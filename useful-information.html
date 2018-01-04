@@ -1,0 +1,213 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>9. Appendix A: Useful information &#8212; NCAS Unified Model Introduction</title>
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. Appendix B: SSH FAQs" href="ssh-tasks.html" />
+    <link rel="prev" title="8. Post processing" href="post-processing.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ssh-tasks.html" title="10. Appendix B: SSH FAQs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="post-processing.html" title="8. Post processing"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="appendix-a-useful-information">
+<h1>9. Appendix A: Useful information<a class="headerlink" href="#appendix-a-useful-information" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="um-output">
+<h2>9.1. UM output<a class="headerlink" href="#um-output" title="Permalink to this headline">¶</a></h2>
+<p><strong>ARCHER job output directory:</strong></p>
+<p>The standard output and error files (job.out &amp; job.err) for the compile, reconfiguration and run are written to the directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">cylc</span><span class="o">-</span><span class="n">run</span><span class="o">/&lt;</span><span class="n">suite</span><span class="o">-</span><span class="nb">id</span><span class="o">&gt;/</span><span class="n">log</span><span class="o">/</span><span class="n">job</span><span class="o">/&lt;</span><span class="n">cycle</span><span class="o">&gt;/&lt;</span><span class="n">app</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p><strong>ARCHER model output:</strong></p>
+<p>By default the UM will write all output (e.g. processor output and data files) to the directory it was launched from, which will be the task’s <strong>work</strong> directory. However, all output paths can be configured in the GUI and in practice most UM tasks will send output to one or both of the suite’s <strong>work</strong> or <strong>share</strong> directories:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">cylc</span><span class="o">-</span><span class="n">run</span><span class="o">/&lt;</span><span class="n">suitename</span><span class="o">&gt;/</span><span class="n">work</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">atmos</span>
+<span class="o">~/</span><span class="n">cylc</span><span class="o">-</span><span class="n">run</span><span class="o">/&lt;</span><span class="n">suitename</span><span class="o">&gt;/</span><span class="n">share</span><span class="o">/</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="archer-architecture">
+<h2>9.2. ARCHER architecture<a class="headerlink" href="#archer-architecture" title="Permalink to this headline">¶</a></h2>
+<p>ARCHER has two kinds of processor which we commonly use - they have several names, but roughly speaking they are the service processors (several nodes worth) sometimes referred to as the front end, and the compute processors (many many nodes worth) sometimes referred to as the back end. We login to the front end and build the model on the front end. We run the model on the back end. You wouldn’t generally have an interactive session on the back end and will submit jobs there through the batch scheduler (PBS).</p>
+<p>The UM infrastructure recognises this architecture and will run tasks in the appropriate place.</p>
+<p>If you are doing any post-processing or analysis you may wish to submit your own parallel or serial jobs. Intensive interactive tasks should be run on the post-processor nodes. For analysing data on the /nerc disk, use the RDF cluster.</p>
+<p>Consult the ARCHER documentation for details.</p>
+</div>
+<div class="section" id="archer-file-systems">
+<h2>9.3. ARCHER file systems<a class="headerlink" href="#archer-file-systems" title="Permalink to this headline">¶</a></h2>
+<p>ARCHER, in common with some other HPC systems, such as MONSooN and Polaris, has (at least) two file systems which have different properties, different uses, different associated policies and different names. On ARCHER there are <code class="docutils literal"><span class="pre">/home</span></code> and <code class="docutils literal"><span class="pre">/work</span></code>. The <code class="docutils literal"><span class="pre">/home</span></code> file system is backed up regularly (only for disaster recovery), has relatively small volume, can efficiently handle many small files, and is where we recommend the UM code is saved and built. The <code class="docutils literal"><span class="pre">/home</span></code> system can not be accessed by jobs running on the compute processors.</p>
+<p>The <code class="docutils literal"><span class="pre">/work</span></code> file system is optimized for fast parallel IO - it doesn’t handle small files very efficiently. It is where your model will write to and read from.</p>
+</div>
+<div class="section" id="archer-node-reservations">
+<h2>9.4. ARCHER node reservations<a class="headerlink" href="#archer-node-reservations" title="Permalink to this headline">¶</a></h2>
+<p>In normal practice you will submit your jobs to the parallel queue on ARCHER; the job scheduler will then manage your job request along with all those from the thousands of other users. For this training course, we will be using processor Reservations, whereby we have exclusive access to a prearranged amount of ARCHER resource meaning that you will not need to wait in the general ARCHER queues. Reservations are specified by a reservation code - e.g. R4943949. As an ARCHER user you can make a reservation so that you have access to the machine at a time of your choosing - reservations incur a cost overhead (50%), so best used when you are sure you need them.</p>
+</div>
+<div class="section" id="useful-rose-commands">
+<h2>9.5. Useful Rose commands<a class="headerlink" href="#useful-rose-commands" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">rose</span> <span class="pre">suite-run</span></code></p>
+<blockquote>
+<div>Run a suite.</div></blockquote>
+<p><code class="docutils literal"><span class="pre">rose</span> <span class="pre">suite-run</span> <span class="pre">--new</span></code></p>
+<blockquote>
+<div>Clear out any existing cylc-run directories for this suite and then run it.  Take care when using this option as it deletes all files from any previous runs of the suite.</div></blockquote>
+<p><code class="docutils literal"><span class="pre">rose</span> <span class="pre">suite-run</span> <span class="pre">--no-log-archive</span></code></p>
+<blockquote>
+<div>Do not archive (tar-gzip) old log directories.</div></blockquote>
+<p><code class="docutils literal"><span class="pre">rose</span> <span class="pre">suite-run</span> <span class="pre">--restart</span></code></p>
+<blockquote>
+<div>Restart the suite from where it finished running previously</div></blockquote>
+<p><code class="docutils literal"><span class="pre">rose</span> <span class="pre">suite-run</span> <span class="pre">[--restart]</span> <span class="pre">--</span> <span class="pre">--hold</span></code></p>
+<blockquote>
+<div>Hold (don’t run tasks) immediately on running or restarting the suite</div></blockquote>
+<p><code class="docutils literal"><span class="pre">rose</span> <span class="pre">suite-shutdown</span></code></p>
+<blockquote>
+<div>Shutdown (stop) a running suite.</div></blockquote>
+<p><code class="docutils literal"><span class="pre">rose</span> <span class="pre">sgc</span></code></p>
+<blockquote>
+<div>Launch the Cylc GUI for a running suite.</div></blockquote>
+<p><code class="docutils literal"><span class="pre">rose</span> <span class="pre">suite-scan</span></code></p>
+<blockquote>
+<div>Scan for any running suites.  This is useful when you’ve shutdown the cylc GUIs and wish to quickly see what suites you still have running.</div></blockquote>
+<p>For more information on all these commands and more see the Rose and Cylc documentation or run <code class="docutils literal"><span class="pre">rose</span> <span class="pre">command</span> <span class="pre">--help</span></code> (E.g. <code class="docutils literal"><span class="pre">rose</span> <span class="pre">suite-run</span> <span class="pre">--help</span></code>) to view the man pages.</p>
+</div>
+<div class="section" id="problems-shutting-down-suites">
+<h2>9.6. Problems shutting down suites<a class="headerlink" href="#problems-shutting-down-suites" title="Permalink to this headline">¶</a></h2>
+<p><strong>Types of shutdown</strong></p>
+<p>By default when you try to shutdown a suite, cylc will wait for any currently running tasks to finish before stopping, which may not be what you want to do. You can also tell cylc to kill any active processes or ignore running processes and force the suite to shutdown anyway. The latter is what you will need to do if the suite has got stuck:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">rose</span> <span class="n">suite</span><span class="o">-</span><span class="n">shutdown</span> <span class="o">--</span> <span class="o">--</span><span class="n">now</span>
+</pre></div>
+</div>
+<p>To access these options in the cylc GUI, go to <em>“Control” -&gt; “Stop Suite”</em>. See also <code class="docutils literal"><span class="pre">rose</span> <span class="pre">help</span> <span class="pre">suite-shutdown</span></code> for further details.</p>
+<p><strong>Forcing shutdown</strong></p>
+<p>Sometimes after trying to shutdown a suite, it will still appear to be running.</p>
+<p>First make sure you have used the correct shutdown command and aren’t waiting for any unfinished tasks (see above). It can take cylc a little while to shut down everything properly, so be patient and give it a few minutes.</p>
+<p>If it still appears to be running (for example you get an error when you try to re-start the suite), you may have to do the following:</p>
+<ul>
+<li><p class="first">Manually kill the active processes:</p>
+<p>Get a list of processes associated with the suite. For example, for suite u-ak194 you would run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>puma u-ak193$ ps -flu annette  | grep u-ak194
+0 S annette   2735  5230  ... grep u-ak194
+1 S annette  18713     1  ... python /home/fcm/cylc-6.11.4/bin/cylc-run u-ak194
+1 S annette  18714 18713  ... python /home/fcm/cylc-6.11.4/bin/cylc-run u-ak194
+1 S annette  18715 18713  ... python /home/fcm/cylc-6.11.4/bin/cylc-run u-ak194
+1 S annette  18717 18713  ... python /home/fcm/cylc-6.11.4/bin/cylc-run u-ak194
+1 S annette  18718 18713  ... python /home/fcm/cylc-6.11.4/bin/cylc-run u-ak194
+</pre></div>
+</div>
+<p>This gives a list of processes. The number in the 4th column is the process-id. Use this to kill each of the processes, eg:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">kill</span> <span class="o">-</span><span class="mi">9</span> <span class="mi">18713</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Delete the port file:</p>
+<p>This lives under <code class="docutils literal"><span class="pre">~/.cylc/ports/</span></code>. For example: <code class="docutils literal"><span class="pre">rm</span> <span class="pre">~/.cylc/ports/u-ak194</span></code></p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">9. Appendix A: Useful information</a><ul>
+<li><a class="reference internal" href="#um-output">9.1. UM output</a></li>
+<li><a class="reference internal" href="#archer-architecture">9.2. ARCHER architecture</a></li>
+<li><a class="reference internal" href="#archer-file-systems">9.3. ARCHER file systems</a></li>
+<li><a class="reference internal" href="#archer-node-reservations">9.4. ARCHER node reservations</a></li>
+<li><a class="reference internal" href="#useful-rose-commands">9.5. Useful Rose commands</a></li>
+<li><a class="reference internal" href="#problems-shutting-down-suites">9.6. Problems shutting down suites</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="post-processing.html"
+                        title="previous chapter">8. Post processing</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ssh-tasks.html"
+                        title="next chapter">10. Appendix B: SSH FAQs</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/useful-information.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ssh-tasks.html" title="10. Appendix B: SSH FAQs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="post-processing.html" title="8. Post processing"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, NCAS-CMS.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

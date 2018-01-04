@@ -1,0 +1,355 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6. Further Exercises &#8212; NCAS Unified Model Introduction</title>
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Rose/Cylc Exercises" href="further-exercises2.html" />
+    <link rel="prev" title="5. Solving Common UM Problems" href="solving-problems.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="further-exercises2.html" title="7. Rose/Cylc Exercises"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="solving-problems.html" title="5. Solving Common UM Problems"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="further-exercises">
+<h1>6. Further Exercises<a class="headerlink" href="#further-exercises" title="Permalink to this headline">¶</a></h1>
+<p>Now that we have built the suite, there is no need to rebuild it each time you run it.  Switch off compilation of the UM and reconfiguration.  Hint: See the <em>“suite conf”</em> section.</p>
+<div class="section" id="change-the-model-output-logging-behaviour">
+<h2>6.1. Change the model output logging behaviour<a class="headerlink" href="#change-the-model-output-logging-behaviour" title="Permalink to this headline">¶</a></h2>
+<p>Navigate to <em>um -&gt; namelist -&gt; Top Level Model Control -&gt; Run Control and Time Settings</em>. Set <strong>ltimer</strong> to <em>true</em>.  Timer diagnostics outputs timing information and can be very useful in diagnosing performance problems.</p>
+<p><strong>Save</strong> and <strong>Run</strong> the suite.</p>
+<p>Check the <em>job.out</em> file.</p>
+<ul class="simple">
+<li>Which routine took the most time?</li>
+<li>How many times was <em>Atm_Step</em> called?</li>
+<li>How many time steps did the model run for?</li>
+<li>Which PE was the slowest to run AP2 Boundary Layer? Which was the fastest?</li>
+</ul>
+<p>Switch on “IO timing” Hint: look in <em>“IO System Settings”</em>.</p>
+<p><strong>Re-run</strong> the model and search for “Total IO Timings” in the <em>job.out</em> file.</p>
+</div>
+<div class="section" id="change-the-processor-decomposition">
+<h2>6.2. Change the processor decomposition<a class="headerlink" href="#change-the-processor-decomposition" title="Permalink to this headline">¶</a></h2>
+<p>Navigate to <em>suite conf -&gt; Domain Decomposition -&gt; Atmosphere</em>.</p>
+<ul class="simple">
+<li>What is the current processor decomposition?</li>
+<li>Why is this not a good way to run the model?</li>
+</ul>
+<p>Hint: The base ARCHER charging unit is a node irrespective of how many cores on the node are being used. ARCHER has 24 cores per node, and for the UM each MPI task and OpenMP thread is mapped to a separate core.  So in this case we are running 8x10 (x 2 OMP threads) for a total of 160 cores, but are charged for 7 nodes (168 cores).</p>
+<p>Try reducing the processor decomposition to 4(EW) x 3(NS). Run the model.</p>
+<ul class="simple">
+<li>What is the error?</li>
+</ul>
+<p>Using too few cores has resulted in the model failing due to insufficient memory, indicated by the message <em>“OOM killer terminated this process”</em>.  In this case it is easy to diagnose the problem, but sometimes it can be difficult to diagnose, so it’s worth trying to increase the number of processors if you suspect memory resource issues.</p>
+<p>Try experimenting with different processor decompositions (E.g. 8x6, 12x12, etc)</p>
+<ul class="simple">
+<li>How do the timings compare to when you ran on 7 nodes?</li>
+</ul>
+<p>You can come up with a performance vs processor count curve in this way which might be valuable if you are planning an experiment - it’s also worth adding in the AU cost calculation when doing this.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Running “under populated”, i.e. with fewer than the total cores per node, gives access to more memory per parallel task.</p>
+</div>
+<p>Change the processor decomposition to run fully populated on 8 nodes with 2 OpenMP threads.</p>
+</div>
+<div class="section" id="stash">
+<h2>6.3. STASH<a class="headerlink" href="#stash" title="Permalink to this headline">¶</a></h2>
+<p><strong>i. Exploring STASH</strong></p>
+<p>Navigate to <em>um -&gt; namelist -&gt; Model Input and Output -&gt; STASH Requests and Profiles</em>. Look at the time profiles called <code class="docutils literal"><span class="pre">TALLTS</span></code> and <code class="docutils literal"><span class="pre">T1H</span></code>.</p>
+<ul class="simple">
+<li>What are they doing?</li>
+</ul>
+<p>(<code class="docutils literal"><span class="pre">TALLTS</span></code> says output on every timestep, <code class="docutils literal"><span class="pre">T1H</span></code> says output hourly)</p>
+<p>Look also at some of the other time, domain and usage profiles.  The domain profiles determine spatial output and the usage profiles effectively specify a Fortran LUN (Logical Unit Number) on which the associated data is written.</p>
+<p>Click on <em>STASH Requests</em>. Now change the time profile for all stash output whose <code class="docutils literal"><span class="pre">Usage</span></code> profile is UPC and <code class="docutils literal"><span class="pre">Time</span></code> profile is T1H - to do this, click on each diagnostic you wish to change and then click the time profile, a drop-down list should appear containing all the available time profiles.  Select <code class="docutils literal"><span class="pre">TALLTS</span></code>.  You can sort the STASH table to make it more convenient to make these changes.  Click on the <code class="docutils literal"><span class="pre">use_name</span></code> column header to sort by usage profile.</p>
+<p><strong>ii. STASH validation macro</strong></p>
+<p>Several Rose macros have been provided to help verify STASH setup.  When you change STASH it is always recommended to run at least the validate macro. The <em>stash_testmask.STASHTstmskValidate</em> macro ensures that the STASH output requsted is valid given the science configuration of the app.  To put this to the test run the STASH validation macro by selecting <em>stash_testmask.STASHTstmskValidate</em> from the list of available macros at the top of the STASH requests panel or alternatively it can be accessed from the <em>“Metadata -&gt; um”</em> menu.</p>
+<p>You should see several errors reported - it appears we have asked for diagnostics which are not available.  This won’t cause the model to fail, however, you could find these diagnostics in the list and switch them off by unchecking the “incl?” column, if you’d like to stop seeing this message.</p>
+<p><strong>Save</strong> and <strong>Re-run</strong> the suite.</p>
+<p>The model should fail with an error message similar to the following:</p>
+<blockquote>
+<div><strong>STWORK: Number of fields exceeds reserved headers for unit  14</strong></div></blockquote>
+<p>This means that the number of output fields exceeds the limit set for a particular stream (the default is 4096 fields); in this case the stream attached to unit 14.  To find out what stream unit 14 is take a look in the <code class="docutils literal"><span class="pre">job.out</span></code> file and search for “unit 14”. You should see that the file opened on unit 14 is &lt;suite-id&gt;a.pc19880901, so this is the <strong>pc</strong> stream.  Back in <code class="docutils literal"><span class="pre">rose</span> <span class="pre">edit</span></code> for this suite look at the STASH usage profile for <strong>upc</strong>.</p>
+<ul class="simple">
+<li>What is the file ID of the failing output stream?</li>
+</ul>
+<p>Now navigate to the window for this stream under <em>Model Input and Output -&gt; Model Output Streams</em>.  This defines the output stream.  You should see confirmation of the base output file name to be <code class="docutils literal"><span class="pre">*.pc*</span></code>.  There are 2 ways to fix this problem:</p>
+<ol class="arabic simple">
+<li>Increase the <strong>reserved_headers</strong> size.</li>
+</ol>
+<p>or</p>
+<ol class="arabic simple" start="2">
+<li>Change the reinitialisation frequency by modifying <strong>reinit_step</strong> and/or <strong>reinit_unit</strong>.  This is telling the model to create new output files at a specified frequency, so individual files don’t get massively large.</li>
+</ol>
+<p>Increasing the reserved header size is fine for smaller increases. Overriding the size by a large amount and thus having large numbers of fieldsfile headers can be inefficient for both runtime and memory. Thus the recommended way is to change the periodic reinitialisation of the fieldsfiles.</p>
+<p>Modify the reinitialisation frequency and run the model again. Take a look at the model output files. You should see that you have multiple <code class="docutils literal"><span class="pre">*.pc19980901_*</span></code> files.</p>
+<p><strong>iii. Adding a new STASH request</strong></p>
+<p>Let’s now try adding a new STASH request to the UM app.</p>
+<p>Click the “New” button in the STASH Requests section.  A window will appear in order for you to browse all available STASHmaster entries.</p>
+<p>By default STASHmaster entries are grouped together by Section code. It is possible to group items by any of the STASHmaster codes using the Group drop down list. The View button contains options to display the STASHmaster entry values and/or the column titles with explanation text and to select which columns to show/hide.</p>
+<p>Expand the <em>“Gravity wave drag”</em> section.  Then change the view by selecting <em>View -&gt; Show expanded value info</em>. Try out the other options in the <em>View</em> menu to see what effect they have.</p>
+<p>Select a STASH item and click <strong>Add</strong> to add it to the list of STASH requests.  In the STASH Requests panel click on the empty <em>dom_name</em>, <em>tim_name</em> and <em>use_name</em> fields of the new request and select appropriate profiles from the drop down lists.  These lists are populated from the entries of the time, use and domain namelists.</p>
+<p>Once you have added a new STASH request, you need to run a macro to generate an index for the namelist.  To do so click on the <strong>Macros</strong> button, then select <strong>stash_indices.TidyStashTransform</strong>. A box will pop up listing the changes the editor is going to make, click <strong>Apply</strong>.</p>
+<ul class="simple">
+<li>Run the model.  Did it work?</li>
+</ul>
+</div>
+<div class="section" id="change-the-dump-frequency">
+<h2>6.4. Change the dump frequency<a class="headerlink" href="#change-the-dump-frequency" title="Permalink to this headline">¶</a></h2>
+<p>Set the model run length to 6 hours.  Hint: <em>suite conf -&gt; Run Initialisation and Cycling</em>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Hours are represented in the ISO 8601 standard as <em>PT&lt;num-hours&gt;H</em> (e.g. PT1H represents 1 hour). Days are represented as P&lt;num-days&gt;D (e.g. P10D represents 10 days)</p>
+</div>
+<p>Reset the STASH output for stream UPC to hourly and the file reinitialisation frequency to 12 hourly.</p>
+<p>Navigate to <em>um -&gt; namelist -&gt; Model Input and Output -&gt; Dumping and Meaning</em>.</p>
+<ul class="simple">
+<li>What is the current dump frequency?</li>
+</ul>
+<p>Set the dump frequency to 6 hours.  <strong>Run</strong> the model.</p>
+<ul class="simple">
+<li>What is the error?</li>
+</ul>
+<p>This error message occurs when you have set the total run length to be less than the cycling (automatic resubmission) frequency.  Change the cycling frequency to 6 hours. Run the model.</p>
+<ul class="simple">
+<li>How much time was spent in DUMPCTL?</li>
+</ul>
+<p>Set the dump frequency to 1 hour. <strong>Run</strong> the model.</p>
+<ul class="simple">
+<li>What happened to the time spent in DUMPCTL?</li>
+</ul>
+</div>
+<div class="section" id="reconfiguration">
+<h2>6.5. Reconfiguration<a class="headerlink" href="#reconfiguration" title="Permalink to this headline">¶</a></h2>
+<p>Try to find out how to run the reconfiguration only. Hint: Look in the <em>“suite conf”</em> section.</p>
+<p>Try to find out where to request extra diagnostic messages for the reconfiguration output.</p>
+<p><strong>Run</strong> the reconfiguration only with extra diagnostic messages.</p>
+<p>Look at the <em>job.out</em> file.</p>
+<ul class="simple">
+<li>Do you see a land-sea mask?</li>
+</ul>
+</div>
+<div class="section" id="setting-up-a-suite-to-cycle">
+<h2>6.6. Setting up a suite to cycle<a class="headerlink" href="#setting-up-a-suite-to-cycle" title="Permalink to this headline">¶</a></h2>
+<p>We mentioned in the presentations that the length of an integration will be limited by the time that a model is allowed to run on the HPC (see the ARCHER web pages for information about the time limits).  Clearly this is no good for much of our work which may need to run on the machine for several months.  Cylc and the UM allow for long integrations to be split up into multiple shorter jobs - this is called <em>cycling</em>.</p>
+<p>Let’s run the model for 3 hours with 1 hour cycling:</p>
+<ul class="simple">
+<li>Set the <em>“Total run length”</em> to 3 hours.</li>
+<li>Set the <em>“Cycling frequency”</em> to 1 hour.</li>
+<li>Set the <em>“Wallclock time”</em> to 10 minutes.</li>
+<li>Ensure that the model dump frequency is hourly, in this case.</li>
+</ul>
+<p><strong>Save</strong> and <strong>Run</strong> the suite.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The automatic resubmission frequency must be a multiple of the dump frequency.</p>
+</div>
+<p>The model will submit the first cycle and once that has succeeded you will see the following 2 cycles submitted and run.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is always wise, particularly when you plan to run a long integration that you only run the first cycle initially so that you can check that the model is doing what you expected before committing to a longer simulation.</p>
+</div>
+</div>
+<div class="section" id="restarting-a-suite">
+<h2>6.7. Restarting a suite<a class="headerlink" href="#restarting-a-suite" title="Permalink to this headline">¶</a></h2>
+<p>Let’s now extend this run out to 6 hours.  Change the <em>“Total run length”</em> to 6 hours and <strong>Save</strong> the suite.</p>
+<p>Having already run the first 3 hours we just want the suite to pick up where it left off and run the remaining 3 hours.  To do this we <em>restart</em> the suite, by typing:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ rose suite-run --restart
+</pre></div>
+</div>
+<p>The cylc GUI will pop up and you should see the run resuming from where it left off (i.e. from cycle point 19880901T0300Z).</p>
+</div>
+<div class="section" id="io-servers">
+<h2>6.8. IO Servers<a class="headerlink" href="#io-servers" title="Permalink to this headline">¶</a></h2>
+<p>Older versions of the UM did not have IO servers, which meant that all reading and writing of fields files went through a single processor (pe0).  When the model is producing lots of data and is running on many processors, this method of IO is very inefficient and costly - when pe0 is writing data, all the other processors have to wait around doing nothing but still consuming AUs.  Later UM versions, including UM 10.5, have IO servers which are processors dedicated to performing IO and which work asynchronously with processors doing the computation.</p>
+<p>Here’s just a taste of how to get this working in your suite.</p>
+<p>Set the suite to run for 6 hours with an appropriate cycling frequency, then check that OpenMP is switched on (Hint: search for <em>openmp</em> in rose edit) as this is needed for the IO servers to work.</p>
+<p>Navigate to <em>suite conf -&gt; Domain Decomposition -&gt; Atmosphere</em> and check the number of OpenMP threads is set to 2. Set the number of <em>“IO Server Processes”</em> to 8.</p>
+<p><strong>Save</strong> and then <strong>Run</strong> the suite.</p>
+<p>You will see lots of IO server log files in <code class="docutils literal"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/&lt;cycle&gt;/atmos_main</span></code> which can be ignored for the most part.</p>
+<p>Try repeating the “Change dump frequency” experiment with the IO servers switched on - you should see much faster performance.</p>
+</div>
+<div class="section" id="running-the-coupled-model">
+<h2>6.9. Running the coupled model<a class="headerlink" href="#running-the-coupled-model" title="Permalink to this headline">¶</a></h2>
+<p>The coupled model consists of the UM Atmosphere model coupled to the NEMO ocean and CICE sea ice models.  The coupled configuration used for this exercise is N96 resolution for the atmosphere and a 1 degree ocean - you will see this written N96 ORCA1.</p>
+<p><strong>i. Checkout and run the suite</strong></p>
+<p>Checkout and open the suite <strong>u-ak943</strong>.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called <em>fcm_make_um</em> and <em>fcm_make_ocean</em> respectively. The model configuration is under <em>coupled</em> rather than <em>um</em>.</p>
+<p>Make the usual changes required to run the suite (i.e. set username, account code, queue)</p>
+<p>Check that the suite is set to build both the UM and ocean, as well as run the reconfiguration and model.</p>
+<p><strong>Run</strong> the suite.</p>
+<p><strong>ii. Exploring the suite</strong></p>
+<p>Whilst the suite is compiling and running which will take around 45 minutes, take some time to look around the suite.</p>
+<ul class="simple">
+<li>How many nodes is the atmosphere running on?</li>
+<li>How many nodes is the ocean running on?</li>
+</ul>
+<p>Changing the processor decomposition for the ocean is not as simple as just changing the EW/NS processes.  You also need to:</p>
+<ol class="arabic simple">
+<li>Recalculate the CICE number of columns per block EW and rows per block NS. (Normally the model is set up so that NEMO and CICE use the same decomposition). Looking at the current settings we calculate as follows:</li>
+</ol>
+<blockquote>
+<div><p>Num of cols per block EW = Num of cols EW / Num of processes EW (E.g. 360 / 9 = 40)</p>
+<p>Num of rows per block NS = Num of rows NS / Num of processes NS (E.g. 330 / 8 = 42)</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Recompile the ocean executable. Note the executable comprises both the ocean (NEMO) and sea-ice (CICE) code.</li>
+</ol>
+<p>Now looked at the <code class="docutils literal"><span class="pre">coupled</span></code> settings.</p>
+<ul class="simple">
+<li>Can you see where the NEMO model settings appear?</li>
+</ul>
+<p>Look under <em>Run settings (namrun)</em>. The variables <code class="docutils literal"><span class="pre">nn_stock</span></code> and <code class="docutils literal"><span class="pre">nn_write</span></code> control the frequency of output files.</p>
+<ul class="simple">
+<li>How often are NEMO restart files written? (Hint the NEMO timestep length is set as variable <code class="docutils literal"><span class="pre">rn_rdt</span></code>).</li>
+</ul>
+<p>Now browse the CICE settings.</p>
+<ul class="simple">
+<li>Can you find what the CICE restart frequency is set to?</li>
+</ul>
+<p>NEMO and CICE are developed separately from the UM, and you should have seen that they work in very different ways. See the websites for documentation:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://oceans11.lanl.gov/trac/CICE">http://oceans11.lanl.gov/trac/CICE</a></li>
+<li><a class="reference external" href="http://www.nemo-ocean.eu/">http://www.nemo-ocean.eu/</a></li>
+</ul>
+<p><strong>iii. Output files</strong></p>
+<p><strong>Log files</strong></p>
+<p>NEMO logging information is written to:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/&lt;cycle&gt;/coupled/ocean.output</span></code></div></blockquote>
+<p>CICE logging information is written to:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/&lt;cycle&gt;/coupled/ice_diag.d</span></code></div></blockquote>
+<p>If the model fails some error messages may also be written to the file <code class="docutils literal"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/&lt;cycle&gt;/coupled/debug.root.01</span></code> or <code class="docutils literal"><span class="pre">debug.root.02</span></code></p>
+<p>When something goes wrong with the coupled model it can be tricky to work out what has gone wrong. NEMO errors may not appear at the end of the file but will be flagged with the string <code class="docutils literal"><span class="pre">E</span> <span class="pre">R</span> <span class="pre">R</span> <span class="pre">O</span> <span class="pre">R</span></code>.</p>
+<p><strong>Restart files</strong></p>
+<p>Restart files go to the subdirectories <code class="docutils literal"><span class="pre">NEMOhist</span></code> and <code class="docutils literal"><span class="pre">CICEhist</span></code> in the standard data directory <code class="docutils literal"><span class="pre">~/cylc-run/&lt;suitename&gt;/share/data/History_Data</span></code>.</p>
+<p><strong>Diagnostic files</strong></p>
+<p>Diagnostic files are left in the <code class="docutils literal"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/&lt;cycle&gt;/coupled/</span></code> directory.</p>
+<p>CICE files start with <code class="docutils literal"><span class="pre">&lt;suitename&gt;i</span></code>. Once your suite has run you should see the following CICE file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>archer$ ls ak943i*
+ak943i.10d.1978-09-10.nc
+</pre></div>
+</div>
+<p>NEMO diagnostic files are named <code class="docutils literal"><span class="pre">&lt;suitename&gt;o*grid_[TUVW]*</span></code>. To see what files are produced, run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>archer$ ls ak943o*grid*
+</pre></div>
+</div>
+<p>In this case each processor writes to a separate file. To concatenate these into a global file use the <code class="docutils literal"><span class="pre">rebuild_nemo</span></code> tool, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>archer$ rebuild_nemo ak943o_10d_19780901_19780910_grid_W_19780901-19780910 72
+</pre></div>
+</div>
+<p>Higher resolution NEMO suites may use the XIOS IO server. In this case, global files may be written directly, or each server process may write its own file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coupled atmos-ocean model setup is complex so we recommend you find a suite already setup for your needs.  If you find you do need to modify a coupled suite setup please contact NCAS-CMS for advice.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6. Further Exercises</a><ul>
+<li><a class="reference internal" href="#change-the-model-output-logging-behaviour">6.1. Change the model output logging behaviour</a></li>
+<li><a class="reference internal" href="#change-the-processor-decomposition">6.2. Change the processor decomposition</a></li>
+<li><a class="reference internal" href="#stash">6.3. STASH</a></li>
+<li><a class="reference internal" href="#change-the-dump-frequency">6.4. Change the dump frequency</a></li>
+<li><a class="reference internal" href="#reconfiguration">6.5. Reconfiguration</a></li>
+<li><a class="reference internal" href="#setting-up-a-suite-to-cycle">6.6. Setting up a suite to cycle</a></li>
+<li><a class="reference internal" href="#restarting-a-suite">6.7. Restarting a suite</a></li>
+<li><a class="reference internal" href="#io-servers">6.8. IO Servers</a></li>
+<li><a class="reference internal" href="#running-the-coupled-model">6.9. Running the coupled model</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="solving-problems.html"
+                        title="previous chapter">5. Solving Common UM Problems</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="further-exercises2.html"
+                        title="next chapter">7. Rose/Cylc Exercises</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/further-exercises.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="further-exercises2.html" title="7. Rose/Cylc Exercises"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="solving-problems.html" title="5. Solving Common UM Problems"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, NCAS-CMS.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,216 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>5. Solving Common UM Problems &#8212; NCAS Unified Model Introduction</title>
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Further Exercises" href="further-exercises.html" />
+    <link rel="prev" title="4. FCM tutorial" href="fcm-tutorial.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="further-exercises.html" title="6. Further Exercises"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fcm-tutorial.html" title="4. FCM tutorial"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="solving-common-um-problems">
+<h1>5. Solving Common UM Problems<a class="headerlink" href="#solving-common-um-problems" title="Permalink to this headline">¶</a></h1>
+<p>This section exposes you to more typical UM errors and hints at how to find and fix those errors.</p>
+<p>You may encounter other errors, often as a result of mistyping, for which solution hints are not provided.</p>
+<div class="section" id="copy-and-set-up-n96-ga7-0-amip-example-suite">
+<h2>5.1. Copy and set up N96 GA7.0 AMIP example suite<a class="headerlink" href="#copy-and-set-up-n96-ga7-0-amip-example-suite" title="Permalink to this headline">¶</a></h2>
+<p>Find and make a copy of suite <strong>u-ag761</strong>.</p>
+<p>Firstly make the changes required to run the suite.  That is the account code (‘n02-training’), your ARCHER user name and the queue to run in.  Hint: Look in the <em>suite.conf</em> section.  You will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.</p>
+<ul class="simple">
+<li>Did you manage to find where to set your ARCHER username?</li>
+</ul>
+<p>This suite is set up slightly differently to the one used in the previous sections; suites do vary on how they are set up but you will soon learn where to look for things.  This suite is set up so that specifying your username on the remote HPC is optional.  If your PUMA username is the same as your username on ARCHER, or if the remote username is set in your <code class="docutils literal"><span class="pre">~/.ssh/config</span></code> file Cylc will be able to submit your suite without having to explicitly set your username in the suite.  However, on this course, we are using training accounts on ARCHER so you will need to set the username.</p>
+<ul class="simple">
+<li>Click <em>View -&gt; View Latent Variables</em>. You should see HPC_USER appear in the panel greyed out.</li>
+<li>Click the <strong>+</strong> sign next to it and select <em>Add to configuration</em></li>
+<li>Enter your ARCHER training username (e.g. ‘ncastr01’)</li>
+</ul>
+</div>
+<div class="section" id="errors-resolved-in-the-code-extraction">
+<h2>5.2. Errors resolved in the code extraction<a class="headerlink" href="#errors-resolved-in-the-code-extraction" title="Permalink to this headline">¶</a></h2>
+<p><strong>Save</strong> the suite and then <strong>Run</strong> it either from the GUI or the command line.</p>
+<p>The suite should fail in the <em>fcm_make_um</em> task. This is the task that extracts all the required code from the repository including any branches.  The failure will be indicated in the <em>gcylc</em> GUI with a red square and the state <em>failed</em>.</p>
+<ul class="simple">
+<li>What is the error?</li>
+</ul>
+<p>Hint: Examine the <em>job.err</em> and <em>job.out</em> to find the cause of the problem. You can view these files through Rose Bush, as we have done previously, however you can also view them quickly and easily directly from the Cylc GUI.  <strong>Right-click</strong> on the failed <em>fcm_make_um</em> task and select <em>View -&gt; job stderr</em></p>
+<p>This indicates that the branch cannot be found due to an incorrect branch name. You will need to look at the UM code repository through Trac either on MOSRS (<a class="reference external" href="https://code.metoffice.gov.uk/trac/um/browser">https://code.metoffice.gov.uk/trac/um/browser</a>) or the PUMA mirror (<a class="reference external" href="https://puma.nerc.ac.uk/trac/um.xm/browser">https://puma.nerc.ac.uk/trac/um.xm/browser</a> with username: guest1 and password: tra1n1ng or use your own) to determine the correct name.</p>
+<p>Fix the error, <strong>Save</strong> the suite.</p>
+<p>Now we will stop the suite and then re-run it.  In the Cylc GUI click on <em>Control -&gt; Stop Suite</em> and then select <strong>Stop now</strong> and then click on <strong>OK</strong>.  <strong>Run</strong> the suite again.</p>
+<p>The suite will fail in <em>fcm_make_um</em> again.</p>
+<ul class="simple">
+<li>What is the error?</li>
+</ul>
+<p>Hint: Again look in the <em>job.err</em> file.  This kind of error results when changes made in two or more branches affect the same bit of code and which the FCM system cannot understand how to resolve.</p>
+<ul class="simple">
+<li>Which file does the problem occur in?</li>
+</ul>
+<p>In practice, you will need to fix the problem with the code conflict as you did in the FCM tutorial section.  To proceed in this case, navigate to <em>fcm_make_um -&gt; sources</em> and remove the branch called <code class="docutils literal"><span class="pre">vn10.5_merge_error</span></code> by clicking on it and then clicking the <strong>-</strong> sign.</p>
+<p><strong>Save</strong> the suite.</p>
+<p>Last time we stopped the suite and then re-ran it, however, it is possible to reload the suite definition and then re-trigger the failed task without first stopping the running suite. To do this change to the suite directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ cd ~/roses/&lt;suitename&gt;
+</pre></div>
+</div>
+<p>We then reload the suite definition by running the following Rose command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ rose suite-run --reload
+</pre></div>
+</div>
+<p>Wait for this command to complete before continuing. Finally in the Cylc GUI <em>right-click</em> on the failed task and select <strong>Trigger (run now)</strong>.  The <em>fcm_make_um</em> task will then submit again.</p>
+<ul class="simple">
+<li>Is there an error in <em>fcm_make_um</em> this time?</li>
+</ul>
+<p>If you look in the <em>job.err</em> file now it should be empty and the <em>job.out</em> file indicates SUCCESS.</p>
+</div>
+<div class="section" id="errors-resolved-in-the-compile-and-run">
+<h2>5.3. Errors resolved in the compile and run<a class="headerlink" href="#errors-resolved-in-the-compile-and-run" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Has the <em>fcm_make2_um</em> (compilation) task completed successfully?</li>
+<li>You should have a failure.  Open the <em>job.err</em> file - what does it indicate?</li>
+<li>Which routine has an error?</li>
+<li>What is the error?</li>
+<li>What line of the Fortran file does it occur on?</li>
+</ul>
+<p>In practice, you would need to fix the error in your branch on PUMA and then restart the suite.  In this case, navigate to <em>fcm_make_um -&gt; sources</em> and remove the branch <code class="docutils literal"><span class="pre">vn10.5_compile_error</span></code>.  <strong>Save</strong> the suite, <strong>Shutdown/Stop</strong> the failed run and then <strong>Run</strong> it again.  Notice we chose to shutdown the failed suite this time rather than do a reload.  In this scenario we need to redo the code extraction (<em>fcm_make_um</em>) step so doing a reload would be slightly more complex; you would need to <em>Reload</em> and then <em>Re-trigger</em> both the <em>fcm_make_um</em> and the <em>fcm_make2_um</em> tasks.  With experience you get to know when it’s better to do a <em>Reload</em> and when to <em>Shutdown</em>  a suite.</p>
+<p>Note again that the task submitted successfully.</p>
+<ul class="simple">
+<li>Did the <em>fcm_make2_um</em> task succeed this time?</li>
+<li>What about the reconfiguration task?</li>
+<li>What is the error?</li>
+<li>Does the start dump exist?</li>
+<li>What is the name of the correct start dump?  Hint: look in the directory where it thinks the start file should be - is there a candidate in there?</li>
+</ul>
+<p>Point your suite to the correct start dump.  Fixing this problem isn’t quite as easy as it sounds.  A search for <strong>ainitial</strong> in the Rose edit GUI will take you to the <em>General reconfiguration options</em> panel.</p>
+<ul class="simple">
+<li>Can you see the problem?</li>
+</ul>
+<p>The initial dump location is set with an environment variable: AINITIAL_N96.  Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.</p>
+<p>In your suite directory on PUMA (<code class="docutils literal"><span class="pre">~/roses/&lt;suitename&gt;</span></code>) use <code class="docutils literal"><span class="pre">grep</span> <span class="pre">-R</span></code> to search for where the variable <em>AINITIAL_N96</em> is set.  Edit AINITIAL_N96 in the appropriate <code class="docutils literal"><span class="pre">.rc</span></code> file to point to the correct initial dump file.  Hint: This suite is set up to run on multiple platforms, make sure you edit the file appropriate to ARCHER.</p>
+<p><strong>Reload</strong> the suite definition and then <strong>Re-trigger</strong> the reconfiguration task.  The reconfiguration should succeed this time.</p>
+<ul class="simple">
+<li>Has the model run successfully?</li>
+</ul>
+<p>This time the model should have failed with an error.</p>
+<ul class="simple">
+<li>What is the error message?</li>
+</ul>
+<p>Hint: Try searching for “ERROR” - you will soon learn common phrases to help track down problems.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you use the search <code class="docutils literal"><span class="pre">job.err</span></code> box at the bottom of the gcylc viewer, when you select <em>“Find Next”</em> you will see a message indicating the live feed will be disconnected. Click <em>Close</em>.</p>
+</div>
+<p>Search for ATP (Abnormal Termination Processing - google this if you wish to know more) to find a backtrace to indicate in more detail in which routine the model failed.</p>
+<ul class="simple">
+<li>At what timestep did the error occur?</li>
+<li>Which PE Rank(s) signalled the Abort?  Make a note of which one(s)</li>
+</ul>
+<p>Change to the <code class="docutils literal"><span class="pre">pe_output</span></code> directory for the atmos_main task. This is under <code class="docutils literal"><span class="pre">~/cylc-run/&lt;suite-id&gt;/work/&lt;cycle&gt;/atmos_main/pe_output</span></code> and contains the output from each PE.</p>
+<p>Open the file called <code class="docutils literal"><span class="pre">&lt;suite-id&gt;.fort6.pe&lt;pe</span> <span class="pre">noted</span> <span class="pre">above&gt;</span></code>.  Sometimes extra information about the error can be found in the individual PE output files.</p>
+<p>The error message indicates that NaNs (NaN stands for Not a Number and is a numeric data type representing an undefined or unrepresentable value) have occurred in the routine EG_BICGSTAB.  This basically means something in the model has become unstable and “blown up”. In this case the failure results from an incorrect value for the solar constant <em>‘sc’</em>.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within <code class="docutils literal"><span class="pre">rose</span> <span class="pre">edit</span></code> may point you in the right direction.  Go to <em>um -&gt; namelist -&gt; UM Science Settings -&gt; Planet Constants</em> and set it to the suggested value. <strong>Save</strong>, <strong>Reload</strong> and <strong>Re-trigger</strong>.</p>
+<p>This time the model should have run successfully.  Check the output to confirm that there are no errors.  Check that the model converged at all time steps.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">5. Solving Common UM Problems</a><ul>
+<li><a class="reference internal" href="#copy-and-set-up-n96-ga7-0-amip-example-suite">5.1. Copy and set up N96 GA7.0 AMIP example suite</a></li>
+<li><a class="reference internal" href="#errors-resolved-in-the-code-extraction">5.2. Errors resolved in the code extraction</a></li>
+<li><a class="reference internal" href="#errors-resolved-in-the-compile-and-run">5.3. Errors resolved in the compile and run</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fcm-tutorial.html"
+                        title="previous chapter">4. FCM tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="further-exercises.html"
+                        title="next chapter">6. Further Exercises</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/solving-problems.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="further-exercises.html" title="6. Further Exercises"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fcm-tutorial.html" title="4. FCM tutorial"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, NCAS-CMS.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>
