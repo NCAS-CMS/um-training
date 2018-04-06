@@ -61,7 +61,7 @@ release = ''
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
-today = '13 December 2017'
+today = '11 April 2018'
 # Else, today_fmt is used as the format for a strftime call.
 #today_fmt = '%B %d, %Y'
 
@@ -180,6 +180,7 @@ htmlhelp_basename = 'UMtrainingdoc'
 my_preamble = '''
 \\addto\\captionsenglish{\\renewcommand{\\chaptername}{Section}}
 \\makeatletter
+\\definecolor{VerbatimBorderColor}{rgb}{1,1,1}
 \\fancypagestyle{normal}{
   \\fancyhf{}
   \\fancyfoot[R]{{\\py@HeaderFamily\\thepage}}
@@ -206,7 +207,7 @@ latex_elements = {
 'babel': '\\usepackage[english]{babel}',
 
 # Suppress release info
-'releasename': ''
+'releasename': ' '
 }
 
 # Grouping the document tree into LaTeX files. List of tuples

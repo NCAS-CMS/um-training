@@ -83,39 +83,29 @@ The default text editor for entering commit messages is ``vi``.  If you would pr
 
 Firstly create a new directory (e.g. ``um/branches``) in your ``$HOME`` directory on PUMA which will be your work area and ``cd`` to it.
 
-**Using the FCM GUI to create a branch:**
+Create a new branch by running the command: ::
 
-A basic FCM GUI was originally created as an interface to the command line functionality of FCM.  However, most people find that for the majority of tasks in FCM it is actually simpler and quicker to use the command line so that is what we will generally use in this tutorial!
+  fcm branch-create -k <ticket> <branch_name> fcm:um.x@vn10.5
 
-However, for branch creation we will show the GUI too.
+Where:
 
-Launch the GUI from the command line by typing: ::
+* **<ticket>** - is the related Trac ticket number for the ticket you created earlier.
+* **<branch_name>** - is a short name for the branch.  This must contain only alpha-numeric characters and/or underscores; e.g *tutorial*
 
-  puma$ fcm gui
+You will be prompted to edit the message log file.  A standard template is automatically supplied and pops up in your default text editor.  However, if you want to add extra comment for the branch, please do so above the line that says *"--This line will be ignored and those below will be inserted automatically--"*.  When you are ready, save your change and exit the editor.  Answer **y** when you are prompted to go ahead and create the branch.
 
-Once you have the FCM GUI open, click on **Branch** on the top menu bar of the GUI.
+If the branch is created successfully you will get a message similar to the following: ::
 
-By default, the **create** radio button should be checked, but if it isn't then check this option.  Set up your branch details as follows:
-
-* Enter **fcm:um.x-tr@vn10.5** for the URL of the repository.
-* Enter a short branch name.  This must contain only alpha-numeric characters and/or underscores; e.g. tutorial
-* Leave branch type as the default **dev**. This will ensure the branch you create is a user development branch.
-* Leave the source type as **trunk** and leave the prefix option as **normal**.
-* Enter the related Trac ticket number for the ticket you created earlier.
-
-Click on **Run** when you are ready.  You will be prompted to edit the message log file.  A standard template is automatically supplied and pops up in your default text editor.  However, if you want to add extra comment for the branch, please do so above the line that says *"--This line will be ignored and those below will be inserted automatically--"*.  When you are ready, save your change and exit the editor.  Answer **Ok** when you are prompted to go ahead and create the branch.
-
-In the output window at the bottom of the GUI, you should hopefully see that your branch has been created successfully.
-
-.. image:: /images/create_branch.png
-   :height: 550px
-   :width: 748px
+  Committed revision 52466.
+  [info] Created: https://code.metoffice.gov.uk/svn/um/main/branches/dev/rosalynhatcher/vn10.5_tutorial
 
 The branch will have a URL (location of repository) like this:
 
 ``https://code.metoffice.gov.uk/um/main/branches/dev/[userid]/vn10.5_[branch_name]``
 
-Selecting the prefix option **normal** prepends the revision of the trunk you have branched from to your branch name.  Here, as we have used version labelling it is **vn10.5**.  If you had entered a version number instead of a label FCM would have added rxxx where xxx is the revision number.
+By default FCM prepends the revision of the trunk you have branched from to your branch name.  Here, as we have used version labelling it is **vn10.5**.  If you had entered a version number instead of a label FCM would have added rxxx where xxx is the revision number instead.
+
+.. note:: For further information on the options available for branch creation type: ``fcm branch-create --help``
 
 Take a note of the revision number the branch was created at, and the branch name, vn10.5_[branch_name].
 
@@ -124,15 +114,6 @@ You can see your branch from within the MOSRS Trac (https://code.metoffice.gov.u
 **main-->branches-->dev-->[userid]**
 
 Your branch will also appear on the UM repository mirror held on PUMA (within 5 minutes): https://puma.nerc.ac.uk/trac/um.xm
-
-**Command line syntax for creating a branch**
-
-As mentioned previously it is also possible to create a branch on the command line: ::
-
-  fcm branch-create -k <xx> <branch-name> fcm:um.x@vnx.y
-
-Where ``-k <xx>`` is used to associate ticket number xx with the branch and ``vnx.y`` is the UM version at which this branch should be created (e.g. vn10.5)
-
 
 **ii. Making changes to a working copy**
 
@@ -181,7 +162,9 @@ Now make some code changes! Use the following scenario to take you through the b
 
  at the command prompt.
 
-* Amend ``um_shell.F90`` to call this new subroutine
+* Amend ``um_shell.F90`` to call this new subroutine: ::
+
+    CALL um_shell_sub()
 
 * Ensure you put a comment line **! DEPENDS ON: um_shell_sub** above the CALL statement to ensure the dependency on your new file is registered.
 
@@ -426,7 +409,7 @@ Your working copy is now pointing to a branch that no longer exists at the HEAD 
 Version Control of Suites
 -------------------------
 
-Just like code changes your UM suites are also under version control in a subversion repository, usually *roses-u* which is on the MOSRS.  Once you have a working copy of your suite under ``~/roses`` you can use FCM commands in the same way as for your source code branches; commit changes, diff changes, etc.
+Just like code changes to your UM suites are also under version control in a subversion repository, usually *roses-u* which is on the MOSRS.  Once you have a working copy of your suite under ``~/roses`` you can use FCM commands in the same way as for your source code branches; commit changes, diff changes, etc.
 
 * Look in the roses-u repository via MOSRS Trac (https://code.metoffice.gov.uk/trac/roses-u) and find the suite you created in the previous section. (Hint: Go to *"Browse Source"* then drill down to find you suite. e.g. u-ag263 would be under a/g/2/6/3)
 

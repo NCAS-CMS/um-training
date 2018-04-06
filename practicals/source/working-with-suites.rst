@@ -87,13 +87,13 @@ Click on the triangle to the left of *suite conf* to expand that section.  Click
 
 .. note:: We generally use a **common notation** to help users navigate through the GUI and to help us help you with questions. Getting to "UM Science Settings" would be indicated like this: *um->namelist->UM Science Settings*.  This notation will be used throughout the rest of this document.
 
-The input namelists for the um are contained in the *um->namelist* section.  Let's take a look at the science namelist for Microphysics (Large Scale Precipiation), run_precip.
+The input namelists for the um are contained in the *um->namelist* section.  Let's take a look at the science namelist for Microphysics (Large Scale Precipiation), run_precip under "UM Science Settings".
 
 For each UM namelist item there is a short description to help you understand what that variable is.  Click on the cog next to a namelist variable and select *Help* to view more detailed information.  The help information can give you some useful pointers but be aware that it has been written with Met Office setup in mind. 
 
-Range and type checking of variables is done as soon as the user enters a new value.  Try changing the value of *timestep_mp_in* to 0. This will cause an error flag to appear, hover over the error for more information and click the *undo* button to revert to the original value.
+Range and type checking of variables is done as soon as the user enters a new value.  Try changing the value of *timestep_mp_in* to 0. This will cause an error flag to appear, hover over the error for more information and click the *undo* button several times to revert to the original value.
 
-Some larger science sections have been been divided into subsections, take a look at "Section 05 - Convection" for an example of this. To open a section in a new tab click with the middle mouse button, expand the section by clicking the page triangles. Rose edit has a search box which can be used to search item names. Try searching for *astart*, you will be taken directly to the Dumping and Meaning panel.
+Some larger science sections have been been divided into subsections, take a look at "Section 05 - Convection" for an example of this. To open a section in a new tab click with the middle mouse button, expand the section by clicking the page triangles. Rose edit has a search box which can be used to search item names. Try searching for the variable *astart* where the input dump is specified, you will be taken directly to the Dumping and Meaning panel.
 
 Trigger ignored settings are hidden by default and only appear to the user when the appropriate options are selected. Open the Gravity Wave Drag panel, if you change *i_gwd_vn* from 5 to 4 the options available change. Click the save button to apply these changes to your app. Let's take a look at what effect this has had to the ``rose-app.conf`` file, run ``fcm diff`` in the suite directory.
 

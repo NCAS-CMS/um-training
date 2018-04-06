@@ -78,17 +78,11 @@ This means that the number of output fields exceeds the limit set for a particul
 
 * What is the file ID of the failing output stream?
 
-Now navigate to the window for this stream under *Model Input and Output -> Model Output Streams*.  This defines the output stream.  You should see confirmation of the base output file name to be ``*.pc*``.  There are 2 ways to fix this problem:
+Now navigate to the window for this stream under *Model Input and Output -> Model Output Streams*.  This defines the output stream.  You should see confirmation of the base output file name to be ``*.pc*``.  Changing the reinitialisation frequency by modifying **reinit_step** and/or **reinit_unit** is the best way to fix this header problem. This tells the model to create new output files at a specified frequency, so individual files don't get massively large.
 
-1) Increase the **reserved_headers** size.
+.. note:: If the model is only exceeding the numer of reserved headers by a small amount it is also possible to just increased the **reserved_headers** size.  Overriding the size by a large amount and thus having large numbers of fieldsfile headers can be very inefficient for both runtime and memory. Thus the recommended way is to change the periodic reinitialisation of the fieldsfiles. 
 
-or
-
-2) Change the reinitialisation frequency by modifying **reinit_step** and/or **reinit_unit**.  This is telling the model to create new output files at a specified frequency, so individual files don't get massively large.
-
-Increasing the reserved header size is fine for smaller increases. Overriding the size by a large amount and thus having large numbers of fieldsfile headers can be inefficient for both runtime and memory. Thus the recommended way is to change the periodic reinitialisation of the fieldsfiles.  
-
-Modify the reinitialisation frequency and run the model again. Take a look at the model output files. You should see that you have multiple ``*.pc19980901_*`` files.
+Modify the reinitialisation frequency (you will need to experiment with the numbers) and run the model again. Take a look at the model output files. You should see that you have multiple ``*.pc19980901_*`` files.
 
 **iii. Adding a new STASH request**
 
