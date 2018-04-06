@@ -202,6 +202,9 @@ latex_elements = {
 # Additional stuff for the LaTeX preamble.
 'preamble': my_preamble,
 
+# Configure margins
+'sphinxsetup': 'hmargin=0.75in, vmargin=0.75in',
+
 # Remove blank pages between chapters
 'classoptions': ',openany,oneside',
 'babel': '\\usepackage[english]{babel}',
