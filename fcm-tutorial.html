@@ -122,38 +122,32 @@
 <p>The default text editor for entering commit messages is <code class="docutils literal"><span class="pre">vi</span></code>.  If you would prefer to use a different editor; for example <code class="docutils literal"><span class="pre">emacs</span></code> or <code class="docutils literal"><span class="pre">vim</span></code>, please see the section on “Setting up your default text editor”.</p>
 <p><strong>i. Creating a branch</strong></p>
 <p>Firstly create a new directory (e.g. <code class="docutils literal"><span class="pre">um/branches</span></code>) in your <code class="docutils literal"><span class="pre">$HOME</span></code> directory on PUMA which will be your work area and <code class="docutils literal"><span class="pre">cd</span></code> to it.</p>
-<p><strong>Using the FCM GUI to create a branch:</strong></p>
-<p>A basic FCM GUI was originally created as an interface to the command line functionality of FCM.  However, most people find that for the majority of tasks in FCM it is actually simpler and quicker to use the command line so that is what we will generally use in this tutorial!</p>
-<p>However, for branch creation we will show the GUI too.</p>
-<p>Launch the GUI from the command line by typing:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ fcm gui
+<p>Create a new branch by running the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">branch</span><span class="o">-</span><span class="n">create</span> <span class="o">-</span><span class="n">k</span> <span class="o">&lt;</span><span class="n">ticket</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">branch_name</span><span class="o">&gt;</span> <span class="n">fcm</span><span class="p">:</span><span class="n">um</span><span class="o">.</span><span class="n">x</span><span class="nd">@vn10</span><span class="o">.</span><span class="mi">5</span>
 </pre></div>
 </div>
-<p>Once you have the FCM GUI open, click on <strong>Branch</strong> on the top menu bar of the GUI.</p>
-<p>By default, the <strong>create</strong> radio button should be checked, but if it isn’t then check this option.  Set up your branch details as follows:</p>
+<p>Where:</p>
 <ul class="simple">
-<li>Enter <strong>fcm:um.x-tr&#64;vn10.5</strong> for the URL of the repository.</li>
-<li>Enter a short branch name.  This must contain only alpha-numeric characters and/or underscores; e.g. tutorial</li>
-<li>Leave branch type as the default <strong>dev</strong>. This will ensure the branch you create is a user development branch.</li>
-<li>Leave the source type as <strong>trunk</strong> and leave the prefix option as <strong>normal</strong>.</li>
-<li>Enter the related Trac ticket number for the ticket you created earlier.</li>
+<li><strong>&lt;ticket&gt;</strong> - is the related Trac ticket number for the ticket you created earlier.</li>
+<li><strong>&lt;branch_name&gt;</strong> - is a short name for the branch.  This must contain only alpha-numeric characters and/or underscores; e.g <em>tutorial</em></li>
 </ul>
-<p>Click on <strong>Run</strong> when you are ready.  You will be prompted to edit the message log file.  A standard template is automatically supplied and pops up in your default text editor.  However, if you want to add extra comment for the branch, please do so above the line that says <em>“–This line will be ignored and those below will be inserted automatically–”</em>.  When you are ready, save your change and exit the editor.  Answer <strong>Ok</strong> when you are prompted to go ahead and create the branch.</p>
-<p>In the output window at the bottom of the GUI, you should hopefully see that your branch has been created successfully.</p>
-<a class="reference internal image-reference" href="_images/create_branch.png"><img alt="_images/create_branch.png" src="_images/create_branch.png" style="width: 748px; height: 550px;" /></a>
+<p>You will be prompted to edit the message log file.  A standard template is automatically supplied and pops up in your default text editor.  However, if you want to add extra comment for the branch, please do so above the line that says <em>“–This line will be ignored and those below will be inserted automatically–”</em>.  When you are ready, save your change and exit the editor.  Answer <strong>y</strong> when you are prompted to go ahead and create the branch.</p>
+<p>If the branch is created successfully you will get a message similar to the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Committed</span> <span class="n">revision</span> <span class="mf">52466.</span>
+<span class="p">[</span><span class="n">info</span><span class="p">]</span> <span class="n">Created</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">code</span><span class="o">.</span><span class="n">metoffice</span><span class="o">.</span><span class="n">gov</span><span class="o">.</span><span class="n">uk</span><span class="o">/</span><span class="n">svn</span><span class="o">/</span><span class="n">um</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">branches</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">rosalynhatcher</span><span class="o">/</span><span class="n">vn10</span><span class="o">.</span><span class="mi">5</span><span class="n">_tutorial</span>
+</pre></div>
+</div>
 <p>The branch will have a URL (location of repository) like this:</p>
 <p><code class="docutils literal"><span class="pre">https://code.metoffice.gov.uk/um/main/branches/dev/[userid]/vn10.5_[branch_name]</span></code></p>
-<p>Selecting the prefix option <strong>normal</strong> prepends the revision of the trunk you have branched from to your branch name.  Here, as we have used version labelling it is <strong>vn10.5</strong>.  If you had entered a version number instead of a label FCM would have added rxxx where xxx is the revision number.</p>
+<p>By default FCM prepends the revision of the trunk you have branched from to your branch name.  Here, as we have used version labelling it is <strong>vn10.5</strong>.  If you had entered a version number instead of a label FCM would have added rxxx where xxx is the revision number instead.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For further information on the options available for branch creation type: <code class="docutils literal"><span class="pre">fcm</span> <span class="pre">branch-create</span> <span class="pre">--help</span></code></p>
+</div>
 <p>Take a note of the revision number the branch was created at, and the branch name, vn10.5_[branch_name].</p>
 <p>You can see your branch from within the MOSRS Trac (<a class="reference external" href="https://code.metoffice.gov.uk/trac/um">https://code.metoffice.gov.uk/trac/um</a>): Click on <strong>Browse Source</strong> on the Trac menu bar and then navigate through:</p>
 <p><strong>main–&gt;branches–&gt;dev–&gt;[userid]</strong></p>
 <p>Your branch will also appear on the UM repository mirror held on PUMA (within 5 minutes): <a class="reference external" href="https://puma.nerc.ac.uk/trac/um.xm">https://puma.nerc.ac.uk/trac/um.xm</a></p>
-<p><strong>Command line syntax for creating a branch</strong></p>
-<p>As mentioned previously it is also possible to create a branch on the command line:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">branch</span><span class="o">-</span><span class="n">create</span> <span class="o">-</span><span class="n">k</span> <span class="o">&lt;</span><span class="n">xx</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> <span class="n">fcm</span><span class="p">:</span><span class="n">um</span><span class="o">.</span><span class="n">x</span><span class="nd">@vnx</span><span class="o">.</span><span class="n">y</span>
-</pre></div>
-</div>
-<p>Where <code class="docutils literal"><span class="pre">-k</span> <span class="pre">&lt;xx&gt;</span></code> is used to associate ticket number xx with the branch and <code class="docutils literal"><span class="pre">vnx.y</span></code> is the UM version at which this branch should be created (e.g. vn10.5)</p>
 <p><strong>ii. Making changes to a working copy</strong></p>
 <p><strong>Checking out a working copy</strong></p>
 <p>You may have noticed that creating a branch does not create a source code tree that you can edit (working copy)!  To do this you need to <em>Checkout</em> from your branch.  Make sure you have changed to the working directory you created earlier as by default code is checked out to the current directory.  To checkout a copy of the UM code type:</p>
@@ -194,9 +188,14 @@
 </ul>
 <blockquote>
 <div>at the command prompt.</div></blockquote>
-<ul class="simple">
-<li>Amend <code class="docutils literal"><span class="pre">um_shell.F90</span></code> to call this new subroutine</li>
-<li>Ensure you put a comment line <strong>! DEPENDS ON: um_shell_sub</strong> above the CALL statement to ensure the dependency on your new file is registered.</li>
+<ul>
+<li><p class="first">Amend <code class="docutils literal"><span class="pre">um_shell.F90</span></code> to call this new subroutine:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CALL</span> <span class="n">um_shell_sub</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Ensure you put a comment line <strong>! DEPENDS ON: um_shell_sub</strong> above the CALL statement to ensure the dependency on your new file is registered.</p>
+</li>
 </ul>
 <p><strong>Deleting a file</strong></p>
 <ul>
@@ -404,7 +403,7 @@ Summary of conflicts:
 </div>
 <div class="section" id="version-control-of-suites">
 <h2>4.7. Version Control of Suites<a class="headerlink" href="#version-control-of-suites" title="Permalink to this headline">¶</a></h2>
-<p>Just like code changes your UM suites are also under version control in a subversion repository, usually <em>roses-u</em> which is on the MOSRS.  Once you have a working copy of your suite under <code class="docutils literal"><span class="pre">~/roses</span></code> you can use FCM commands in the same way as for your source code branches; commit changes, diff changes, etc.</p>
+<p>Just like code changes to your UM suites are also under version control in a subversion repository, usually <em>roses-u</em> which is on the MOSRS.  Once you have a working copy of your suite under <code class="docutils literal"><span class="pre">~/roses</span></code> you can use FCM commands in the same way as for your source code branches; commit changes, diff changes, etc.</p>
 <ul class="simple">
 <li>Look in the roses-u repository via MOSRS Trac (<a class="reference external" href="https://code.metoffice.gov.uk/trac/roses-u">https://code.metoffice.gov.uk/trac/roses-u</a>) and find the suite you created in the previous section. (Hint: Go to <em>“Browse Source”</em> then drill down to find you suite. e.g. u-ag263 would be under a/g/2/6/3)</li>
 <li>Go to your suite working directory and type <strong>fcm status</strong> to see the changes you have made since you copied the suite.</li>

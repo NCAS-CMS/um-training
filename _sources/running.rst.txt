@@ -50,12 +50,12 @@ Now make the following changes:
 * Click on *suite conf -> jinja2* in the left hand panel
 * Change HPC_USER (that's your ARCHER training account)
 * Change HPC_ACCOUNT to **'n02-training'**
-* Change HPC_QUEUE to be the reservation code for today. (e.g. **'R4943949'**)
+* Change HPC_QUEUE to be the reservation code for today. (e.g. **'R5212096'**)
 * Save the suite (*File -> Save* or click the *down arrow* icon)
 
 .. note:: Quotes around the 'n02-training', reservation code and your ARCHER username are essential otherwise the suite won't run.
 
-.. note:: In normal practice you submit your suites to the parallel queue (either 'short' or 'standard') on ARCHER.  For this training course, we are using processor Reservations, whereby we have exclusive access to a prearranged amount of ARCHER resource.  Reservations are specified by a reservation code; e.g. R4943949.
+.. note:: In normal practice you submit your suites to the parallel queue (either 'short' or 'standard') on ARCHER.  For this training course, we are using processor Reservations, whereby we have exclusive access to a prearranged amount of ARCHER resource.  Reservations are specified by a reservation code; e.g. R5212096.
 
 **iii. Run the suite**
 
@@ -169,7 +169,7 @@ The amount of output created by the suite and written to this file can be contro
 It is well worth taking a little time to look through this file and to recognise some of the key phrases output by the model. You will soon learn what to search for to tell you if the model ran successfully or not. Unfortunately, important information can be dotted about in the file, so just examining the first or last few lines may not be sufficient to find out why the model hasn't behaved as you expected. Try to find answers to the following:
 
 * How many boundary layer levels did you run with?
-* What was the range of grid points handled by this processor?
+* What was the range of gridpoints handled by this processor?
 
 Check the file sizes of the different file types. The output directory will contain start dumps, diagnostic output files and possibly a core dump file if the model failed) and these usually have very different sizes.
 

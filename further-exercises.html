@@ -110,16 +110,12 @@
 <ul class="simple">
 <li>What is the file ID of the failing output stream?</li>
 </ul>
-<p>Now navigate to the window for this stream under <em>Model Input and Output -&gt; Model Output Streams</em>.  This defines the output stream.  You should see confirmation of the base output file name to be <code class="docutils literal"><span class="pre">*.pc*</span></code>.  There are 2 ways to fix this problem:</p>
-<ol class="arabic simple">
-<li>Increase the <strong>reserved_headers</strong> size.</li>
-</ol>
-<p>or</p>
-<ol class="arabic simple" start="2">
-<li>Change the reinitialisation frequency by modifying <strong>reinit_step</strong> and/or <strong>reinit_unit</strong>.  This is telling the model to create new output files at a specified frequency, so individual files don’t get massively large.</li>
-</ol>
-<p>Increasing the reserved header size is fine for smaller increases. Overriding the size by a large amount and thus having large numbers of fieldsfile headers can be inefficient for both runtime and memory. Thus the recommended way is to change the periodic reinitialisation of the fieldsfiles.</p>
-<p>Modify the reinitialisation frequency and run the model again. Take a look at the model output files. You should see that you have multiple <code class="docutils literal"><span class="pre">*.pc19980901_*</span></code> files.</p>
+<p>Now navigate to the window for this stream under <em>Model Input and Output -&gt; Model Output Streams</em>.  This defines the output stream.  You should see confirmation of the base output file name to be <code class="docutils literal"><span class="pre">*.pc*</span></code>.  Changing the reinitialisation frequency by modifying <strong>reinit_step</strong> and/or <strong>reinit_unit</strong> is the best way to fix this header problem. This tells the model to create new output files at a specified frequency, so individual files don’t get massively large.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the model is only exceeding the numer of reserved headers by a small amount it is also possible to just increased the <strong>reserved_headers</strong> size.  Overriding the size by a large amount and thus having large numbers of fieldsfile headers can be very inefficient for both runtime and memory. Thus the recommended way is to change the periodic reinitialisation of the fieldsfiles.</p>
+</div>
+<p>Modify the reinitialisation frequency (you will need to experiment with the numbers) and run the model again. Take a look at the model output files. You should see that you have multiple <code class="docutils literal"><span class="pre">*.pc19980901_*</span></code> files.</p>
 <p><strong>iii. Adding a new STASH request</strong></p>
 <p>Let’s now try adding a new STASH request to the UM app.</p>
 <p>Click the “New” button in the STASH Requests section.  A window will appear in order for you to browse all available STASHmaster entries.</p>
