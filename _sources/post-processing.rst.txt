@@ -79,11 +79,11 @@ um-convpp
 
 We have mentioned in the presentations the PP file format - this is a sequential format (a fields file is random access) still much used in the community. PP data is stored as 32-bit, which provides a significant saving of space, but means that a conversion step is required from a fields file (64-bit). The utility to do this is called ``um-convpp``.  ``um-convpp`` converts directly from 64-bit files produced by the UM to 32-bit PP files.  You must, however, make sure you are using a version 10.4 or greater - you can check that you are using the right one by typing ``which um-convpp``. 
 
-Add the path to um-convpp to your environment - you can also add this to your ~/.profile so it is available everytime you log in. ::
+Add the path to ``um-convpp`` to your environment - you can also add this to your ``~/.profile`` so it is available everytime you log in. ::
 
   archer$ export PATH=$UMDIR/vn10.6/cce/utilities:$PATH
 
-Run ``um-convpp`` on the fieldsfile ending .pc19880901 ::
+Run ``um-convpp`` on a fieldsfile (E.g ag761a.pc19880901_00) ::
 
   archer$ cd /home/n02/n02/ros/cylc-run/u-ag761/share/data/History_Data
   archer$ um-convpp ag761a.pc19880901 ag761a.pc19880901.pp

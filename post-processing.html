@@ -107,11 +107,11 @@ archer$ mule-pumf --print-columns 2 ag761.astart &gt; ~/mule-pumf.out
 <div class="section" id="um-convpp">
 <h2>8.4. um-convpp<a class="headerlink" href="#um-convpp" title="Permalink to this headline">¶</a></h2>
 <p>We have mentioned in the presentations the PP file format - this is a sequential format (a fields file is random access) still much used in the community. PP data is stored as 32-bit, which provides a significant saving of space, but means that a conversion step is required from a fields file (64-bit). The utility to do this is called <code class="docutils literal"><span class="pre">um-convpp</span></code>.  <code class="docutils literal"><span class="pre">um-convpp</span></code> converts directly from 64-bit files produced by the UM to 32-bit PP files.  You must, however, make sure you are using a version 10.4 or greater - you can check that you are using the right one by typing <code class="docutils literal"><span class="pre">which</span> <span class="pre">um-convpp</span></code>.</p>
-<p>Add the path to um-convpp to your environment - you can also add this to your ~/.profile so it is available everytime you log in.</p>
+<p>Add the path to <code class="docutils literal"><span class="pre">um-convpp</span></code> to your environment - you can also add this to your <code class="docutils literal"><span class="pre">~/.profile</span></code> so it is available everytime you log in.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>archer$ export PATH=$UMDIR/vn10.6/cce/utilities:$PATH
 </pre></div>
 </div>
-<p>Run <code class="docutils literal"><span class="pre">um-convpp</span></code> on the fieldsfile ending .pc19880901</p>
+<p>Run <code class="docutils literal"><span class="pre">um-convpp</span></code> on a fieldsfile (E.g ag761a.pc19880901_00)</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>archer$ cd /home/n02/n02/ros/cylc-run/u-ag761/share/data/History_Data
 archer$ um-convpp ag761a.pc19880901 ag761a.pc19880901.pp
 
