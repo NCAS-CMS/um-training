@@ -23,7 +23,7 @@ When you attempt to create a branch or commit changes to the repository, you wil
   export SVN_EDITOR='nedit'
   
   # vi
-  export SVN_EDITOR='xterm -e vi' 
+  export SVN_EDITOR='vi' 
 
 Applying modifications to a UM suite
 ------------------------------------
@@ -85,7 +85,7 @@ Firstly create a new directory (e.g. ``um/branches``) in your ``$HOME`` director
 
 Create a new branch by running the command: ::
 
-  fcm branch-create -k <ticket> <branch_name> fcm:um.x@vn10.5
+  fcm branch-create -k <ticket> <branch_name> fcm:um.x-tr@vn10.5
 
 Where:
 
@@ -409,7 +409,7 @@ Your working copy is now pointing to a branch that no longer exists at the HEAD 
 Version Control of Suites
 -------------------------
 
-Just like code changes to your UM suites are also under version control in a subversion repository, usually *roses-u* which is on the MOSRS.  Once you have a working copy of your suite under ``~/roses`` you can use FCM commands in the same way as for your source code branches; commit changes, diff changes, etc.
+Just like the model code, your UM suites are also under version control in a subversion repository, usually *roses-u* which is on the MOSRS.  Once you have a working copy of your suite under ``~/roses`` you can use FCM commands in the same way as for your source code branches; i.e. commit changes, diff changes, etc.
 
 * Look in the roses-u repository via MOSRS Trac (https://code.metoffice.gov.uk/trac/roses-u) and find the suite you created in the previous section. (Hint: Go to *"Browse Source"* then drill down to find you suite. e.g. u-ag263 would be under a/g/2/6/3)
 

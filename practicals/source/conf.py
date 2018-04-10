@@ -180,6 +180,7 @@ htmlhelp_basename = 'UMtrainingdoc'
 my_preamble = '''
 \\addto\\captionsenglish{\\renewcommand{\\chaptername}{Section}}
 \\makeatletter
+\\setcounter{tocdepth}{1}
 \\definecolor{VerbatimBorderColor}{rgb}{1,1,1}
 \\fancypagestyle{normal}{
   \\fancyhf{}

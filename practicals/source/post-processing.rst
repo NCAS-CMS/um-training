@@ -54,13 +54,14 @@ Run ``mule-pumf`` on the start file - here's a couple of examples on one of Ros'
                         ag761.astart > ~/mule-pumf-header.out
 
  archer$ mule-pumf --print-columns 2 ag761.astart > ~/mule-pumf.out
+
 * Can you see what the difference is in the output of these 2 commands?
 
 Take a look at the man page (``mule-pumf -h``) and experiment with some of the other options
 
 **ii. mule-summary**
 
-This utility is used to print out a summary of the lookup headers which describe the fields from a UM file. Its intended use is to aid in quick inspections of files for diagnostic purposes. ::
+This utility is used to print out a summary of the lookup headers which describe the fields from a UM file. Its intended use is to aid in quick inspections of files for diagnostic purposes.
 
 Run ``mule-summary`` on the start file again.
 
@@ -78,11 +79,11 @@ um-convpp
 
 We have mentioned in the presentations the PP file format - this is a sequential format (a fields file is random access) still much used in the community. PP data is stored as 32-bit, which provides a significant saving of space, but means that a conversion step is required from a fields file (64-bit). The utility to do this is called ``um-convpp``.  ``um-convpp`` converts directly from 64-bit files produced by the UM to 32-bit PP files.  You must, however, make sure you are using a version 10.4 or greater - you can check that you are using the right one by typing ``which um-convpp``. 
 
-Add the path to um-convpp to your environment - you can also add this to your ~/.profile so it is available everytime you log in. ::
+Add the path to ``um-convpp`` to your environment - you can also add this to your ``~/.profile`` so it is available everytime you log in. ::
 
   archer$ export PATH=$UMDIR/vn10.6/cce/utilities:$PATH
 
-Run ``um-convpp`` on the fieldsfile ending .pc19880901 ::
+Run ``um-convpp`` on a fieldsfile (E.g ag761a.pc19880901_00) ::
 
   archer$ cd /home/n02/n02/ros/cylc-run/u-ag761/share/data/History_Data
   archer$ um-convpp ag761a.pc19880901 ag761a.pc19880901.pp
@@ -105,7 +106,7 @@ CF-compliant data in NetCDF format. You first need to set the
 environment to run ``cfa`` - if you will be a frequent user, add the
 ``module load`` and ``module swap`` commands to your .profile. ::
 
- esPP001$ module load anaconda cf
+ esPP001$ module load anaconda/2.2.0-python2 cf udunits
  esPP001$ module swap PrgEnv-cray PrgEnv-intel
  esPP001$ cfa -i -o ag761a.pc19880901.pp.nc ag761a.pc19880901.pp
  
@@ -146,7 +147,7 @@ Many tools exist for analysing data from NWP and climate models and there are ma
   user, add the ``module load`` and ``module swap`` commands to your
   .profile. ::
 
-   archer$ module load anaconda/2.2.0-python2 cf
+   archer$ module load anaconda/2.2.0-python2 cf udunits
    archer$ module swap PrgEnv-cray PrgEnv-intel
    archer$ python
    >>> import cf
