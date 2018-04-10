@@ -132,7 +132,7 @@ features - we’ll use it to convert UM fields file or PP data to
 CF-compliant data in NetCDF format. You first need to set the
 environment to run <code class="docutils literal"><span class="pre">cfa</span></code> - if you will be a frequent user, add the
 <code class="docutils literal"><span class="pre">module</span> <span class="pre">load</span></code> and <code class="docutils literal"><span class="pre">module</span> <span class="pre">swap</span></code> commands to your .profile.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>esPP001$ module load anaconda cf
+<div class="highlight-default"><div class="highlight"><pre><span></span>esPP001$ module load anaconda/2.2.0-python2 cf udunits
 esPP001$ module swap PrgEnv-cray PrgEnv-intel
 esPP001$ cfa -i -o ag761a.pc19880901.pp.nc ag761a.pc19880901.pp
 </pre></div>
@@ -171,7 +171,7 @@ Axes           : time(1) = [1988-09-01 06:00:00] 360_day
 <li><p class="first">Set up the environment and start python - if you will be a frequent
 user, add the <code class="docutils literal"><span class="pre">module</span> <span class="pre">load</span></code> and <code class="docutils literal"><span class="pre">module</span> <span class="pre">swap</span></code> commands to your
 .profile.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>archer$ module load anaconda/2.2.0-python2 cf
+<div class="highlight-default"><div class="highlight"><pre><span></span>archer$ module load anaconda/2.2.0-python2 cf udunits
 archer$ module swap PrgEnv-cray PrgEnv-intel
 archer$ python
 &gt;&gt;&gt; import cf
