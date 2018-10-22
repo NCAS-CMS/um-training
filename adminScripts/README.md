@@ -7,3 +7,8 @@
 ### applicantSpreadsheetToDocs.py 
   - Makes .html and/or .pdf with attendee details
   - This is for us to use as an aide-memoire
+
+### various check[something].py
+  - these check accounts set up (location in header)
+  - checkTracAccounts.py (man.badc.rl.ac.uk)
+  - checkPUMADetailsApplicants.py (puma)
