@@ -4,28 +4,19 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>10. Appendix B: SSH FAQs &#8212; NCAS Unified Model Introduction</title>
+    <title>11. Appendix B: SSH FAQs &#8212; NCAS Unified Model Introduction</title>
     <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="9. Appendix A: Useful information" href="useful-information.html" /> 
-  </head>
-  <body>
+    <link rel="prev" title="10. Appendix A: Useful information" href="useful-information.html" /> 
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -33,7 +24,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="useful-information.html" title="9. Appendix A: Useful information"
+          <a href="useful-information.html" title="10. Appendix A: Useful information"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
       </ul>
@@ -45,76 +36,76 @@
           <div class="body" role="main">
             
   <div class="section" id="appendix-b-ssh-faqs">
-<h1>10. Appendix B: SSH FAQs<a class="headerlink" href="#appendix-b-ssh-faqs" title="Permalink to this headline">¶</a></h1>
+<h1>11. Appendix B: SSH FAQs<a class="headerlink" href="#appendix-b-ssh-faqs" title="Permalink to this headline">¶</a></h1>
 <p>This Sections provides instructions for some common ssh tasks. If you have any problems, contact a member of the CMS team.</p>
 <div class="section" id="using-an-existing-ssh-agent">
-<span id="using-existing-agent"></span><h2>10.1. Using an existing ssh agent<a class="headerlink" href="#using-an-existing-ssh-agent" title="Permalink to this headline">¶</a></h2>
+<span id="using-existing-agent"></span><h2>11.1. Using an existing ssh agent<a class="headerlink" href="#using-an-existing-ssh-agent" title="Permalink to this headline">¶</a></h2>
 <p>If you already have an ssh-agent set up on PUMA, you can use this one to connect to your Archer training account. Conversely, after the course you may wish to use the keys you set up for own Archer account.</p>
-<p>You can copy your ssh key over to Archer using the <code class="docutils literal"><span class="pre">ssh-copy-id</span></code> script.</p>
-<p>First you need to find the name of the public key in your <code class="docutils literal"><span class="pre">.ssh</span></code> directory.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ cd ~/.ssh
+<p>You can copy your ssh key over to Archer using the <code class="docutils literal notranslate"><span class="pre">ssh-copy-id</span></code> script.</p>
+<p>First you need to find the name of the public key in your <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cd ~/.ssh
 puma$ ls
 environment.puma  id_rsa  id_rsa.pub  known_hosts  ssh-setup
 </pre></div>
 </div>
-<p>The public key ends with <code class="docutils literal"><span class="pre">.pub</span></code> and will usually be called <code class="docutils literal"><span class="pre">id_rsa.pub</span></code> or <code class="docutils literal"><span class="pre">id_dsa.pub</span></code>.</p>
+<p>The public key ends with <code class="docutils literal notranslate"><span class="pre">.pub</span></code> and will usually be called <code class="docutils literal notranslate"><span class="pre">id_rsa.pub</span></code> or <code class="docutils literal notranslate"><span class="pre">id_dsa.pub</span></code>.</p>
 <p>Now run the script to copy the key to your Archer account, making sure to use the correct name for your key:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ ssh-copy-id -i ~/.ssh/id_rsa.pub &lt;archer-username&gt;@login.archer.ac.uk
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh-copy-id -i ~/.ssh/id_rsa.pub &lt;archer-username&gt;@login.archer.ac.uk
 </pre></div>
 </div>
 <p>You will be prompted for your Archer password.</p>
 <p>If successful, you should now be able to login to Archer without a password. If you are prompted for a passphrase you need to re-start your agent - see below.</p>
 </div>
 <div class="section" id="restarting-your-ssh-agent">
-<span id="restarting-agent"></span><h2>10.2. Restarting your ssh agent<a class="headerlink" href="#restarting-your-ssh-agent" title="Permalink to this headline">¶</a></h2>
+<span id="restarting-agent"></span><h2>11.2. Restarting your ssh agent<a class="headerlink" href="#restarting-your-ssh-agent" title="Permalink to this headline">¶</a></h2>
 <p>Normally your ssh agent persists even when you log out of puma. However, from time to time it can vanish.</p>
 <p>If you are prompted for your passphrase, this means the ssh agent has stopped for some reason. The agent <em>should</em> have been re-initialised when you logged into puma, but you will need to re-associate your ssh keys to the agent.</p>
 <p>To do so, run:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ ssh-add
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh-add
 </pre></div>
 </div>
 <p>If successful this will prompt for your passphrase:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Enter</span> <span class="n">passphrase</span> <span class="k">for</span> <span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">puma</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Enter</span> <span class="n">passphrase</span> <span class="k">for</span> <span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">puma</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="p">:</span>
 </pre></div>
 </div>
 <p>Sometimes this step will fail with the following error:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Could</span> <span class="ow">not</span> <span class="nb">open</span> <span class="n">a</span> <span class="n">connection</span> <span class="n">to</span> <span class="n">your</span> <span class="n">authentication</span> <span class="n">agent</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Could</span> <span class="ow">not</span> <span class="nb">open</span> <span class="n">a</span> <span class="n">connection</span> <span class="n">to</span> <span class="n">your</span> <span class="n">authentication</span> <span class="n">agent</span><span class="o">.</span>
 </pre></div>
 </div>
 <p>In this case, the agent is not running. Usually this is beacuse of an environment file. Delete the following:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ rm ~/.ssh/environment.puma
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ rm ~/.ssh/environment.puma
 </pre></div>
 </div>
 <p>Then log out of puma and back in again. You should hopefully see a message similar to:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Initialising</span> <span class="n">new</span> <span class="n">SSH</span> <span class="n">agent</span><span class="o">...</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Initialising</span> <span class="n">new</span> <span class="n">SSH</span> <span class="n">agent</span><span class="o">...</span>
 </pre></div>
 </div>
 <p>And you should now be able to run ssh-add successfully.</p>
 </div>
 <div class="section" id="regenerating-your-ssh-keys">
-<span id="regenerating-keys"></span><h2>10.3. Regenerating your ssh keys<a class="headerlink" href="#regenerating-your-ssh-keys" title="Permalink to this headline">¶</a></h2>
+<span id="regenerating-keys"></span><h2>11.3. Regenerating your ssh keys<a class="headerlink" href="#regenerating-your-ssh-keys" title="Permalink to this headline">¶</a></h2>
 <p>If you have forgotten your passphrase you will need to regenerate your ssh keys. Before doing so, you will need to tidy up the old keys otherwise the ssh agent can get itself confused.</p>
-<p>Go to your <code class="docutils literal"><span class="pre">.ssh</span></code> directory, and look at the files:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ cd ~/.ssh
+<p>Go to your <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> directory, and look at the files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cd ~/.ssh
 puma$ ls
 environment.puma  id_rsa  id_rsa.pub  known_hosts  ssh-setup
 </pre></div>
 </div>
-<p>Delete the public and private keys. These will normally be named <code class="docutils literal"><span class="pre">id_rsa</span></code> and <code class="docutils literal"><span class="pre">id_rsa.pub</span></code>, or <code class="docutils literal"><span class="pre">id_dsa</span></code> and <code class="docutils literal"><span class="pre">id_dsa.pub</span></code>.</p>
-<p>You should also delete the <code class="docutils literal"><span class="pre">environment.puma</span></code> file:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ rm id_rsa id_rsa.pub environment.puma
+<p>Delete the public and private keys. These will normally be named <code class="docutils literal notranslate"><span class="pre">id_rsa</span></code> and <code class="docutils literal notranslate"><span class="pre">id_rsa.pub</span></code>, or <code class="docutils literal notranslate"><span class="pre">id_dsa</span></code> and <code class="docutils literal notranslate"><span class="pre">id_dsa.pub</span></code>.</p>
+<p>You should also delete the <code class="docutils literal notranslate"><span class="pre">environment.puma</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ rm id_rsa id_rsa.pub environment.puma
 </pre></div>
 </div>
 <p>Next check if you have an agent running:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ ps -flu &lt;puma-username&gt; | grep ssh-agent
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ps -flu &lt;puma-username&gt; | grep ssh-agent
 </pre></div>
 </div>
 <p>If you have an agent running, one or more lines like the following will be returned:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>15658 ?        00:00:00 ssh-agent
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>15658 ?        00:00:00 ssh-agent
 </pre></div>
 </div>
-<p>The number in the first column is the process-id, pass this to the <code class="docutils literal"><span class="pre">kill</span></code> command to stop the process, for example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>puma$ kill -9 15658
+<p>The number in the first column is the process-id, pass this to the <code class="docutils literal notranslate"><span class="pre">kill</span></code> command to stop the process, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ kill -9 15658
 </pre></div>
 </div>
 <p>You can now start again, following the <a class="reference internal" href="getting-setup.html#ssh-setup"><span class="std std-ref">ssh set up instructions</span></a>.</p>
@@ -129,17 +120,17 @@ environment.puma  id_rsa  id_rsa.pub  known_hosts  ssh-setup
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">10. Appendix B: SSH FAQs</a><ul>
-<li><a class="reference internal" href="#using-an-existing-ssh-agent">10.1. Using an existing ssh agent</a></li>
-<li><a class="reference internal" href="#restarting-your-ssh-agent">10.2. Restarting your ssh agent</a></li>
-<li><a class="reference internal" href="#regenerating-your-ssh-keys">10.3. Regenerating your ssh keys</a></li>
+<li><a class="reference internal" href="#">11. Appendix B: SSH FAQs</a><ul>
+<li><a class="reference internal" href="#using-an-existing-ssh-agent">11.1. Using an existing ssh agent</a></li>
+<li><a class="reference internal" href="#restarting-your-ssh-agent">11.2. Restarting your ssh agent</a></li>
+<li><a class="reference internal" href="#regenerating-your-ssh-keys">11.3. Regenerating your ssh keys</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="useful-information.html"
-                        title="previous chapter">9. Appendix A: Useful information</a></p>
+                        title="previous chapter">10. Appendix A: Useful information</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -149,12 +140,14 @@ environment.puma  id_rsa  id_rsa.pub  known_hosts  ssh-setup
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -168,14 +161,14 @@ environment.puma  id_rsa  id_rsa.pub  known_hosts  ssh-setup
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="useful-information.html" title="9. Appendix A: Useful information"
+          <a href="useful-information.html" title="10. Appendix A: Useful information"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, NCAS-CMS.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>

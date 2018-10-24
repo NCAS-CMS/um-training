@@ -28,7 +28,7 @@ Consult the ARCHER website for more information: http://www.archer.ac.uk
 Running a Standard Suite
 ------------------------
 
-To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM10.5.  
+To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM11.1.  
 
 **i. Copy the suite**
 
@@ -50,7 +50,7 @@ Now make the following changes:
 * Click on *suite conf -> jinja2* in the left hand panel
 * Change HPC_USER (that's your ARCHER training account)
 * Change HPC_ACCOUNT to **'n02-training'**
-* Change HPC_QUEUE to be the reservation code for today. (e.g. **'R5212096'**)
+* Change HPC_QUEUE to be the reservation code for today. (e.g. **'R5660443'**)
 * Save the suite (*File -> Save* or click the *down arrow* icon)
 
 .. note:: Quotes around the 'n02-training', reservation code and your ARCHER username are essential otherwise the suite won't run.
@@ -107,7 +107,7 @@ For suites submitted from PUMA; in a browser navigate to ``http://puma.nerc.ac.u
 
 Enter your PUMA userid and click *"Suites List"*.  You should then see a list of all the suites you have run.  Click on *"tasks jobs list"* for the suite you have just run. You can examine the output of each task using the links, as well as see whether the suite contains failed tasks, or is currently running.  For this suite you should see output files for 4 tasks: fcm_make (code extraction), fcm_make2 (compilation), recon & atmos. The job.out and job.err files are the first places you should look for information when tasks fail.
 
-.. note:: To launch Rose Bush on Monsoon run the command ``firefox http://localhost/rose-bush``
+.. note:: Rose Bush currently does not work on Monsoon.
 
 **Compilation output**
 

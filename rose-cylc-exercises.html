@@ -1,0 +1,227 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>8. Rose/Cylc Exercises &#8212; NCAS Unified Model Introduction</title>
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. Post processing" href="post-processing.html" />
+    <link rel="prev" title="7. Further Exercises (2)" href="further-exercises-2.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="post-processing.html" title="9. Post processing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="further-exercises-2.html" title="7. Further Exercises (2)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rose-cylc-exercises">
+<h1>8. Rose/Cylc Exercises<a class="headerlink" href="#rose-cylc-exercises" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="differencing-suites">
+<h2>8.1. Differencing suites<a class="headerlink" href="#differencing-suites" title="Permalink to this headline">¶</a></h2>
+<p>Currently there is no Rose tool to difference two suites. Since a suite consists of text files it is simply a matter of making sure all the Rose configuration files are in the common format by running <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">config-dump</span></code> on each suite and then running <code class="docutils literal notranslate"><span class="pre">diff</span></code>.</p>
+<p>We will difference your copy of the GA7.0 suite with the original one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cd ~/roses
+puma$ rosie checkout u-ag761
+puma$ rose config-dump -C u-ag761
+puma$ rose config-dump -C &lt;your-suitename&gt;
+puma$ diff -r u-ag761 &lt;your-suitename&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li>Are the differences what you expected?</li>
+</ul>
+</div>
+<div class="section" id="graphing-a-suite">
+<h2>8.2. Graphing a suite<a class="headerlink" href="#graphing-a-suite" title="Permalink to this headline">¶</a></h2>
+<p>When developing suites, it can be useful to check what the run graph looks like after jinja evaluation, etc.</p>
+<p>The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ rosie checkout u-ah076
+puma$ cd ~/roses/u-ah076
+puma$ rose suite-run -l --name=u-ah076 # install suite in local cylc db only
+puma$ cylc graph u-ah076               # view graph in browser
+</pre></div>
+</div>
+<p>A window containing the graph of the suite should appear.</p>
+</div>
+<div class="section" id="exploring-the-suite-definition-files">
+<h2>8.3. Exploring the suite definition files<a class="headerlink" href="#exploring-the-suite-definition-files" title="Permalink to this headline">¶</a></h2>
+<p>Change to the <code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suite-id&gt;</span></code> directory for your copy of u-ag263.</p>
+<p>Open the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file in your favourite editor.</p>
+<p>Look at the <code class="docutils literal notranslate"><span class="pre">[scheduling]</span></code> section.  This contains some Jinja2 variables (BUILD &amp; RECON) which allow the user to select which tasks appear in the dependency graph. The dependency graph tells Cylc the order in which to run tasks.  The <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> and <code class="docutils literal notranslate"><span class="pre">recon</span></code> tasks are only included if the <code class="docutils literal notranslate"><span class="pre">BUILD</span></code> and <code class="docutils literal notranslate"><span class="pre">RECON</span></code> variables are set to true. These variables are located in the <code class="docutils literal notranslate"><span class="pre">rose-suite.conf</span></code> and can be changed using the rose edit GUI or by directly editing the <code class="docutils literal notranslate"><span class="pre">rose-suite.conf</span></code> file.  When you run a suite a processed version of the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file with all the Jinja2 code evaluated is placed in your suite’s <code class="docutils literal notranslate"><span class="pre">cylc-run</span></code> directory.</p>
+<ul class="simple">
+<li>Take a look at the <code class="docutils literal notranslate"><span class="pre">suite.rc.processed</span></code> file for your suite.  Hint: go to directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suite-id&gt;</span></code>.</li>
+<li>Change the values of BUILD and RECON and re-run your suite.</li>
+<li>Look at the new <code class="docutils literal notranslate"><span class="pre">suite.rc.processed</span></code> file.  Can you see how the graph has changed?</li>
+</ul>
+<p>Make sure that you leave the suite with BUILD=false before continuing.</p>
+<p>As we saw earlier when changing the path to the start dump, some settings can’t be changed through the rose edit GUI.  Instead you have to edit the suite definition files directly.</p>
+<ul class="simple">
+<li>Can you find where the atmos processor decomposition is set for this suite?</li>
+<li>Change atmos processor decomposition to run on 2 nodes.  Run the suite.</li>
+<li>What error message did you get? Hint: Look in the usual <code class="docutils literal notranslate"><span class="pre">job.out/job.err</span></code> or it may be in the <code class="docutils literal notranslate"><span class="pre">job-activity.log</span></code> file.</li>
+</ul>
+<p>This error is caused by a mismatch in the number of nodes requested by the PBS job script header and the number of processors requested by the <code class="docutils literal notranslate"><span class="pre">aprun</span></code> command which launches the executable. (For further information on PBS and the aprun command on ARCHER see: <a class="reference external" href="http://www.archer.ac.uk/documentation/user-guide/batch.php">http://www.archer.ac.uk/documentation/user-guide/batch.php</a>).</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">[[atmos]]</span> <span class="pre">[[[directives]]]</span></code> section change <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">select=1</span></code> to <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">select=2</span></code> to tell the PBS scheduler that you require 2 nodes.</p>
+<ul class="simple">
+<li>The suite should run this time. Did it run on 2 nodes as requested?</li>
+<li>How much walltime has been requested for the reconfiguration?</li>
+</ul>
+<p>Now take a look at the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file for your other suite (the one copied from u-ag761). See how it differs.  This one is set up to run on multiple platforms.</p>
+<ul class="simple">
+<li>Can you see the more complex dependency graph?</li>
+<li>Can you see where to change the reconfiguration walltime for this suite?</li>
+</ul>
+<p>This has just given you a very brief look at the suite definitions files.  More information can be found in the cylc documentation.</p>
+</div>
+<div class="section" id="suite-and-task-event-handling">
+<h2>8.4. Suite and task event handling<a class="headerlink" href="#suite-and-task-event-handling" title="Permalink to this headline">¶</a></h2>
+<p>Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting <code class="docutils literal notranslate"><span class="pre">[[[events]]]</span> <span class="pre">mail</span> <span class="pre">events</span></code> to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite u-ag761 to send an email on task (submission) failure and retry.</p>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file to add the <code class="docutils literal notranslate"><span class="pre">[[[events]]]</span></code> section below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">runtime</span><span class="p">]</span>
+    <span class="p">[[</span><span class="n">root</span><span class="p">]]</span>
+        <span class="o">...</span>
+        <span class="p">[[[</span><span class="n">environment</span><span class="p">]]]</span>
+        <span class="o">...</span>
+        <span class="p">[[[</span><span class="n">events</span><span class="p">]]]</span>
+            <span class="n">mail</span> <span class="n">events</span> <span class="o">=</span> <span class="n">submission</span> <span class="n">retry</span><span class="p">,</span> <span class="n">retry</span><span class="p">,</span> <span class="n">submission</span> <span class="n">failed</span><span class="p">,</span> <span class="n">failed</span>
+</pre></div>
+</div>
+<p>Configure cylc so it knows what your email address is. Edit the file <code class="docutils literal notranslate"><span class="pre">~/.cylc/global.rc</span></code> (create it if it doesn’t exist) to add the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">task</span> <span class="n">events</span><span class="p">]</span>
+    <span class="n">mail</span> <span class="n">to</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">enter</span><span class="o">-</span><span class="n">your</span><span class="o">-</span><span class="n">email</span><span class="o">-</span><span class="n">address</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To test this out we need to force the suite to fail.  Change the account code to a non-existent one; e.g. ‘n02-fail’</p>
+<ul class="simple">
+<li>Did you get an email when the suite failed?</li>
+<li>Look in the suite error files to find the error message?</li>
+</ul>
+<p>Change the account code back to ‘n02-training’ before continuing.</p>
+<p>Further information about event handlers can be found in the Cylc documentation: <a class="reference external" href="https://cylc.github.io/cylc/html/single/cug-html.html#13.15">https://cylc.github.io/cylc/html/single/cug-html.html#13.15</a></p>
+</div>
+<div class="section" id="adding-a-new-app-to-your-suite">
+<h2>8.5. Adding a new app to your suite<a class="headerlink" href="#adding-a-new-app-to-your-suite" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="starting-a-suite-in-held-mode">
+<h2>8.6. Starting a suite in “held” mode<a class="headerlink" href="#starting-a-suite-in-held-mode" title="Permalink to this headline">¶</a></h2>
+<p>This allows you to trigger the running of tasks manually.</p>
+<p>To start a suite in held mode add <code class="docutils literal notranslate"><span class="pre">--</span> <span class="pre">--hold</span></code> to the end of the <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">suite-run</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ rose suite-run -- --hold
+</pre></div>
+</div>
+<p>The first <code class="docutils literal notranslate"><span class="pre">--</span></code> tells Rose that all subsequent options should be passed on to Cylc.  This is why the hold option should be added to the end of the command, after any Rose options.  Once the suite has started all tasks will be in a held state.  It is then possible to select which tasks are run by right clicking on a task in the Cylc GUI and manually triggering it or resetting its state.</p>
+<p>Try doing this as a way to run the reconfiguration only in one of your suites.</p>
+</div>
+<div class="section" id="discovering-running-suites-and-the-multi-suite-monitor-gui">
+<h2>8.7. Discovering running suites and the multi-suite monitor GUI<a class="headerlink" href="#discovering-running-suites-and-the-multi-suite-monitor-gui" title="Permalink to this headline">¶</a></h2>
+<p>Suites that are currently running can be detected with command line or GUI tools:</p>
+<p>Submit 2 of your suites. It doesn’t matter what tasks they are running for this exercise; compilation, recon or model run.</p>
+<p>Now try running the command <code class="docutils literal notranslate"><span class="pre">cylc</span> <span class="pre">scan</span></code>. This lists your currently running suites.  For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cylc scan
+u-af140 ros@localhost:7770
+u-ag761 ros@localhost:7776
+</pre></div>
+</div>
+<p>There is also a multi-suite monitor GUI, which allows you to monitor the states of all suites you have running in one window.  Try running the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cylc gscan &amp;
+</pre></div>
+</div>
+<p>Double clicking on a suite in <em>gscan</em> opens the <em>gcylc</em> window, which you will be very familiar with by now. For each suite open the <em>gcylc</em> window and stop the suite by going to <em>Control -&gt; Stop Suite</em>, selecting  <strong>Stop after killing active tasks</strong> and clicking <strong>Ok</strong>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">8. Rose/Cylc Exercises</a><ul>
+<li><a class="reference internal" href="#differencing-suites">8.1. Differencing suites</a></li>
+<li><a class="reference internal" href="#graphing-a-suite">8.2. Graphing a suite</a></li>
+<li><a class="reference internal" href="#exploring-the-suite-definition-files">8.3. Exploring the suite definition files</a></li>
+<li><a class="reference internal" href="#suite-and-task-event-handling">8.4. Suite and task event handling</a></li>
+<li><a class="reference internal" href="#adding-a-new-app-to-your-suite">8.5. Adding a new app to your suite</a></li>
+<li><a class="reference internal" href="#starting-a-suite-in-held-mode">8.6. Starting a suite in “held” mode</a></li>
+<li><a class="reference internal" href="#discovering-running-suites-and-the-multi-suite-monitor-gui">8.7. Discovering running suites and the multi-suite monitor GUI</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="further-exercises-2.html"
+                        title="previous chapter">7. Further Exercises (2)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="post-processing.html"
+                        title="next chapter">9. Post processing</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/rose-cylc-exercises.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="post-processing.html" title="9. Post processing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="further-exercises-2.html" title="7. Further Exercises (2)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, NCAS-CMS.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+    </div>
+  </body>
+</html>
