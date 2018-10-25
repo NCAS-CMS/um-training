@@ -203,4 +203,5 @@ Note that the latitude and longitude coordinates are now shorter in length.
 
   >>> cf.write(f, 'cru_precip_european_mean_regridded.nc')
 
-This has just given you a taster of CF-Python & CF-Plot, if you would like to try out some more exercises please take a look at  http://www.met.reading.ac.uk/~swsheaps/scicomp2/index.html
+This has just given you a taster of CF-Python & CF-Plot, if you would like to try out some more exercises please take a look at http://ajheaps.github.io/cf-plot
+
