@@ -8,7 +8,7 @@ xconv
 
 **i. View data**
 
-On ARCHER go to the output directory of the global job that you ran previously (the one copied from u-ag761). Run ``xconv`` on the file ending with ``da19880903_00``. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.
+On ARCHER go to the output directory of the global job that you ran previously (the one copied from u-ba799). Run ``xconv`` on the file ending with, for example, ``da19880901_04``. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.
 
 In the directory above is a file whose name ends in ``.astart``; run a second instance of ``xconv`` on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.
 
@@ -51,9 +51,9 @@ This provides another way of seeing header information, but also gives some info
 Run ``mule-pumf`` on the start file - here's a couple of examples on one of Ros' files: :: 
 
  archer$ mule-pumf --print-columns 2 --headers-only \\
-                        ag761.astart > ~/mule-pumf-header.out
+                        ba799.astart > ~/mule-pumf-header.out
 
- archer$ mule-pumf --print-columns 2 ag761.astart > ~/mule-pumf.out
+ archer$ mule-pumf --print-columns 2 ba799.astart > ~/mule-pumf.out
 
 * Can you see what the difference is in the output of these 2 commands?
 
@@ -81,16 +81,16 @@ We have mentioned in the presentations the PP file format - this is a sequential
 
 Add the path to ``um-convpp`` to your environment - you can also add this to your ``~/.profile`` so it is available everytime you log in. ::
 
-  archer$ export PATH=$UMDIR/vn10.6/cce/utilities:$PATH
+  archer$ export PATH=$UMDIR/vn11.0/cce/utilities:$PATH
 
-Run ``um-convpp`` on a fieldsfile (E.g ag761a.pc19880901_00) ::
+Run ``um-convpp`` on a fieldsfile (E.g ba799a.pc19880901_00) ::
 
-  archer$ cd /home/n02/n02/ros/cylc-run/u-ag761/share/data/History_Data
-  archer$ um-convpp ag761a.pc19880901 ag761a.pc19880901.pp
+  archer$ cd /home/n02/n02/ros/cylc-run/u-ba799/share/data/History_Data
+  archer$ um-convpp ba799a.pc19880901_00 ba799a.pc19880901_00.pp
 
-  archer$ ls -l ag761a.pc19880901*
-  -rw-r--r-- 1 ros n02 64917504 Mar 15 11:56 ag761a.pc19880901
-  -rw-r--r-- 1 ros n02 48581456 Mar 21 10:19 ag761a.pc19880901.pp
+  archer$ ls -l ba799a.pc19880901*
+  -rw-r--r-- 1 ros n02 64917504 Mar 15 11:56 ag761a.pc19880901_00
+  -rw-r--r-- 1 ros n02 48581456 Mar 21 10:19 ag761a.pc19880901_00.pp
 
 Note the reduction in file size. Now use xconv to examine the contents of the PP file.
 
@@ -108,7 +108,7 @@ environment to run ``cfa`` - if you will be a frequent user, add the
 
  esPP001$ module load anaconda/2.2.0-python2 cf udunits
  esPP001$ module swap PrgEnv-cray PrgEnv-intel
- esPP001$ cfa -i -o ag761a.pc19880901.pp.nc ag761a.pc19880901.pp
+ esPP001$ cfa -i -o ba799a.pc19880901_00.pp.nc ba799a.pc19880901_00.pp
  
 Try viewing the NetCDF file with xconv.
 
@@ -118,26 +118,25 @@ files, to provide a text representation of the CF fields contained in
 the input files. Try it on a PP file and its NetCDF equivalent,
 e.g. ::
 
-  archer$ cfdump ag761a.pc19880901.pp | less
-  wind_speed field summary
-  ------------------------
-  Data           : wind_speed(latitude(145), longitude(192)) m s-1
-  Cell methods   : time: maximum
-  Axes           : time(1) = [1988-09-01 03:00:00] 360_day
-                 : altitude(1) = [10.0] m
+  archer$ cfdump ba799a.pc19880901_00.pp | less
+  Field: long_name:HEAVYSIDE FN ON P LEV/UV GRID (ncvar%UM_m01s30i301_vn1100)
+  ---------------------------------------------------------------------------
+  Data           : long_name:HEAVYSIDE FN ON P LEV/UV GRID(time(5), air_pressure(17), latitude(145), longitude(192)) 
+  Cell methods   : time: point
+  Axes           : time(5) = [1988-09-01T00:00:00Z, ..., 1988-09-01T03:59:59Z] 360_day
+                 : air_pressure(17) = [1000.0, ..., 10.0] hPa
                  : latitude(145) = [-90.0, ..., 90.0] degrees_north
                  : longitude(192) = [0.0, ..., 358.125] degrees_east
-  Aux coords     : model_level_number(altitude(1)) = [8888]
 
-  geopotential_height field summary
-  ---------------------------------
-  Data           : geopotential_height(latitude(144), longitude(192)) m
+  Field: long_name:VORTICITY 850 (ncvar%UM_m01s30i455_vn1100)
+  -----------------------------------------------------------
+  Data           : long_name:VORTICITY 850(time(5), latitude(145), longitude(192)) 
   Cell methods   : time: point
-  Axes           : time(1) = [1988-09-01 06:00:00] 360_day
-                 : air_pressure(1) = [500.0] hPa
-                 : latitude(144) = [-89.375, ..., 89.375] degrees_north
-                 : longitude(192) = [0.9375, ..., 359.0625] degrees_east
- 
+  Axes           : air_pressure(1) = [-1.0] hPa
+                 : time(5) = [1988-09-01T00:00:00Z, ..., 1988-09-01T03:59:59Z] 360_day
+                 : latitude(145) = [-90.0, ..., 90.0] degrees_north
+                 : longitude(192) = [0.0, ..., 358.125] degrees_east
+
 CF-python CF-plot
 -----------------
 
