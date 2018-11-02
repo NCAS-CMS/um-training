@@ -38,5 +38,6 @@ exampleString = '\n'.join([template.render(attendeeName   = row['First Name'] +\
                                            courseLocation = courseLocation,
                                            courseDates    = courseDates) +\
                            htmlPageBreak for index, row in df.iterrows()])
-#print(exampleString)
+#remove last page break
+exampleString = exampleString[:-len(htmlPageBreak)]
 pdfkit.from_string(exampleString, outputFilename)
