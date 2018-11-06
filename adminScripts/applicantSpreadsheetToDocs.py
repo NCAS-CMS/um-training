@@ -11,6 +11,8 @@ import pandas as pd
 # Choose whether to make pdf and/or html outputs
 makingHTMLFiles = False
 makingPDFs = True
+pdf_output_file = 'nov2018Applicants.pdf'
+
 if makingPDFs:
     try:
         import pdfkit
@@ -31,11 +33,24 @@ htmlHeadString = '''<!DOCTYPE html>
 <html>
 <head>
 <title>Page Title</title>
+
+    <style>
+      .content {
+      font-style: normal;
+      font-size: 18px;
+      padding-top: 4.0em;
+      margin-left: 2.5em;
+      margin-right: 2.5em;
+      }
+    </style>
+
 </head>
 <body>
+<div class="content">
 '''
 
-htmlFootString = '''</body>
+htmlFootString = '''</div>
+</body>
 </html>'''
 htmlPageBreak  = '<p style="page-break-after: always">\n'
 
@@ -101,6 +116,10 @@ df = df.sort_values('Last Name')
 # Use dropdown list in html - nameList holds this info
 nameList = [[index, row['First Name'] + ' ' + row['Last Name']] for index, row in df.iterrows()]
 
+# Remove Dave Case (dont want him round these parts)
+#df = df[df.Last_Name != 'Case'] #space in index is a pain!!
+#df = df.drop(df.index[8])
+
 # You can make html files for each applicant, with a dropdown to jump between them
 if makingHTMLFiles:
     # Change file names to people names if needed (rm whitespace)
@@ -122,4 +141,4 @@ if makingPDFs:
         exampleString = '\n'.join([htmlHeadString +\
                                    pageFromDataFrameRow(row) +\
                                    htmlFootString for index, row in df.iterrows()])
-    pdfkit.from_string(exampleString, 'example.pdf')
+    pdfkit.from_string(exampleString, pdf_output_file)
