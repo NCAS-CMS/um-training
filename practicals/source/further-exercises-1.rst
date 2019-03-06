@@ -1,5 +1,5 @@
-Further Exercises
-=================
+Further Exercises (1)
+=====================
 
 Now that we have built the suite, there is no need to rebuild it each time you run it.  Switch off compilation of the UM and reconfiguration.  Hint: See the *"suite conf"* section.
 
@@ -41,7 +41,11 @@ Try experimenting with different processor decompositions (E.g. 8x6, 12x12, etc)
 
 * How do the timings compare to when you ran on 7 nodes?
 
-You can come up with a performance vs processor count curve in this way which might be valuable if you are planning an experiment - it's also worth adding in the AU cost calculation when doing this.
+You can come up with a performance vs processor count curve in this way which might be valuable if you are planning an experiment - it's also worth adding in the AU cost calculation when doing this.  An example of this can be seen below:
+
+.. image:: /images/cost-curves.jpg
+   :height: 366px
+   :width: 650px
 
 .. note:: Running "under populated", i.e. with fewer than the total cores per node, gives access to more memory per parallel task.
 
@@ -80,7 +84,7 @@ This means that the number of output fields exceeds the limit set for a particul
 
 Now navigate to the window for this stream under *Model Input and Output -> Model Output Streams*.  This defines the output stream.  You should see confirmation of the base output file name to be ``*.pc*``.  Changing the reinitialisation frequency by modifying **reinit_step** and/or **reinit_unit** is the best way to fix this header problem. This tells the model to create new output files at a specified frequency, so individual files don't get massively large.
 
-.. note:: If the model is only exceeding the numer of reserved headers by a small amount it is also possible to just increased the **reserved_headers** size.  Overriding the size by a large amount and thus having large numbers of fieldsfile headers can be very inefficient for both runtime and memory. Thus the recommended way is to change the periodic reinitialisation of the fieldsfiles. 
+.. note:: If the model is only exceeding the numer of reserved headers by a small amount it is also possible to just increased the **reserved_headers** size.  Overriding the size by a large amount and thus having large numbers of fieldsfile headers can be very inefficient for both runtime and memory. Therefore the recommended way is to change the periodic reinitialisation of the fieldsfiles. 
 
 Modify the reinitialisation frequency (you will need to experiment with the numbers) and run the model again. Take a look at the model output files. You should see that you have multiple ``*.pc19980901_*`` files.
 
@@ -103,21 +107,17 @@ Once you have added a new STASH request, you need to run a macro to generate an 
 Change the dump frequency
 -------------------------
 
-Set the model run length to 6 hours.  Hint: *suite conf -> Run Initialisation and Cycling*.
+Set the model run length to 2 hours.  Hint: *suite conf -> Run Initialisation and Cycling*.
 
 .. note:: Hours are represented in the ISO 8601 standard as *PT<num-hours>H* (e.g. PT1H represents 1 hour). Days are represented as P<num-days>D (e.g. P10D represents 10 days)
 
-Reset the STASH output for stream UPC to hourly and the file reinitialisation frequency to 12 hourly.
+Reset the STASH output for stream UPC to hourly and the file reinitialisation frequency to 4 hourly.
 
 Navigate to *um -> namelist -> Model Input and Output -> Dumping and Meaning*.
 
 * What is the current dump frequency?
 
-Set the dump frequency to 6 hours.  **Run** the model.
-
-* What is the error?
-
-This error message occurs when you have set the total run length to be less than the cycling (automatic resubmission) frequency.  Change the cycling frequency to 6 hours. Run the model.
+Set the dump frequency to 2 hours.  **Run** the model.
 
 * How much time was spent in DUMPCTL?
 
@@ -168,112 +168,4 @@ Having already run the first 3 hours we just want the suite to pick up where it 
   puma$ rose suite-run --restart
 
 The cylc GUI will pop up and you should see the run resuming from where it left off (i.e. from cycle point 19880901T0300Z).
-
-IO Servers
-----------
-
-Older versions of the UM did not have IO servers, which meant that all reading and writing of fields files went through a single processor (pe0).  When the model is producing lots of data and is running on many processors, this method of IO is very inefficient and costly - when pe0 is writing data, all the other processors have to wait around doing nothing but still consuming AUs.  Later UM versions, including UM 10.5, have IO servers which are processors dedicated to performing IO and which work asynchronously with processors doing the computation.
-
-Here's just a taste of how to get this working in your suite.
-
-Set the suite to run for 6 hours with an appropriate cycling frequency, then check that OpenMP is switched on (Hint: search for *openmp* in rose edit) as this is needed for the IO servers to work.
-
-Navigate to *suite conf -> Domain Decomposition -> Atmosphere* and check the number of OpenMP threads is set to 2. Set the number of *"IO Server Processes"* to 8.
-
-**Save** and then **Run** the suite.
-
-You will see lots of IO server log files in ``~/cylc-run/<suitename>/work/<cycle>/atmos_main`` which can be ignored for the most part.
-
-Try repeating the "Change dump frequency" experiment with the IO servers switched on - you should see much faster performance.
-
-Running the coupled model
--------------------------
-
-The coupled model consists of the UM Atmosphere model coupled to the NEMO ocean and CICE sea ice models.  The coupled configuration used for this exercise is N96 resolution for the atmosphere and a 1 degree ocean - you will see this written N96 ORCA1.
-
-**i. Checkout and run the suite**
-
-Checkout and open the suite **u-ak943**.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called *fcm_make_um* and *fcm_make_ocean* respectively. The model configuration is under *coupled* rather than *um*.
-
-Make the usual changes required to run the suite (i.e. set username, account code, queue)
-
-Check that the suite is set to build both the UM and ocean, as well as run the reconfiguration and model.
-
-**Run** the suite.
-
-**ii. Exploring the suite**
-
-Whilst the suite is compiling and running which will take around 45 minutes, take some time to look around the suite.
-
-* How many nodes is the atmosphere running on?
-* How many nodes is the ocean running on?
-
-Changing the processor decomposition for the ocean is not as simple as just changing the EW/NS processes.  You also need to:
-
-1. Recalculate the CICE number of columns per block EW and rows per block NS. (Normally the model is set up so that NEMO and CICE use the same decomposition). Looking at the current settings we calculate as follows:
-
-  Num of cols per block EW = Num of cols EW / Num of processes EW (E.g. 360 / 9 = 40)
-
-  Num of rows per block NS = Num of rows NS / Num of processes NS (E.g. 330 / 8 = 42) 
-
-2. Recompile the ocean executable. Note the executable comprises both the ocean (NEMO) and sea-ice (CICE) code. 
-
-Now looked at the ``coupled`` settings.   
-
-* Can you see where the NEMO model settings appear? 
-
-Look under *Run settings (namrun)*. The variables ``nn_stock`` and ``nn_write`` control the frequency of output files. 
-
-* How often are NEMO restart files written? (Hint the NEMO timestep length is set as variable ``rn_rdt``).
-
-Now browse the CICE settings.
-
-* Can you find what the CICE restart frequency is set to? 
-
-NEMO and CICE are developed separately from the UM, and you should have seen that they work in very different ways. See the websites for documentation: 
-
-* http://oceans11.lanl.gov/trac/CICE 
-* http://www.nemo-ocean.eu/
-
-**iii. Output files**
-
-**Log files** 
-
-NEMO logging information is written to:
-
- ``~/cylc-run/<suitename>/work/<cycle>/coupled/ocean.output``
-
-CICE logging information is written to: 
-
- ``~/cylc-run/<suitename>/work/<cycle>/coupled/ice_diag.d``
-
-If the model fails some error messages may also be written to the file ``~/cylc-run/<suitename>/work/<cycle>/coupled/debug.root.01`` or ``debug.root.02``
-
-When something goes wrong with the coupled model it can be tricky to work out what has gone wrong. NEMO errors may not appear at the end of the file but will be flagged with the string ``E R R O R``. 
-
-**Restart files** 
-
-Restart files go to the subdirectories ``NEMOhist`` and ``CICEhist`` in the standard data directory ``~/cylc-run/<suitename>/share/data/History_Data``.
-
-**Diagnostic files**
-
-Diagnostic files are left in the ``~/cylc-run/<suitename>/work/<cycle>/coupled/`` directory. 
-
-CICE files start with ``<suitename>i``. Once your suite has run you should see the following CICE file: :: 
-
-  archer$ ls ak943i*
-  ak943i.10d.1978-09-10.nc
-
-NEMO diagnostic files are named ``<suitename>o*grid_[TUVW]*``. To see what files are produced, run: :: 
-
-  archer$ ls ak943o*grid*
-
-In this case each processor writes to a separate file. To concatenate these into a global file use the ``rebuild_nemo`` tool, e.g.: :: 
-
-  archer$ rebuild_nemo ak943o_10d_19780901_19780910_grid_W_19780901-19780910 72
-
-Higher resolution NEMO suites may use the XIOS IO server. In this case, global files may be written directly, or each server process may write its own file. 
-  
-.. note:: The coupled atmos-ocean model setup is complex so we recommend you find a suite already setup for your needs.  If you find you do need to modify a coupled suite setup please contact NCAS-CMS for advice. 
-
 
