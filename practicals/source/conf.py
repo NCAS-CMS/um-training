@@ -61,7 +61,7 @@ release = ''
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
-today = '11 April 2018'
+today = '07 November 2018'
 # Else, today_fmt is used as the format for a strftime call.
 #today_fmt = '%B %d, %Y'
 
@@ -204,7 +204,9 @@ latex_elements = {
 'preamble': my_preamble,
 
 # Configure margins
-'sphinxsetup': 'hmargin={1.0in,0.75in}, vmargin=0.75in',
+#'sphinxsetup': 'hmargin={1.0in,0.75in}, vmargin=0.75in',
+#'sphinxsetup': 'hmargin={1.5in,1.0in}, vmargin=0.75in',
+'sphinxsetup': 'hmargin={1.0in,0.75in}',
 
 # Remove blank pages between chapters
 'classoptions': ',openany,oneside',

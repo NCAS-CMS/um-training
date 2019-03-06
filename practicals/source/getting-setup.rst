@@ -109,11 +109,12 @@ When prompted for **Password**, enter your ARCHER password.
 
 If you don't get asked for your Passphrase (i.e. RSA key), then something has gone wrong. In this case, make sure the public key, was successfully copied over to ARCHER by logging into ARCHER and opening the file ``~/.ssh/authorized_keys``. It should contain something similar to: ::
 
-   ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAt1JmHYgsuf0UWVLqNqnDSaUUP2xJ+Um0H5WnUt/i
-   2mxhlBrwOtvVWRjnzo5EcylZJs/Cg5JVe4UR6toqNXbZG1RXscLQnQoPAvzFoWLzfP7Q3lrzeC1S
-   kM2FWfWC38ga3Svs6fm63/I7WmJy+4D8BWWaXj/9yM1OskFj6yfWItr150rwwNauOQbWJhl7I/Kk
-   fhVPBvZ9vHiAK4cjUMQ9fFS1dij3GSBmOfu2RuMgNNg9y1MLSzEk2242F4tOg7paTk7wwUZ+ZLqR
-   BtT2aREnjIGI7KvACBZD1y40tXXPIZw9m2Dl0dK7mFQ2/YFWh2/NAmkFMXzDOmkg0biq1m+QKw==
+   ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAt1JmHYgsuf0UWVLqNqnDSaUUP2xJ+Um0H5WnUt
+   /i2mxhlBrwOtvVWRjnzo5EcylZJs/Cg5JVe4UR6toqNXbZG1RXscLQnQoPAvzFoWLzfP7Q3lrz
+   eC1SkM2FWfWC38ga3Svs6fm63/I7WmJy+4D8BWWaXj/9yM1OskFj6yfWItr150rwwNauOQbWJh
+   l7I/KkfhVPBvZ9vHiAK4cjUMQ9fFS1dij3GSBmOfu2RuMgNNg9y1MLSzEk2242F4tOg7paTk7w
+   wUZ+ZLqRBtT2aREnjIGI7KvACBZD1y40tXXPIZw9m2Dl0dK7mFQ2/YFWh2/NAmkFMXzDOmkg0b
+   iq1m+QKw==
    ros@puma
 
 If it doesn't, and no errors were reported from the ``install-ssh-keys`` script, please ask for assistance.
