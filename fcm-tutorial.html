@@ -294,19 +294,19 @@ Merges Avail Into Parent: 29416
 <p><strong>v. Testing that your branch works</strong></p>
 <p>Now that you have made a branch you can use it in the suite you were running earlier.  Go back to the section where you added an existing branch to your suite and add your new branch as well.</p>
 <p><strong>Save</strong> and then <strong>Run</strong> your suite.</p>
-<p>If you have followed the tutorial scenario so far you should find that your suite fails during the <strong>fcm extract</strong> of code.  In the <code class="docutils literal notranslate"><span class="pre">job.err</span></code> file for the <em>fcm_make_um</em> task you will see an error message like this:</p>
+<p>If you have followed the tutorial scenario so far you should find that your suite fails during the <strong>fcm extract</strong> of code.  In the <code class="docutils literal notranslate"><span class="pre">job.err</span></code> file for the <em>fcm_make</em> task you will see an error message like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[FAIL] um/src/control/top_level/um_shell.F90: merge results in conflict
-[FAIL]     merge output: /home/ros/cylc-run/u-ag954/share/fcm_make/.fcm-make/
-extract/merge/um/src/control/top_level/um_shell.F90.diff
-[FAIL]     source from location  0: svn://puma/um.xm_svn/main/trunk/src/control/
-top_level/um_shell.F90@24655
+[FAIL]     merge output: /home/ros/cylc-run/u-ag954/share/fcm_make/
+.fcm-make/extract/merge/um/src/control/top_level/um_shell.F90.diff
+[FAIL]     source from location  0: svn://puma/um.xm_svn/main/trunk/src/
+control/top_level/um_shell.F90@24655
 [FAIL]     source from location  1: svn://puma/um.xm_svn/main/branches/dev/
 rosalynhatcher/vn10.5_um_shell1/src/control/top_level/um_shell.F90@29416
 [FAIL] !!! source from location  2: svn://puma/um.xm_svn/main/branches/dev/
 rosalynhatcher/vn10.5_example_branch/src/control/top_level/um_shell.F90@29416
 </pre></div>
 </div>
-<p>This is because the sample branch and your branch contain modifications to the same line in file <code class="docutils literal notranslate"><span class="pre">um_shell.F90</span></code> and so conflict.  Errors like this can be quite common if you are working with others on the same section of code.  The default behaviour of FCM in this situation is to fail and force you to resolve the conflict.  For the purposes of this exercise we will simply remove the ‘um_shell1’ branch from the suite - we’ve decided we only want the changes we’ve put in our branch.  In practice you will need to go through the process of resolving a conflict which can be quite complex. There is a tutorial dedicated to conflict resolution should you wish to know more (TODO - Link to conflict tutorial) and is a good reference should you encounter conflicts in your development work.</p>
+<p>This is because the sample branch and your branch contain modifications to the same line in file <code class="docutils literal notranslate"><span class="pre">um_shell.F90</span></code> and so conflict.  Errors like this can be quite common if you are working with others on the same section of code.  The default behaviour of FCM in this situation is to fail and force you to resolve the conflict.  For the purposes of this exercise we will simply remove the ‘um_shell1’ branch from the suite - we’ve decided we only want the changes we’ve put in our branch.  In practice you will need to go through the process of resolving a conflict which can be quite complex. There is a tutorial dedicated to conflict resolution should you wish to know more and is a good reference should you encounter conflicts in your development work.</p>
 <p><strong>Viewing your changes in Trac</strong></p>
 <p>Making a change to your branch results in a <strong>changeset</strong> which is basically a record of the changes.  One way of viewing the changeset you have just created is to click on <strong>Timeline</strong> in Trac.  The Timeline view is a sequential record of all events in the repository.  You should see changesets for your original commit to your branch and the subsequent commit after resolving the conflicts near the top.  The changesets are numbered corresponding to the revision of your branch which would have been displayed in the GUI when you did a commit or branch info.  To see all the details click on the line <em>‘Changeset[xxx]…’</em> relating to your changeset.  Alternatively, if you enter the number of the changeset “[<strong>xxx</strong>]” into the search box at the top right, it will take you directly to the numbered changeset.  Your changeset should look something like this:</p>
 <a class="reference internal image-reference" href="_images/fcm_changeset.png"><img alt="_images/fcm_changeset.png" src="_images/fcm_changeset.png" style="width: 650px; height: 591px;" /></a>

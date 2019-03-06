@@ -46,7 +46,7 @@
 <h2>9.1. xconv<a class="headerlink" href="#xconv" title="Permalink to this headline">¶</a></h2>
 <p><strong>i. View data</strong></p>
 <p>On ARCHER go to the output directory of the global job that you ran previously (the one copied from u-ba799). Run <code class="docutils literal notranslate"><span class="pre">xconv</span></code> on the file ending with, for example, <code class="docutils literal notranslate"><span class="pre">da19880901_04</span></code>. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.</p>
-<p>In the directory above is a file whose name ends in <code class="docutils literal notranslate"><span class="pre">.astart</span></code>; run a second instance of <code class="docutils literal notranslate"><span class="pre">xconv</span></code> on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.</p>
+<p>In the same directory is a file whose name ends in <code class="docutils literal notranslate"><span class="pre">.astart</span></code>; run a second instance of <code class="docutils literal notranslate"><span class="pre">xconv</span></code> on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">xconv</span></code> window lists the fields in the file, the dimensions of those fields (upper left panel), the coordinates of the grid underlying the data, the time(s) of the data (upper right panel), some information about the type of file (lower left panel), and general data about the field (lower right panel.)</p>
 <p>Both files have the same fields. Double click on a field to reveal its coordinate data. Check the time for this field (select the “t” checkbox in the upper right panel).</p>
 <p>Plot both sets of data - click the “Plot Data” button.</p>
@@ -125,7 +125,7 @@ environment to run <code class="docutils literal notranslate"><span class="pre">
 <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span></code> and <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">swap</span></code> commands to your .profile.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>esPP001$ module load anaconda/2.2.0-python2 cf udunits
 esPP001$ module swap PrgEnv-cray PrgEnv-intel
-esPP001$ cfa -i -o ba799a.pc19880901_00.pp.nc ba799a.pc19880901_00.pp
+esPP001$ cfa -i -o ba799a.pc19880901_00.nc ba799a.pc19880901_00.pp
 </pre></div>
 </div>
 <p>Try viewing the NetCDF file with xconv.</p>

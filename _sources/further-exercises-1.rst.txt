@@ -119,19 +119,11 @@ Navigate to *um -> namelist -> Model Input and Output -> Dumping and Meaning*.
 
 Set the dump frequency to 2 hours.  **Run** the model.
 
-* What is the error?
-
-This error message occurs when you have set the total run length to be less than the cycling (automatic resubmission) frequency.  Change the cycling frequency to 6 hours. Run the model.
-
 * How much time was spent in DUMPCTL?
 
 Set the dump frequency to 1 hour. **Run** the model.
 
 * What happened to the time spent in DUMPCTL?
-
-.. todo::
-
-  Add comment on why it is important to understand what is going on here?
 
 Reconfiguration
 ---------------

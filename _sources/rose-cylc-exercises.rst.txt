@@ -9,10 +9,10 @@ Currently there is no Rose tool to difference two suites. Since a suite consists
 We will difference your copy of the GA7.0 suite with the original one: ::
 
   puma$ cd ~/roses
-  puma$ rosie checkout u-ag761
-  puma$ rose config-dump -C u-ag761
+  puma$ rosie checkout u-ba799
+  puma$ rose config-dump -C u-ba799
   puma$ rose config-dump -C <your-suitename>
-  puma$ diff -r u-ag761 <your-suitename>
+  puma$ diff -r u-ba799 <your-suitename>
 
 * Are the differences what you expected?
 
@@ -58,7 +58,7 @@ In the ``[[atmos]] [[[directives]]]`` section change ``-l select=1`` to ``-l sel
 * The suite should run this time. Did it run on 2 nodes as requested?
 * How much walltime has been requested for the reconfiguration?
 
-Now take a look at the ``suite.rc`` file for your other suite (the one copied from u-ag761). See how it differs.  This one is set up to run on multiple platforms.  
+Now take a look at the ``suite.rc`` file for your other suite (the one copied from u-ba799). See how it differs.  This one is set up to run on multiple platforms.  
 
 * Can you see the more complex dependency graph?
 * Can you see where to change the reconfiguration walltime for this suite?
@@ -68,7 +68,7 @@ This has just given you a very brief look at the suite definitions files.  More 
 Suite and task event handling
 -----------------------------
 
-Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting ``[[[events]]] mail events`` to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite u-ag761 to send an email on task (submission) failure and retry. 
+Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting ``[[[events]]] mail events`` to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite u-ba799 to send an email on task (submission) failure and retry. 
 
 Edit the ``suite.rc`` file to add the ``[[[events]]]`` section below: ::
 
@@ -93,10 +93,6 @@ To test this out we need to force the suite to fail.  Change the account code to
 Change the account code back to 'n02-training' before continuing.
 
 Further information about event handlers can be found in the Cylc documentation: https://cylc.github.io/cylc/html/single/cug-html.html#13.15
-
-Adding a new app to your suite
-------------------------------
-
 
 Starting a suite in "held" mode
 -------------------------------

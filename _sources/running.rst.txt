@@ -78,10 +78,10 @@ This will show the status of jobs you are running.  You will see output similar 
   ncastr01@eslogin005:~> qstat -u ncastr01
 
   sdb: 
-                                                            Req'd  Req'd   Elap
-  Job ID        Username Queue    Jobname    SessID NDS TSK Memory Time  S Time
-  ------------- -------- -------- ---------- ------ --- --- ------ ----- - -----
-  3988630.sdb   ncastr01 S3979005 atmos.1.u-    --    1  24    --  00:20 R 00:10
+                                                         Req'd  Req'd   Elap
+  Job ID        Username Queue   Jobname  SessID NDS TSK Memory Time  S Time
+  ------------ -------- -------- -------- ------ --- --- ------ ----- - -----
+  3988630.sdb  ncastr01 S3979005 atmos.1-    --    1  24    --  00:20 R 00:10
 
 At this stage you will probably only have a job running or waiting to run in the serial queue. Running qstat will show all jobs currently on ARCHER, most of which will be in the parallel queues. 
 

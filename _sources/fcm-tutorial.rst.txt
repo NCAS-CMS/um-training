@@ -283,19 +283,19 @@ Now that you have made a branch you can use it in the suite you were running ear
 
 **Save** and then **Run** your suite.
 
-If you have followed the tutorial scenario so far you should find that your suite fails during the **fcm extract** of code.  In the ``job.err`` file for the *fcm_make_um* task you will see an error message like this: ::
+If you have followed the tutorial scenario so far you should find that your suite fails during the **fcm extract** of code.  In the ``job.err`` file for the *fcm_make* task you will see an error message like this: ::
 
   [FAIL] um/src/control/top_level/um_shell.F90: merge results in conflict
-  [FAIL]     merge output: /home/ros/cylc-run/u-ag954/share/fcm_make/.fcm-make/
-  extract/merge/um/src/control/top_level/um_shell.F90.diff
-  [FAIL]     source from location  0: svn://puma/um.xm_svn/main/trunk/src/control/
-  top_level/um_shell.F90@24655
+  [FAIL]     merge output: /home/ros/cylc-run/u-ag954/share/fcm_make/
+  .fcm-make/extract/merge/um/src/control/top_level/um_shell.F90.diff
+  [FAIL]     source from location  0: svn://puma/um.xm_svn/main/trunk/src/
+  control/top_level/um_shell.F90@24655
   [FAIL]     source from location  1: svn://puma/um.xm_svn/main/branches/dev/
   rosalynhatcher/vn10.5_um_shell1/src/control/top_level/um_shell.F90@29416
   [FAIL] !!! source from location  2: svn://puma/um.xm_svn/main/branches/dev/
   rosalynhatcher/vn10.5_example_branch/src/control/top_level/um_shell.F90@29416
 
-This is because the sample branch and your branch contain modifications to the same line in file ``um_shell.F90`` and so conflict.  Errors like this can be quite common if you are working with others on the same section of code.  The default behaviour of FCM in this situation is to fail and force you to resolve the conflict.  For the purposes of this exercise we will simply remove the 'um_shell1' branch from the suite - we've decided we only want the changes we've put in our branch.  In practice you will need to go through the process of resolving a conflict which can be quite complex. There is a tutorial dedicated to conflict resolution should you wish to know more (TODO - Link to conflict tutorial) and is a good reference should you encounter conflicts in your development work.
+This is because the sample branch and your branch contain modifications to the same line in file ``um_shell.F90`` and so conflict.  Errors like this can be quite common if you are working with others on the same section of code.  The default behaviour of FCM in this situation is to fail and force you to resolve the conflict.  For the purposes of this exercise we will simply remove the 'um_shell1' branch from the suite - we've decided we only want the changes we've put in our branch.  In practice you will need to go through the process of resolving a conflict which can be quite complex. There is a tutorial dedicated to conflict resolution should you wish to know more and is a good reference should you encounter conflicts in your development work.
 
 **Viewing your changes in Trac**
 
