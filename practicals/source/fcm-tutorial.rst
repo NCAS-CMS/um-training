@@ -9,12 +9,11 @@ In this section you will learn about:
 * How to checkout and change a working copy
 * Getting information about your working copy and branch
 * Committing changes to your branch
-* Resolving conflicts between branches
 * Version control of suites
 
 Setting up your default text editor
 -----------------------------------
-When you attempt to create a branch or commit changes to the repository, you will normally be prompted to edit your commit log message using a text editor. The system chooses its editor by searching for a non-empty string through a hierarchy of environment variables in this order: SVN_EDITOR, VISUAL, and EDITOR. Note that the editor you select must able to run in the foreground. For example, you can add one of the following in your ``$HOME/.profile``, ``$HOME/.kshrc`` (Korn) or ``$HOME/.bashrc`` (Bash): ::
+When you attempt to create a branch or commit changes to the repository, you will normally be prompted to edit your commit log message using a text editor. The system chooses its editor by searching for a non-empty string through a hierarchy of environment variables in this order: SVN_EDITOR, VISUAL, and EDITOR. Note that the editor you select must able to run in the foreground. The default editor is `vi`.  If you prefer to use `emacs` or `nedit`, for example, you can add one of the following in your ``$HOME/.profile``, ``$HOME/.kshrc`` (Korn) or ``$HOME/.bashrc`` (Bash): ::
 
   # Emacs
   export SVN_EDITOR=emacs
@@ -22,9 +21,6 @@ When you attempt to create a branch or commit changes to the repository, you wil
   # NEdit
   export SVN_EDITOR='nedit'
   
-  # vi
-  export SVN_EDITOR='vi' 
-
 Applying modifications to a UM suite
 ------------------------------------
 
@@ -125,7 +121,7 @@ You may have noticed that creating a branch does not create a source code tree t
 
 Where URL is the url of your branch.  This can be supplied in it's full form: 
 
-``https://code.metoffice.gov.uk/um/main/branches/dev/[userid]/vn10.5_[branch_name]``
+``https://code.metoffice.gov.uk/svn/um/main/branches/dev/[userid]/vn10.5_[branch_name]``
 
 or by a shorter way:
 
@@ -287,77 +283,19 @@ Now that you have made a branch you can use it in the suite you were running ear
 
 **Save** and then **Run** your suite.
 
-If you have followed the tutorial scenario so far you should find that your suite fails during the **fcm extract** of code.  In the ``job.err`` file for the *fcm_make_um* task you will see an error message like this: ::
+If you have followed the tutorial scenario so far you should find that your suite fails during the **fcm extract** of code.  In the ``job.err`` file for the *fcm_make* task you will see an error message like this: ::
 
   [FAIL] um/src/control/top_level/um_shell.F90: merge results in conflict
-  [FAIL]     merge output: /home/ros/cylc-run/u-ag954/share/fcm_make/.fcm-make/
-  extract/merge/um/src/control/top_level/um_shell.F90.diff
-  [FAIL]     source from location  0: svn://puma/um.xm_svn/main/trunk/src/control/
-  top_level/um_shell.F90@24655
+  [FAIL]     merge output: /home/ros/cylc-run/u-ag954/share/fcm_make/
+  .fcm-make/extract/merge/um/src/control/top_level/um_shell.F90.diff
+  [FAIL]     source from location  0: svn://puma/um.xm_svn/main/trunk/src/
+  control/top_level/um_shell.F90@24655
   [FAIL]     source from location  1: svn://puma/um.xm_svn/main/branches/dev/
   rosalynhatcher/vn10.5_um_shell1/src/control/top_level/um_shell.F90@29416
   [FAIL] !!! source from location  2: svn://puma/um.xm_svn/main/branches/dev/
   rosalynhatcher/vn10.5_example_branch/src/control/top_level/um_shell.F90@29416
 
-This is because the sample branch and your branch contain modifications to the same file (``um_shell.F90``) and so conflict.  The default behaviour of FCM is to fail and force you to resolve the conflict.  The next section explains options for doing this.
-
-**vi. Resolving conflicts**
-
-In real UM scenarios, there will be working practices for how conflicts are resolved.  It is likely that package branches will be used to merge several developer branches together.
-
-For the purposes of this tutorial we will resolve the conflict by incorporating the change from the other branch in to yours:
-
-  * In the working copy directory, type: ::
-
-      fcm merge fcm:um.x-br/dev/rosalynhatcher/vn10.5_um_shell1
-
-  * You will be prompted to confirm the merge.  Answer **y** to this.
-
-  * The conflict with ``um_shell.F90`` will be indicated. Please then run ``fcm status`` to see that the file ``um_shell.F90`` is flagged with the letter C, identifying it as a Conflict: ::
-
-      ros@puma$ fcm status
-      M      .
-      C       src/control/top_level/um_shell.F90
-      ?       src/control/top_level/um_shell.F90.merge-left.r24655
-      ?       src/control/top_level/um_shell.F90.merge-right.r29333
-      ?       src/control/top_level/um_shell.F90.working
-      Summary of conflicts:
-        Text conflicts: 1
-
-
-In order to make the working copy/branch useable, the conflicts must be resolved. To run conflict resolution type: ::
-
-  puma$ fcm conflicts
-
-FCM will now run the file editor/difference tool ``xxdiff`` and will show a 3 way display:
-
-The file in the middle is the common ancestor from the merge (i.e. the version of code before either of the changes have been applied).  The file on the left contains the changes from your branch and the file on the right is the file containing the changes which you are merging in.
-
-``xxdiff`` is configured to automatically select regions that would end up being selected by an automatic merge (i.e. the changes do not overlap).  Any difference "hunks" which cannot be resolved automatically are left "unselected".  The number of unresolved changes is shown in the top right hand corner of the xxdiff display, under the Help menu.  In this case it should show 1.
-
-To inspect the differences either scroll through the files using the scrollbars or use keyboard shortcuts **n** to go to the next difference, and **p** to go to the previous one.
-
-If you have followed the tutorial scenario so far you should see that the changes to the header, "My PE" write statement and the addition of call to the new subroutine ``um_shell_sub`` have been selected automatically by ``xxdiff`` because they do not overlap.  However, the changes to the other write statement haven't because they do overlap (they should be highlighted in a different colour to the changes that don't overlap)
-
-To resolve this conflict, select your write statement "Start of UM Tutorial RUN Job" change by clicking on the text in the file on the left to select it.  You should see that the number of unresolved changes now drops to 0 and the selected text changes colour.
-
-Now select **Exit with MERGED** from the xxdiff File menu.  You will be prompted to run **svn resolved** so answer **y** to this.
-
-It is important to remember that the merge command only applies changes to your working copy.  Therefore, you must commit the change to your branch in order for it to become permanent in the repository.  Before you do that though, it is a good idea to inspect the changes prior to committing.
-
-You have already seen how to use ``fcm status`` to see which files have changed in a working copy.  To see more details, you need to use ``fcm diff``.  In your working copy directory type: ::
-
-  puma$ fcm diff -g
-
-You will get a 2 way diff between your working copy and your branch.  Scroll down to check that the changes you require as a result of the previous merge are correct.
-
-If you are happy, exit the diff and type **fcm commit**.  You will be prompted to edit the commit log as before.  However, you may notice that a standard template is already provided for you.  In most cases, the standard message should be sufficient.  However, if you want to add extra comment to the commit, please do so above the line that says *"--This line will be ignored and those below will be inserted automatically--"*.  This is useful, for example, if there were significant issues addressed in the merge.  Answer **y** to confirm the commit.
-
-Return to your suite and go to the *fcm_make -> env -> sources* panel.  Remove the 'um_shell1' branch.
-
-Now you have merged in the changes from this branch to your branch and resolved conflicts the 'um_shell1' branch is redundant.  **Save** the suite.  Before you can re-run the suite you will need to shutdown the previous failed run.  In the Cylc GUI click on *Control -> Stop Suite*, select **Stop now** and then click on **Ok**. Now **Run** your suite to verify that all the changes have been applied.
-
-This section of the tutorial has given a very simple example of a conflict resolution.  In practice it can be much less straightforward! A separate tutorial section dedicated to conflict resolution using likely examples from the UM has been created which you can reference/work through should you encounter more complex conflicts in your development work.
+This is because the sample branch and your branch contain modifications to the same line in file ``um_shell.F90`` and so conflict.  Errors like this can be quite common if you are working with others on the same section of code.  The default behaviour of FCM in this situation is to fail and force you to resolve the conflict.  For the purposes of this exercise we will simply remove the 'um_shell1' branch from the suite - we've decided we only want the changes we've put in our branch.  In practice you will need to go through the process of resolving a conflict which can be quite complex. There is a tutorial dedicated to conflict resolution should you wish to know more and is a good reference should you encounter conflicts in your development work.
 
 **Viewing your changes in Trac**
 
@@ -411,10 +349,12 @@ Version Control of Suites
 
 Just like the model code, your UM suites are also under version control in a subversion repository, usually *roses-u* which is on the MOSRS.  Once you have a working copy of your suite under ``~/roses`` you can use FCM commands in the same way as for your source code branches; i.e. commit changes, diff changes, etc.
 
-* Look in the roses-u repository via MOSRS Trac (https://code.metoffice.gov.uk/trac/roses-u) and find the suite you created in the previous section. (Hint: Go to *"Browse Source"* then drill down to find you suite. e.g. u-ag263 would be under a/g/2/6/3)
+* Look in the roses-u repository via MOSRS Trac (https://code.metoffice.gov.uk/trac/roses-u) and find the suite you created in the previous section. (Hint: Go to *"Browse Source"* then drill down to find you suite. e.g. u-ag263 would be under a/g/2/6/3).  When was the suite last modified?
 
 * Go to your suite working directory and type **fcm status** to see the changes you have made since you copied the suite.
 
 * Run **fcm commit** to commit your changes to the repository.
 
-* Look again in the MOSRS roses-u Trac and see that your commit has now appeared in the repository.
+* Look again in the MOSRS roses-u Trac and see that your commit has now appeared in the repository.  What is the suite's last modified time now?
+
+* Use Trac to view the changes you have made to the suite.  (Hint: click on the number in the revision column, and then on the *View changes* button to show a diff of your changes)

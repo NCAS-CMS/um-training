@@ -8,7 +8,7 @@ You may encounter other errors, often as a result of mistyping, for which soluti
 Copy and set up N96 GA7.0 AMIP example suite
 --------------------------------------------
 
-Find and make a copy of suite **u-ag761**.
+Find and make a copy of suite **u-ba799**.
 
 Firstly make the changes required to run the suite.  That is the account code ('n02-training'), your ARCHER user name and the queue to run in.  Hint: Look in the *suite.conf* section.  You will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.
 
@@ -45,7 +45,7 @@ Hint: Again look in the *job.err* file.  This kind of error results when changes
 
 * Which file does the problem occur in?
 
-In practice, you will need to fix the problem with the code conflict as you did in the FCM tutorial section.  To proceed in this case, navigate to *fcm_make_um -> sources* and remove the branch called ``vn10.5_merge_error`` by clicking on it and then clicking the **-** sign.
+In practice, you will need to fix the problem with the code conflict as you did in the FCM tutorial section.  To proceed in this case, navigate to *fcm_make_um -> sources* and remove the branch called ``vn11.0_merge_error`` by clicking on it and then clicking the **-** sign.
 
 **Save** the suite.
 
@@ -72,7 +72,7 @@ Errors resolved in the compile and run
 * What is the error?
 * What line of the Fortran file does it occur on?
 
-In practice, you would need to fix the error in your branch on PUMA and then restart the suite.  In this case, navigate to *fcm_make_um -> sources* and remove the branch ``vn10.5_compile_error``.  **Save** the suite, **Shutdown/Stop** the failed run and then **Run** it again.  Notice we chose to shutdown the failed suite this time rather than do a reload.  In this scenario we need to redo the code extraction (*fcm_make_um*) step so doing a reload would be slightly more complex; you would need to *Reload* and then *Re-trigger* both the *fcm_make_um* and the *fcm_make2_um* tasks.  With experience you get to know when it's better to do a *Reload* and when to *Shutdown*  a suite.
+In practice, you would need to fix the error in your branch on PUMA and then restart the suite.  In this case, navigate to *fcm_make_um -> sources* and remove the branch ``vn11.0_compile_error``.  **Save** the suite, **Shutdown/Stop** the failed run and then **Run** it again.  Notice we chose to shutdown the failed suite this time rather than do a reload.  In this scenario we need to redo the code extraction (*fcm_make_um*) step so doing a reload would be slightly more complex; you would need to *Reload* and then *Re-trigger* both the *fcm_make_um* and the *fcm_make2_um* tasks.  With experience you get to know when it's better to do a *Reload* and when to *Shutdown*  a suite.
 
 Note again that the task submitted successfully.  
 
@@ -86,9 +86,9 @@ Point your suite to the correct start dump.  Fixing this problem isn't quite as 
 
 * Can you see the problem?
 
-The initial dump location is set with an environment variable: AINITIAL_N96.  Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.
+The initial dump location is set with an environment variable: AINITIAL.  Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.
 
-In your suite directory on PUMA (``~/roses/<suitename>``) use ``grep -R`` to search for where the variable *AINITIAL_N96* is set.  Edit AINITIAL_N96 in the appropriate ``.rc`` file to point to the correct initial dump file.  Hint: This suite is set up to run on multiple platforms, make sure you edit the file appropriate to ARCHER.
+In your suite directory on PUMA (``~/roses/<suitename>``) use ``grep -R`` to search for where the variable *AINITIAL* is set (If you are unfamiliar with using `grep` please ask for help).  Edit AINITIAL in the appropriate ``.rc`` file to point to the correct initial dump file.  (Hint: This suite is set up to run on multiple platforms, make sure you edit the file appropriate to ARCHER.) You may notice that AINITIAL is set 3 times; a different file is required depending on the resolution the model is being run at.  This suite is running at N96 resolution.
 
 **Reload** the suite definition and then **Re-trigger** the reconfiguration task.  The reconfiguration should succeed this time.
 
@@ -114,7 +114,17 @@ Open the file called ``<suite-id>.fort6.pe<pe noted above>``.  Sometimes extra i
 
 The error message indicates that NaNs (NaN stands for Not a Number and is a numeric data type representing an undefined or unrepresentable value) have occurred in the routine EG_BICGSTAB.  This basically means something in the model has become unstable and "blown up". In this case the failure results from an incorrect value for the solar constant *'sc'*.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within ``rose edit`` may point you in the right direction.  Go to *um -> namelist -> UM Science Settings -> Planet Constants* and set it to the suggested value. **Save**, **Reload** and **Re-trigger**.
 
-This time the model should have run successfully.  Check the output to confirm that there are no errors.  Check that the model converged at all time steps.
+The model should fail with the same error.  So what's gone wrong here?  We've changed the value of the solar constant to a valid value so why didn't it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER navigate to the work directory for the *atmos_main* task (ie. ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main``).  In here you will see several files with uppercase names (e.g. ATMOSCNTL, SHARED), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use `grep`) in these files for the solar constant variable `sc`.  Hint: search for the string "`sc=`".
+
+* What value does it have?  Is this what you changed it to in the Rose edit GUI?
+
+So why was the change not picked up?  Go back to view the setting in the Rose GUI.  By the side of the variable `sc` there is a little icon of a hand on paper, this indicates that there is an *"optional configuration override"* for this variable.
+
+Optional configuration overrides add to or overwrite the default configuration. They are useful to make it easier to switch between different configurations of the model.  For example switching between different resolutions.
+
+Click on the icon and the list of overrides appears.  You will see that the variable is set to 120000.0 in the *training* override file and it is this value that is being used in the model.  Unfortunately optional configuration override files cannot be changed through the GUI so we will need to edit the Rose file directly. Override files for the `um` app live in the directory ``~/roses/<suite-id>/app/um/opt``.  Open the file ``rose-app-training.conf`` and edit the value for ``sc``. **Save**, **Reload** and **Re-trigger** the suite.
+
+Check the ``sc`` variable in the namelist file again to confirm that it does now have the correct value. This time the model should run successfully. Check the output to confirm that there are no errors.  Check that the model converged at all time steps.
 
 
 
