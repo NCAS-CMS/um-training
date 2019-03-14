@@ -2,16 +2,20 @@
 python3 (DHC used anaconda)
 takes spreadsheet (consider whitespace) and makes neater document
 Does this for NCAS-CMS tutorials, to get data on applicants    
-AT THE MOMENT CHANGE fileName TO BE FILE OF INTEREST and just run python [this].py
+AT THE MOMENT CHANGE fileName TO BE FILE OF INTEREST and just run python [this].py [filename]
 '''
 
 import numpy as np
 import pandas as pd
+import sys
 
 # Choose whether to make pdf and/or html outputs
 makingHTMLFiles = False
 makingPDFs = True
-pdf_output_file = 'nov2018Applicants.pdf'
+if len(sys.argv) > 2:
+    pdf_output_file = sys.argv[2]
+else:
+    pdf_output_file = 'Applicants.pdf'
 
 if makingPDFs:
     try:
@@ -23,7 +27,7 @@ if makingPDFs:
 
 
 # could use sys.argv[1] or something, but need name to be readable by python
-fileName = 'sensiblyNamed.xlsx'
+fileName = sys.argv[1]#'sensiblyNamed.xlsx'
 
 # choose to split all applicants onto separate pages in .pdf
 pdfPageBreak = True
@@ -77,6 +81,32 @@ def dataFrameFromFile(filename):
     else:
         raise ValueError('include other file types later')
 
+def bestMatchFromRow(row, headerName, strictCount=False):
+    ''' In cases wherein two rows have same headerName (postgrad/researcher) (!!!) 
+        find non-empty/None match '''
+
+    _headers = np.array(list(row.iteritems()))[:,0] #must be a method for this
+    if strictCount:
+        _maxColumnSameNames = len([x for x in _headers if headerName == x])
+    else:
+        _maxColumnSameNames = len([x for x in _headers if headerName in x])
+
+    if _maxColumnSameNames == 1:
+        return row[headerName]
+
+    bestValue = ''
+    # Assume that name convention is to keep adding numbers- return 1st string found
+    if isinstance(row[headerName], str):
+        bestValue = max([bestValue, row[headerName]])
+    else:
+        for i in map(str, range(1, _maxColumnSameNames)):
+            if isinstance(row[headerName + '.' + i], str):
+                bestValue = max([bestValue, row[headerName + '.' + i]])
+#                return    row[headerName + '.' + i]
+
+    return bestValue #this will do, as they may not have entered anything
+#    raise Exception('Lazy exception bestMatchFromRow ' + headerName)
+    
 def pageFromDataFrameRow(dfRow):
     ''' html page to match Annette's eg from each row of DataFrame 
         Where names of columns change, an attempt is made to find the index '''
@@ -86,16 +116,21 @@ def pageFromDataFrameRow(dfRow):
     outString += '<p> {}</p>\n'.format(dfRow['Email Address'])
     outString += '<p> {} {} Funding: {}</p>\n'.format(dfRow['Application Type'],
                                                       dfRow['Year of Study'],
-                                                      dfRow['Funding Body'])
-    outString += '<p> {} {}</p>\n'.format(dfRow['University/Institution'],
-                                          dfRow['Department'])
-    outString += '<p> Supervisor: {}</p>\n'.format(dfRow['Supervisor Name'])
+                                                      bestMatchFromRow(dfRow, 'Funding Body'))
+    outString += '<p> {} {}</p>\n'.format(bestMatchFromRow(dfRow, 'University/Institution'),
+                                          bestMatchFromRow(dfRow, 'Department'))
+    
+    # some headers are substrings-- but risk substrings not unique
+    bestSupervisorName = max([x for x in [bestMatchFromRow(dfRow, 'Supervisor Name', strictCount=True),
+                                          bestMatchFromRow(dfRow, 'PI/Supervisor Name', strictCount=True),
+                                          ''] if isinstance(x, str)])
+    outString += '<p> Supervisor: {}</p>\n'.format(bestSupervisorName)
 
-    outString += '<h2>Title: {}</h2>\n'.format(dfRow['Project Title'])
-    outString += '<p>{}</p>\n'.format(dfRow['Research Description (maximum 1000 characters)'])
-    outString += '<p>{} {}</p>\n'.format(dfRow['Employer'],
-                                         dfRow['Role Title'])
-    outString += '<p>{}</p>\n'.format(dfRow['Role Description'])
+    outString += '<h2>Title: {}</h2>\n'.format(bestMatchFromRow(dfRow, 'Project Title'))
+    outString += '<p>{}</p>\n'.format(bestMatchFromRow(dfRow, 'Research Description (maximum 1000 characters)'))
+    outString += '<p>{} {}</p>\n'.format(bestMatchFromRow(dfRow, 'Employer'),
+                                         bestMatchFromRow(dfRow, 'Role Title'))
+    outString += '<p>{}</p>\n'.format(bestMatchFromRow(dfRow, 'Role Description'))
     outString += '<h2>UM configuration</h2>\n'
     _indexUMConfColumn = np.where(dfRow.keys().str.contains('UM config', na=False))[0][0]
     outString += '<p>{}</p>\n'.format(dfRow[_indexUMConfColumn])
@@ -106,7 +141,6 @@ def pageFromDataFrameRow(dfRow):
     #remove all nan with whitespace (ignore inelegance)
     return outString.replace('nan', '')
 
-#df = dataFrameFromFile('~/Downloads/UM Training Application March 2017 (Responses).xlsx')
 df = dataFrameFromFile(fileName)
 #assert(all([x in df.loc[0].keys() for x in needed keys]))
 
