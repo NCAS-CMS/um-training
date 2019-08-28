@@ -100,7 +100,7 @@ puma$ cylc graph u-ah076               # view graph in browser
 </div>
 <div class="section" id="suite-and-task-event-handling">
 <h2>8.4. Suite and task event handling<a class="headerlink" href="#suite-and-task-event-handling" title="Permalink to this headline">¶</a></h2>
-<p>Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting <code class="docutils literal notranslate"><span class="pre">[[[events]]]</span> <span class="pre">mail</span> <span class="pre">events</span></code> to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite u-ba799 to send an email on task (submission) failure and retry.</p>
+<p>Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting <code class="docutils literal notranslate"><span class="pre">[[[events]]]</span> <span class="pre">mail</span> <span class="pre">events</span></code> to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite u-ba799 to send an email on task (submission) failure, retry and timeout.</p>
 <p>Edit the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file to add the <code class="docutils literal notranslate"><span class="pre">[[[events]]]</span></code> section below:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">runtime</span><span class="p">]</span>
     <span class="p">[[</span><span class="n">root</span><span class="p">]]</span>
@@ -108,7 +108,8 @@ puma$ cylc graph u-ah076               # view graph in browser
         <span class="p">[[[</span><span class="n">environment</span><span class="p">]]]</span>
         <span class="o">...</span>
         <span class="p">[[[</span><span class="n">events</span><span class="p">]]]</span>
-            <span class="n">mail</span> <span class="n">events</span> <span class="o">=</span> <span class="n">submission</span> <span class="n">retry</span><span class="p">,</span> <span class="n">retry</span><span class="p">,</span> <span class="n">submission</span> <span class="n">failed</span><span class="p">,</span> <span class="n">failed</span>
+            <span class="n">mail</span> <span class="n">events</span> <span class="o">=</span> <span class="n">submission</span> <span class="n">retry</span><span class="p">,</span> <span class="n">retry</span><span class="p">,</span> <span class="n">submission</span> <span class="n">failed</span><span class="p">,</span> <span class="n">failed</span><span class="p">,</span> <span class="n">submission</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">timeout</span>
+            <span class="n">submission</span> <span class="n">timeout</span> <span class="o">=</span> <span class="n">P1D</span>
 </pre></div>
 </div>
 <p>Configure cylc so it knows what your email address is. Edit the file <code class="docutils literal notranslate"><span class="pre">~/.cylc/global.rc</span></code> (create it if it doesn’t exist) to add the following:</p>

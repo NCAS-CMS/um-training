@@ -125,6 +125,8 @@ Set the dump frequency to 1 hour. **Run** the model.
 
 * What happened to the time spent in DUMPCTL?
 
+It is important to understand that writing out model dumps, particularly at higher resolutions, takes up a large amount of time and contributes to the cost.  You should think about how frequently you need to output model dumps when setting up your simulations.
+
 Reconfiguration
 ---------------
 
@@ -152,11 +154,11 @@ Let's run the model for 3 hours with 1 hour cycling:
 
 **Save** and **Run** the suite.
 
-.. note:: The automatic resubmission frequency must be a multiple of the dump frequency.
+.. note:: The cycling frequency must be a multiple of the dump frequency.
 
 The model will submit the first cycle and once that has succeeded you will see the following 2 cycles submitted and run.
 
-.. note:: It is always wise, particularly when you plan to run a long integration that you only run the first cycle initially so that you can check that the model is doing what you expected before committing to a longer simulation.
+.. note:: It is always wise, particularly when you plan to run a long integration, that you only run the first cycle initially so that you can check that the model is doing what you expect before committing to a longer simulation.  It also enables you to determine how long it takes your model to run and thus be able to calculate an appropriate cycling frequency for your simulation.
 
 Restarting a suite
 ------------------

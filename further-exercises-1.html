@@ -139,6 +139,7 @@
 <ul class="simple">
 <li>What happened to the time spent in DUMPCTL?</li>
 </ul>
+<p>It is important to understand that writing out model dumps, particularly at higher resolutions, takes up a large amount of time and contributes to the cost.  You should think about how frequently you need to output model dumps when setting up your simulations.</p>
 </div>
 <div class="section" id="reconfiguration">
 <h2>6.5. Reconfiguration<a class="headerlink" href="#reconfiguration" title="Permalink to this headline">¶</a></h2>
@@ -163,12 +164,12 @@
 <p><strong>Save</strong> and <strong>Run</strong> the suite.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The automatic resubmission frequency must be a multiple of the dump frequency.</p>
+<p class="last">The cycling frequency must be a multiple of the dump frequency.</p>
 </div>
 <p>The model will submit the first cycle and once that has succeeded you will see the following 2 cycles submitted and run.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">It is always wise, particularly when you plan to run a long integration that you only run the first cycle initially so that you can check that the model is doing what you expected before committing to a longer simulation.</p>
+<p class="last">It is always wise, particularly when you plan to run a long integration, that you only run the first cycle initially so that you can check that the model is doing what you expect before committing to a longer simulation.  It also enables you to determine how long it takes your model to run and thus be able to calculate an appropriate cycling frequency for your simulation.</p>
 </div>
 </div>
 <div class="section" id="restarting-a-suite">

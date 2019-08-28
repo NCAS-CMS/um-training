@@ -118,13 +118,13 @@
 <li><strong>&lt;ticket&gt;</strong> - is the related Trac ticket number for the ticket you created earlier.</li>
 <li><strong>&lt;branch_name&gt;</strong> - is a short name for the branch.  This must contain only alpha-numeric characters and/or underscores; e.g <em>tutorial</em></li>
 </ul>
-<p>You will be prompted to edit the message log file.  A standard template is automatically supplied and pops up in your default text editor.  However, if you want to add extra comment for the branch, please do so above the line that says <em>“–This line will be ignored and those below will be inserted automatically–”</em>.  When you are ready, save your change and exit the editor.  Answer <strong>y</strong> when you are prompted to go ahead and create the branch.</p>
+<p>You will be prompted to edit the message log file.  A standard template is automatically supplied and pops up in your default text editor.  Add a comment about what the branch is for at the top of the file.  When you are ready, save your change and exit the editor.  Answer <strong>y</strong> when you are prompted to go ahead and create the branch.</p>
 <p>If the branch is created successfully you will get a message similar to the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Committed</span> <span class="n">revision</span> <span class="mf">52466.</span>
 <span class="p">[</span><span class="n">info</span><span class="p">]</span> <span class="n">Created</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">code</span><span class="o">.</span><span class="n">metoffice</span><span class="o">.</span><span class="n">gov</span><span class="o">.</span><span class="n">uk</span><span class="o">/</span><span class="n">svn</span><span class="o">/</span><span class="n">um</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">branches</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">rosalynhatcher</span><span class="o">/</span><span class="n">vn10</span><span class="o">.</span><span class="mi">5</span><span class="n">_tutorial</span>
 </pre></div>
 </div>
-<p>The branch will have a URL (location of repository) like this:</p>
+<p>The branch will have a URL (location in repository) like this:</p>
 <p><code class="docutils literal notranslate"><span class="pre">https://code.metoffice.gov.uk/um/main/branches/dev/[userid]/vn10.5_[branch_name]</span></code></p>
 <p>By default FCM prepends the revision of the trunk you have branched from to your branch name.  Here, as we have used version labelling it is <strong>vn10.5</strong>.  If you had entered a version number instead of a label FCM would have added rxxx where xxx is the revision number instead.</p>
 <div class="admonition note">
@@ -137,7 +137,7 @@
 <p>Your branch will also appear on the UM repository mirror held on PUMA (within 5 minutes): <a class="reference external" href="https://puma.nerc.ac.uk/trac/um.xm">https://puma.nerc.ac.uk/trac/um.xm</a></p>
 <p><strong>ii. Making changes to a working copy</strong></p>
 <p><strong>Checking out a working copy</strong></p>
-<p>You may have noticed that creating a branch does not create a source code tree that you can edit (working copy)!  To do this you need to <em>Checkout</em> from your branch.  Make sure you have changed to the working directory you created earlier as by default code is checked out to the current directory.  To checkout a copy of the UM code type:</p>
+<p>You may have noticed that creating a branch does not create a source code tree that you can edit (working copy)!  To do this you need to <em>Checkout</em> your branch.  Make sure you have changed to the working directory you created earlier as by default code is checked out to the current directory.  To checkout a copy of the UM code type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">checkout</span> <span class="n">URL</span>
 </pre></div>
 </div>
@@ -199,7 +199,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">status</span>
 </pre></div>
 </div>
-<p>and you should see a list of files taht have been changed.  If you’ve followed the example scenario above you should see output similar to this:</p>
+<p>and you should see a list of files that have been changed.  If you’ve followed the example scenario above you should see output similar to this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma$ fcm status
 D       fcm-make/ncas-xc30-ifort/um-createbc-safe.cfg
 M       src/control/top_level/um_shell.F90
@@ -221,7 +221,7 @@ A       src/control/top_level/um_shell_sub.F90
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ fcm commit
 </pre></div>
 </div>
-<p>A text editor will appear to allow you to edit the commit message.  You must add a commit message to describe your change above the line that says <strong>“–This line, and those below, will be ignored–”</strong>.  Your commit will fail if you do not enter a commit message.  Make sure you provide meaningful commit messages (if your change is intended for inclusion in the trunk you should reference your ticket number) as these will show up in the revision logs and can be a useful source of informtion.</p>
+<p>A text editor will appear to allow you to edit the commit message.  You must add a commit message to describe your change above the line that says <strong>“–Add your commit message ABOVE - do not alter this line or those below–”</strong>.  Your commit will fail if you do not enter a commit message.  Make sure you provide meaningful commit messages (if your change is intended for inclusion in the trunk you should reference your ticket number) as these will show up in the revision logs and can be a useful source of informtion.</p>
 <p><strong>DO:</strong></p>
 <ul class="simple">
 <li>Put a link to the ticket that raises the issues you are addressing using a wiki syntax; e.g. #15.  Putting this as the first item in the commit message means it will show very clearly under Trac what ticket the change relates to.</li>
@@ -314,13 +314,22 @@ rosalynhatcher/vn10.5_example_branch/src/control/top_level/um_shell.F90@29416
 <div class="section" id="documenting-your-change">
 <h2>4.5. Documenting your change<a class="headerlink" href="#documenting-your-change" title="Permalink to this headline">¶</a></h2>
 <p>Go back to the Trac ticket you created for your code change and add some documentation as follows:</p>
-<ul class="simple">
-<li>A description of what code has changed</li>
-<li>Test results (i.e. Did your suite run? Were there any clashes to resolve?)</li>
-<li>Any other information you want to add</li>
-<li>As we have finished the change for this tutorial example we will resolve the ticket as <strong>fixed</strong> by clicking <strong>Modify Ticket</strong> and selecting <em>“resolve &amp; assign to &lt;username&gt; as fixed”</em>.</li>
+<ul>
+<li><div class="first line-block">
+<div class="line">Add a link to your branch:</div>
+<div class="line">Development branch: <code class="docutils literal notranslate"><span class="pre">[source:main/branches/dev/&lt;username&gt;/&lt;branch_name&gt;]</span></code></div>
+</div>
+</li>
+<li><p class="first">A description of what code has changed</p>
+</li>
+<li><p class="first">Test results (i.e. Did your suite run? Were there any clashes to resolve?)</p>
+</li>
+<li><p class="first">Any other information you want to add</p>
+</li>
+<li><p class="first">As we have finished the change for this tutorial example we will resolve the ticket as <strong>fixed</strong> by clicking <strong>Modify Ticket</strong> and selecting <em>“resolve &amp; assign to &lt;username&gt; as fixed”</em>.</p>
+</li>
 </ul>
-<p><strong>Preview</strong> and <strong>Submit</strong> your ticket to save the changes.</p>
+<p><strong>Preview</strong> and <strong>Submit</strong> your ticket to save the changes.  Check the link you added works.</p>
 </div>
 <div class="section" id="tidying-up">
 <h2>4.6. Tidying Up<a class="headerlink" href="#tidying-up" title="Permalink to this headline">¶</a></h2>
@@ -337,7 +346,7 @@ rosalynhatcher/vn10.5_example_branch/src/control/top_level/um_shell.F90@29416
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">branch</span><span class="o">-</span><span class="n">delete</span>
 </pre></div>
 </div>
-<p>You will be prompted to edit the commit message file.  A standard template is automatically supplied for the commit.  However, if you want to add extra comment for the branch, please do so above the line that says <em>“–This line will be ignored and those below will be inserted automatically–”</em>.  Save your changes and exit the editor.</p>
+<p>You will be prompted to edit the commit message file.  Again a standard template is automatically supplied for the commit.  Add your commit message, save your changes and exit the editor.</p>
 <p>Answer <strong>y</strong> when you are prompted to go ahead and delete this branch.</p>
 <p>Your working copy is now pointing to a branch that no longer exists at the HEAD revision of the repository.  It is possible to keep this working copy, create a new branch and switch your working copy to point to the new branch.  Otherwise, you can remove your working copy by issuing a careful <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-rf</span></code> command.</p>
 </div>

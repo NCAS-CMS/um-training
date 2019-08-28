@@ -51,6 +51,8 @@ Right-clicking on a suite displays a pop-up menu from which you can perform many
 * Right-click on suite **u-ag137** and select *Checkout Suite* from the pop-up menu. 
 
 When you checkout a suite it is always placed in your ``~/roses`` directory.  In this state, the suite is simply a working copy - you can edit it and run it but any changes you make will only be held locally.  
+
+.. note: As we are simply viewing an existing suite that is owned by someone else you, by default, will not be able to commit any changes to the repository.
  
 .. note:: You can also checkout a suite by highlighting it and then clicking the *Checkout* button on the toolbar.  
 
