@@ -88,14 +88,14 @@ Where:
 * **<ticket>** - is the related Trac ticket number for the ticket you created earlier.
 * **<branch_name>** - is a short name for the branch.  This must contain only alpha-numeric characters and/or underscores; e.g *tutorial*
 
-You will be prompted to edit the message log file.  A standard template is automatically supplied and pops up in your default text editor.  However, if you want to add extra comment for the branch, please do so above the line that says *"--This line will be ignored and those below will be inserted automatically--"*.  When you are ready, save your change and exit the editor.  Answer **y** when you are prompted to go ahead and create the branch.
+You will be prompted to edit the message log file.  A standard template is automatically supplied and pops up in your default text editor.  Add a comment about what the branch is for at the top of the file.  When you are ready, save your change and exit the editor.  Answer **y** when you are prompted to go ahead and create the branch.
 
 If the branch is created successfully you will get a message similar to the following: ::
 
   Committed revision 52466.
   [info] Created: https://code.metoffice.gov.uk/svn/um/main/branches/dev/rosalynhatcher/vn10.5_tutorial
 
-The branch will have a URL (location of repository) like this:
+The branch will have a URL (location in repository) like this:
 
 ``https://code.metoffice.gov.uk/um/main/branches/dev/[userid]/vn10.5_[branch_name]``
 
@@ -110,12 +110,12 @@ You can see your branch from within the MOSRS Trac (https://code.metoffice.gov.u
 **main-->branches-->dev-->[userid]**
 
 Your branch will also appear on the UM repository mirror held on PUMA (within 5 minutes): https://puma.nerc.ac.uk/trac/um.xm
-
+ 
 **ii. Making changes to a working copy**
 
 **Checking out a working copy**
 
-You may have noticed that creating a branch does not create a source code tree that you can edit (working copy)!  To do this you need to *Checkout* from your branch.  Make sure you have changed to the working directory you created earlier as by default code is checked out to the current directory.  To checkout a copy of the UM code type: ::
+You may have noticed that creating a branch does not create a source code tree that you can edit (working copy)!  To do this you need to *Checkout* your branch.  Make sure you have changed to the working directory you created earlier as by default code is checked out to the current directory.  To checkout a copy of the UM code type: ::
 
   fcm checkout URL
 
@@ -177,7 +177,7 @@ All the changes you have made so far have not been committed - i.e. saved to you
 
   fcm status
 
-and you should see a list of files taht have been changed.  If you've followed the example scenario above you should see output similar to this: ::
+and you should see a list of files that have been changed.  If you've followed the example scenario above you should see output similar to this: ::
 
   ros@puma$ fcm status
   D       fcm-make/ncas-xc30-ifort/um-createbc-safe.cfg
@@ -203,7 +203,7 @@ The change in your working copy remains local until you commit it to the reposit
 
   puma$ fcm commit
 
-A text editor will appear to allow you to edit the commit message.  You must add a commit message to describe your change above the line that says **"--This line, and those below, will be ignored--"**.  Your commit will fail if you do not enter a commit message.  Make sure you provide meaningful commit messages (if your change is intended for inclusion in the trunk you should reference your ticket number) as these will show up in the revision logs and can be a useful source of informtion.
+A text editor will appear to allow you to edit the commit message.  You must add a commit message to describe your change above the line that says **"--Add your commit message ABOVE - do not alter this line or those below--"**.  Your commit will fail if you do not enter a commit message.  Make sure you provide meaningful commit messages (if your change is intended for inclusion in the trunk you should reference your ticket number) as these will show up in the revision logs and can be a useful source of informtion.
 
 **DO:**
 
@@ -310,12 +310,14 @@ Documenting your change
 
 Go back to the Trac ticket you created for your code change and add some documentation as follows:
 
+* | Add a link to your branch: 
+  | Development branch: ``[source:main/branches/dev/<username>/<branch_name>]``
 * A description of what code has changed
 * Test results (i.e. Did your suite run? Were there any clashes to resolve?)
 * Any other information you want to add
 * As we have finished the change for this tutorial example we will resolve the ticket as **fixed** by clicking **Modify Ticket** and selecting *"resolve & assign to <username> as fixed"*.
 
-**Preview** and **Submit** your ticket to save the changes.
+**Preview** and **Submit** your ticket to save the changes.  Check the link you added works.
 
 Tidying Up
 ----------
@@ -338,7 +340,7 @@ Make sure you are in the relevant working copy directory and type: ::
 
   fcm branch-delete
 
-You will be prompted to edit the commit message file.  A standard template is automatically supplied for the commit.  However, if you want to add extra comment for the branch, please do so above the line that says *"--This line will be ignored and those below will be inserted automatically--"*.  Save your changes and exit the editor.
+You will be prompted to edit the commit message file.  Again a standard template is automatically supplied for the commit.  Add your commit message, save your changes and exit the editor.
 
 Answer **y** when you are prompted to go ahead and delete this branch.
 

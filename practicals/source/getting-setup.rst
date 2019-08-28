@@ -1,24 +1,23 @@
 Getting set up
 ==============
 
-Launch MobaXterm
-----------------
+Install and Launch MobaXterm
+----------------------------
+
+Unfortunately we can no longer pre-install MobaXterm for you due to licencing restrictions, so you will first need to download and install MobaXterm:
 
 * Login to the windows machine with your University of Reading credentials
-* If there is a MobaXterm icon on the Desktop, double click it, choose to run the application, then move on to the next Section "Login to PUMA".
+* | From Chrome, go to page: https://mobaxterm.mobatek.net/download.html 
+  | Google “mobaxterm download” and this should be the first entry (check the URL). 
+* Under “Home Edition” select “Download now”
+* | On next page select **“MobaXterm Home Edition v11.1 (Portable edition)”**. 
+  | This should download the package. 
+* Click the download icon in the bottom left hand corner. 
+* | Double-click on the **MobaXterm_Personal_11.1** application file, and select “Extract all”. 
+  | A new directory window will open up. 
+* Double-click **MobaXterm_Personal_11.1** to launch the application.
 
-Mobaxterm may also be available through the Start menu, under All programs. 
-
-If there is no MobaXterm:
-
-* Open the Chrome browser
-* google "mobaxterm download"
-* Download the Personal Edition
-* Choose Save As - and save to the Desktop
-* Double click the MobaXterm folder, drag MobaXterm_Personal_8.4.exe to the Desktop
-* Double click the MobaXterm icon
-
-.. note:: Windows sometimes fails to display a  MobaXterm icon on the desktop; if this happens, simply double click the application in the Desktop file listing. 
+Next time, navigate to “Downloads” to open the application.
 
 Login to PUMA 
 -------------

@@ -103,8 +103,7 @@ previously done using IDL or MATLAB and are working to extend that
 functionality. ``cfa`` is a python utility which offers a host of
 features - we'll use it to convert UM fields file or PP data to
 CF-compliant data in NetCDF format. You first need to set the
-environment to run ``cfa`` - if you will be a frequent user, add the
-``module load`` and ``module swap`` commands to your .profile. ::
+environment to run ``cfa``: ::
 
  esPP001$ module load anaconda/2.2.0-python2 cf udunits
  esPP001$ module swap PrgEnv-cray PrgEnv-intel
@@ -142,9 +141,7 @@ CF-python CF-plot
 
 Many tools exist for analysing data from NWP and climate models and there are many contributing factors for the proliferation of these analysis utilities, for example, the disparity of data formats used by the authors of the models, and/or the availability of the underlying sofware. There is a strong push towards developing and using python as the underlying language and CF-netCDF as the data format. CMS is home to tools in the CF-netCDF stable - here's an example of the use of these tools to perform some quite complex data manipulations. The user is insulated from virtually all of the details of the methods allowing them to concentrate on scientific analysis rather than programming intricacies.
 
-* Set up the environment and start python - if you will be a frequent
-  user, add the ``module load`` and ``module swap`` commands to your
-  .profile. ::
+* Set up the environment and start python. ::
 
    archer$ module load anaconda/2.2.0-python2 cf udunits
    archer$ module swap PrgEnv-cray PrgEnv-intel
