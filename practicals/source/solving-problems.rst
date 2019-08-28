@@ -102,8 +102,6 @@ Hint: Try searching for "ERROR" - you will soon learn common phrases to help tra
 
 .. note:: If you use the search ``job.err`` box at the bottom of the gcylc viewer, when you select *"Find Next"* you will see a message indicating the live feed will be disconnected. Click *Close*.
 
-Search for ATP (Abnormal Termination Processing - google this if you wish to know more) to find a backtrace to indicate in more detail in which routine the model failed.
-
 * At what timestep did the error occur?
 
 * Which PE Rank(s) signalled the Abort?  Make a note of which one(s)

@@ -6,7 +6,7 @@
 NCAS Unified Model Introduction: Practical sessions
 ===================================================
 
-Practical exercises for the UM training course in Reading, 7-9 November 2018.
+Practical exercises for the UM training course in Reading, 3-5 April 2019. 
 
 NCAS Computational Modelling Services: http://cms.ncas.ac.uk/
 

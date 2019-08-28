@@ -68,7 +68,7 @@ This has just given you a very brief look at the suite definitions files.  More 
 Suite and task event handling
 -----------------------------
 
-Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting ``[[[events]]] mail events`` to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite u-ba799 to send an email on task (submission) failure and retry. 
+Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting ``[[[events]]] mail events`` to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite u-ba799 to send an email on task (submission) failure, retry and timeout. 
 
 Edit the ``suite.rc`` file to add the ``[[[events]]]`` section below: ::
 
@@ -78,7 +78,8 @@ Edit the ``suite.rc`` file to add the ``[[[events]]]`` section below: ::
             [[[environment]]]
             ...
             [[[events]]]
-                mail events = submission retry, retry, submission failed, failed
+                mail events = submission retry, retry, submission failed, failed, submission timeout, timeout
+                submission timeout = P1D
 
 Configure cylc so it knows what your email address is. Edit the file ``~/.cylc/global.rc`` (create it if it doesn't exist) to add the following: ::
 
