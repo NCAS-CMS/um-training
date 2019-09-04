@@ -125,5 +125,48 @@ There is also a multi-suite monitor GUI, which allows you to monitor the states 
 
   puma$ cylc gscan &
 
-Double clicking on a suite in *gscan* opens the *gcylc* window, which you will be very familiar with by now. For each suite open the *gcylc* window and stop the suite by going to *Control -> Stop Suite*, selecting  **Stop after killing active tasks** and clicking **Ok**.
+  Double clicking on a suite in *gscan* opens the *gcylc* window, which you will be very familiar with by now. For each suite open the *gcylc* window and stop the suite by going to *Control -> Stop Suite*, selecting  **Stop after killing active tasks** and clicking **Ok**.
+  
 
+Adding a new task to a suite
+-------------------------------------
+
+To add a new task, you have to specify how it relates to other tasks, specifically, which task will trigger it and which task will follow the new one.  Then  you have to specify the details of the task in the file ``rose-app.conf`` . This might require meta-data to be added to tell the general user what the inputs to the task mean. Any scripts needed to support your task can be added into the suite ``bin`` directory (for binary, or executable files). The suite configuration file suite.rc is the place where you modify the task graph.  Later in the same file you need to specify which computer will run the task and the resources it will need. 
+
+In this example, we will add a task that says ``Hello, World`` which will execute after the reconfiguration and before the main model.
+
+Begin by creating a new directory in the suite applications directory of your copy of u-ba799.  Close the Rose GUI first and the  go into the ``app`` directory and create a new directory called ``new_app``.  Change into the new directory and create a blank ``rose-app.conf file`` e.g. ``touch rose-app.conf``.
+
+Now go to the top of the suite directory and start the Rose editor.  You should now see the new application listed.  At this point it is an empty application which does nothing and is not integrated into the task chain.  Click on the little triangle to the left of new_app to expand its contents (You may need to tick View -> View Latent Pages in the GUI to see this).  Everything is greyed out.  Click on ``command`` to see the command page and then click the plus sign and select “add to configuration” to add a command to the application.  Then enter ``echo Hello, World from new_app`` in the command default box.  Save this and then have a look at the contents of rose-app.conf to see the effect.
+
+We will execute the new application after the reconfiguration and before the UM starts.  We will run it on ARCHER.  To set this up, edit the ``suite.rc`` file.  Under, ::
+
+  [scheduling]
+     [[dependencies]]
+
+find the line  ``graph = recon  => atmos_main``
+and change it to, ``graph = recon => new_app => atmos_main``.
+
+This puts the new_app in the right place in the task list.
+
+The next step is to tell Rose to run the application on ARCHER.  Under the section [runtime] there are environment definitions for [[recon]] and for [[atmos_main]].  Insert one for [[new_app]].  Since this is a simple command, it will be run in the serial queue.  The queuing system is specific to the super computer being used.  In our case, we want to make a modification to the ARCHER specific description which can be found in ``site/archer.rc``.  There is already a definition for the serial queue environment  [[HPC_SERIAL]] that we can make use of.   To run the new application on the ARCHER serial queue and allow it two minutes to complete, add the lines, ::
+
+   [[new_app]]
+       inherit = HPC_SERIAL
+      [[[job]]]
+            execution time limit = PT2M
+
+after the environment for [[INSTALL_ANCIL_RESOURCE]].
+	    
+We are now ready to go.  Press run in the GUI and look at the task graph: recon and atmos_main are there, but a new hierarchy of tasks has appeared, ::
+
+  HPC
+      HPC_SERIAL
+          new_app
+
+
+Notice that ``atmos_main`` no longer runs after the reconfiguration, but ``new_app`` does and when that is completed, ``atmos_main`` starts, as we wanted. The output from ``new_app`` can be found in the Cylc output directory in ``log/job/19880901T0000Z/new_app/NN/job.out``.
+
+A more complex application might involve the execution of a script.  In this case we would replace the contents of the command default box with the name of the script.  Then you would store the script in the suite bin directory, where it would become part of the suite (remember to ``fcm add`` any new files that you add to the suite so they will be added to the repository when you next commit).
+
+Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For to know more, see the Rose documentation at https://metomi.github.io/rose/doc/html/tutorial/rose/applications.html.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see https://metomi.github.io/rose/doc/html/api/rose-built-in-applications.html.
