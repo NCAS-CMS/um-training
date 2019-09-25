@@ -128,24 +128,29 @@ There is also a multi-suite monitor GUI, which allows you to monitor the states 
 Double clicking on a suite in *gscan* opens the *gcylc* window, which you will be very familiar with by now. For each suite open the *gcylc* window and stop the suite by going to *Control -> Stop Suite*, selecting  **Stop after killing active tasks** and clicking **Ok**.
   
 
-Adding a new App to a suite
+Adding a new app to a suite
 -------------------------------------
 
 A Rose application or "Rose app" is a Rose configuration which executes a command.
 
-To add a new app, you have to specify how it relates to other tasks, specifically, which task will trigger it and which task will follow the new one.  Then  you have to specify the details of the ap in the configuration file ``rose-app.conf`` . This might require meta-data to be added to tell the general user what the inputs to the task mean. Any scripts needed to support your task can be added into an app ``bin`` directory (for binary, or executable files). General scripts go in the suite ``bin`` directory. The suite configuration file ``suite.rc`` is the place where you modify the task graph the task definition i.e.  which computer will run the task and the resources it will need. 
+To add a new app, you have to specify how it relates to other tasks, specifically, which task will trigger it and which task will follow the new one.  Then  you have to specify the details of the app in the configuration file ``rose-app.conf`` . This might require metadata to be added to tell the general user what the inputs to the task mean. Any scripts or executables needed by the new app can be added into an app ``bin/`` directory. General scripts go in the suite ``bin/`` directory. The suite configuration file ``suite.rc`` is the place where you modify the task graph the task definition i.e.  which computer will run the task and the resources it will need. 
 
-In this example, we will add an app that says ``Hello, World`` which will execute after the reconfiguration and before the main model. We will add the app to your copy of u-ba799.
+In this example, we will add an app that prints ``Hello World`` which will execute after the reconfiguration and before the main model. We will add the app to your copy of u-ba799.
 
 **i. Create the Rose application directory**
 
-Close the Rose GUI first and the  go into the ``app`` directory and create a new directory called ``new_app``.
+Make sure the Rose edit GUI for your suite is closed. ``cd`` into the suite ``app/`` directory and create a new directory called ``new_app`` ::
+  
+  puma$ cd ~/roses/<SUITEID>/app
+  puma$ mkdir new_app
 
 **ii.  Create the Rose app configuration file**
 
-Change into the new directory and create a blank app configuration file, ``rose-app.conf file`` e.g. ``touch rose-app.conf``.
+Change into the ``new_app`` directory and create a blank app configuration file called ``rose-app.conf``: :: 
 
-Now go to the top of the suite directory and start the Rose editor.  You should now see the new application listed.  At this point it is an empty application and is not integrated into the task chain.  Click on the little triangle to the left of new_app to expand its contents (You may need to tick View -> View Latent Pages in the GUI to see this).  Everything is greyed out.  Click on ``command`` to see the command page and then click the plus sign and select “add to configuration” to add a command to the application.  Then enter ``echo Hello, World`` in the command default box.  Save this and then have a look at the contents of rose-app.conf to see the effect.
+  puma$ touch rose-app.conf
+
+Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on the little triangle to the left of *new_app* to expand its contents (You may need to select *View -> View Latent Pages* to see this).  Everything is greyed out.  Click on ``command`` to see the command page and then click the plus sign next to "command default" (you may need to select *View -> View Latent Variables* to see it) and select “add to configuration” to add a command to the application. Enter ``echo "Hello World"`` in the "command default" box.  Save this and then have a look at the contents of the ``rose-app.conf`` file to see the effect.
 
 **iii. Setting up the task scheduling**
 
@@ -154,76 +159,80 @@ We will execute the new application, after the reconfiguration and before the UM
   [scheduling]
      [[dependencies]]
 
-find the line  ``graph = recon  => atmos_main``
-and change it to, ``graph = recon => new_app => atmos_main``.
+find the line ::
 
-This puts the new_app in the right place in the task list.
+  graph = recon  => atmos_main
 
-The next step is to tell Rose to run the task on ARCHER.   The queuing system is specific to the super computer being used.  General task definitions go in the ``suite.rc`` file only and the definitions specific to ARCHER in the ``site/archer.rc`` file.  There is already a definition for the serial queue environment  [[HPC_SERIAL]] that we can make use of.   To run the new application on the ARCHER serial queue and allow it two minutes to complete, add the lines, ::
+and change it to ::
+
+  graph = recon => new_app => atmos_main
+
+This puts the task new_app in the right place in the task list.
+
+The next step is to tell Rose to run the task on ARCHER.   The queuing system is specific to the host being run on.  General task definitions go in the ``suite.rc`` file and the definitions specific to ARCHER in the ``site/archer.rc`` file.  There is already a definition for the serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of.   To run the new application on ARCHER in the serial queue and give it two minutes to complete, add the following lines to the ``suite.rc`` after the definition for ``[[recon]]``: ::
 
    [[new_app]]
        inherit = HPC_SERIAL
       [[[job]]]
             execution time limit = PT2M
 
-after the definition for [[INSTALL_ANCIL_RESOURCE]].
-
 **iv. Running the new app**
 	    
-We are now ready to go.  Press run in the GUI and look at the task graph: recon and atmos_main are there, but a new hierarchy of tasks has appeared,
+We are now ready to go.  Run the suite either from within the rose edit GUI or from the command line. Look at the task graph: recon and atmos_main are there, but a new hierarchy of tasks has appeared,
 
 ..  image:: /images/ba799-1.jpg
 
-Notice that ``atmos_main`` no longer runs after the reconfiguration, but ``new_app`` does and when that is completed, ``atmos_main`` starts, as we wanted. The output from ``new_app`` can be found in the Cylc output directory in ``log/job/19880901T0000Z/new_app/NN/job.out``.
+Notice that ``atmos_main`` no longer runs after the reconfiguration, but ``new_app`` does and when that has completed, ``atmos_main`` starts, as we wanted. The output from ``new_app`` can be found in the cylc output directory: ``log/job/19880901T0000Z/new_app/NN/job.out``.
 
-**v. Extending the app by using a script**
+**v. Extending the app to run a script**
 
-A more complex application might involve the execution of a script.  In this case we would replace the contents of the command default box with the name of the script.  Then you would store the script in the app bin directory, where it would become part of the suite (remember to ``fcm add`` any new files that you add to the suite so they will be added to the repository when you next commit).
+A more complex application might involve the execution of a script.  To do this we would replace the contents of the "command default" box with the name of the script.  Then place the script in the app ``bin/`` directory, where it would become part of the suite (remember to ``fcm add`` any new files that you add to the suite so they will be added to the repository when you next commit).
 
-Now create a bin directory under new_app and create a file called ``hello.sh`` with the contents, ::
+Now create a ``bin/`` directory under ``new_app/`` and create a file called ``hello.sh`` with the contents, ::
 
   #!/bin/bash
   echo "Hello, $1!"
 
-We will allow the user to select from a variety of planets and say hello.  Make it an executable script, ::
+We will allow the user to select from a variety of planets and say hello.  Make it an executable script: ::
 
   chmod +x hello.sh
 
-Then we can say ./hello.sh Jupiter to get it to say "Hello, Jupiter!".
+Then we can say ``./hello.sh Jupiter`` to get it to print "Hello, Jupiter!".
 
-Now go to the new app ``env`` page on the GUI,  right click on the greyed out ``env`` and click "+ Add env". Save it, then right click on the blank page and select "Add blank variable".  Two boxes appear: enter "Planet" in the first and "Jupiter" in the second.  This introduces an environment variable called "Planet" and sets it to "Jupiter".
+Now go to the *new_app -> env* page in the GUI,  right click on the greyed out ``env`` and click "+ Add env". Save it, then right click on the blank page and select "Add blank variable".  Two boxes appear: enter **PLANET** in the first and **Jupiter** in the second.  This adds an environment variable called ``PLANET`` and sets it to "Jupiter".
 
-Now change the command from echo "Hello, World" to hello.sh ${Planet}.
+Now change the command from echo "Hello, World" to hello.sh ${PLANET}.
 
 **vi. Testing and Running**
 
-The script can be tested in isolation by changing into the ``new_app`` directory and executing, ::
+The app can be tested in isolation by changing into the ``new_app/`` directory and executing, ::
 
   rose app-run
 
 This produces the desired output and also a file ``rose-app-run.conf``, which can be deleted.
 
-We can now run the whole suite from the Rose GUI.
+Now **run** the suite.
 
-**vii. Adding Metadata**
+**vii. Rose Metadata**
 
-As it stands, there are no restrictions on the variable ``Planet``.  We can add metadata to explain to the general user what the variable Planet is meant to be, perhaps limiting it to certain values.  This is useful to protect any later code which may fail if not presented with a planet.
+Metadata can be used to provide information about settings in Rose configurations.  It is used for documenting settings, performing automatic checking and for formatting the rose edit GUI. Metadata can be used to ensure that configurations are valid before they are run.
 
-Rose provides the meta-data for many existing standard applications, such as the ``um-atmos``, ``fcm_make``.  These are all stored on PUMA in ``~fcm/rose-meta``.  Have a look at this directory.
+Metadata for many standard applications, such as ``um-atmos``, ``fcm_make`` are all stored centrally on PUMA in ``~fcm/rose-meta``.  Have a look at this directory.
 
-Rose provides some tools to quickly guess at the metadata where there is none.  Create a directory ``meta`` under ``new_app`` .  Then execute the command, ::
+For our example there are currently no restrictions on the variable ``PLANET``.  We will now add some metadata to help the user understand what the variable ``PLANET`` is and what values it is limited to.
+
+Rose provides some tools to quickly guess at the metadata where there is none.  Create a directory ``meta/`` under ``new_app/`` .  Then execute the command, ::
 
   rose metadata-gen
 
   
-This creates a file ``rose-meta.conf`` in the ``meta`` directory.  It just says that there is an evironment variable called Planet, but it does not know much about it.  Edit this file and add the lines, ::
+This creates a file ``rose-meta.conf`` in the ``meta/`` directory.  It just says that there is an evironment variable called ``PLANET``, but it does not know much about it.  Edit this file and add the following lines after ``[env=PLANET]``: ::
 
   description=The name of the world to say hello to.
-   values=Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
-   help=Must be a planet bigger than Pluto - see https://en.wikipedia.org/wiki/Solar_System
+  values=Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
+  help=Must be a planet bigger than Pluto - see https://en.wikipedia.org/wiki/Solar_System
   
-after ``[env=Planet]``.  Now go back to the Rose GUI, select ``Metadata -> Refresh Metadata``. and click on the `new_app`` ``env`` page.  The entry box for Planet has changed into a drop down list.  Pluto is not allowed, presumably because the code cannot handle tiny planets.  Right click on the cog next to Planet and select ``info`` to see the description and allowed values.
- 
+Now go back to the Rose GUI and select *Metadata -> Refresh Metadata*. Once the metadata has reloaded, go to the *new_app -> env* panel.  The entry box for ``PLANET`` has changed into a drop down list.  Pluto is not allowed, presumably because the code cannot handle tiny planets.  Right click on the cog next to Planet and select ``info`` to see the description and allowed values.
 
 **vi. References**
 
