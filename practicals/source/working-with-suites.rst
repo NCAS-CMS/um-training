@@ -4,7 +4,7 @@ Working with Suites
 Suite Discovery and Management: rosie go
 ----------------------------------------
 
-**Rosie go** is the suite manager GUI. It acts as a hub for all your suite work. From ``rosie go`` it is possible to search for suites, create, checkout, delete, edit, run suites and more.  We will only take a look at the main features here.  Full details on all the features of ``rosie go`` can be found in the user guide - http://metomi.github.io/rose/doc/rose-rug-rosie-go.html.
+**Rosie go** is the suite manager GUI. It acts as a hub for all your suite work. From ``rosie go`` it is possible to search for suites, create, checkout, delete, edit, run suites and more.  We will take a look at the main features here.  
 
 Launch ``rosie go`` by typing: ::
 

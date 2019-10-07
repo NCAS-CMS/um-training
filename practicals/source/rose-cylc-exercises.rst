@@ -37,7 +37,7 @@ Change to the ``~/roses/<suite-id>`` directory for your copy of u-ag263.
 
 Open the ``suite.rc`` file in your favourite editor.  
 
-Look at the ``[scheduling]`` section.  This contains some Jinja2 variables (BUILD & RECON) which allow the user to select which tasks appear in the dependency graph. The dependency graph tells Cylc the order in which to run tasks.  The ``fcm_make`` and ``recon`` tasks are only included if the ``BUILD`` and ``RECON`` variables are set to true. These variables are located in the ``rose-suite.conf`` and can be changed using the rose edit GUI or by directly editing the ``rose-suite.conf`` file.  When you run a suite a processed version of the ``suite.rc`` file with all the Jinja2 code evaluated is placed in your suite's ``cylc-run`` directory.  
+Look at the ``[scheduling]`` section.  This contains some Jinja2 variables (BUILD & RECON) which allow the user to select which tasks appear in the dependency graph. The dependency graph tells Cylc the order in which to run tasks.  The ``fcm_make`` and ``recon`` tasks are only included if the ``BUILD`` and ``RECON`` variables are set to true. These variables are located in the ``rose-suite.conf`` and can be changed using the rose edit GUI or by directly editing the ``rose-suite.conf`` file.  When you run a suite, a processed version of the ``suite.rc`` file, with all the Jinja2 code evaluated, is placed in your suite's ``cylc-run`` directory.  
 
 * Take a look at the ``suite.rc.processed`` file for your suite.  Hint: go to directory ``~/cylc-run/<suite-id>``.
 * Change the values of BUILD and RECON and re-run your suite.  
@@ -93,7 +93,7 @@ To test this out we need to force the suite to fail.  Change the account code to
 
 Change the account code back to 'n02-training' before continuing.
 
-Further information about event handlers can be found in the Cylc documentation: https://cylc.github.io/cylc/html/single/cug-html.html#13.15
+Further information about event handlers can be found in the Cylc documentation: https://cylc.github.io/doc/built-sphinx-single/index.html#eventhandling
 
 Starting a suite in "held" mode
 -------------------------------
@@ -131,11 +131,16 @@ Double clicking on a suite in *gscan* opens the *gcylc* window, which you will b
 Adding a new app to a suite
 -------------------------------------
 
-A Rose application or "Rose app" is a Rose configuration which executes a command.
+A Rose application or “Rose app” is a Rose configuration for running an executable command, encapsulating details such as scripts, programs and settings.
 
-To add a new app, you have to specify how it relates to other tasks, specifically, which task will trigger it and which task will follow the new one.  Then  you have to specify the details of the app in the configuration file ``rose-app.conf`` . This might require metadata to be added to tell the general user what the inputs to the task mean. Any scripts or executables needed by the new app can be added into an app ``bin/`` directory. General scripts go in the suite ``bin/`` directory. The suite configuration file ``suite.rc`` is the place where you modify the task graph the task definition i.e.  which computer will run the task and the resources it will need. 
+To add a new app to a suite, we first create a directory to hold the app files. The main details are specified in a configuration file ``rose-app.conf``. We may also specify some metadata to tell the general user what inputs to the task mean (this goes under a ``meta/`` sub-directory or we may reference some standard metadata held elsewhere). Any scripts or executables needed by the new app can be added into an app ``bin/`` directory. General scripts that aren't specific to the app should go in the *suite* ``bin/`` directory.
 
-In this example, we will add an app that prints ``Hello World`` which will execute after the reconfiguration and before the main model. We will add the app to your copy of u-ba799.
+Remember to ``fcm add`` any new files that you add to the suite so they will be added to the repository when you next commit.
+
+In order to actually run the app, we need to add a new "task" to the suite which involves editing the suite configuration file ``suite.rc``. We specify i) how the new task relates to other tasks, specifically, which task will trigger it
+and which task will follow it; ii) what the task will run (i.e which app); and iii) how the task will run (i.e. which computer and the resources it will need).
+
+In this example, you will add an app that prints ``Hello World``, which will execute after the reconfiguration and before the main model. You will add the app to your copy of u-ba799.
 
 **i. Create the Rose application directory**
 
@@ -150,11 +155,13 @@ Change into the ``new_app`` directory and create a blank app configuration file 
 
   puma$ touch rose-app.conf
 
-Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on the little triangle to the left of *new_app* to expand its contents (You may need to select *View -> View Latent Pages* to see this).  Everything is greyed out.  Click on ``command`` to see the command page and then click the plus sign next to "command default" (you may need to select *View -> View Latent Variables* to see it) and select “add to configuration” to add a command to the application. Enter ``echo "Hello World"`` in the "command default" box.  Save this and then have a look at the contents of the ``rose-app.conf`` file to see the effect.
+Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on the little triangle to the left of *new_app* to expand its contents (you may need to select *View -> View Latent Pages* to see this).  Everything is greyed out.  Click on ``command`` to see the command page and then click the plus sign next to "command default" (you may need to select *View -> View Latent Variables* to see it) and select “add to configuration” to add a command to the application. Enter ``echo "Hello World"`` in the "command default" box.  Save this and then have a look at the contents of the ``rose-app.conf`` file to see the effect.
 
-**iii. Setting up the task scheduling**
+**iii. Add a new task to the suite definition**
 
-We will execute the new application, after the reconfiguration and before the UM starts, on ARCHER in the serial queue.  To set this up, edit the ``suite.rc`` file.  Under, ::
+In order to execute the app, we need to add a new task to the suite workflow. This task executes our new application on a machine that we specify. In this instance we are adding the new task between the reconfiguration and the model run, and the task will be run on ARCHER in the serial queue.
+
+To set this up, edit the ``suite.rc`` file. Under, ::
 
   [scheduling]
      [[dependencies]]
@@ -165,16 +172,18 @@ find the line ::
 
 and change it to ::
 
-  graph = recon => new_app => atmos_main
+  graph = recon => hello => atmos_main
 
-This puts the task new_app in the right place in the task list.
+This puts the task ``hello`` in the right place in the task list.
 
-The next step is to tell Rose to run the task on ARCHER.   The queuing system is specific to the host being run on.  General task definitions go in the ``suite.rc`` file and the definitions specific to ARCHER in the ``site/archer.rc`` file.  There is already a definition for the serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of.   To run the new application on ARCHER in the serial queue and give it two minutes to complete, add the following lines to the ``suite.rc`` after the definition for ``[[recon]]``: ::
+The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable ``ROSE_TASK_APP`` in the task definition.  General task definitions go in the ``suite.rc`` file and the definitions specific to ARCHER in the ``site/archer.rc`` file.  The queuing system is specific to the host being run on, and here is already a definition for the ARCHER serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of. To run the new application on ARCHER in the serial queue and give it two minutes to complete, add the following lines to the ``suite.rc`` after the definition for ``[[recon]]``: ::
 
-   [[new_app]]
-       inherit = HPC_SERIAL
+   [[hello]]
+      inherit = HPC_SERIAL
+      [[[environment]]]
+         ROSE_TASK_APP = new_app
       [[[job]]]
-            execution time limit = PT2M
+         execution time limit = PT2M
 
 **iv. Running the new app**
 	    
@@ -186,7 +195,7 @@ Notice that ``atmos_main`` no longer runs after the reconfiguration, but ``new_a
 
 **v. Extending the app to run a script**
 
-A more complex application might involve the execution of a script.  To do this we would replace the contents of the "command default" box with the name of the script.  Then place the script in the app ``bin/`` directory, where it would become part of the suite (remember to ``fcm add`` any new files that you add to the suite so they will be added to the repository when you next commit).
+A more complex application might involve the execution of a script.  To do this we would replace the contents of the "command default" box with the name of the script.  Then place the script in the app ``bin/`` directory. 
 
 Now create a ``bin/`` directory under ``new_app/`` and create a file called ``hello.sh`` with the contents, ::
 

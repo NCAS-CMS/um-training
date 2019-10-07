@@ -28,7 +28,7 @@ Consult the ARCHER website for more information: http://www.archer.ac.uk
 Running a Standard Suite
 ------------------------
 
-To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM11.1.  
+To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM10.5.  
 
 **i. Copy the suite**
 
@@ -103,7 +103,7 @@ The output from a standard suite goes to a variety of places, depending on the t
 
 The standard output and errors from the suite can be easily viewed using Rose Bush.
 
-For suites submitted from PUMA; in a browser navigate to ``http://puma.nerc.ac.uk/rose-bush``.  
+For suites submitted from PUMA; in a browser navigate to: http://puma.nerc.ac.uk/rose-bush
 
 Enter your PUMA userid and click *"Suites List"*.  You should then see a list of all the suites you have run.  Click on *"tasks jobs list"* for the suite you have just run. You can examine the output of each task using the links, as well as see whether the suite contains failed tasks, or is currently running.  For this suite you should see output files for 4 tasks: fcm_make (code extraction), fcm_make2 (compilation), recon & atmos. The job.out and job.err files are the first places you should look for information when tasks fail.
 
