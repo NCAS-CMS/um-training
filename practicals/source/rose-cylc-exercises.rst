@@ -137,10 +137,15 @@ To add a new app to a suite, we first create a directory to hold the app files. 
 
 Remember to ``fcm add`` any new files that you add to the suite so they will be added to the repository when you next commit.
 
-In order to actually run the app, we need to add a new "task" to the suite which involves editing the suite configuration file ``suite.rc``. We specify i) how the new task relates to other tasks, specifically, which task will trigger it
-and which task will follow it; ii) what the task will run (i.e which app); and iii) how the task will run (i.e. which computer and the resources it will need).
+In order to actually run the app, we need to add a new "task" to the suite which involves editing the suite configuration file ``suite.rc``. We need to specify 3 things: 
 
-In this example, you will add an app that prints ``Hello World``, which will execute after the reconfiguration and before the main model. You will add the app to your copy of u-ba799.
+ **1)** how the new task relates to other tasks, specifically, which task will trigger it and which task will follow it; 
+
+ **2)** what the task will run (i.e which app); and 
+
+ **3)** how the task will run (i.e. which computer and the resources it will need).
+
+In this example, we will add an app that prints ``Hello World``, which will execute after the reconfiguration and before the main model. We will add the app to your copy of u-ba799.
 
 **i. Create the Rose application directory**
 
@@ -176,7 +181,7 @@ and change it to ::
 
 This puts the task ``hello`` in the right place in the task list.
 
-The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable ``ROSE_TASK_APP`` in the task definition.  General task definitions go in the ``suite.rc`` file and the definitions specific to ARCHER in the ``site/archer.rc`` file.  The queuing system is specific to the host being run on, and here is already a definition for the ARCHER serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of. To run the new application on ARCHER in the serial queue and give it two minutes to complete, add the following lines to the ``suite.rc`` after the definition for ``[[recon]]``: ::
+The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable ``ROSE_TASK_APP`` in the task definition.  General task definitions go in the ``suite.rc`` file and the definitions specific to ARCHER in the ``site/archer.rc`` file.  The queuing system is specific to the host being run on, and there is already a definition for the ARCHER serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of. To run the new application on ARCHER in the serial queue and give it two minutes to complete, add the following lines to the ``suite.rc`` after the definition for ``[[recon]]``: ::
 
    [[hello]]
       inherit = HPC_SERIAL
@@ -187,11 +192,11 @@ The next step is to add a definition for the new task. To tell Rose to use one o
 
 **iv. Running the new app**
 	    
-We are now ready to go.  Run the suite either from within the rose edit GUI or from the command line. Look at the task graph: recon and atmos_main are there, but a new hierarchy of tasks has appeared,
+We are now ready to go.  **Run** the suite. Look at the task graph: recon and atmos_main are there, but a new hierarchy of tasks has appeared.
 
-..  image:: /images/ba799-1.jpg
+..  image:: /images/ba799-new-app.png
 
-Notice that ``atmos_main`` no longer runs after the reconfiguration, but ``new_app`` does and when that has completed, ``atmos_main`` starts, as we wanted. The output from ``new_app`` can be found in the cylc output directory: ``log/job/19880901T0000Z/new_app/NN/job.out``.
+Notice that ``atmos_main`` no longer runs after the reconfiguration, but our new task ``hello`` does and when that has completed, ``atmos_main`` starts. The output from the ``hello`` task can be found in the cylc output directory: ``log/job/19880901T0000Z/hello/NN/job.out``.
 
 **v. Extending the app to run a script**
 
@@ -208,7 +213,7 @@ We will allow the user to select from a variety of planets and say hello.  Make 
 
 Then we can say ``./hello.sh Jupiter`` to get it to print "Hello, Jupiter!".
 
-Now go to the *new_app -> env* page in the GUI,  right click on the greyed out ``env`` and click "+ Add env". Save it, then right click on the blank page and select "Add blank variable".  Two boxes appear: enter **PLANET** in the first and **Jupiter** in the second.  This adds an environment variable called ``PLANET`` and sets it to "Jupiter".
+Right click on the greyed out *new_app -> env* in the index panel and click "+ Add env". **Save**, then select *new_app -> env* to view the ``env`` page, right click on the blank page and select "Add blank variable".  Two boxes appear: enter **PLANET** in the first and **Jupiter** in the second.  This adds an environment variable called ``PLANET`` and sets it to "Jupiter".
 
 Now change the command from echo "Hello, World" to hello.sh ${PLANET}.
 
@@ -218,7 +223,16 @@ The app can be tested in isolation by changing into the ``new_app/`` directory a
 
   rose app-run
 
-This produces the desired output and also a file ``rose-app-run.conf``, which can be deleted.
+This should produce output similar to: ::
+
+  ros@puma$ rose app-run
+  [INFO] export PATH=/home/ros/roses/u-ba799/app/new_app/bin:/home/fcm/rose-2016.11.1/bin:/usr/local/python/bin:
+  ...
+  [INFO] export PLANET=Jupiter
+  [INFO] command: hello.sh ${PLANET}
+  Hello, Jupiter!
+
+and also a file ``rose-app-run.conf``, which can be deleted.
 
 Now **run** the suite.
 
@@ -237,7 +251,7 @@ Rose provides some tools to quickly guess at the metadata where there is none.  
   
 This creates a file ``rose-meta.conf`` in the ``meta/`` directory.  It just says that there is an evironment variable called ``PLANET``, but it does not know much about it.  Edit this file and add the following lines after ``[env=PLANET]``: ::
 
-  description=The name of the world to say hello to.
+  description=The name of the planet to say hello to.
   values=Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
   help=Must be a planet bigger than Pluto - see https://en.wikipedia.org/wiki/Solar_System
   
