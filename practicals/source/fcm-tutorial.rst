@@ -151,18 +151,20 @@ Now make some code changes! Use the following scenario to take you through the b
 
 **Adding a new file**
 
-* Still in the ``src/control/top_level`` directory, add a new file with a subroutine in, called ``um_shell_sub.F90``.  (An example file is available on PUMA: ``~um/um-training/um_shell_sub.F90``.  The routine ``umPrint`` should be used for writing out messages rather than standard FORTRAN ``WRITE`` statements.)
+* Still in the ``src/control/top_level`` directory, add a new FORTRAN module file (``um_shell_mod.F90``) containing a subroutine called ``um_shell_sub()``.  (An example file is available on PUMA: ``~um/um-training/um_shell_mod.F90``.  The routine ``umPrint`` should be used for writing out messages rather than standard FORTRAN ``WRITE`` statements.)
 * Run **fcm add** on the command line, to let the repository know you're adding a new file at the next commit. Make sure you are still in ``src/control/top_level`` and then type: ::
 
-    fcm add um_shell_sub.F90
+    fcm add um_shell_mod.F90
 
  at the command prompt.
 
-* Amend ``um_shell.F90`` to call this new subroutine: ::
+* Modify ``um_shell.F90`` to use this new module.  You'll see lots of ``USE`` statements near the top of the file.  Add the following to use our new one. ::
+
+    USE um_shell_mod
+
+* Then add a line to call the ``um_shell_sub`` subroutine (suggest around line 375): ::  
 
     CALL um_shell_sub()
-
-* Ensure you put a comment line **! DEPENDS ON: um_shell_sub** above the CALL statement to ensure the dependency on your new file is registered.
 
 **Deleting a file**
 
