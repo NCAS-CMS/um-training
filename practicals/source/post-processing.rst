@@ -143,8 +143,8 @@ Many tools exist for analysing data from NWP and climate models and there are ma
 
 * Set up the environment and start python. ::
 
-   archer$ module load anaconda/2.2.0-python2 cf udunits
-   archer$ module swap PrgEnv-cray PrgEnv-intel
+   
+   archer$ export PATH=/home/n02/n02/ajh/anaconda3/bin:$PATH
    archer$ python
    >>> import cf
 
@@ -152,12 +152,12 @@ We'll be looking at CRU observed precipitation data
 
 * Read in data files ::
 
-  >>> f = cf.read_field('~charles/UM_Training/cru/*.nc')
+  >>> f = cf.read('~charles/UM_Training/cru/*.nc')[0]
 
 * Inspect the file contents with different amounts of detail ::
 
   >>> f
-  >>> print f
+  >>> print(f)
   >>> f.dump()
   
 Note that the three files in the cru directory are aggregated into one
@@ -166,24 +166,24 @@ field.
 * Average the field with respect to time ::
 
   >>> f = f.collapse('T: mean')
-  >>> print f
+  >>> print(f)
 
 Note that the time coordinate is now of length 1.
 
 * Read in another field produced by a GCM, this has a different latitude/longitude grid to regrid the CRU data to ::
 
-  >>> g = cf.read_field('~charles/UM_Training/N96_DJF_precip_means.nc')
-  >>> print g
+  >>> g = cf.read('~charles/UM_Training/N96_DJF_precip_means.nc')[0]
+  >>> print(g)
 
 * Regrid the field of observed data (f) to the grid of the model field (g) ::
 
   >>> f = f.regrids(g, method='bilinear')
-  >>> print f
+  >>> print(f)
 
 * Subspace the regridded field, f, to a European region ::
 
   >>> f = f.subspace(X=cf.wi(-10, 40), Y=cf.wi(35, 70))
-  >>> print f
+  >>> print(f)
 
 Note that the latitude and longitude coordinates are now shorter in length.
 

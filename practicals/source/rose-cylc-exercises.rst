@@ -257,7 +257,7 @@ This creates a file ``rose-meta.conf`` in the ``meta/`` directory.  It just says
   
 Now go back to the Rose GUI and select *Metadata -> Refresh Metadata*. Once the metadata has reloaded, go to the *new_app -> env* panel.  The entry box for ``PLANET`` has changed into a drop down list.  Pluto is not allowed, presumably because the code cannot handle tiny planets.  Right click on the cog next to Planet and select ``info`` to see the description and allowed values.
 
-**vi. References**
+**viii. References**
 
 A fuller discussion of Rose metadata can be found at https://metomi.github.io/rose/doc/html/tutorial/rose/metadata.html.
 

@@ -89,7 +89,7 @@ Click on the triangle to the left of *suite conf* to expand that section.  Click
 
 .. note:: We generally use a **common notation** to help users navigate through the GUI and to help us help you with questions. Getting to "UM Science Settings" would be indicated like this: *um->namelist->UM Science Settings*.  This notation will be used throughout the rest of this document.
 
-The input namelists for the um are contained in the *um->namelist* section.  Let's take a look at the science namelist for Microphysics (Large Scale Precipiation), run_precip under "UM Science Settings".
+The input namelists for the um are contained in the *um->namelist* section.  Let's take a look at the science namelist for Microphysics (Large Scale Precipitation), run_precip under "UM Science Settings".
 
 For each UM namelist item there is a short description to help you understand what that variable is.  Click on the cog next to a namelist variable and select *Help* to view more detailed information.  The help information can give you some useful pointers but be aware that it has been written with Met Office setup in mind. 
 

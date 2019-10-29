@@ -353,7 +353,7 @@ Version Control of Suites
 
 Just like the model code, your UM suites are also under version control in a subversion repository, usually *roses-u* which is on the MOSRS.  Once you have a working copy of your suite under ``~/roses`` you can use FCM commands in the same way as for your source code branches; i.e. commit changes, diff changes, etc.
 
-* Look in the roses-u repository via MOSRS Trac (https://code.metoffice.gov.uk/trac/roses-u) and find the suite you created in the previous section. (Hint: Go to *"Browse Source"* then drill down to find you suite. e.g. u-ag263 would be under a/g/2/6/3).  When was the suite last modified?
+* Look in the roses-u repository via MOSRS Trac (https://code.metoffice.gov.uk/trac/roses-u) and find the suite you created in the previous section. (Hint: Go to *"Browse Source"* then drill down to find your suite. e.g. u-ag263 would be under a/g/2/6/3).  When was the suite last modified?
 
 * Go to your suite working directory and type **fcm status** to see the changes you have made since you copied the suite.
 
