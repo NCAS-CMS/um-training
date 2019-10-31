@@ -50,7 +50,7 @@ Now make the following changes:
 * Click on *suite conf -> jinja2* in the left hand panel
 * Change HPC_USER (that's your ARCHER training account)
 * Change HPC_ACCOUNT to **'n02-training'**
-* Change HPC_QUEUE to be the reservation code for today. (e.g. **'R6056429'**)
+* Change HPC_QUEUE to be the reservation code for today. (e.g. **'R6585903'**)
 * Save the suite (*File -> Save* or click the *down arrow* icon)
 
 .. note:: Quotes around the 'n02-training', reservation code and your ARCHER username are essential otherwise the suite won't run.

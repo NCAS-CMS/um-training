@@ -105,19 +105,18 @@ features - we'll use it to convert UM fields file or PP data to
 CF-compliant data in NetCDF format. You first need to set the
 environment to run ``cfa``: ::
 
- esPP001$ module load anaconda/2.2.0-python2 cf udunits
- esPP001$ module swap PrgEnv-cray PrgEnv-intel
+ esPP001$ export PATH=/home/n02/n02/ajh/anaconda3/bin:$PATH
  esPP001$ cfa -i -o ba799a.pc19880901_00.nc ba799a.pc19880901_00.pp
  
 Try viewing the NetCDF file with xconv.
 
 
-``cfdump`` is a tool to view CF fields. It can be run on PP or NetCDF
+``cfa`` can also view CF fields. It can be run on PP or NetCDF
 files, to provide a text representation of the CF fields contained in
 the input files. Try it on a PP file and its NetCDF equivalent,
 e.g. ::
 
-  archer$ cfdump ba799a.pc19880901_00.pp | less
+  archer$ cfa -vm ba799a.pc19880901_00.pp | less
   Field: long_name:HEAVYSIDE FN ON P LEV/UV GRID (ncvar%UM_m01s30i301_vn1100)
   ---------------------------------------------------------------------------
   Data           : long_name:HEAVYSIDE FN ON P LEV/UV GRID(time(5), air_pressure(17), latitude(145), longitude(192)) 
