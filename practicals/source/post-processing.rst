@@ -94,8 +94,8 @@ Run ``um-convpp`` on a fieldsfile (E.g ba799a.pc19880901_00) ::
 
 Note the reduction in file size. Now use xconv to examine the contents of the PP file.
 
-cfa and cfdump
---------------
+cfa
+---
 
 There is an increasing use of python in the community and we have, and
 continue to develop, python tools to do much of the data processing
