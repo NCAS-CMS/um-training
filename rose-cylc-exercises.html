@@ -72,7 +72,7 @@ puma$ cylc graph u-ah076               # view graph in browser
 <h2>8.3. Exploring the suite definition files<a class="headerlink" href="#exploring-the-suite-definition-files" title="Permalink to this headline">¶</a></h2>
 <p>Change to the <code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suite-id&gt;</span></code> directory for your copy of u-ag263.</p>
 <p>Open the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file in your favourite editor.</p>
-<p>Look at the <code class="docutils literal notranslate"><span class="pre">[scheduling]</span></code> section.  This contains some Jinja2 variables (BUILD &amp; RECON) which allow the user to select which tasks appear in the dependency graph. The dependency graph tells Cylc the order in which to run tasks.  The <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> and <code class="docutils literal notranslate"><span class="pre">recon</span></code> tasks are only included if the <code class="docutils literal notranslate"><span class="pre">BUILD</span></code> and <code class="docutils literal notranslate"><span class="pre">RECON</span></code> variables are set to true. These variables are located in the <code class="docutils literal notranslate"><span class="pre">rose-suite.conf</span></code> and can be changed using the rose edit GUI or by directly editing the <code class="docutils literal notranslate"><span class="pre">rose-suite.conf</span></code> file.  When you run a suite a processed version of the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file with all the Jinja2 code evaluated is placed in your suite’s <code class="docutils literal notranslate"><span class="pre">cylc-run</span></code> directory.</p>
+<p>Look at the <code class="docutils literal notranslate"><span class="pre">[scheduling]</span></code> section.  This contains some Jinja2 variables (BUILD &amp; RECON) which allow the user to select which tasks appear in the dependency graph. The dependency graph tells Cylc the order in which to run tasks.  The <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> and <code class="docutils literal notranslate"><span class="pre">recon</span></code> tasks are only included if the <code class="docutils literal notranslate"><span class="pre">BUILD</span></code> and <code class="docutils literal notranslate"><span class="pre">RECON</span></code> variables are set to true. These variables are located in the <code class="docutils literal notranslate"><span class="pre">rose-suite.conf</span></code> and can be changed using the rose edit GUI or by directly editing the <code class="docutils literal notranslate"><span class="pre">rose-suite.conf</span></code> file.  When you run a suite, a processed version of the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file, with all the Jinja2 code evaluated, is placed in your suite’s <code class="docutils literal notranslate"><span class="pre">cylc-run</span></code> directory.</p>
 <ul class="simple">
 <li>Take a look at the <code class="docutils literal notranslate"><span class="pre">suite.rc.processed</span></code> file for your suite.  Hint: go to directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suite-id&gt;</span></code>.</li>
 <li>Change the values of BUILD and RECON and re-run your suite.</li>
@@ -123,7 +123,7 @@ puma$ cylc graph u-ah076               # view graph in browser
 <li>Look in the suite error files to find the error message?</li>
 </ul>
 <p>Change the account code back to ‘n02-training’ before continuing.</p>
-<p>Further information about event handlers can be found in the Cylc documentation: <a class="reference external" href="https://cylc.github.io/cylc/html/single/cug-html.html#13.15">https://cylc.github.io/cylc/html/single/cug-html.html#13.15</a></p>
+<p>Further information about event handlers can be found in the Cylc documentation: <a class="reference external" href="https://cylc.github.io/doc/built-sphinx-single/index.html#eventhandling">https://cylc.github.io/doc/built-sphinx-single/index.html#eventhandling</a></p>
 </div>
 <div class="section" id="starting-a-suite-in-held-mode">
 <h2>8.5. Starting a suite in “held” mode<a class="headerlink" href="#starting-a-suite-in-held-mode" title="Permalink to this headline">¶</a></h2>
@@ -151,6 +151,108 @@ u-ag761 ros@localhost:7776
 </div>
 <p>Double clicking on a suite in <em>gscan</em> opens the <em>gcylc</em> window, which you will be very familiar with by now. For each suite open the <em>gcylc</em> window and stop the suite by going to <em>Control -&gt; Stop Suite</em>, selecting  <strong>Stop after killing active tasks</strong> and clicking <strong>Ok</strong>.</p>
 </div>
+<div class="section" id="adding-a-new-app-to-a-suite">
+<h2>8.7. Adding a new app to a suite<a class="headerlink" href="#adding-a-new-app-to-a-suite" title="Permalink to this headline">¶</a></h2>
+<p>A Rose application or “Rose app” is a Rose configuration for running an executable command, encapsulating details such as scripts, programs and settings.</p>
+<p>To add a new app to a suite, we first create a directory to hold the app files. The main details are specified in a configuration file <code class="docutils literal notranslate"><span class="pre">rose-app.conf</span></code>. We may also specify some metadata to tell the general user what inputs to the task mean (this goes under a <code class="docutils literal notranslate"><span class="pre">meta/</span></code> sub-directory or we may reference some standard metadata held elsewhere). Any scripts or executables needed by the new app can be added into an app <code class="docutils literal notranslate"><span class="pre">bin/</span></code> directory. General scripts that aren’t specific to the app should go in the <em>suite</em> <code class="docutils literal notranslate"><span class="pre">bin/</span></code> directory.</p>
+<p>Remember to <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">add</span></code> any new files that you add to the suite so they will be added to the repository when you next commit.</p>
+<p>In order to actually run the app, we need to add a new “task” to the suite which involves editing the suite configuration file <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code>. We need to specify 3 things:</p>
+<blockquote>
+<div><p><strong>1)</strong> how the new task relates to other tasks, specifically, which task will trigger it and which task will follow it;</p>
+<p><strong>2)</strong> what the task will run (i.e which app); and</p>
+<p><strong>3)</strong> how the task will run (i.e. which computer and the resources it will need).</p>
+</div></blockquote>
+<p>In this example, we will add an app that prints <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code>, which will execute after the reconfiguration and before the main model. We will add the app to your copy of u-ba799.</p>
+<p><strong>i. Create the Rose application directory</strong></p>
+<p>Make sure the Rose edit GUI for your suite is closed. <code class="docutils literal notranslate"><span class="pre">cd</span></code> into the suite <code class="docutils literal notranslate"><span class="pre">app/</span></code> directory and create a new directory called <code class="docutils literal notranslate"><span class="pre">new_app</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cd ~/roses/&lt;SUITEID&gt;/app
+puma$ mkdir new_app
+</pre></div>
+</div>
+<p><strong>ii.  Create the Rose app configuration file</strong></p>
+<p>Change into the <code class="docutils literal notranslate"><span class="pre">new_app</span></code> directory and create a blank app configuration file called <code class="docutils literal notranslate"><span class="pre">rose-app.conf</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ touch rose-app.conf
+</pre></div>
+</div>
+<p>Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on the little triangle to the left of <em>new_app</em> to expand its contents (you may need to select <em>View -&gt; View Latent Pages</em> to see this).  Everything is greyed out.  Click on <code class="docutils literal notranslate"><span class="pre">command</span></code> to see the command page and then click the plus sign next to “command default” (you may need to select <em>View -&gt; View Latent Variables</em> to see it) and select “add to configuration” to add a command to the application. Enter <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;Hello</span> <span class="pre">World&quot;</span></code> in the “command default” box.  Save this and then have a look at the contents of the <code class="docutils literal notranslate"><span class="pre">rose-app.conf</span></code> file to see the effect.</p>
+<p><strong>iii. Add a new task to the suite definition</strong></p>
+<p>In order to execute the app, we need to add a new task to the suite workflow. This task executes our new application on a machine that we specify. In this instance we are adding the new task between the reconfiguration and the model run, and the task will be run on ARCHER in the serial queue.</p>
+<p>To set this up, edit the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file. Under,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">scheduling</span><span class="p">]</span>
+   <span class="p">[[</span><span class="n">dependencies</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>find the line</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="n">recon</span>  <span class="o">=&gt;</span> <span class="n">atmos_main</span>
+</pre></div>
+</div>
+<p>and change it to</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="n">recon</span> <span class="o">=&gt;</span> <span class="n">hello</span> <span class="o">=&gt;</span> <span class="n">atmos_main</span>
+</pre></div>
+</div>
+<p>This puts the task <code class="docutils literal notranslate"><span class="pre">hello</span></code> in the right place in the task list.</p>
+<p>The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable <code class="docutils literal notranslate"><span class="pre">ROSE_TASK_APP</span></code> in the task definition.  General task definitions go in the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file and the definitions specific to ARCHER in the <code class="docutils literal notranslate"><span class="pre">site/archer.rc</span></code> file.  The queuing system is specific to the host being run on, and there is already a definition for the ARCHER serial queue environment  <code class="docutils literal notranslate"><span class="pre">[[HPC_SERIAL]]</span></code> that we can make use of. To run the new application on ARCHER in the serial queue and give it two minutes to complete, add the following lines to the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> after the definition for <code class="docutils literal notranslate"><span class="pre">[[recon]]</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">hello</span><span class="p">]]</span>
+   <span class="n">inherit</span> <span class="o">=</span> <span class="n">HPC_SERIAL</span>
+   <span class="p">[[[</span><span class="n">environment</span><span class="p">]]]</span>
+      <span class="n">ROSE_TASK_APP</span> <span class="o">=</span> <span class="n">new_app</span>
+   <span class="p">[[[</span><span class="n">job</span><span class="p">]]]</span>
+      <span class="n">execution</span> <span class="n">time</span> <span class="n">limit</span> <span class="o">=</span> <span class="n">PT2M</span>
+</pre></div>
+</div>
+<p><strong>iv. Running the new app</strong></p>
+<p>We are now ready to go.  <strong>Run</strong> the suite. Look at the task graph: recon and atmos_main are there, but a new hierarchy of tasks has appeared.</p>
+<img alt="_images/ba799-new-app.png" src="_images/ba799-new-app.png" />
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">atmos_main</span></code> no longer runs after the reconfiguration, but our new task <code class="docutils literal notranslate"><span class="pre">hello</span></code> does and when that has completed, <code class="docutils literal notranslate"><span class="pre">atmos_main</span></code> starts. The output from the <code class="docutils literal notranslate"><span class="pre">hello</span></code> task can be found in the cylc output directory: <code class="docutils literal notranslate"><span class="pre">log/job/19880901T0000Z/hello/NN/job.out</span></code>.</p>
+<p><strong>v. Extending the app to run a script</strong></p>
+<p>A more complex application might involve the execution of a script.  To do this we would replace the contents of the “command default” box with the name of the script.  Then place the script in the app <code class="docutils literal notranslate"><span class="pre">bin/</span></code> directory.</p>
+<p>Now create a <code class="docutils literal notranslate"><span class="pre">bin/</span></code> directory under <code class="docutils literal notranslate"><span class="pre">new_app/</span></code> and <code class="docutils literal notranslate"><span class="pre">cd</span></code> into it. Create a file called <code class="docutils literal notranslate"><span class="pre">hello.sh</span></code> with the contents,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="n">echo</span> <span class="s2">&quot;Hello, $1!&quot;</span>
+</pre></div>
+</div>
+<p>We will allow the user to select from a variety of planets and say hello.  Make it an executable script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">hello</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>Then we can say <code class="docutils literal notranslate"><span class="pre">./hello.sh</span> <span class="pre">Jupiter</span></code> to get it to print “Hello, Jupiter!”.</p>
+<p>Right click on the greyed out <em>new_app -&gt; env</em> in the index panel and click “+ Add env”. <strong>Save</strong>, then select <em>new_app -&gt; env</em> to view the <code class="docutils literal notranslate"><span class="pre">env</span></code> page, right click on the blank page and select “Add blank variable”.  Two boxes appear: enter <strong>PLANET</strong> in the first and <strong>Jupiter</strong> in the second.  This adds an environment variable called <code class="docutils literal notranslate"><span class="pre">PLANET</span></code> and sets it to “Jupiter”.</p>
+<p>Now change the command from echo “Hello, World” to hello.sh ${PLANET}.</p>
+<p><strong>vi. Testing and Running</strong></p>
+<p>The app can be tested in isolation by changing into the <code class="docutils literal notranslate"><span class="pre">new_app/</span></code> directory and executing,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rose</span> <span class="n">app</span><span class="o">-</span><span class="n">run</span>
+</pre></div>
+</div>
+<p>This should produce output similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma$ rose app-run
+[INFO] export PATH=/home/ros/roses/u-ba799/app/new_app/bin:/home/fcm/rose-2016.11.1/bin:/usr/local/python/bin:
+...
+[INFO] export PLANET=Jupiter
+[INFO] command: hello.sh ${PLANET}
+Hello, Jupiter!
+</pre></div>
+</div>
+<p>and also a file <code class="docutils literal notranslate"><span class="pre">rose-app-run.conf</span></code>, which can be deleted.</p>
+<p>Now <strong>run</strong> the suite.</p>
+<p><strong>vii. Rose Metadata</strong></p>
+<p>Metadata can be used to provide information about settings in Rose configurations.  It is used for documenting settings, performing automatic checking and for formatting the rose edit GUI. Metadata can be used to ensure that configurations are valid before they are run.</p>
+<p>Metadata for many standard applications, such as <code class="docutils literal notranslate"><span class="pre">um-atmos</span></code>, <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> are all stored centrally on PUMA in <code class="docutils literal notranslate"><span class="pre">~fcm/rose-meta</span></code>.  Have a look at this directory.</p>
+<p>For our example there are currently no restrictions on the variable <code class="docutils literal notranslate"><span class="pre">PLANET</span></code>.  We will now add some metadata to help the user understand what the variable <code class="docutils literal notranslate"><span class="pre">PLANET</span></code> is and what values it is limited to.</p>
+<p>Rose provides some tools to quickly guess at the metadata where there is none.  Create a directory <code class="docutils literal notranslate"><span class="pre">meta/</span></code> under <code class="docutils literal notranslate"><span class="pre">new_app/</span></code> .  Then execute the command,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rose</span> <span class="n">metadata</span><span class="o">-</span><span class="n">gen</span>
+</pre></div>
+</div>
+<p>This creates a file <code class="docutils literal notranslate"><span class="pre">rose-meta.conf</span></code> in the <code class="docutils literal notranslate"><span class="pre">meta/</span></code> directory.  It just says that there is an evironment variable called <code class="docutils literal notranslate"><span class="pre">PLANET</span></code>, but it does not know much about it.  Edit this file and add the following lines after <code class="docutils literal notranslate"><span class="pre">[env=PLANET]</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">description</span><span class="o">=</span><span class="n">The</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">planet</span> <span class="n">to</span> <span class="n">say</span> <span class="n">hello</span> <span class="n">to</span><span class="o">.</span>
+<span class="n">values</span><span class="o">=</span><span class="n">Mercury</span><span class="p">,</span> <span class="n">Venus</span><span class="p">,</span> <span class="n">Earth</span><span class="p">,</span> <span class="n">Mars</span><span class="p">,</span> <span class="n">Jupiter</span><span class="p">,</span> <span class="n">Saturn</span><span class="p">,</span> <span class="n">Uranus</span><span class="p">,</span> <span class="n">Neptune</span>
+<span class="n">help</span><span class="o">=</span><span class="n">Must</span> <span class="n">be</span> <span class="n">a</span> <span class="n">planet</span> <span class="n">bigger</span> <span class="n">than</span> <span class="n">Pluto</span> <span class="o">-</span> <span class="n">see</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">en</span><span class="o">.</span><span class="n">wikipedia</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">wiki</span><span class="o">/</span><span class="n">Solar_System</span>
+</pre></div>
+</div>
+<p>Now go back to the Rose GUI and select <em>Metadata -&gt; Refresh Metadata</em>. Once the metadata has reloaded, go to the <em>new_app -&gt; env</em> panel.  The entry box for <code class="docutils literal notranslate"><span class="pre">PLANET</span></code> has changed into a drop down list.  Pluto is not allowed, presumably because the code cannot handle tiny planets.  Right click on the cog next to Planet and select <code class="docutils literal notranslate"><span class="pre">info</span></code> to see the description and allowed values.</p>
+<p><strong>viii. References</strong></p>
+<p>A fuller discussion of Rose metadata can be found at <a class="reference external" href="https://metomi.github.io/rose/doc/html/tutorial/rose/metadata.html">https://metomi.github.io/rose/doc/html/tutorial/rose/metadata.html</a>.</p>
+<p>Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For further details, see the Rose documentation at <a class="reference external" href="https://metomi.github.io/rose/doc/html/tutorial/rose/applications.html">https://metomi.github.io/rose/doc/html/tutorial/rose/applications.html</a>.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see <a class="reference external" href="https://metomi.github.io/rose/doc/html/api/rose-built-in-applications.html">https://metomi.github.io/rose/doc/html/api/rose-built-in-applications.html</a>.</p>
+</div>
 </div>
 
 
@@ -168,6 +270,7 @@ u-ag761 ros@localhost:7776
 <li><a class="reference internal" href="#suite-and-task-event-handling">8.4. Suite and task event handling</a></li>
 <li><a class="reference internal" href="#starting-a-suite-in-held-mode">8.5. Starting a suite in “held” mode</a></li>
 <li><a class="reference internal" href="#discovering-running-suites-and-the-multi-suite-monitor-gui">8.6. Discovering running suites and the multi-suite monitor GUI</a></li>
+<li><a class="reference internal" href="#adding-a-new-app-to-a-suite">8.7. Adding a new app to a suite</a></li>
 </ul>
 </li>
 </ul>
@@ -217,7 +320,7 @@ u-ag761 ros@localhost:7776
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017, NCAS-CMS.
+        &#169; Copyright 2017-2019, NCAS-CMS.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>

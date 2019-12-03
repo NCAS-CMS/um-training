@@ -104,7 +104,7 @@ Hint: Try searching for "ERROR" - you will soon learn common phrases to help tra
 
 * At what timestep did the error occur?
 
-* Which PE Rank(s) signalled the Abort?  Make a note of which one(s)
+* Which PE Ranks signalled the Abort?  Make a note of which ones
 
 Change to the ``pe_output`` directory for the atmos_main task. This is under ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main/pe_output`` and contains the output from each PE.
 

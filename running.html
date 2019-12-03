@@ -60,7 +60,7 @@
 </div>
 <div class="section" id="running-a-standard-suite">
 <h2>3.2. Running a Standard Suite<a class="headerlink" href="#running-a-standard-suite" title="Permalink to this headline">¶</a></h2>
-<p>To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM11.1.</p>
+<p>To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM10.5.</p>
 <p><strong>i. Copy the suite</strong></p>
 <ul class="simple">
 <li>In <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> locate the suite with idx <strong>u-ag263</strong> owned by <strong>annetteosprey</strong>.</li>
@@ -78,7 +78,7 @@
 <li>Click on <em>suite conf -&gt; jinja2</em> in the left hand panel</li>
 <li>Change HPC_USER (that’s your ARCHER training account)</li>
 <li>Change HPC_ACCOUNT to <strong>‘n02-training’</strong></li>
-<li>Change HPC_QUEUE to be the reservation code for today. (e.g. <strong>‘R6056429’</strong>)</li>
+<li>Change HPC_QUEUE to be the reservation code for today. (e.g. <strong>‘R6585903’</strong>)</li>
 <li>Save the suite (<em>File -&gt; Save</em> or click the <em>down arrow</em> icon)</li>
 </ul>
 <div class="admonition note">
@@ -125,7 +125,7 @@
 <p>The output from a standard suite goes to a variety of places, depending on the type of the file.  On ARCHER you will find all the output from your run under the directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;suitename&gt;</span></code> is the name of the suite. This is actually a symbolic link to the equivalent location in your <code class="docutils literal notranslate"><span class="pre">/work</span></code> directory (E.g. <code class="docutils literal notranslate"><span class="pre">/work/n02/n02/&lt;username&gt;/cylc-run/&lt;suitename&gt;</span></code>.</p>
 <p><strong>Rose bush</strong></p>
 <p>The standard output and errors from the suite can be easily viewed using Rose Bush.</p>
-<p>For suites submitted from PUMA; in a browser navigate to <code class="docutils literal notranslate"><span class="pre">http://puma.nerc.ac.uk/rose-bush</span></code>.</p>
+<p>For suites submitted from PUMA; in a browser navigate to: <a class="reference external" href="http://puma.nerc.ac.uk/rose-bush">http://puma.nerc.ac.uk/rose-bush</a></p>
 <p>Enter your PUMA userid and click <em>“Suites List”</em>.  You should then see a list of all the suites you have run.  Click on <em>“tasks jobs list”</em> for the suite you have just run. You can examine the output of each task using the links, as well as see whether the suite contains failed tasks, or is currently running.  For this suite you should see output files for 4 tasks: fcm_make (code extraction), fcm_make2 (compilation), recon &amp; atmos. The job.out and job.err files are the first places you should look for information when tasks fail.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -233,7 +233,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017, NCAS-CMS.
+        &#169; Copyright 2017-2019, NCAS-CMS.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>

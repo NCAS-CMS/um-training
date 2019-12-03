@@ -165,10 +165,10 @@
 </ul>
 <p><strong>Adding a new file</strong></p>
 <ul>
-<li><p class="first">Still in the <code class="docutils literal notranslate"><span class="pre">src/control/top_level</span></code> directory, add a new file with a subroutine in, called <code class="docutils literal notranslate"><span class="pre">um_shell_sub.F90</span></code>.  (An example file is available on PUMA: <code class="docutils literal notranslate"><span class="pre">~um/um-training/um_shell_sub.F90</span></code>.  The routine <code class="docutils literal notranslate"><span class="pre">umPrint</span></code> should be used for writing out messages rather than standard FORTRAN <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statements.)</p>
+<li><p class="first">Still in the <code class="docutils literal notranslate"><span class="pre">src/control/top_level</span></code> directory, add a new FORTRAN module file (<code class="docutils literal notranslate"><span class="pre">um_shell_mod.F90</span></code>) containing a subroutine called <code class="docutils literal notranslate"><span class="pre">um_shell_sub()</span></code>.  (An example file is available on PUMA: <code class="docutils literal notranslate"><span class="pre">~um/um-training/um_shell_mod.F90</span></code>.  The routine <code class="docutils literal notranslate"><span class="pre">umPrint</span></code> should be used for writing out messages rather than standard FORTRAN <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statements.)</p>
 </li>
 <li><p class="first">Run <strong>fcm add</strong> on the command line, to let the repository know you’re adding a new file at the next commit. Make sure you are still in <code class="docutils literal notranslate"><span class="pre">src/control/top_level</span></code> and then type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">add</span> <span class="n">um_shell_sub</span><span class="o">.</span><span class="n">F90</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">add</span> <span class="n">um_shell_mod</span><span class="o">.</span><span class="n">F90</span>
 </pre></div>
 </div>
 </li>
@@ -176,12 +176,15 @@
 <blockquote>
 <div>at the command prompt.</div></blockquote>
 <ul>
-<li><p class="first">Amend <code class="docutils literal notranslate"><span class="pre">um_shell.F90</span></code> to call this new subroutine:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CALL</span> <span class="n">um_shell_sub</span><span class="p">()</span>
+<li><p class="first">Modify <code class="docutils literal notranslate"><span class="pre">um_shell.F90</span></code> to use this new module.  You’ll see lots of <code class="docutils literal notranslate"><span class="pre">USE</span></code> statements near the top of the file.  Add the following to use our new one.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">USE</span> <span class="n">um_shell_mod</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Ensure you put a comment line <strong>! DEPENDS ON: um_shell_sub</strong> above the CALL statement to ensure the dependency on your new file is registered.</p>
+<li><p class="first">Then add a line to call the <code class="docutils literal notranslate"><span class="pre">um_shell_sub</span></code> subroutine (suggest around line 375):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CALL</span> <span class="n">um_shell_sub</span><span class="p">()</span>
+</pre></div>
+</div>
 </li>
 </ul>
 <p><strong>Deleting a file</strong></p>
@@ -281,11 +284,11 @@ Revision: 29416
 Last Changed Author: rosalynhatcher
 Last Changed Rev: 29416
 Last Changed Date: 2016-10-21T10:30:48.533152Z
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 Branch Create Author: rosalynhatcher
 Branch Create Rev: 29406
 Branch Create Date: 2016-10-21 10:26:42 +0100 (Fri, 21 Oct 2016)
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 Branch Parent: https://code.metoffice.gov.uk/svn/um/main/trunk@24655
 Merges Avail From Parent: 29409 29400 ....... 25507 25445 25365 25212 25077 24778
 Merges Avail Into Parent: 29416
@@ -354,7 +357,7 @@ rosalynhatcher/vn10.5_example_branch/src/control/top_level/um_shell.F90@29416
 <h2>4.7. Version Control of Suites<a class="headerlink" href="#version-control-of-suites" title="Permalink to this headline">¶</a></h2>
 <p>Just like the model code, your UM suites are also under version control in a subversion repository, usually <em>roses-u</em> which is on the MOSRS.  Once you have a working copy of your suite under <code class="docutils literal notranslate"><span class="pre">~/roses</span></code> you can use FCM commands in the same way as for your source code branches; i.e. commit changes, diff changes, etc.</p>
 <ul class="simple">
-<li>Look in the roses-u repository via MOSRS Trac (<a class="reference external" href="https://code.metoffice.gov.uk/trac/roses-u">https://code.metoffice.gov.uk/trac/roses-u</a>) and find the suite you created in the previous section. (Hint: Go to <em>“Browse Source”</em> then drill down to find you suite. e.g. u-ag263 would be under a/g/2/6/3).  When was the suite last modified?</li>
+<li>Look in the roses-u repository via MOSRS Trac (<a class="reference external" href="https://code.metoffice.gov.uk/trac/roses-u">https://code.metoffice.gov.uk/trac/roses-u</a>) and find the suite you created in the previous section. (Hint: Go to <em>“Browse Source”</em> then drill down to find your suite. e.g. u-ag263 would be under a/g/2/6/3).  When was the suite last modified?</li>
 <li>Go to your suite working directory and type <strong>fcm status</strong> to see the changes you have made since you copied the suite.</li>
 <li>Run <strong>fcm commit</strong> to commit your changes to the repository.</li>
 <li>Look again in the MOSRS roses-u Trac and see that your commit has now appeared in the repository.  What is the suite’s last modified time now?</li>
@@ -428,7 +431,7 @@ rosalynhatcher/vn10.5_example_branch/src/control/top_level/um_shell.F90@29416
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017, NCAS-CMS.
+        &#169; Copyright 2017-2019, NCAS-CMS.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>

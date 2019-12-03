@@ -88,7 +88,7 @@
 <p>Navigate to <em>um -&gt; namelist -&gt; Model Input and Output -&gt; NetCDF Output Options</em> and set <code class="docutils literal notranslate"><span class="pre">l_netcdf</span></code> to true. Several fields will appear which allow you to configure various NetCDF options.  For this exercise, leave them at their chosen values.</p>
 <p><strong>ii. Set NetCDF Output Streams</strong></p>
 <p>Expand the <em>NetCDF Output Streams</em> section. A single stream - <strong>nc0</strong> - already exists; select it to display its content. As a useful comaprison, expand the <em>Model Output Streams</em> section and with the middle mouse button select <strong>pp0</strong>. Observe that the only significant differences between <strong>pp0</strong> and <strong>nc0</strong> are the values of <code class="docutils literal notranslate"><span class="pre">file_id</span></code> and <code class="docutils literal notranslate"><span class="pre">filename_base</span></code>.  Data compression options for <strong>nc0</strong> are revealed if <code class="docutils literal notranslate"><span class="pre">l_compress</span></code> is set to true. NetCDF deflation is a computationally expensive process best handled asynchronously to computation and as yet not fully implemented through the UM IO Server scheme (but under active development.) For many low- to medium-resolution models and, depending precisely on output profiles, high-resolution models also, use of UM-NetCDF without IO servers still provides significant benefits over fields-file output since using it avoids the need for subsequent file format conversion.</p>
-<p>Right-click on <strong>nc0</strong> and select <em>Clone this section</em>. Edit the settings of the newly cloned section to make the new stream similar to <strong>pp1</strong>. It is sensible to change the name of the new stream from “1” to something more meaningful, nc1 for example (right click on “1”, select <em>Rename a section</em>, and change …nc(1) to …nc (nc1)).</p>
+<p>Right-click on <strong>nc0</strong> and select <em>Clone this section</em>. Edit the settings of the newly cloned section appropriately to make the new stream similar to <strong>pp1</strong> (ie. edit <code class="docutils literal notranslate"><span class="pre">filename_base</span></code> and all the reinitialisation variables). It is sensible to change the name of the new stream from “1” to something more meaningful, nc1 for example (right click on “1”, select <em>Rename a section</em>, and change …nc(1) to …nc (nc1)).</p>
 <p><strong>iii. Direct output to the nc streams</strong></p>
 <p>Expand <em>STASH Requests and Profiles</em>, then expand <em>Usage Profiles</em>. Assign nc streams to usage profiles - in this suite, UPA and UPB are assigned to <strong>pp0</strong> and <strong>pp1</strong> respectively (where can you see this?). Edit these Usage profiles to refer to <strong>nc0</strong> and <strong>nc1</strong> respectively. Run the STASH Macros (if you need a reminder see Section 6), save the changes, and run the suite. Check that the NetCDF output is what you expected.</p>
 <p>Try adding more nc streams to mimic the pp stream behaviour.</p>
@@ -289,7 +289,7 @@ This includes a more detailed tutorial.</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017, NCAS-CMS.
+        &#169; Copyright 2017-2019, NCAS-CMS.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
