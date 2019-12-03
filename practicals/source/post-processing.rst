@@ -94,8 +94,8 @@ Run ``um-convpp`` on a fieldsfile (E.g ba799a.pc19880901_00) ::
 
 Note the reduction in file size. Now use xconv to examine the contents of the PP file.
 
-cfa and cfdump
---------------
+cfa
+---
 
 There is an increasing use of python in the community and we have, and
 continue to develop, python tools to do much of the data processing
@@ -105,19 +105,18 @@ features - we'll use it to convert UM fields file or PP data to
 CF-compliant data in NetCDF format. You first need to set the
 environment to run ``cfa``: ::
 
- esPP001$ module load anaconda/2.2.0-python2 cf udunits
- esPP001$ module swap PrgEnv-cray PrgEnv-intel
+ esPP001$ export PATH=/home/n02/n02/ajh/anaconda3/bin:$PATH
  esPP001$ cfa -i -o ba799a.pc19880901_00.nc ba799a.pc19880901_00.pp
  
 Try viewing the NetCDF file with xconv.
 
 
-``cfdump`` is a tool to view CF fields. It can be run on PP or NetCDF
+``cfa`` can also view CF fields. It can be run on PP or NetCDF
 files, to provide a text representation of the CF fields contained in
 the input files. Try it on a PP file and its NetCDF equivalent,
 e.g. ::
 
-  archer$ cfdump ba799a.pc19880901_00.pp | less
+  archer$ cfa -vm ba799a.pc19880901_00.pp | less
   Field: long_name:HEAVYSIDE FN ON P LEV/UV GRID (ncvar%UM_m01s30i301_vn1100)
   ---------------------------------------------------------------------------
   Data           : long_name:HEAVYSIDE FN ON P LEV/UV GRID(time(5), air_pressure(17), latitude(145), longitude(192)) 
@@ -143,8 +142,8 @@ Many tools exist for analysing data from NWP and climate models and there are ma
 
 * Set up the environment and start python. ::
 
-   archer$ module load anaconda/2.2.0-python2 cf udunits
-   archer$ module swap PrgEnv-cray PrgEnv-intel
+   
+   archer$ export PATH=/home/n02/n02/ajh/anaconda3/bin:$PATH
    archer$ python
    >>> import cf
 
@@ -152,12 +151,12 @@ We'll be looking at CRU observed precipitation data
 
 * Read in data files ::
 
-  >>> f = cf.read_field('~charles/UM_Training/cru/*.nc')
+  >>> f = cf.read('~charles/UM_Training/cru/*.nc')[0]
 
 * Inspect the file contents with different amounts of detail ::
 
   >>> f
-  >>> print f
+  >>> print(f)
   >>> f.dump()
   
 Note that the three files in the cru directory are aggregated into one
@@ -166,24 +165,24 @@ field.
 * Average the field with respect to time ::
 
   >>> f = f.collapse('T: mean')
-  >>> print f
+  >>> print(f)
 
 Note that the time coordinate is now of length 1.
 
 * Read in another field produced by a GCM, this has a different latitude/longitude grid to regrid the CRU data to ::
 
-  >>> g = cf.read_field('~charles/UM_Training/N96_DJF_precip_means.nc')
-  >>> print g
+  >>> g = cf.read('~charles/UM_Training/N96_DJF_precip_means.nc')[0]
+  >>> print(g)
 
 * Regrid the field of observed data (f) to the grid of the model field (g) ::
 
   >>> f = f.regrids(g, method='bilinear')
-  >>> print f
+  >>> print(f)
 
 * Subspace the regridded field, f, to a European region ::
 
   >>> f = f.subspace(X=cf.wi(-10, 40), Y=cf.wi(35, 70))
-  >>> print f
+  >>> print(f)
 
 Note that the latitude and longitude coordinates are now shorter in length.
 

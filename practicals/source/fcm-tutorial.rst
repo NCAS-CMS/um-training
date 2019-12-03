@@ -151,18 +151,20 @@ Now make some code changes! Use the following scenario to take you through the b
 
 **Adding a new file**
 
-* Still in the ``src/control/top_level`` directory, add a new file with a subroutine in, called ``um_shell_sub.F90``.  (An example file is available on PUMA: ``~um/um-training/um_shell_sub.F90``.  The routine ``umPrint`` should be used for writing out messages rather than standard FORTRAN ``WRITE`` statements.)
+* Still in the ``src/control/top_level`` directory, add a new FORTRAN module file (``um_shell_mod.F90``) containing a subroutine called ``um_shell_sub()``.  (An example file is available on PUMA: ``~um/um-training/um_shell_mod.F90``.  The routine ``umPrint`` should be used for writing out messages rather than standard FORTRAN ``WRITE`` statements.)
 * Run **fcm add** on the command line, to let the repository know you're adding a new file at the next commit. Make sure you are still in ``src/control/top_level`` and then type: ::
 
-    fcm add um_shell_sub.F90
+    fcm add um_shell_mod.F90
 
  at the command prompt.
 
-* Amend ``um_shell.F90`` to call this new subroutine: ::
+* Modify ``um_shell.F90`` to use this new module.  You'll see lots of ``USE`` statements near the top of the file.  Add the following to use our new one. ::
+
+    USE um_shell_mod
+
+* Then add a line to call the ``um_shell_sub`` subroutine (suggest around line 375): ::  
 
     CALL um_shell_sub()
-
-* Ensure you put a comment line **! DEPENDS ON: um_shell_sub** above the CALL statement to ensure the dependency on your new file is registered.
 
 **Deleting a file**
 
@@ -351,7 +353,7 @@ Version Control of Suites
 
 Just like the model code, your UM suites are also under version control in a subversion repository, usually *roses-u* which is on the MOSRS.  Once you have a working copy of your suite under ``~/roses`` you can use FCM commands in the same way as for your source code branches; i.e. commit changes, diff changes, etc.
 
-* Look in the roses-u repository via MOSRS Trac (https://code.metoffice.gov.uk/trac/roses-u) and find the suite you created in the previous section. (Hint: Go to *"Browse Source"* then drill down to find you suite. e.g. u-ag263 would be under a/g/2/6/3).  When was the suite last modified?
+* Look in the roses-u repository via MOSRS Trac (https://code.metoffice.gov.uk/trac/roses-u) and find the suite you created in the previous section. (Hint: Go to *"Browse Source"* then drill down to find your suite. e.g. u-ag263 would be under a/g/2/6/3).  When was the suite last modified?
 
 * Go to your suite working directory and type **fcm status** to see the changes you have made since you copied the suite.
 
