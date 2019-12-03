@@ -270,11 +270,11 @@ You should see information about your branch revision, when it was last changed 
   Last Changed Author: rosalynhatcher
   Last Changed Rev: 29416
   Last Changed Date: 2016-10-21T10:30:48.533152Z
-  --------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   Branch Create Author: rosalynhatcher
   Branch Create Rev: 29406
   Branch Create Date: 2016-10-21 10:26:42 +0100 (Fri, 21 Oct 2016)
-  --------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   Branch Parent: https://code.metoffice.gov.uk/svn/um/main/trunk@24655
   Merges Avail From Parent: 29409 29400 ....... 25507 25445 25365 25212 25077 24778
   Merges Avail Into Parent: 29416

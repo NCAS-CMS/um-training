@@ -10,12 +10,12 @@ Unfortunately we can no longer pre-install MobaXterm for you due to licencing re
 * | From Chrome, go to page: https://mobaxterm.mobatek.net/download.html 
   | Google “mobaxterm download” and this should be the first entry (check the URL). 
 * Under “Home Edition” select “Download now”
-* | On next page select **“MobaXterm Home Edition v12.2 (Portable edition)”**. 
+* | On next page select **“MobaXterm Home Edition v12.3 (Portable edition)”**. 
   | This should download the package. 
 * Click the download icon in the bottom left hand corner. 
-* | Double-click on the **MobaXterm_Personal_12.2** application file, and select “Extract all”. 
+* | Double-click on the **MobaXterm_Personal_12.3** application file, and select “Extract all”. 
   | A new directory window will open up. 
-* Double-click **MobaXterm_Personal_12.2** to launch the application.
+* Double-click **MobaXterm_Personal_12.3** to launch the application.
 
 Next time, navigate to “Downloads” to open the application.
 

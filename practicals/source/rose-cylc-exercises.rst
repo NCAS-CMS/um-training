@@ -202,7 +202,7 @@ Notice that ``atmos_main`` no longer runs after the reconfiguration, but our new
 
 A more complex application might involve the execution of a script.  To do this we would replace the contents of the "command default" box with the name of the script.  Then place the script in the app ``bin/`` directory. 
 
-Now create a ``bin/`` directory under ``new_app/`` and create a file called ``hello.sh`` with the contents, ::
+Now create a ``bin/`` directory under ``new_app/`` and ``cd`` into it. Create a file called ``hello.sh`` with the contents, ::
 
   #!/bin/bash
   echo "Hello, $1!"
