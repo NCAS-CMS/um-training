@@ -1,38 +1,34 @@
-Running a UM suite on ARCHER
-============================
+Running a UM suite on ARCHER2
+=============================
 
-ARCHER architecture
--------------------
+ARCHER2 architecture
+--------------------
 
-In common with many HPC systems, ARCHER consists of different types of processor nodes: 
+In common with many HPC systems, ARCHE2 consists of different types of processor nodes: 
 
-* **Login nodes:** This is where you land when you ssh into ARCHER. Typically these processors are used for file management tasks.
+* **Login nodes:** This is where you land when you ssh into ARCHER2. Typically these processors are used for file management tasks.
 
-* **Compute / batch nodes:** These make up most of the ARCHER system, and this is where the model runs. 
+* **Compute / batch nodes:** These make up most of the ARCHER2 system, and this is where the model runs. 
 
 * **Serial / post-processing nodes:** This is where less intensive tasks such as compilation and archiving take place. 
 
-* **Service nodes:** These are used to launch the batch jobs amongst other things. 
-
-ARCHER has three file systems: 
+ARCHER2 has two file systems: 
 
 * **/home:** This is relatively small and is only backed up for disaster recovery. 
 
 * **/work:** This is much larger, but is not backed up. Note that the batch nodes can only see the work file system. It is optimised for parallel I/O and large files. 
 
-* **/nerc:** This is the Research Data Facility (RDF) used to archive data. It is backed up. 
-
-Consult the ARCHER website for more information: http://www.archer.ac.uk 
+Consult the ARCHER2 website for more information: http://www.archer2.ac.uk 
 
 
 Running a Standard Suite
 ------------------------
 
-To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM10.5.  
+To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM11.8.  
 
 **i. Copy the suite**
 
-* In ``rosie go`` locate the suite with idx **u-ag263** owned by **annetteosprey**. 
+* In ``rosie go`` locate the suite with idx **u-cc519** owned by **rosalynhatcher**. 
 * Right click on the suite and select ``Copy Suite``.  
 
 This copies an existing suite to a new suite id.  The new suite will be owned by you.  During the copy process a wizard will launch for you to edit the suite discovery information, if you wish.
@@ -48,14 +44,14 @@ Before you can run the suite you need to change the *userid*, *queue* and *accou
 Now make the following changes:
 
 * Click on *suite conf -> jinja2* in the left hand panel
-* Change HPC_USER (that's your ARCHER training account)
+* Change HPC_USER (that's your ARCHER2 training account)
 * Change HPC_ACCOUNT to **'n02-training'**
 * Change HPC_QUEUE to be the reservation code for today. (e.g. **'R6585903'**)
 * Save the suite (*File -> Save* or click the *down arrow* icon)
 
-.. note:: Quotes around the 'n02-training', reservation code and your ARCHER username are essential otherwise the suite won't run.
+.. note:: Quotes around the 'n02-training', reservation code and your ARCHER2 username are essential otherwise the suite won't run.
 
-.. note:: In normal practice you submit your suites to the parallel queue (either 'short' or 'standard') on ARCHER.  For this training course, we are using processor Reservations, whereby we have exclusive access to a prearranged amount of ARCHER resource.  Reservations are specified by a reservation code; e.g. R5212096.
+.. note:: In normal practice you submit your suites to the parallel queue (either 'short' or 'standard') on ARCHER2.  For this training course, we are using processor Reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource.  Reservations are specified by a reservation code; e.g. R5212096.
 
 **iii. Run the suite**
 
@@ -65,25 +61,21 @@ The standard suite will build, reconfigure and run the UM.
 
 Doing this will execute the ``rose suite-run`` command (more on this later) and start the Cylc GUI (gcylc) through which you can monitor the progress of your suite graphically. The cylc GUI will update as the job progresses.
 
-**iv. Looking at the queues on ARCHER**
+**iv. Looking at the queues on ARCHER2**
 
-While you're waiting for the suite to run, let's log into ARCHER and learn how to look at the ARCHER queues.
+While you're waiting for the suite to run, let's log into ARCHER2 and learn how to look at the ARCHER2 queues. Remember you will need to login to ARCHER2 from your local desktop NOT from PUMA.
 
 Run the following command: ::
 
-  qstat -u <archer-user-name>
+  squeue -u <archer2-user-name>
 
 This will show the status of jobs you are running.  You will see output similar to the following: ::
 
-  ncastr01@eslogin005:~> qstat -u ncastr01
+  ARCHER2> squeue -u ros
+        JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON) 
+       148599  standard u-cc519.      ros  R       0:11      1 nid001001
 
-  sdb: 
-                                                         Req'd  Req'd   Elap
-  Job ID        Username Queue   Jobname  SessID NDS TSK Memory Time  S Time
-  ------------ -------- -------- -------- ------ --- --- ------ ----- - -----
-  3988630.sdb  ncastr01 S3979005 atmos.1-    --    1  24    --  00:20 R 00:10
-
-At this stage you will probably only have a job running or waiting to run in the serial queue. Running qstat will show all jobs currently on ARCHER, most of which will be in the parallel queues. 
+At this stage you will probably only have a job running or waiting to run in the serial queue. Running ``squeue`` will show all jobs currently on ARCHER2, most of which will be in the parallel queues. 
 
 Another useful command is ``serialJobs``, which lists the jobs in the serial queue only. You will need to run ``module load anaconda`` before running the ``serialJobs`` command.  Try it now: ::
 
@@ -92,12 +84,12 @@ Another useful command is ``serialJobs``, which lists the jobs in the serial que
 
 Once your suite has finished running the Cylc GUI will go blank and you should get a message in the bottom left hand corner saying *'Stopped with succeeded'*.
 
-Cylc is set up so that it *polls* ARCHER to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on ARCHER and the Cylc GUI being updated. If you see that the task has finished running but Cylc hasn't updated then you can manually poll the task by right-clicking on it and selecting **Poll** from the pop-up menu.
+Cylc is set up so that it *polls* ARCHER2 to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on ARCHER2 and the Cylc GUI being updated. If you see that the task has finished running but Cylc hasn't updated then you can manually poll the task by right-clicking on it and selecting **Poll** from the pop-up menu.
 
 Standard Suite Output
 ---------------------
 
-The output from a standard suite goes to a variety of places, depending on the type of the file.  On ARCHER you will find all the output from your run under the directory ``~/cylc-run/<suitename>``, where ``<suitename>`` is the name of the suite. This is actually a symbolic link to the equivalent location in your ``/work`` directory (E.g. ``/work/n02/n02/<username>/cylc-run/<suitename>``. 
+The output from a standard suite goes to a variety of places, depending on the type of the file.  On ARCHER2 you will find all the output from your run under the directory ``~/cylc-run/<suitename>``, where ``<suitename>`` is the name of the suite. This is actually a symbolic link to the equivalent location in your ``/work`` directory (E.g. ``/work/n02/n02/<username>/cylc-run/<suitename>``. 
 
 **Rose bush**
 

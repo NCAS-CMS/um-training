@@ -8,7 +8,7 @@ You may encounter other errors, often as a result of mistyping, for which soluti
 Copy and set up N96 GA7.0 AMIP example suite
 --------------------------------------------
 
-Find and make a copy of suite **u-ba799**.
+Find and make a copy of suite **u-cc654**.
 
 Firstly make the changes required to run the suite.  That is the account code ('n02-training'), your ARCHER user name and the queue to run in.  Hint: Look in the *suite.conf* section.  You will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.
 
@@ -45,7 +45,7 @@ Hint: Again look in the *job.err* file.  This kind of error results when changes
 
 * Which file does the problem occur in?
 
-In practice, you will need to fix the problem with the code conflict as you did in the FCM tutorial section.  To proceed in this case, navigate to *fcm_make_um -> sources* and remove the branch called ``vn11.0_merge_error`` by clicking on it and then clicking the **-** sign.
+In practice, you will need to fix the problem with the code conflict as you did in the FCM tutorial section.  To proceed in this case, navigate to *fcm_make_um -> sources* and remove the branch called ``vn11.7_training_merge_error`` by clicking on it and then clicking the **-** sign.
 
 **Save** the suite.
 
@@ -72,7 +72,7 @@ Errors resolved in the compile and run
 * What is the error?
 * What line of the Fortran file does it occur on?
 
-In practice, you would need to fix the error in your branch on PUMA and then restart the suite.  In this case, navigate to *fcm_make_um -> sources* and remove the branch ``vn11.0_compile_error``.  **Save** the suite, **Shutdown/Stop** the failed run and then **Run** it again.  Notice we chose to shutdown the failed suite this time rather than do a reload.  In this scenario we need to redo the code extraction (*fcm_make_um*) step so doing a reload would be slightly more complex; you would need to *Reload* and then *Re-trigger* both the *fcm_make_um* and the *fcm_make2_um* tasks.  With experience you get to know when it's better to do a *Reload* and when to *Shutdown*  a suite.
+In practice, you would need to fix the error in your branch on PUMA and then restart the suite.  In this case, navigate to *fcm_make_um -> sources* and remove the branch ``vn11.7_training_compile_error``.  **Save** the suite, **Shutdown/Stop** the failed run and then **Run** it again.  Notice we chose to shutdown the failed suite this time rather than do a reload.  In this scenario we need to redo the code extraction (*fcm_make_um*) step so doing a reload would be slightly more complex; you would need to *Reload* and then *Re-trigger* both the *fcm_make_um* and the *fcm_make2_um* tasks.  With experience you get to know when it's better to do a *Reload* and when to *Shutdown*  a suite.
 
 Note again that the task submitted successfully.  
 

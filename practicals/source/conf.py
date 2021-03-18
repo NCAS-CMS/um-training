@@ -44,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'NCAS Unified Model Introduction'
-copyright = u'2017-2019, NCAS-CMS'
+copyright = u'2017-2021, NCAS-CMS'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -61,7 +61,7 @@ release = ''
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
-today = '06 November 2019'
+today = '18 March 2021'
 # Else, today_fmt is used as the format for a strftime call.
 #today_fmt = '%B %d, %Y'
 
