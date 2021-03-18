@@ -5,19 +5,26 @@ This section exposes you to more typical UM errors and hints at how to find and 
 
 You may encounter other errors, often as a result of mistyping, for which solution hints are not provided.
 
-Copy and set up N96 GA7.0 AMIP example suite
---------------------------------------------
+Set up N96 GA7.0 AMIP example suite
+-----------------------------------
 
-Find and make a copy of suite **u-cc654**.
+Find and make a copy of suite ``u-cc654``.
 
-Firstly make the changes required to run the suite.  That is the account code ('n02-training'), your ARCHER user name and the queue to run in.  Hint: Look in the *suite.conf* section.  You will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.
+Firstly make the changes required to run the suite.  That is:
+
+* The account code ('n02-training')
+* Your ARCHER user name
+* The queue to run in.
+
+.. Hint::
+   Look in the *suite.conf* section.  You will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.
 
 * Did you manage to find where to set your ARCHER username?  
 
 This suite is set up slightly differently to the one used in the previous sections; suites do vary on how they are set up but you will soon learn where to look for things.  This suite is set up so that specifying your username on the remote HPC is optional.  If your PUMA username is the same as your username on ARCHER, or if the remote username is set in your ``~/.ssh/config`` file Cylc will be able to submit your suite without having to explicitly set your username in the suite.  However, on this course, we are using training accounts on ARCHER so you will need to set the username.
 
-* Click *View -> View Latent Variables*. You should see HPC_USER appear in the panel greyed out.
-* Click the **+** sign next to it and select *Add to configuration*
+* Click :guilabel:`View --> View Latent Variables`. You should see HPC_USER appear in the panel greyed out.
+* Click the :guilabel:`+` sign next to it and select :guilabel:`Add to configuration`
 * Enter your ARCHER training username (e.g. 'ncastr01')
 
 Errors resolved in the code extraction
@@ -29,7 +36,8 @@ The suite should fail in the *fcm_make_um* task. This is the task that extracts 
 
 * What is the error? 
 
-Hint: Examine the *job.err* and *job.out* to find the cause of the problem. You can view these files through Rose Bush, as we have done previously, however you can also view them quickly and easily directly from the Cylc GUI.  **Right-click** on the failed *fcm_make_um* task and select *View -> job stderr*
+.. HINT::
+   Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files through Rose Bush, as we have done previously, however you can also view them quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View -> job stderr`
 
 This indicates that the branch cannot be found due to an incorrect branch name. You will need to look at the UM code repository through Trac either on MOSRS (https://code.metoffice.gov.uk/trac/um/browser) or the PUMA mirror (https://puma.nerc.ac.uk/trac/um.xm/browser with username: guest1 and password: tra1n1ng or use your own) to determine the correct name.
 
@@ -41,7 +49,8 @@ The suite will fail in *fcm_make_um* again.
 
 * What is the error?
 
-Hint: Again look in the *job.err* file.  This kind of error results when changes made in two or more branches affect the same bit of code and which the FCM system cannot understand how to resolve.
+.. Hint::
+   Again look in the ``job.err`` file.  This kind of error results when changes made in two or more branches affect the same bit of code and which the FCM system cannot understand how to resolve.
 
 * Which file does the problem occur in?
 
@@ -80,7 +89,10 @@ Note again that the task submitted successfully.
 * What about the reconfiguration task?
 * What is the error?
 * Does the start dump exist?
-* What is the name of the correct start dump?  Hint: look in the directory where it thinks the start file should be - is there a candidate in there?
+* What is the name of the correct start dump?
+
+.. Hint::
+   Look in the directory where it thinks the start file should be - is there a candidate in there?
 
 Point your suite to the correct start dump.  Fixing this problem isn't quite as easy as it sounds.  A search for **ainitial** in the Rose edit GUI will take you to the *General reconfiguration options* panel.
 
@@ -88,7 +100,10 @@ Point your suite to the correct start dump.  Fixing this problem isn't quite as 
 
 The initial dump location is set with an environment variable: AINITIAL.  Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.
 
-In your suite directory on PUMA (``~/roses/<suitename>``) use ``grep -R`` to search for where the variable *AINITIAL* is set (If you are unfamiliar with using `grep` please ask for help).  Edit AINITIAL in the appropriate ``.rc`` file to point to the correct initial dump file.  (Hint: This suite is set up to run on multiple platforms, make sure you edit the file appropriate to ARCHER.) You may notice that AINITIAL is set 3 times; a different file is required depending on the resolution the model is being run at.  This suite is running at N96 resolution.
+In your suite directory on PUMA (``~/roses/<suitename>``) use ``grep -R`` to search for where the variable *AINITIAL* is set (If you are unfamiliar with using `grep` please ask for help).  Edit AINITIAL in the appropriate ``.rc`` file to point to the correct initial dump file.
+
+.. Hint::
+   This suite is set up to run on multiple platforms, make sure you edit the file appropriate to ARCHER. You may notice that AINITIAL is set 3 times; a different file is required depending on the resolution the model is being run at.  This suite is running at N96 resolution.
 
 **Reload** the suite definition and then **Re-trigger** the reconfiguration task.  The reconfiguration should succeed this time.
 
@@ -98,7 +113,8 @@ This time the model should have failed with an error.
 
 * What is the error message?
 
-Hint: Try searching for "ERROR" - you will soon learn common phrases to help track down problems.
+.. Hint::
+   Try searching for "ERROR" - you will soon learn common phrases to help track down problems.
 
 .. note:: If you use the search ``job.err`` box at the bottom of the gcylc viewer, when you select *"Find Next"* you will see a message indicating the live feed will be disconnected. Click *Close*.
 
@@ -112,7 +128,10 @@ Open the file called ``<suite-id>.fort6.pe<pe noted above>``.  Sometimes extra i
 
 The error message indicates that NaNs (NaN stands for Not a Number and is a numeric data type representing an undefined or unrepresentable value) have occurred in the routine EG_BICGSTAB.  This basically means something in the model has become unstable and "blown up". In this case the failure results from an incorrect value for the solar constant *'sc'*.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within ``rose edit`` may point you in the right direction.  Go to *um -> namelist -> UM Science Settings -> Planet Constants* and set it to the suggested value. **Save**, **Reload** and **Re-trigger**.
 
-The model should fail with the same error.  So what's gone wrong here?  We've changed the value of the solar constant to a valid value so why didn't it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER navigate to the work directory for the *atmos_main* task (ie. ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main``).  In here you will see several files with uppercase names (e.g. ATMOSCNTL, SHARED), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use `grep`) in these files for the solar constant variable `sc`.  Hint: search for the string "`sc=`".
+The model should fail with the same error.  So what's gone wrong here?  We've changed the value of the solar constant to a valid value so why didn't it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER navigate to the work directory for the *atmos_main* task (ie. ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main``).  In here you will see several files with uppercase names (e.g. ATMOSCNTL, SHARED), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use `grep`) in these files for the solar constant variable `sc`.
+
+.. Hint::
+   Search for the string "`sc=`".
 
 * What value does it have?  Is this what you changed it to in the Rose edit GUI?
 
