@@ -3,32 +3,32 @@ Further Exercises (2)
 
 The exercises in this section are all optional.  We suggest you pick and choose the exercises that you feel are most relevant to the work you are/will be doing.
 
-.. note:: Use your copy of suite u-ba799 for these exercises unless otherwise specified.
+.. note:: Use your copy of suite ``u-ba799`` for these exercises unless otherwise specified.
 
 Post-Processing (archive and transfer of model data)
 ----------------------------------------------------
 
-When your model runs it outputs data onto the Archer ``/work`` disk (``/projects`` on Monsoon/NEXCS). If you are running a long integration and/or at high resolution data will mount up very quickly and you will need to move it either to the ARCHER RDF or JASMIN.  The post-processing app (postproc) is used within cycling suites to automatically archive model data and can be optionally configured to transfer the data from the RDF to JASMIN data facility.  The app archives and deletes model output files, not only for the UM, but also NEMO and CICE in coupled configurations.
+When your model runs it outputs data onto the ARCHER2 ``/work`` disk (``/projects`` on Monsoon2). If you are running a long integration and/or at high resolution data will mount up very quickly and you will need to move the data off of ARCHER2; for example to JASMIN.  The post-processing app (postproc) is used within cycling suites to automatically *archive*  model data and can be optionally configured to transfer the data from ARCHER2 to the JASMIN data facility.  The app archives and deletes model output files, not only for the UM, but also NEMO and CICE in coupled configurations.
 
-Let's try configuring your suite to archive to the RDF:
+Let's try configuring your suite to archive to a staging location on ARCHER2:
 
-* Switch on post-processsing in window *suite conf -> Tasks*
+* Switch on post-processsing in window :guilabel:`suite conf --> Tasks`
 
-The post-processing is configured under the **postproc** section:
+The post-processing is configured under the :guilabel:`postproc` section:
 
-* Select the "Archer archiving system" in window *Post Processing - common settings*.
+* Select the :guilabel:`Archer` archiving system in window :guilabel:`Post Processing - common settings`.
 
-A couple of new entries will have appeared in the index panel, *Archer Archiving* and *JASMIN Transfer*, identified with the blue dots.
+A couple of new entries will have appeared in the index panel, :guilabel:`Archer Archiving` and :guilabel:`JASMIN Transfer`, identified with the blue dots.
 
 You now need to specify where you want your archived data to be copied to:
 
-* In the *Archer Archiving* panel set ``archive_root_dir`` to be **/nerc/n02/n02/<userid>**.  The *archive_name* (suite id) will be automatically appended to this.  
+* In the :guilabel:`Archer Archiving` panel set ``archive_root_dir`` to be ``/work/n02/n02/<userid>/archive``.  The ``archive_name`` (suite id) will be automatically appended to this.  
 
-You will need to run the model for at least 1 day as archiving doesn't work for periods of less than 1 day.  Change the *"run length"* and *"cycling frequency"* to be 1 day.  This should complete in about 5 minutes so set the *"wallclock time"* to be 10 minutes. 
+You will need to run the model for at least 1 day as archiving doesn't work for periods of less than 1 day.  Change the ``run length`` and ``cycling frequency`` to be 1 day.  This should complete in about 5 minutes so set the ``wallclock time`` to be 10 minutes. 
 
-**Run** the suite.
+:guilabel:`Run` the suite.
 
-Once the run has completed go to the archive directory for this cycle (e.g. ``/nerc/n02/n02/<userid>/<suiteid>/19880901T0000Z``) and you should see several files have been copied over (e.g ``ba902a.pc19880901_00.pp``).  Data is only archived when it is no longer required by the model for restarting or for calculating means (seasonal, annual, etc). This run is reinitialising the ``pc`` data stream every 4 hours and you should see that it has only archived data files up to 16:00hrs (ba902a.pc19880901_16.pp).  The last file containing data for hours 20-24 is still required by the model. Equally seasonal mean files would not be archived until the end of the year, after the annual mean has been created.
+Once the run has completed go to the archive directory for this cycle (e.g. ``/nerc/n02/n02/<userid>/<suiteid>/19880901T0000Z``) and you should see several files have been copied over (e.g ``ba902a.pc19880901_00.pp``).  Data is only archived when it is no longer required by the model for restarting or for calculating means (seasonal, annual, etc). This run is reinitialising the ``pc`` data stream every 4 hours and you should see that it has only archived data files up to 16:00hrs (``ba902a.pc19880901_16.pp``).  The last file containing data for hours 20-24 is still required by the model. Equally seasonal mean files would not be archived until the end of the year, after the annual mean has been created.
 
 .. note:: The post-processing app can also be configured to transfer the archived data over to JASMIN.  Details on how to do this are available on the CMS website: http://cms.ncas.ac.uk/wiki/Docs/PostProcessingApp
 
@@ -39,36 +39,39 @@ Older versions of the UM did not have IO servers, which meant that all reading a
 
 Here's just a taste of how to get this working in your suite.
 
-Set the suite to run for 6 hours with an appropriate cycling frequency, then check that OpenMP is switched on (Hint: search for *openmp* in rose edit) as this is needed for the IO servers to work.
+Set the suite to run for 6 hours with an appropriate cycling frequency, then check that ``OpenMP`` is switched on as this is needed for the IO servers to work.
 
-Navigate to *suite conf -> Domain Decomposition -> Atmosphere* and check the number of OpenMP threads is set to 2. Set the number of *"IO Server Processes"* to 8.
+.. hint::
+   Search for ``openmp`` in the rose edit GUI
 
-**Save** and then **Run** the suite.
+Navigate to :guilabel:`suite conf --> Domain Decomposition --> Atmosphere` and check the number of ``OpenMP threads`` is set to ``2``. Set the number of ``IO Server Processes`` to ``8``.
+
+:guilabel:`Save` and then :guilabel:`Run` the suite.
 
 You will see lots of IO server log files in ``~/cylc-run/<suitename>/work/<cycle>/atmos_main`` which can be ignored for the most part.
 
-Try repeating the "Change dump frequency" experiment with the IO servers switched on - you should see much faster performance.
+Try repeating the :ref:`change_dump_freq` experiment with the IO servers switched on - you should see much faster performance.
 
 Writing NetCDF output from the UM
 ---------------------------------
 
-Until UM vn10.9, only fields-file output was available from the UM - bespoke NetCDF output configurations did exist but not on the UM trunk. The suite used in most of these Section 7 exercises is vn11.0, hence supports both fields-file and NetCDF output data formats.
+Until UM vn10.9, only fields-file output was available from the UM - bespoke NetCDF output configurations did exist but not on the UM trunk. The suite used in most of these Section 7 exercises is vn11.7, hence supports both fields-file and NetCDF output data formats.
 
-**i. Enable NetCDF**
+Enable NetCDF
+^^^^^^^^^^^^^
+Make sure that ``IO Server Processes`` variable is set to ``0``.
 
-Make sure that **IO Server Processes** is set to 0.
+Navigate to :guilabel:`um --> namelist --> Model Input and Output --> NetCDF Output Options` and set ``l_netcdf`` to ``true``. Several fields will appear which allow you to configure various NetCDF options.  For this exercise, leave them at their chosen values.
 
-Navigate to *um -> namelist -> Model Input and Output -> NetCDF Output Options* and set ``l_netcdf`` to true. Several fields will appear which allow you to configure various NetCDF options.  For this exercise, leave them at their chosen values.
+Set NetCDF Output Streams
+^^^^^^^^^^^^^^^^^^^^^^^^^
+Expand the :guilabel:`NetCDF Output Streams` section. A single stream - ``nc0`` - already exists; select it to display its content. As a useful comaprison, expand the :guilabel:`Model Output Streams` section and with the middle mouse button select :guilabel:`pp0`. Observe that the only significant differences between ``pp0`` and ``nc0`` are the values of ``file_id`` and ``filename_base``.  Data compression options for ``nc0`` are revealed if ``l_compress`` is set to ``true``. NetCDF deflation is a computationally expensive process best handled asynchronously to computation and as yet not fully implemented through the UM IO Server scheme (but under active development.) For many low- to medium-resolution models and, depending precisely on output profiles, high-resolution models also, use of UM-NetCDF without IO servers still provides significant benefits over fields-file output since using it avoids the need for subsequent file format conversion.
 
-**ii. Set NetCDF Output Streams**
+Right-click on :guilabel:`nc0` and select :guilabel:`Clone this section`. Edit the settings of the newly cloned section appropriately to make the new stream similar to ``pp1`` (ie. edit ``filename_base`` and all the reinitialisation variables). It is sensible to change the name of the new stream from ``1`` to something more meaningful, ``nc1`` for example (right click on ``1``, select :guilabel:`Rename a section`, and change ...nc(1) to ...nc (nc1)).
 
-Expand the *NetCDF Output Streams* section. A single stream - **nc0** - already exists; select it to display its content. As a useful comaprison, expand the *Model Output Streams* section and with the middle mouse button select **pp0**. Observe that the only significant differences between **pp0** and **nc0** are the values of ``file_id`` and ``filename_base``.  Data compression options for **nc0** are revealed if ``l_compress`` is set to true. NetCDF deflation is a computationally expensive process best handled asynchronously to computation and as yet not fully implemented through the UM IO Server scheme (but under active development.) For many low- to medium-resolution models and, depending precisely on output profiles, high-resolution models also, use of UM-NetCDF without IO servers still provides significant benefits over fields-file output since using it avoids the need for subsequent file format conversion.
-
-Right-click on **nc0** and select *Clone this section*. Edit the settings of the newly cloned section appropriately to make the new stream similar to **pp1** (ie. edit ``filename_base`` and all the reinitialisation variables). It is sensible to change the name of the new stream from "1" to something more meaningful, nc1 for example (right click on "1", select *Rename a section*, and change ...nc(1) to ...nc (nc1)).
-
-**iii. Direct output to the nc streams**
-
-Expand *STASH Requests and Profiles*, then expand *Usage Profiles*. Assign nc streams to usage profiles - in this suite, UPA and UPB are assigned to **pp0** and **pp1** respectively (where can you see this?). Edit these Usage profiles to refer to **nc0** and **nc1** respectively. Run the STASH Macros (if you need a reminder see Section 6), save the changes, and run the suite. Check that the NetCDF output is what you expected.
+Direct output to the nc streams
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Expand :guilabel:`STASH Requests and Profiles`, then expand :guilabel:`Usage Profiles`. Assign nc streams to usage profiles - in this suite, UPA and UPB are assigned to ``pp0`` and ``pp1`` respectively (where can you see this?). Edit these Usage profiles to refer to ``nc0`` and ``nc1`` respectively. Run the STASH Macros (if you need a reminder see Section 6), save the changes, and run the suite. Check that the NetCDF output is what you expected.
 
 Try adding more nc streams to mimic the pp stream behaviour.
 
@@ -77,18 +80,18 @@ Running the coupled model
 
 The coupled model consists of the UM Atmosphere model coupled to the NEMO ocean and CICE sea ice models.  The coupled configuration used for this exercise is N96 resolution for the atmosphere and a 1 degree ocean - you will see this written N96 ORCA1.
 
-**i. Checkout and run the suite**
-
-Checkout and open the suite **u-ak943**.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called *fcm_make_um* and *fcm_make_ocean* respectively. The model configuration is under *coupled* rather than *um*.
+Checkout and run the suite
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+Checkout and open the suite ``u-ak943``.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called ``fcm_make_um`` and ``fcm_make_ocean`` respectively. The model configuration is under :guilabel:`coupled` rather than :guilabel:`um`.
 
 Make the usual changes required to run the suite (i.e. set username, account code, queue)
 
 Check that the suite is set to build both the UM and ocean, as well as run the reconfiguration and model.
 
-**Run** the suite.
+:guilabel:`Run` the suite.
 
-**ii. Exploring the suite**
-
+Exploring the suite
+^^^^^^^^^^^^^^^^^^^
 Whilst the suite is compiling and running which will take around 45 minutes, take some time to look around the suite.
 
 * How many nodes is the atmosphere running on?
@@ -104,13 +107,15 @@ Changing the processor decomposition for the ocean is not as simple as just chan
 
 2. Recompile the ocean executable. Note the executable comprises both the ocean (NEMO) and sea-ice (CICE) code. 
 
-Now looked at the ``coupled`` settings.   
+Now look at the ``coupled`` settings.   
 
 * Can you see where the NEMO model settings appear? 
 
-Look under *Run settings (namrun)*. The variables ``nn_stock`` and ``nn_write`` control the frequency of output files. 
+Look under :guilabel:`Run settings (namrun)`. The variables ``nn_stock`` and ``nn_write`` control the frequency of output files. 
 
-* How often are NEMO restart files written? (Hint the NEMO timestep length is set as variable ``rn_rdt``).
+* How often are NEMO restart files written?
+
+.. hint:: The NEMO timestep length is set as variable ``rn_rdt``
 
 Now browse the CICE settings.
 
@@ -121,8 +126,8 @@ NEMO and CICE are developed separately from the UM, and you should have seen tha
 * http://oceans11.lanl.gov/trac/CICE 
 * http://www.nemo-ocean.eu/
 
-**iii. Output files**
-
+Output files
+^^^^^^^^^^^^
 **Log files** 
 
 NEMO logging information is written to:
@@ -170,44 +175,33 @@ from a global model.  It allows the user to specify the domains and it
 then automatically creates the required ancillary files and lateral
 boundary condition files.
 
-**i. Checkout and run the suite**
+Checkout and run the suite
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+Checkout and open the suite ``u-ba621``. There are a number of tasks for creating ancillary files (``ancil_*`` and ``ants_*``).  The global model set up is in :guilabel:`glm_um` and the LAMs are in :guilabel:`um`.  The task ``um-createbc`` creates the lateral boundary condition files.
 
-Checkout and open the suite **u-ba621**. There are a number of tasks for
-creating ancillary files (*ancil_** and *ants_**).  The global model set
-up is in *glm_um* and the LAMs are in *um*.  The task *um-createbc* creates
-the lateral boundary condition files.
+Under :guilabel:`suite conf --> jinja2:suite.rc` are the main panels for controlling the Nesting Suite. Make the usual changes required to run the suite (i.e. set username, account code, queue). The training nesting suite has pre-built executables so you don't have to spend
+time building it.  :guilabel:`Run` the suite.
 
-Under *suite conf -> jinja2:suite.rc* are the main panels for
-controlling the Nesting Suite. Make the usual changes required to run
-the suite (i.e. set username, account code, queue). The training
-nesting suite has pre-built executables so you don't have to spend
-time building it.  **Run** the suite.
+This particular suite has a global model and one limited area model. It should complete in about 45 - 60 minutes.
 
-This particular suite has a global model and one limited area model.
-It should complete in about 45 - 60 minutes.
+Exploring the Suite
+^^^^^^^^^^^^^^^^^^^
+The Driving Model set up panel allows the user to specify the resolution of the global model and the number of nested regions.
 
-**ii. Exploring the Suite**
+The :guilabel:`Nested Region 1` set up panel specifies the latitude and longitude of the centre of the first nested region.  All the other limited area models have the same centre.
 
-The Driving Model set up panel allows the user to specify the
-resolution of the global model and the number of nested regions.
+A useful way to get this information is to use Google Maps.  Find the place you want as a centre and then press ``control-left mouse`` and a little window with the latitude and longitude appears.
 
-The *Nested Region 1* set up panel specifies the latitude and longitude
-of the centre of the first nested region.  All the other limited area
-models have the same centre.
+ * Can you find out where the first LAM is located?
 
-A useful way to get this information is to use Google Maps.  Find the
-place you want as a centre and then press ``control-left mouse`` and a
-little window with the latitude and longitude appears.
+.. hint:: Look at the orography file output during the ancillary creation.
 
- * Can you find out where the first LAM is located?  Hint: look at the orography file output during the ancillary creation.
+The :guilabel:`resolution 1` set up panel specifies the grid and the run length.
 
-The *resolution 1* set up panel specifies the grid and the run length.
+The :guilabel:`Config 1` set up panel specifies the science configuration to be run.  Each LAM can have multiple science configurations.
 
-The *Config 1* set up panel specifies the science configuration to be
-run.  Each LAM can have multiple science configurations.
-
-**iii.  Initial Data**
-
+Initial Data
+^^^^^^^^^^^^
 The initial data for the global model is in ``share/cycle/<cycle time>/glm/ics``
 
 The initial data for the first LAM is in ``share/cycle/<cycle time>/Regn1/resn_1/RA1M/ics``
@@ -216,27 +210,20 @@ The RA1M is the name you gave to the first science configuration.
 
 The LBCs for the first LAM are in ``share/cycle/<cycle time>/Regn1/resn_1/RA1M/lbcs``.
 
-**iv. The ancillary files**
-
+The ancillary files
+^^^^^^^^^^^^^^^^^^^
 These are in ``share/data/ancils/Regn1/resn_1``
 
+The output files
+^^^^^^^^^^^^^^^^
+The global model output is in ``share/cycle/<cycle time>/glm/um``. This also contains contains the data for creating the LBC files (``umglaa_cb*``) for the first LAM.
 
-**v.  The output files**
-
-The global model output is in ``share/cycle/<cycle time>/glm/um``. This also
-contains contains the data for creating the LBC files (umglaa_cb*) for the first LAM.
-
-Diagnostic files can be found under ``work/<cycle time>`` in an application directory.  For
-example, the region1 forecast diagnostics is in ``work/<cycle time>/Regn1_resn_1_RA1M_um_fcst_000``.
-This will include the pe_output files.
+Diagnostic files can be found under ``work/<cycle time>`` in an application directory.  For example, the region1 forecast diagnostics is in ``work/<cycle time>/Regn1_resn_1_RA1M_um_fcst_000``. This will include the pe_output files.
 
 The output for the first LAM is in ``share/cycle/<cycle time>/Regn1/resn_1/RA1M/um``.
 
-
-**vi. Further Information**
-
-This has been a very brief overview of the functionality of the
-Nesting Suite. The Nesting Suite is developed and maintained by Stuart
-Webster at the Met Office.  He has a web page all about the Nesting
-Suite at https://code.metoffice.gov.uk/trac/rmed/wiki/suites/nesting.
+Further Information
+^^^^^^^^^^^^^^^^^^^
+This has been a very brief overview of the functionality of the Nesting Suite. The Nesting Suite is developed and maintained by Stuart
+Webster at the Met Office.  He has a web page all about the Nesting Suite at https://code.metoffice.gov.uk/trac/rmed/wiki/suites/nesting.
 This includes a more detailed tutorial.
