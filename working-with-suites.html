@@ -1,208 +1,350 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2. Working with Suites &#8212; NCAS Unified Model Introduction</title>
-    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>2. Working with Suites &mdash; NCAS Unified Model Introduction</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Running a UM suite on ARCHER" href="running.html" />
+    <link rel="next" title="3. Running a UM suite on ARCHER2" href="running.html" />
     <link rel="prev" title="1. Getting set up" href="getting-setup.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="running.html" title="3. Running a UM suite on ARCHER"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="getting-setup.html" title="1. Getting set up"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> NCAS Unified Model Introduction
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Practicals</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting-setup.html">1. Getting set up</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Working with Suites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#suite-discovery-and-management-rosie-go">2.1. Suite Discovery and Management: rosie go</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#searching-for-suites">Searching for suites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#viewing-suite-information">Viewing suite information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#checking-out-an-existing-suite">Checking out an existing suite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-useful-features">Other useful features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#editing-suites-rose-edit">2.2. Editing Suites: rose edit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#launch-the-config-editor-gui">Launch the config editor GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#explore-the-gui">Explore the GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-checking-of-um-inputs">Error checking of UM inputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">3. Running a UM suite on ARCHER2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">4. FCM tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solving-problems.html">5. Solving Common UM Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">6. Further Exercises (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">7. Further Exercises (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">8. Rose/Cylc Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post-processing.html">9. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="useful-information.html">10. Appendix A: Useful information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh-tasks.html">11. Appendix B: SSH FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NCAS Unified Model Introduction</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>Working with Suites</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/working-with-suites.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="working-with-suites">
-<h1>2. Working with Suites<a class="headerlink" href="#working-with-suites" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2. </span>Working with Suites<a class="headerlink" href="#working-with-suites" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="suite-discovery-and-management-rosie-go">
-<h2>2.1. Suite Discovery and Management: rosie go<a class="headerlink" href="#suite-discovery-and-management-rosie-go" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1. </span>Suite Discovery and Management: rosie go<a class="headerlink" href="#suite-discovery-and-management-rosie-go" title="Permalink to this headline">¶</a></h2>
 <p><strong>Rosie go</strong> is the suite manager GUI. It acts as a hub for all your suite work. From <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> it is possible to search for suites, create, checkout, delete, edit, run suites and more.  We will take a look at the main features here.</p>
 <p>Launch <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> by typing:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ rosie go
 </pre></div>
 </div>
-<p><strong>i. Searching for suites</strong></p>
-<p>By default, <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> will show all the suites that you have checked out locally, so unless you have used Rose before you will have an empty results panel to begin with.  You can search for suites by typing a word/phrase into the search box and either click the search button or press <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code>.  The search looks for the entered word/phrase in <strong>any</strong> of a suite’s properties.</p>
+<div class="section" id="searching-for-suites">
+<h3>Searching for suites<a class="headerlink" href="#searching-for-suites" title="Permalink to this headline">¶</a></h3>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> will show all the suites that you have checked out locally, so unless you have used Rose before you will have an empty results panel to begin with.  You can search for suites by typing a word/phrase into the <span class="guilabel">Search</span> box and either click the <span class="guilabel">Search</span> button or press <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code>.  The search looks for the entered word/phrase in <strong>any</strong> of a suite’s properties.</p>
 <ul class="simple">
-<li>Enter <strong>u-ag137</strong> in the <em>Search</em> box and press <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code></li>
+<li><p>Enter <strong>u-ag137</strong> in the <span class="guilabel">Search</span> box and press <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code></p></li>
 </ul>
 <p>You should now see a long list of suites. All these suites are listed as they reference <code class="docutils literal notranslate"><span class="pre">u-ag137</span></code> in their suite information.</p>
-<p>More advanced queries can be run by clicking the <strong>+</strong> button next to the search button.  Queries allow you to filter results based on the values of particular properties. You can combine filters to make complex queries.</p>
+<p>More advanced queries can be run by clicking the <span class="guilabel">+</span> button next to the Search button.  Queries allow you to filter results based on the values of particular properties. You can combine filters to make complex queries.</p>
 <ul class="simple">
-<li>Select <strong>idx</strong> in the property box and <strong>eq</strong> in the operator box and then enter the value <strong>u-ag137</strong>. Click <strong>Query</strong>.</li>
+<li><p>Select <strong>idx</strong> in the property box and <strong>eq</strong> in the operator box and then enter the value <strong>u-ag137</strong>. Click <span class="guilabel">Query</span>.</p></li>
 </ul>
 <p>This time you should only see one suite listed in the results pane.</p>
 <ul class="simple">
-<li>Now run a query to list all suites <strong>owned by rosalynhatcher containing ARCHER in their title</strong>.</li>
+<li><p>Now run a query to list all suites <strong>owned by rosalynhatcher containing ARCHER in their title</strong>.</p></li>
 </ul>
 <p>The searches you run within <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> are recorded in your search history.</p>
 <ul class="simple">
-<li>View your history by clicking <em>“History -&gt; Show search history”</em>.</li>
+<li><p>View your history by clicking <span class="guilabel">History –&gt; Show search history</span>.</p></li>
 </ul>
-<p>The Search History panel should now be displayed on the left-hand side of <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> listing your past searches.  You can order the results by type, parameters or whether you asked to see all revisions by clicking on the relevent column head. To re-run one of these searches simply click on it.</p>
+<p>The <span class="guilabel">Search History</span> panel should now be displayed on the left-hand side of <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> listing your past searches.  You can order the results by type, parameters or whether you asked to see all revisions by clicking on the relevent column head. To re-run one of these searches simply click on it.</p>
 <ul class="simple">
-<li>Try running your initial search for u-ag137 again.</li>
+<li><p>Try running your initial search for <code class="docutils literal notranslate"><span class="pre">u-ag137</span></code> again.</p></li>
 </ul>
-<p>Close the History Panel by clicking the close button at the top of the history panel.</p>
-<p><strong>ii. Viewing suite information</strong></p>
-<p>To obtain more information about a suite listed in the search results you can do one of two things; hold your mouse over the suite to display a tooltip containing more details or right click on the suite and click <code class="docutils literal notranslate"><span class="pre">Info</span></code> in the pop-up menu to display a dialog box containing further details.</p>
+<p>Close the <span class="guilabel">Search History</span> Panel by clicking the close button (<span class="guilabel">X</span>) in the top-right of the panel.</p>
+</div>
+<div class="section" id="viewing-suite-information">
+<h3>Viewing suite information<a class="headerlink" href="#viewing-suite-information" title="Permalink to this headline">¶</a></h3>
+<p>To obtain more information about a suite listed in the search results you can do one of two things:</p>
+<ol class="arabic simple">
+<li><p>Hold your mouse over the suite to display a tooltip containing more details</p></li>
+<li><p>Right click on the suite and select <span class="guilabel">Info</span> in the pop-up menu to display a dialog box containing further details</p></li>
+</ol>
 <ul class="simple">
-<li>What project is suite u-ab878 associated with?</li>
+<li><p>What project is suite <code class="docutils literal notranslate"><span class="pre">u-ab878</span></code> associated with?</p></li>
 </ul>
 <p>Suite search results can be ordered by property in either ascending or descending order. To do so, click on the column title for the property you wish to order by so an arrow is displayed next to it indicating the order in which the property is being sorted.</p>
-<p><strong>iii. Checking out an existing suite</strong></p>
-<p>Right-clicking on a suite displays a pop-up menu from which you can perform many functions on the suite; e.g. checkout, copy, delete, run, etc.  We will perform many of these actions in subsequent exercises but to begin with we will just checkout an existing suite to use in the <em>“Editing Suites”</em> exercises. To view a suite it must be checked out first.</p>
+</div>
+<div class="section" id="checking-out-an-existing-suite">
+<h3>Checking out an existing suite<a class="headerlink" href="#checking-out-an-existing-suite" title="Permalink to this headline">¶</a></h3>
+<p>Right-clicking on a suite displays a pop-up menu from which you can perform many functions on the suite; e.g. checkout, copy, delete, run, etc.  We will perform many of these actions in subsequent exercises but to begin with we will just checkout an existing suite to use in the <a class="reference internal" href="#editing-suites"><span class="std std-ref">Editing Suites: rose edit</span></a> exercises. To view a suite it must be checked out first.</p>
 <ul class="simple">
-<li>Right-click on suite <strong>u-ag137</strong> and select <em>Checkout Suite</em> from the pop-up menu.</li>
+<li><p>Right-click on suite <code class="docutils literal notranslate"><span class="pre">u-ag137</span></code> and select <span class="guilabel">Checkout Suite</span> from the pop-up menu.</p></li>
 </ul>
 <p>When you checkout a suite it is always placed in your <code class="docutils literal notranslate"><span class="pre">~/roses</span></code> directory.  In this state, the suite is simply a working copy - you can edit it and run it but any changes you make will only be held locally.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You can also checkout a suite by highlighting it and then clicking the <em>Checkout</em> button on the toolbar.</p>
+<p class="admonition-title">Note</p>
+<p>You can also checkout a suite by highlighting it and then clicking the <span class="guilabel">Checkout</span> button on the toolbar.</p>
 </div>
-<p><strong>iv. Other useful features</strong></p>
-<p>To see what suites you have checked out click the <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">local</span> <span class="pre">suites</span></code> button to the left of the search box (represented by the <em>home</em> icon).  You should have at least 1 suite listed.</p>
+</div>
+<div class="section" id="other-useful-features">
+<h3>Other useful features<a class="headerlink" href="#other-useful-features" title="Permalink to this headline">¶</a></h3>
+<p>To see what suites you have checked out click the <span class="guilabel">Show local suites</span> button to the left of the search box (represented by the <em>house</em> icon).  You should have at least 1 suite listed.</p>
 <ul class="simple">
-<li>What do you think the <em>house</em> icon in the local column indicates?</li>
+<li><p>What do you think the <em>house</em> icon in the local column indicates?</p></li>
 </ul>
+</div>
 </div>
 <div class="section" id="editing-suites-rose-edit">
-<h2>2.2. Editing Suites: rose edit<a class="headerlink" href="#editing-suites-rose-edit" title="Permalink to this headline">¶</a></h2>
-<p>The Rose config editor in combination with the meta-data file, which describes UM inputs, is the GUI for editing UM suites.  Building and running the UM under Rose requires, at least, two separate apps: an fcm_make_app to build the model executable and a UM app to configure the runtime namelists and environment variables.  Coupled models may require additional fcm_make apps, one for each executable to be built.</p>
-<p><strong>i. Launch the config editor GUI</strong></p>
-<p>Right click on suite u-ag137 and select <code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">Suite</span></code>.  The <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">edit</span></code> GUI will start up.</p>
+<span id="editing-suites"></span><h2><span class="section-number">2.2. </span>Editing Suites: rose edit<a class="headerlink" href="#editing-suites-rose-edit" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">config</span> <span class="pre">editor</span></code> in combination with the metadata file, which describes UM inputs, is the GUI for editing UM suites.  Building and running the UM under Rose requires, at least, two separate apps: an <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> app to build the model executable and a <code class="docutils literal notranslate"><span class="pre">um</span></code> app to configure the runtime namelists and environment variables.  Coupled models may require additional <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> apps, one for each executable to be built.</p>
+<div class="section" id="launch-the-config-editor-gui">
+<h3>Launch the config editor GUI<a class="headerlink" href="#launch-the-config-editor-gui" title="Permalink to this headline">¶</a></h3>
+<p>Right click on suite <code class="docutils literal notranslate"><span class="pre">u-ag137</span></code> and select <span class="guilabel">Edit Suite</span>.  The <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">edit</span></code> GUI will start up.</p>
 <p>On the left hand side is a navigation panel containing a tree listing the apps in the suite.  For this particular suite these are:</p>
 <ul class="simple">
-<li><em>suite conf</em> - General suite configuration options</li>
-<li><em>fcm_make_pp</em> - Extract and build the post-processing scripts</li>
-<li><em>fcm_make_um</em> - Extract and build the UM source code</li>
-<li><em>housekeeping</em> - Tidies up log files, old work and data directories</li>
-<li><em>install_ancil</em> - Install ancillary files</li>
-<li><em>postproc</em> - Post-processing settings</li>
-<li><em>rose_ana</em> - Rose built in app; used here for comparison of dump files</li>
-<li><em>rose_arch</em> - Rose built in app; used here for archiving of log files</li>
-<li><em>um</em> - The UM atmosphere and reconfiguration settings</li>
+<li><p><em>suite conf</em> - General suite configuration options</p></li>
+<li><p><em>fcm_make_pp</em> - Extract and build the post-processing scripts</p></li>
+<li><p><em>fcm_make_um</em> - Extract and build the UM source code</p></li>
+<li><p><em>housekeeping</em> - Tidies up log files, old work and data directories</p></li>
+<li><p><em>install_ancil</em> - Install ancillary files</p></li>
+<li><p><em>postproc</em> - Post-processing settings</p></li>
+<li><p><em>rose_ana</em> - Rose built in app; used here for comparison of dump files</p></li>
+<li><p><em>rose_arch</em> - Rose built in app; used here for archiving of log files</p></li>
+<li><p><em>um</em> - The UM atmosphere and reconfiguration settings</p></li>
 </ul>
-<p><strong>ii. Explore the GUI</strong></p>
-<p>Click on the triangle to the left of <em>suite conf</em> to expand that section.  Click on <em>Build and run switches</em>.  A panel will appear on the right-hand side containing options for controlling what tasks will be run for this suite.  You can see that it will build the UM and reconfiguration executables, run the reconfiguration and then run the model.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We generally use a <strong>common notation</strong> to help users navigate through the GUI and to help us help you with questions. Getting to “UM Science Settings” would be indicated like this: <em>um-&gt;namelist-&gt;UM Science Settings</em>.  This notation will be used throughout the rest of this document.</p>
 </div>
-<p>The input namelists for the um are contained in the <em>um-&gt;namelist</em> section.  Let’s take a look at the science namelist for Microphysics (Large Scale Precipitation), run_precip under “UM Science Settings”.</p>
-<p>For each UM namelist item there is a short description to help you understand what that variable is.  Click on the cog next to a namelist variable and select <em>Help</em> to view more detailed information.  The help information can give you some useful pointers but be aware that it has been written with Met Office setup in mind.</p>
-<p>Range and type checking of variables is done as soon as the user enters a new value.  Try changing the value of <em>timestep_mp_in</em> to 0. This will cause an error flag to appear, hover over the error for more information and click the <em>undo</em> button several times to revert to the original value.</p>
-<p>Some larger science sections have been been divided into subsections, take a look at “Section 05 - Convection” for an example of this. To open a section in a new tab click with the middle mouse button, expand the section by clicking the page triangles. Rose edit has a search box which can be used to search item names. Try searching for the variable <em>astart</em> where the input dump is specified, you will be taken directly to the Dumping and Meaning panel.</p>
-<p>Trigger ignored settings are hidden by default and only appear to the user when the appropriate options are selected. Open the Gravity Wave Drag panel, if you change <em>i_gwd_vn</em> from 5 to 4 the options available change. Click the save button to apply these changes to your app. Let’s take a look at what effect this has had to the <code class="docutils literal notranslate"><span class="pre">rose-app.conf</span></code> file, run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">diff</span></code> in the suite directory.</p>
+<div class="section" id="explore-the-gui">
+<h3>Explore the GUI<a class="headerlink" href="#explore-the-gui" title="Permalink to this headline">¶</a></h3>
+<p>Click on the triangle to the left of <span class="guilabel">suite conf</span> to expand that section.  Click on <span class="guilabel">Build and run switches</span>.  A panel will appear on the right-hand side containing options for controlling what tasks will be run for this suite.  You can see that it will build the UM and reconfiguration executables, run the reconfiguration and then run the model.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We generally use a <strong>common notation</strong> to help users navigate through the GUI and to help us help you with questions. Getting to “UM Science Settings” would be indicated like this: <span class="guilabel">um –&gt; namelist –&gt; UM Science Settings</span>.  This notation will be used throughout the rest of this tutorial.</p>
+</div>
+<p>The input namelists for the UM are contained in the <span class="guilabel">um –&gt; namelist</span> section.  Let’s take a look at the science namelist for <em>Microphysics (Large Scale Precipitation)</em>, <code class="docutils literal notranslate"><span class="pre">run_precip</span></code> under <span class="guilabel">UM Science Settings</span>.</p>
+<p>For each UM namelist item there is a short description to help you understand what that variable is.  Click on the cog next to a namelist variable and select <span class="guilabel">Help</span> to view more detailed information.  The help information can give you some useful pointers but be aware that it has been written with Met Office setup in mind.</p>
+<p>Range and type checking of variables is done as soon as the user enters a new value.  Try changing the value of <code class="docutils literal notranslate"><span class="pre">timestep_mp_in</span></code> to <code class="docutils literal notranslate"><span class="pre">0</span></code>. This will cause an error flag to appear, hover over the error for more information and click the <span class="guilabel">undo</span> button several times to revert to the original value.</p>
+<p>Some larger science sections have been been divided into subsections; take a look at <span class="guilabel">Section 05 - Convection</span> for an example of this. To open a section in a new tab click with the middle mouse button, expand the section by clicking the page triangles. Rose edit has a search box which can be used to search item names. Try searching for the variable <code class="docutils literal notranslate"><span class="pre">astart</span></code> where the input dump is specified, you will be taken directly to the <span class="guilabel">Dumping and Meaning</span> panel.</p>
+<p>Trigger ignored settings are hidden by default and only appear to the user when the appropriate options are selected. Open the <span class="guilabel">Gravity Wave Drag</span> panel, if you change <code class="docutils literal notranslate"><span class="pre">i_gwd_vn</span></code> from <code class="docutils literal notranslate"><span class="pre">5</span></code> to <code class="docutils literal notranslate"><span class="pre">4</span></code> the options available change. Click the <span class="guilabel">save</span> button to apply these changes to your app. Let’s take a look at what effect this has had to the <code class="docutils literal notranslate"><span class="pre">rose-app.conf</span></code> file, run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">diff</span></code> in the suite directory.</p>
 <blockquote>
 <div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cd ~/roses/u-ag137
 puma$ fcm diff -g
 </pre></div>
 </div>
 </div></blockquote>
-<p>You should see that several namelist items have had <em>!!</em> added to the start of the line. This tells Rose to ignore these items when processing the app file into Fortran namelists. Should you wish to see all variables on a panel select “View All Ignored Variables” and “View Latent Variables” from the “View” menu.</p>
-<p>Switch back to the Rose edit window and click the <strong>undo</strong> button to revert the changes and then <strong>save</strong> the suite again. To view all changes made to the suite in the current session click on the <strong>Undo/Redo Viewer</strong> in the <em>Edit</em> menu.</p>
-<p><strong>iii. Error checking of UM inputs</strong></p>
+<p>You should see that several namelist items have had <code class="docutils literal notranslate"><span class="pre">!!</span></code> added to the start of the line. This tells Rose to ignore these items when processing the app file into Fortran namelists. Should you wish to see all variables on a panel select <span class="guilabel">View All Ignored Variables</span> and <span class="guilabel">View Latent Variables</span> from the <span class="guilabel">View</span> menu.</p>
+<p>Switch back to the Rose edit window and click the <span class="guilabel">Undo</span> button to revert the changes and then <span class="guilabel">Save</span> the suite again. To view all changes made to the suite in the current session go to <span class="guilabel">Edit &gt; Undo/Redo Viewer</span>.</p>
+</div>
+<div class="section" id="error-checking-of-um-inputs">
+<h3>Error checking of UM inputs<a class="headerlink" href="#error-checking-of-um-inputs" title="Permalink to this headline">¶</a></h3>
 <p>In addition to the type and range checking of namelist items and environment variables, more thorough checks can be made using Rose macros and the fail-if/warn-if metadata.</p>
-<p>First let’s check if the suite contains any options which trigger the fail-if and warn-if checks in the UM metadata. Select “Check fail-if, warn-if” from the “Metadata” menu. As this suite is setup correctly “FailureRuleChecker: No problems found” should appear at the bottom right of the window.</p>
-<p>Now let’s try and introduce both a warning and a failure. We’re going to change the boundary layer option “alpha_cd”. Either navigate to <em>“Section 03 - Boundary Layer -&gt; Implicit solver options”</em> or type “alpha_cd” into the search bar. Click on the plus sign to add an array element to alpha_cd and type 1.5 into the new box. Next navigate to <em>“Reconfiguration and Ancillary Control -&gt; Output dump grid sizes and levels”</em> and increase the number of ozone levels to 86. Now run the fail-if, warn-if checker again.</p>
+<p>First let’s check if the suite contains any options which trigger the fail-if and warn-if checks in the UM metadata. Select menu item <span class="guilabel">Metadata &gt; Check fail-if, warn-if</span>. As this suite is setup correctly <code class="docutils literal notranslate"><span class="pre">FailureRuleChecker:</span> <span class="pre">No</span> <span class="pre">problems</span> <span class="pre">found</span></code> should appear at the bottom right of the window.</p>
+<p>Now let’s try and introduce both a warning and a failure. We’re going to change the boundary layer option <code class="docutils literal notranslate"><span class="pre">alpha_cd</span></code>. Either navigate to <span class="guilabel">Section 03 - Boundary Layer –&gt; Implicit solver options</span> or type <code class="docutils literal notranslate"><span class="pre">alpha_cd</span></code> into the search bar. Click on the <span class="guilabel">+</span> sign to add an array element to <code class="docutils literal notranslate"><span class="pre">alpha_cd</span></code> and type <code class="docutils literal notranslate"><span class="pre">1.5</span></code> into the new box. Next navigate to <span class="guilabel">Reconfiguration and Ancillary Control –&gt; Output dump grid sizes and levels</span> and increase the number of ozone levels to <code class="docutils literal notranslate"><span class="pre">86</span></code>. Now run the fail-if, warn-if checker again.</p>
 <ul class="simple">
-<li>What is the error?</li>
-<li>What is the warning?</li>
+<li><p>What is the error?</p></li>
+<li><p>What is the warning?</p></li>
 </ul>
-<p>Use the undo button to put the settings back to how we found them and run the checker again. It is strongly recommended that whenever namelists and environment variables are modified that the fail-if, warn-if checker is applied before running the suite.</p>
+<p>Use the <span class="guilabel">Undo</span> button to put the settings back to how we found them and run the checker again. It is strongly recommended that whenever namelists and environment variables are modified that the fail-if, warn-if checker is applied before running the suite.</p>
+</div>
 </div>
 </div>
 
 
+           </div>
+           
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">2. Working with Suites</a><ul>
-<li><a class="reference internal" href="#suite-discovery-and-management-rosie-go">2.1. Suite Discovery and Management: rosie go</a></li>
-<li><a class="reference internal" href="#editing-suites-rose-edit">2.2. Editing Suites: rose edit</a></li>
-</ul>
-</li>
-</ul>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="running.html" class="btn btn-neutral float-right" title="3. Running a UM suite on ARCHER2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="getting-setup.html" class="btn btn-neutral float-left" title="1. Getting set up" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="getting-setup.html"
-                        title="previous chapter">1. Getting set up</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="running.html"
-                        title="next chapter">3. Running a UM suite on ARCHER</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/working-with-suites.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2021, NCAS-CMS.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="running.html" title="3. Running a UM suite on ARCHER"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="getting-setup.html" title="1. Getting set up"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2017-2019, NCAS-CMS.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

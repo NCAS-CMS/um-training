@@ -1,156 +1,332 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>3. Running a UM suite on ARCHER &#8212; NCAS Unified Model Introduction</title>
-    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>3. Running a UM suite on ARCHER2 &mdash; NCAS Unified Model Introduction</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="4. FCM tutorial" href="fcm-tutorial.html" />
     <link rel="prev" title="2. Working with Suites" href="working-with-suites.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="fcm-tutorial.html" title="4. FCM tutorial"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="working-with-suites.html" title="2. Working with Suites"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> NCAS Unified Model Introduction
+          
+
+          
+          </a>
+
+          
             
-  <div class="section" id="running-a-um-suite-on-archer">
-<h1>3. Running a UM suite on ARCHER<a class="headerlink" href="#running-a-um-suite-on-archer" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="archer-architecture">
-<h2>3.1. ARCHER architecture<a class="headerlink" href="#archer-architecture" title="Permalink to this headline">¶</a></h2>
-<p>In common with many HPC systems, ARCHER consists of different types of processor nodes:</p>
-<ul class="simple">
-<li><strong>Login nodes:</strong> This is where you land when you ssh into ARCHER. Typically these processors are used for file management tasks.</li>
-<li><strong>Compute / batch nodes:</strong> These make up most of the ARCHER system, and this is where the model runs.</li>
-<li><strong>Serial / post-processing nodes:</strong> This is where less intensive tasks such as compilation and archiving take place.</li>
-<li><strong>Service nodes:</strong> These are used to launch the batch jobs amongst other things.</li>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Practicals</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting-setup.html">1. Getting set up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">2. Working with Suites</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Running a UM suite on ARCHER2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#archer2-architecture">3.1. ARCHER2 architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-standard-suite">3.2. Running a Standard Suite</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#copy-the-suite">Copy the suite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edit-the-suite">Edit the suite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-suite">Run the suite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#looking-at-the-queues-on-archer2">Looking at the queues on ARCHER2</a></li>
 </ul>
-<p>ARCHER has three file systems:</p>
-<ul class="simple">
-<li><strong>/home:</strong> This is relatively small and is only backed up for disaster recovery.</li>
-<li><strong>/work:</strong> This is much larger, but is not backed up. Note that the batch nodes can only see the work file system. It is optimised for parallel I/O and large files.</li>
-<li><strong>/nerc:</strong> This is the Research Data Facility (RDF) used to archive data. It is backed up.</li>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#standard-suite-output">3.3. Standard Suite Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rose-bush">Rose bush</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compilation-output">Compilation output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#standard-output">Standard output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#binary-output-work-and-share">Binary output - work and share</a></li>
 </ul>
-<p>Consult the ARCHER website for more information: <a class="reference external" href="http://www.archer.ac.uk">http://www.archer.ac.uk</a></p>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">4. FCM tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solving-problems.html">5. Solving Common UM Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">6. Further Exercises (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">7. Further Exercises (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">8. Rose/Cylc Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post-processing.html">9. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="useful-information.html">10. Appendix A: Useful information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh-tasks.html">11. Appendix B: SSH FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NCAS Unified Model Introduction</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>Running a UM suite on ARCHER2</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/running.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="running-a-um-suite-on-archer2">
+<h1><span class="section-number">3. </span>Running a UM suite on ARCHER2<a class="headerlink" href="#running-a-um-suite-on-archer2" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="archer2-architecture">
+<h2><span class="section-number">3.1. </span>ARCHER2 architecture<a class="headerlink" href="#archer2-architecture" title="Permalink to this headline">¶</a></h2>
+<p>In common with many HPC systems, ARCHER2 consists of different types of processor nodes:</p>
+<ul class="simple">
+<li><p><strong>Login nodes:</strong> This is where you land when you ssh into ARCHER2. Typically these processors are used for file management tasks.</p></li>
+<li><p><strong>Compute / batch nodes:</strong> These make up most of the ARCHER2 system, and this is where the model runs.</p></li>
+<li><p><strong>Serial / post-processing nodes:</strong> This is where less intensive tasks such as compilation and archiving take place.</p></li>
+</ul>
+<p>ARCHER2 has two file systems:</p>
+<ul class="simple">
+<li><p><strong>/home:</strong> This is relatively small and is only backed up for disaster recovery.</p></li>
+<li><p><strong>/work:</strong> This is much larger, but is not backed up. Note that the batch nodes can only see the work file system. It is optimised for parallel I/O and large files.</p></li>
+</ul>
+<p>Consult the ARCHER2 website for more information: <a class="reference external" href="http://www.archer2.ac.uk">http://www.archer2.ac.uk</a></p>
 </div>
 <div class="section" id="running-a-standard-suite">
-<h2>3.2. Running a Standard Suite<a class="headerlink" href="#running-a-standard-suite" title="Permalink to this headline">¶</a></h2>
-<p>To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM10.5.</p>
-<p><strong>i. Copy the suite</strong></p>
+<h2><span class="section-number">3.2. </span>Running a Standard Suite<a class="headerlink" href="#running-a-standard-suite" title="Permalink to this headline">¶</a></h2>
+<p>To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM11.8.</p>
+<div class="section" id="copy-the-suite">
+<h3>Copy the suite<a class="headerlink" href="#copy-the-suite" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>In <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> locate the suite with idx <strong>u-ag263</strong> owned by <strong>annetteosprey</strong>.</li>
-<li>Right click on the suite and select <code class="docutils literal notranslate"><span class="pre">Copy</span> <span class="pre">Suite</span></code>.</li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> locate the suite with idx <strong>u-cc519</strong> owned by <strong>rosalynhatcher</strong>.</p></li>
+<li><p>Right click on the suite and select <span class="guilabel">Copy Suite</span>.</p></li>
 </ul>
 <p>This copies an existing suite to a new suite id.  The new suite will be owned by you.  During the copy process a wizard will launch for you to edit the suite discovery information, if you wish.</p>
 <p>A new suite will be created in the MOSRS rosie-u suite repository and will be checked out into your <code class="docutils literal notranslate"><span class="pre">~/roses</span></code> directory.</p>
-<p><strong>ii. Edit the suite</strong></p>
+</div>
+<div class="section" id="edit-the-suite">
+<h3>Edit the suite<a class="headerlink" href="#edit-the-suite" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Open your new suite in the Rose config editor GUI.</li>
+<li><p>Open your new suite in the Rose config editor GUI.</p></li>
 </ul>
-<p>Before you can run the suite you need to change the <em>userid</em>, <em>queue</em> and <em>account code</em>.</p>
-<p>Now make the following changes:</p>
+<p>Before you can run the suite you need to change the <em>userid</em>, <em>queue</em> and <em>account code</em>:</p>
 <ul class="simple">
-<li>Click on <em>suite conf -&gt; jinja2</em> in the left hand panel</li>
-<li>Change HPC_USER (that’s your ARCHER training account)</li>
-<li>Change HPC_ACCOUNT to <strong>‘n02-training’</strong></li>
-<li>Change HPC_QUEUE to be the reservation code for today. (e.g. <strong>‘R6585903’</strong>)</li>
-<li>Save the suite (<em>File -&gt; Save</em> or click the <em>down arrow</em> icon)</li>
+<li><p>Click on <span class="guilabel">suite conf –&gt; jinja2</span> in the left hand panel</p></li>
+<li><p>Change <code class="docutils literal notranslate"><span class="pre">HPC_USER</span></code> (that’s your ARCHER2 training account)</p></li>
+<li><p>Change <code class="docutils literal notranslate"><span class="pre">HPC_ACCOUNT</span></code> to <strong>‘n02-training’</strong></p></li>
+<li><p>Change <code class="docutils literal notranslate"><span class="pre">HPC_QUEUE</span></code> to <strong>‘standard’</strong></p></li>
+<li><p>Change <code class="docutils literal notranslate"><span class="pre">HPC_RESERVATION</span></code> to be the reservation code for today. (e.g. <strong>‘n02_135’</strong>)</p></li>
+<li><p>Save the suite (<span class="guilabel">File &gt; Save</span> or click the <em>down arrow</em> icon)</p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Quotes around the ‘n02-training’, reservation code and your ARCHER username are essential otherwise the suite won’t run.</p>
+<p class="admonition-title">Note</p>
+<p>Quotes around the ‘n02-training’, reservation code and your ARCHER2 username are essential otherwise the suite won’t run.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In normal practice you submit your suites to the parallel queue (either ‘short’ or ‘standard’) on ARCHER.  For this training course, we are using processor Reservations, whereby we have exclusive access to a prearranged amount of ARCHER resource.  Reservations are specified by a reservation code; e.g. R5212096.</p>
+<p class="admonition-title">Note</p>
+<p>In normal practice you submit your suites to the parallel queue (either ‘short’ or ‘standard’) on ARCHER2.  For this training course, we are using processor reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource.  Reservations are specified by adding an additional setting called the reservation code; e.g. n02_135.</p>
 </div>
-<p><strong>iii. Run the suite</strong></p>
+</div>
+<div class="section" id="run-the-suite">
+<h3>Run the suite<a class="headerlink" href="#run-the-suite" title="Permalink to this headline">¶</a></h3>
 <p>The standard suite will build, reconfigure and run the UM.</p>
 <ul class="simple">
-<li>Click on the triangle symbol on the right end of the menu bar to run the suite.</li>
+<li><p>Click on the triangle symbol on the right end of the menu bar to run the suite.</p></li>
 </ul>
-<p>Doing this will execute the <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">suite-run</span></code> command (more on this later) and start the Cylc GUI (gcylc) through which you can monitor the progress of your suite graphically. The cylc GUI will update as the job progresses.</p>
-<p><strong>iv. Looking at the queues on ARCHER</strong></p>
-<p>While you’re waiting for the suite to run, let’s log into ARCHER and learn how to look at the ARCHER queues.</p>
+<p>Doing this will execute the <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">suite-run</span></code> command (more on this later) and start the Cylc GUI through which you can monitor the progress of your suite graphically. The Cylc GUI will update as the job progresses.</p>
+</div>
+<div class="section" id="looking-at-the-queues-on-archer2">
+<h3>Looking at the queues on ARCHER2<a class="headerlink" href="#looking-at-the-queues-on-archer2" title="Permalink to this headline">¶</a></h3>
+<p>While you’re waiting for the suite to run, let’s log into ARCHER2 and learn how to look at the queues.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember you will need to login to ARCHER2 from your local desktop NOT from PUMA.</p>
+</div>
 <p>Run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qstat</span> <span class="o">-</span><span class="n">u</span> <span class="o">&lt;</span><span class="n">archer</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">squeue</span> <span class="o">-</span><span class="n">u</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>This will show the status of jobs you are running.  You will see output similar to the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ncastr01</span><span class="nd">@eslogin005</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">qstat</span> <span class="o">-</span><span class="n">u</span> <span class="n">ncastr01</span>
-
-<span class="n">sdb</span><span class="p">:</span>
-                                                       <span class="n">Req</span><span class="s1">&#39;d  Req&#39;</span><span class="n">d</span>   <span class="n">Elap</span>
-<span class="n">Job</span> <span class="n">ID</span>        <span class="n">Username</span> <span class="n">Queue</span>   <span class="n">Jobname</span>  <span class="n">SessID</span> <span class="n">NDS</span> <span class="n">TSK</span> <span class="n">Memory</span> <span class="n">Time</span>  <span class="n">S</span> <span class="n">Time</span>
-<span class="o">------------</span> <span class="o">--------</span> <span class="o">--------</span> <span class="o">--------</span> <span class="o">------</span> <span class="o">---</span> <span class="o">---</span> <span class="o">------</span> <span class="o">-----</span> <span class="o">-</span> <span class="o">-----</span>
-<span class="mf">3988630.</span><span class="n">sdb</span>  <span class="n">ncastr01</span> <span class="n">S3979005</span> <span class="n">atmos</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span>    <span class="o">--</span>    <span class="mi">1</span>  <span class="mi">24</span>    <span class="o">--</span>  <span class="mi">00</span><span class="p">:</span><span class="mi">20</span> <span class="n">R</span> <span class="mi">00</span><span class="p">:</span><span class="mi">10</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ARCHER2</span><span class="o">&gt;</span> <span class="n">squeue</span> <span class="o">-</span><span class="n">u</span> <span class="n">ros</span>
+      <span class="n">JOBID</span> <span class="n">PARTITION</span>     <span class="n">NAME</span>     <span class="n">USER</span> <span class="n">ST</span>       <span class="n">TIME</span>  <span class="n">NODES</span> <span class="n">NODELIST</span><span class="p">(</span><span class="n">REASON</span><span class="p">)</span>
+     <span class="mi">148599</span>  <span class="n">standard</span> <span class="n">u</span><span class="o">-</span><span class="n">cc519</span><span class="o">.</span>      <span class="n">ros</span>  <span class="n">R</span>       <span class="mi">0</span><span class="p">:</span><span class="mi">11</span>      <span class="mi">1</span> <span class="n">nid001001</span>
 </pre></div>
 </div>
-<p>At this stage you will probably only have a job running or waiting to run in the serial queue. Running qstat will show all jobs currently on ARCHER, most of which will be in the parallel queues.</p>
+<p>At this stage you will probably only have a job running or waiting to run in the serial queue. Running <code class="docutils literal notranslate"><span class="pre">squeue</span></code> will show all jobs currently on ARCHER2, most of which will be in the parallel queues.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
 <p>Another useful command is <code class="docutils literal notranslate"><span class="pre">serialJobs</span></code>, which lists the jobs in the serial queue only. You will need to run <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">anaconda</span></code> before running the <code class="docutils literal notranslate"><span class="pre">serialJobs</span></code> command.  Try it now:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ncastr01</span><span class="nd">@eslogin005</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">module</span> <span class="n">load</span> <span class="n">anaconda</span>
 <span class="n">ncastr01</span><span class="nd">@eslogin005</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">serialJobs</span>
 </pre></div>
 </div>
-<p>Once your suite has finished running the Cylc GUI will go blank and you should get a message in the bottom left hand corner saying <em>‘Stopped with succeeded’</em>.</p>
-<p>Cylc is set up so that it <em>polls</em> ARCHER to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on ARCHER and the Cylc GUI being updated. If you see that the task has finished running but Cylc hasn’t updated then you can manually poll the task by right-clicking on it and selecting <strong>Poll</strong> from the pop-up menu.</p>
+</div>
+<p>Once your suite has finished running the Cylc GUI will go blank and you should get a message in the bottom left hand corner saying <code class="docutils literal notranslate"><span class="pre">Stopped</span> <span class="pre">with</span> <span class="pre">succeeded</span></code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Cylc is set up so that it <em>polls</em> ARCHER2 to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on ARCHER2 and the Cylc GUI being updated. If you see that the task has finished running but Cylc hasn’t updated then you can manually poll the task by right-clicking on it and selecting <span class="guilabel">Poll</span> from the pop-up menu.</p>
+</div>
+</div>
 </div>
 <div class="section" id="standard-suite-output">
-<h2>3.3. Standard Suite Output<a class="headerlink" href="#standard-suite-output" title="Permalink to this headline">¶</a></h2>
-<p>The output from a standard suite goes to a variety of places, depending on the type of the file.  On ARCHER you will find all the output from your run under the directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;suitename&gt;</span></code> is the name of the suite. This is actually a symbolic link to the equivalent location in your <code class="docutils literal notranslate"><span class="pre">/work</span></code> directory (E.g. <code class="docutils literal notranslate"><span class="pre">/work/n02/n02/&lt;username&gt;/cylc-run/&lt;suitename&gt;</span></code>.</p>
-<p><strong>Rose bush</strong></p>
+<h2><span class="section-number">3.3. </span>Standard Suite Output<a class="headerlink" href="#standard-suite-output" title="Permalink to this headline">¶</a></h2>
+<p>The output from a standard suite goes to a variety of places, depending on the type of the file.  On ARCHER2 you will find all the output from your run under the directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;suitename&gt;</span></code> is the name of the suite. This is actually a symbolic link to the equivalent location in your <code class="docutils literal notranslate"><span class="pre">/work</span></code> directory (E.g. <code class="docutils literal notranslate"><span class="pre">/work/n02/n02/&lt;username&gt;/cylc-run/&lt;suitename&gt;</span></code>.</p>
+<div class="section" id="rose-bush">
+<h3>Rose bush<a class="headerlink" href="#rose-bush" title="Permalink to this headline">¶</a></h3>
 <p>The standard output and errors from the suite can be easily viewed using Rose Bush.</p>
 <p>For suites submitted from PUMA; in a browser navigate to: <a class="reference external" href="http://puma.nerc.ac.uk/rose-bush">http://puma.nerc.ac.uk/rose-bush</a></p>
-<p>Enter your PUMA userid and click <em>“Suites List”</em>.  You should then see a list of all the suites you have run.  Click on <em>“tasks jobs list”</em> for the suite you have just run. You can examine the output of each task using the links, as well as see whether the suite contains failed tasks, or is currently running.  For this suite you should see output files for 4 tasks: fcm_make (code extraction), fcm_make2 (compilation), recon &amp; atmos. The job.out and job.err files are the first places you should look for information when tasks fail.</p>
+<p>Enter your PUMA userid and click <span class="guilabel">Suites List</span>.  You should then see a list of all the suites you have run.  Click on <span class="guilabel">tasks jobs list</span> for the suite you have just run. You can examine the output of each task using the links, as well as see whether the suite contains failed tasks, or is currently running.  For this suite you should see output files for 4 tasks: <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> (code extraction), <code class="docutils literal notranslate"><span class="pre">fcm_make2</span></code> (compilation), <code class="docutils literal notranslate"><span class="pre">recon</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">atmos</span></code>. The <code class="docutils literal notranslate"><span class="pre">job.out</span></code> and <code class="docutils literal notranslate"><span class="pre">job.err</span></code> files are the first places you should look for information when tasks fail.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">To run Rose Bush on Monsoon run: <code class="docutils literal notranslate"><span class="pre">firefox</span> <span class="pre">http://localhost/rose-bush</span></code></p>
+<p class="admonition-title">Note</p>
+<p>To run Rose Bush on Monsoon run: <code class="docutils literal notranslate"><span class="pre">firefox</span> <span class="pre">http://localhost/rose-bush</span></code></p>
 </div>
-<p><strong>Compilation output</strong></p>
-<p>The output from the compilation is stored on the host upon which the compilation was performed.  The output from fcm_make is inside the directory containing the build, which is inside the <cite>share</cite> subdirectory.</p>
+</div>
+<div class="section" id="compilation-output">
+<h3>Compilation output<a class="headerlink" href="#compilation-output" title="Permalink to this headline">¶</a></h3>
+<p>The output from the compilation is stored on the host upon which the compilation was performed.  The output from <cite>fcm_make</cite> is inside the directory containing the build, which is inside the <code class="docutils literal notranslate"><span class="pre">share</span></code> subdirectory.</p>
 <p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/share/fcm_make/fcm-make2.log</span></code></p>
 <p>If you come across the word “failed”, chances are your model didn’t build correctly and this file is where you’d search for reasons why.</p>
-<p><strong>Standard output</strong></p>
-<p>The output from the UM scripts and the output from PE0 is placed in the <code class="docutils literal notranslate"><span class="pre">log</span></code> subdirectory. As we saw in Rose Bush stdout and stderr are written to 2 separate files. For a task named <em>atmos</em>, the output from the most recent run will be:</p>
+</div>
+<div class="section" id="standard-output">
+<h3>Standard output<a class="headerlink" href="#standard-output" title="Permalink to this headline">¶</a></h3>
+<p>The output from the UM scripts and the output from PE0 is placed in the <code class="docutils literal notranslate"><span class="pre">log</span></code> subdirectory. As we saw in Rose Bush stdout and stderr are written to 2 separate files. For a task named <code class="docutils literal notranslate"><span class="pre">atmos</span></code>, the output from the most recent run will be:</p>
 <p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/log/job/1/atmos/NN/job.out</span></code></p>
 <p>And the corresponding error file is:</p>
 <p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/log/job/1/atmos/NN/job.err</span></code></p>
-<p>Here <code class="docutils literal notranslate"><span class="pre">NN</span></code> is a symbolic link created by Rose pointing to the output of the most recently run <em>atmos</em> task.</p>
-<p>Take a look at the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> for the <em>atmos</em> task either on the command-line or through Rose Bush.</p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">NN</span></code> is a symbolic link created by Rose pointing to the output of the most recently run <code class="docutils literal notranslate"><span class="pre">atmos</span></code> task.</p>
+<p>Take a look at the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> for the <code class="docutils literal notranslate"><span class="pre">atmos</span></code> task either on the command-line or through Rose Bush.</p>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
 <ul class="simple">
-<li>How much walltime did the run consume?  Hint: go to the bottom of the file and find walltime.</li>
-<li>Why does the phrase walltime appear twice?</li>
-<li>How much time did you request for the task?</li>
-<li>How many AUs (Accounting Units) did the job cost? Hint: 1 core hour currently = 15 AUs (You should have some idea of the resource requirements for your runs and how that relates to the annual AU budget for your project). See the ARCHER website for information about the AU.</li>
-<li>Did the linear solve for the Helmholtz problem converge in the final timestep?</li>
-<li>How many prognostic fields were read from the start file?</li>
+<li><p>How much walltime did the run consume?</p></li>
 </ul>
-<p><strong>Binary output - work and share</strong></p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Go to the bottom of the file and find walltime.</p>
+</div>
+<ul class="simple">
+<li><p>Why does the phrase walltime appear twice?</p></li>
+<li><p>How much time did you request for the task?</p></li>
+<li><p>How many AUs (Accounting Units) did the job cost?</p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>1 node hour currently = 1 CU (You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project). See the ARCHER website for information about the CU.</p>
+</div>
+</div>
+<ul class="simple">
+<li><p>Did the linear solve for the Helmholtz problem converge in the final timestep?</p></li>
+<li><p>How many prognostic fields were read from the start file?</p></li>
+</ul>
+</div>
+<div class="section" id="binary-output-work-and-share">
+<h3>Binary output - work and share<a class="headerlink" href="#binary-output-work-and-share" title="Permalink to this headline">¶</a></h3>
 <p>By default the UM will write all output to the directory it was launched from, which will be the task’s <code class="docutils literal notranslate"><span class="pre">work</span></code> directory.  However, all output paths can be configured in the GUI and in practice most UM tasks will send output to one or both of the suite’s <code class="docutils literal notranslate"><span class="pre">work</span></code> or <code class="docutils literal notranslate"><span class="pre">share</span></code> directories.</p>
 <p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/1/atmos</span></code></p>
 <p>or</p>
@@ -158,83 +334,67 @@
 <p>For this suite output is sent to the <code class="docutils literal notranslate"><span class="pre">work</span></code> directory.</p>
 <p>Change directory to the work space.</p>
 <ul class="simple">
-<li>What files and directories are present?</li>
+<li><p>What files and directories are present?</p></li>
 </ul>
 <p>Model diagnostic output files will appear here, along with a directory called <code class="docutils literal notranslate"><span class="pre">pe_output</span></code>. This contains one file for each processor, for both model and reconfiguration, which contain logging information on how the model behaved.</p>
 <p>Open one of these files <code class="docutils literal notranslate"><span class="pre">&lt;suite-id&gt;.fort6.peXX</span></code> in your favourite editor.</p>
-<p>The amount of output created by the suite and written to this file can be controlled in the suite configuration (<em>um -&gt; env -&gt; Runtime Controls -&gt; Atmosphere only</em>). For development work, and to gain familiarity with the system, make sure “Extra diagnostic messages” are output. Switch it on in this suite if it isn’t already.</p>
+<p>The amount of output created by the suite and written to this file can be controlled in the suite configuration (<span class="guilabel">um –&gt; env –&gt; Runtime Controls –&gt; Atmosphere only</span>). For development work, and to gain familiarity with the system, make sure “Extra diagnostic messages” are output. Switch it on in this suite if it isn’t already.</p>
 <p>It is well worth taking a little time to look through this file and to recognise some of the key phrases output by the model. You will soon learn what to search for to tell you if the model ran successfully or not. Unfortunately, important information can be dotted about in the file, so just examining the first or last few lines may not be sufficient to find out why the model hasn’t behaved as you expected. Try to find answers to the following:</p>
 <ul class="simple">
-<li>How many boundary layer levels did you run with?</li>
-<li>What was the range of gridpoints handled by this processor?</li>
+<li><p>How many boundary layer levels did you run with?</p></li>
+<li><p>What was the range of gridpoints handled by this processor?</p></li>
 </ul>
 <p>Check the file sizes of the different file types. The output directory will contain start dumps, diagnostic output files and possibly a core dump file if the model failed) and these usually have very different sizes.</p>
 </div>
 </div>
-
-
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">3. Running a UM suite on ARCHER</a><ul>
-<li><a class="reference internal" href="#archer-architecture">3.1. ARCHER architecture</a></li>
-<li><a class="reference internal" href="#running-a-standard-suite">3.2. Running a Standard Suite</a></li>
-<li><a class="reference internal" href="#standard-suite-output">3.3. Standard Suite Output</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="working-with-suites.html"
-                        title="previous chapter">2. Working with Suites</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="fcm-tutorial.html"
-                        title="next chapter">4. FCM tutorial</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/running.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="fcm-tutorial.html" class="btn btn-neutral float-right" title="4. FCM tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="working-with-suites.html" class="btn btn-neutral float-left" title="2. Working with Suites" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2021, NCAS-CMS.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="fcm-tutorial.html" title="4. FCM tutorial"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="working-with-suites.html" title="2. Working with Suites"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2017-2019, NCAS-CMS.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

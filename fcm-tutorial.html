@@ -1,59 +1,201 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>4. FCM tutorial &#8212; NCAS Unified Model Introduction</title>
-    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>4. FCM tutorial &mdash; NCAS Unified Model Introduction</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="5. Solving Common UM Problems" href="solving-problems.html" />
-    <link rel="prev" title="3. Running a UM suite on ARCHER" href="running.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="solving-problems.html" title="5. Solving Common UM Problems"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="running.html" title="3. Running a UM suite on ARCHER"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
-      </ul>
-    </div>  
+    <link rel="prev" title="3. Running a UM suite on ARCHER2" href="running.html" /> 
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> NCAS Unified Model Introduction
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Practicals</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting-setup.html">1. Getting set up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">2. Working with Suites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">3. Running a UM suite on ARCHER2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. FCM tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-your-default-text-editor">4.1. Setting up your default text editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#applying-modifications-to-a-um-suite">4.2. Applying modifications to a UM suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opening-a-ticket">4.3. Opening a Ticket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#making-code-changes">4.4. Making Code Changes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-branch">Creating a branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#making-changes-to-a-working-copy">Making changes to a working copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#committing-changes">Committing changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-information-about-your-branch">Getting information about your branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-that-your-branch-works">Testing that your branch works</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#documenting-your-change">4.5. Documenting your change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tidying-up">4.6. Tidying Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-control-of-suites">4.7. Version Control of Suites</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="solving-problems.html">5. Solving Common UM Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">6. Further Exercises (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">7. Further Exercises (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">8. Rose/Cylc Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post-processing.html">9. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="useful-information.html">10. Appendix A: Useful information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh-tasks.html">11. Appendix B: SSH FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NCAS Unified Model Introduction</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">4. </span>FCM tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/fcm-tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="fcm-tutorial">
-<h1>4. FCM tutorial<a class="headerlink" href="#fcm-tutorial" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4. </span>FCM tutorial<a class="headerlink" href="#fcm-tutorial" title="Permalink to this headline">¶</a></h1>
 <p>In this section you will learn about:</p>
 <ul class="simple">
-<li>Incorporating modifications to your suite</li>
-<li>Creating a ticket to document your code change</li>
-<li>Creating a branch using the FCM GUI and command line</li>
-<li>How to checkout and change a working copy</li>
-<li>Getting information about your working copy and branch</li>
-<li>Committing changes to your branch</li>
-<li>Version control of suites</li>
+<li><p>Incorporating modifications to your suite</p></li>
+<li><p>Creating a ticket to document your code change</p></li>
+<li><p>Creating a branch using the FCM GUI and command line</p></li>
+<li><p>How to checkout and change a working copy</p></li>
+<li><p>Getting information about your working copy and branch</p></li>
+<li><p>Committing changes to your branch</p></li>
+<li><p>Version control of suites</p></li>
 </ul>
 <div class="section" id="setting-up-your-default-text-editor">
-<h2>4.1. Setting up your default text editor<a class="headerlink" href="#setting-up-your-default-text-editor" title="Permalink to this headline">¶</a></h2>
-<p>When you attempt to create a branch or commit changes to the repository, you will normally be prompted to edit your commit log message using a text editor. The system chooses its editor by searching for a non-empty string through a hierarchy of environment variables in this order: SVN_EDITOR, VISUAL, and EDITOR. Note that the editor you select must able to run in the foreground. The default editor is <cite>vi</cite>.  If you prefer to use <cite>emacs</cite> or <cite>nedit</cite>, for example, you can add one of the following in your <code class="docutils literal notranslate"><span class="pre">$HOME/.profile</span></code>, <code class="docutils literal notranslate"><span class="pre">$HOME/.kshrc</span></code> (Korn) or <code class="docutils literal notranslate"><span class="pre">$HOME/.bashrc</span></code> (Bash):</p>
+<h2><span class="section-number">4.1. </span>Setting up your default text editor<a class="headerlink" href="#setting-up-your-default-text-editor" title="Permalink to this headline">¶</a></h2>
+<p>When you attempt to create a branch or commit changes to the repository, you will normally be prompted to edit your commit log message using a text editor. The system chooses its editor by searching for a non-empty string through a hierarchy of environment variables in this order: <code class="docutils literal notranslate"><span class="pre">SVN_EDITOR</span></code>, <code class="docutils literal notranslate"><span class="pre">VISUAL</span></code>, and <code class="docutils literal notranslate"><span class="pre">EDITOR</span></code>.</p>
+<p>The editor you select must able to run in the foreground. The default editor is <code class="docutils literal notranslate"><span class="pre">vi</span></code>.  If you prefer to use <code class="docutils literal notranslate"><span class="pre">emacs</span></code> or <code class="docutils literal notranslate"><span class="pre">nedit</span></code>, for example, you can add one of the following in your <code class="docutils literal notranslate"><span class="pre">$HOME/.profile</span></code>, <code class="docutils literal notranslate"><span class="pre">$HOME/.kshrc</span></code> (Korn) or <code class="docutils literal notranslate"><span class="pre">$HOME/.bashrc</span></code> (Bash):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Emacs</span>
 <span class="n">export</span> <span class="n">SVN_EDITOR</span><span class="o">=</span><span class="n">emacs</span>
 
@@ -63,7 +205,7 @@
 </div>
 </div>
 <div class="section" id="applying-modifications-to-a-um-suite">
-<h2>4.2. Applying modifications to a UM suite<a class="headerlink" href="#applying-modifications-to-a-um-suite" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.2. </span>Applying modifications to a UM suite<a class="headerlink" href="#applying-modifications-to-a-um-suite" title="Permalink to this headline">¶</a></h2>
 <p>Now that you’ve run a basic suite, you need to know how to apply changes to the trunk code.  We’ll start by applying existing changes (aka a branch) to your suite.  A branch equates to a copy of the UM source code tree with user modifications.  A branch can contain changes to many code files.</p>
 <p>As a user, you will be supplied with the <strong>URL</strong> and possibly a version number of a branch.  FCM keywords can be used to specify the URL which is a way of using shorthand for standard bits of the URL path.  For example, this branch has been created in the MOSRS UM repository:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">code</span><span class="o">.</span><span class="n">metoffice</span><span class="o">.</span><span class="n">gov</span><span class="o">.</span><span class="n">uk</span><span class="o">/</span><span class="n">um</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">branches</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">rosalynhatcher</span><span class="o">/</span><span class="n">vn10</span><span class="o">.</span><span class="mi">5</span><span class="n">_um_shell1</span>
@@ -75,39 +217,40 @@
 </div>
 <p>This branch contains a code change to <code class="docutils literal notranslate"><span class="pre">um_shell</span></code> to print:</p>
 <p><code class="docutils literal notranslate"><span class="pre">Tutorial</span> <span class="pre">Change:</span> <span class="pre">Start</span> <span class="pre">of</span> <span class="pre">UM</span> <span class="pre">RUN</span> <span class="pre">Job:</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">of</span> <span class="pre">UM</span> <span class="pre">RUN</span> <span class="pre">job:</span></code></p>
-<p>To add this branch go to the panel <em>fcm_make -&gt; env -&gt; sources</em> and in the <strong>um_sources</strong> box add the URL:</p>
+<p>To add this branch go to the panel <span class="guilabel">fcm_make –&gt; env –&gt; sources</span> and in the <code class="docutils literal notranslate"><span class="pre">um_sources</span></code> box add the URL:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">branches</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">rosalynhatcher</span><span class="o">/</span><span class="n">vn10</span><span class="o">.</span><span class="mi">5</span><span class="n">_um_shell1</span>
 </pre></div>
 </div>
-<p>Now <strong>Save</strong> your suite and then submit it either by running <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">suite-run</span></code> or clicking the “Play” button in the rose edit GUI.</p>
+<p>Now <span class="guilabel">Save</span> your suite and then submit it either by running <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">suite-run</span></code> or clicking the “Play” button in the rose edit GUI.</p>
 <p>When the suite has completed, check the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> file to verify that you have got the changed output message:</p>
 <p><code class="docutils literal notranslate"><span class="pre">Tutorial</span> <span class="pre">Change:</span> <span class="pre">Start</span> <span class="pre">of</span> <span class="pre">UM</span> <span class="pre">RUN</span> <span class="pre">Job:</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">of</span> <span class="pre">UM</span> <span class="pre">RUN</span> <span class="pre">job:</span></code></p>
 </div>
 <div class="section" id="opening-a-ticket">
-<h2>4.3. Opening a Ticket<a class="headerlink" href="#opening-a-ticket" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.3. </span>Opening a Ticket<a class="headerlink" href="#opening-a-ticket" title="Permalink to this headline">¶</a></h2>
 <p>All code changes destined for the UM trunk must have an associated Trac Ticket documenting the change (e.g. <a class="reference external" href="https://code.metoffice.gov.uk/trac/um/ticket/1957">https://code.metoffice.gov.uk/trac/um/ticket/1957</a>).  For all other changes creating a ticket to document your change is entirely optional.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For full details on the UM working practices including the review and commit to trunk process please see <a class="reference external" href="https://code.metoffice.gov.uk/trac/um/wiki/working_practices">https://code.metoffice.gov.uk/trac/um/wiki/working_practices</a>.  If you are planning to make a code change intended for the trunk please make sure you read this before starting the change.</p>
+<p class="admonition-title">Note</p>
+<p>For full details on the UM working practices including the review and commit to trunk process please see <a class="reference external" href="https://code.metoffice.gov.uk/trac/um/wiki/working_practices">https://code.metoffice.gov.uk/trac/um/wiki/working_practices</a>.  If you are planning to make a code change intended for the trunk please make sure you read this before starting the change.</p>
 </div>
-<p>We will now create a ticket for our code change. Navigate to the UM Trac page on MOSRS: <a class="reference external" href="https://code.metoffice.gov.uk/trac/um">https://code.metoffice.gov.uk/trac/um</a> (You will be prompted to login to MOSRS if you haven’t already done so). Click on <strong>New Ticket</strong>.  A form entitled <strong>Create New Ticket</strong> should appear. For the purposes of this tutorial fill in the following:</p>
+<p>We will now create a ticket for our code change. Navigate to the UM Trac page on MOSRS: <a class="reference external" href="https://code.metoffice.gov.uk/trac/um">https://code.metoffice.gov.uk/trac/um</a> (You will be prompted to login to MOSRS if you haven’t already done so). Click on <span class="guilabel">New Ticket</span>.  A form entitled <strong>Create New Ticket</strong> should appear. For the purposes of this tutorial fill in the following:</p>
 <ul class="simple">
-<li><strong>Summary</strong>: <em>“Code change for UM Tutorial”</em></li>
-<li><strong>Description</strong>: provide as much detail as possible so that all reading the ticket are able to understand the planned change. You can use WikiFormatting to enhance the readability of your text.</li>
-<li><strong>Type</strong>: select <em>“task”</em></li>
-<li><strong>Milestone</strong>: select <em>“Not for Builds”</em>; this indicates the ticket is not intended for the UM trunk. If your change is intended for the trunk this should be set to the UM release the change is being targeted at: e.g. <em>“UM10.6 code release”</em></li>
-<li><strong>Severity</strong>: leave this as <em>“minor”</em></li>
-<li><strong>Component</strong>: select <em>“General”</em></li>
-<li><strong>cc</strong>: leave this empty</li>
-<li><strong>Owner</strong>: assign the ticket to yourself by selecting your username from the drop down list.</li>
+<li><p><strong>Summary</strong>: <em>“Code change for UM Tutorial”</em></p></li>
+<li><p><strong>Description</strong>: provide as much detail as possible so that all reading the ticket are able to understand the planned change. You can use WikiFormatting to enhance the readability of your text.</p></li>
+<li><p><strong>Type</strong>: select <em>“task”</em></p></li>
+<li><p><strong>Milestone</strong>: select <em>“Not for Builds”</em>; this indicates the ticket is not intended for the UM trunk. If your change is intended for the trunk this should be set to the UM release the change is being targeted at: e.g. <em>“UM10.6 code release”</em></p></li>
+<li><p><strong>Severity</strong>: leave this as <em>“minor”</em></p></li>
+<li><p><strong>Component</strong>: select <em>“General”</em></p></li>
+<li><p><strong>cc</strong>: leave this empty</p></li>
+<li><p><strong>Owner</strong>: assign the ticket to yourself by selecting your username from the drop down list.</p></li>
 </ul>
-<p>A preview of your ticket should appear at the bottom of the page.  If if doesn’t appear automatically, use the <strong>Preview</strong> button to inspect your ticket before using the <strong>Create ticket</strong> button to create the ticket.</p>
+<p>A preview of your ticket should appear at the bottom of the page.  If if doesn’t appear automatically, use the <span class="guilabel">Preview</span> button to inspect your ticket before clicking <span class="guilabel">Create ticket</span> button to create the ticket.</p>
 <p>Remember the number of your new ticket as you will need it later in this tutorial.</p>
 </div>
 <div class="section" id="making-code-changes">
-<h2>4.4. Making Code Changes<a class="headerlink" href="#making-code-changes" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.4. </span>Making Code Changes<a class="headerlink" href="#making-code-changes" title="Permalink to this headline">¶</a></h2>
 <p>The default text editor for entering commit messages is <code class="docutils literal notranslate"><span class="pre">vi</span></code>.  If you would prefer to use a different editor; for example <code class="docutils literal notranslate"><span class="pre">emacs</span></code> or <code class="docutils literal notranslate"><span class="pre">vim</span></code>, please see the section on “Setting up your default text editor”.</p>
-<p><strong>i. Creating a branch</strong></p>
+<div class="section" id="creating-a-branch">
+<h3>Creating a branch<a class="headerlink" href="#creating-a-branch" title="Permalink to this headline">¶</a></h3>
 <p>Firstly create a new directory (e.g. <code class="docutils literal notranslate"><span class="pre">um/branches</span></code>) in your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory on PUMA which will be your work area and <code class="docutils literal notranslate"><span class="pre">cd</span></code> to it.</p>
 <p>Create a new branch by running the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">branch</span><span class="o">-</span><span class="n">create</span> <span class="o">-</span><span class="n">k</span> <span class="o">&lt;</span><span class="n">ticket</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">branch_name</span><span class="o">&gt;</span> <span class="n">fcm</span><span class="p">:</span><span class="n">um</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="n">tr</span><span class="nd">@vn10</span><span class="o">.</span><span class="mi">5</span>
@@ -115,10 +258,10 @@
 </div>
 <p>Where:</p>
 <ul class="simple">
-<li><strong>&lt;ticket&gt;</strong> - is the related Trac ticket number for the ticket you created earlier.</li>
-<li><strong>&lt;branch_name&gt;</strong> - is a short name for the branch.  This must contain only alpha-numeric characters and/or underscores; e.g <em>tutorial</em></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;ticket&gt;</span></code> - is the related Trac ticket number for the ticket you created earlier.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;branch_name&gt;</span></code> - is a short name for the branch.  This must contain only alpha-numeric characters and/or underscores; e.g <code class="docutils literal notranslate"><span class="pre">tutorial</span></code></p></li>
 </ul>
-<p>You will be prompted to edit the message log file.  A standard template is automatically supplied and pops up in your default text editor.  Add a comment about what the branch is for at the top of the file.  When you are ready, save your change and exit the editor.  Answer <strong>y</strong> when you are prompted to go ahead and create the branch.</p>
+<p>You will be prompted to edit the message log file.  A standard template is automatically supplied and pops up in your default text editor.  Add a comment about what the branch is for at the top of the file.  When you are ready, save your change and exit the editor.  Answer <code class="docutils literal notranslate"><span class="pre">y</span></code> when you are prompted to go ahead and create the branch.</p>
 <p>If the branch is created successfully you will get a message similar to the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Committed</span> <span class="n">revision</span> <span class="mf">52466.</span>
 <span class="p">[</span><span class="n">info</span><span class="p">]</span> <span class="n">Created</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">code</span><span class="o">.</span><span class="n">metoffice</span><span class="o">.</span><span class="n">gov</span><span class="o">.</span><span class="n">uk</span><span class="o">/</span><span class="n">svn</span><span class="o">/</span><span class="n">um</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">branches</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">rosalynhatcher</span><span class="o">/</span><span class="n">vn10</span><span class="o">.</span><span class="mi">5</span><span class="n">_tutorial</span>
@@ -126,62 +269,74 @@
 </div>
 <p>The branch will have a URL (location in repository) like this:</p>
 <p><code class="docutils literal notranslate"><span class="pre">https://code.metoffice.gov.uk/um/main/branches/dev/[userid]/vn10.5_[branch_name]</span></code></p>
-<p>By default FCM prepends the revision of the trunk you have branched from to your branch name.  Here, as we have used version labelling it is <strong>vn10.5</strong>.  If you had entered a version number instead of a label FCM would have added rxxx where xxx is the revision number instead.</p>
+<p>By default FCM prepends the revision of the trunk you have branched from to your branch name.  Here, as we have used version labelling it is <code class="docutils literal notranslate"><span class="pre">vn10.5</span></code>.  If you had entered a version number instead of a label FCM would have added <code class="docutils literal notranslate"><span class="pre">rxxx</span></code> where <code class="docutils literal notranslate"><span class="pre">xxx</span></code> is the revision number instead.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For further information on the options available for branch creation type: <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">branch-create</span> <span class="pre">--help</span></code></p>
+<p class="admonition-title">Note</p>
+<p>For further information on the options available for branch creation type: <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">branch-create</span> <span class="pre">--help</span></code></p>
 </div>
-<p>Take a note of the revision number the branch was created at, and the branch name, vn10.5_[branch_name].</p>
-<p>You can see your branch from within the MOSRS Trac (<a class="reference external" href="https://code.metoffice.gov.uk/trac/um">https://code.metoffice.gov.uk/trac/um</a>): Click on <strong>Browse Source</strong> on the Trac menu bar and then navigate through:</p>
-<p><strong>main–&gt;branches–&gt;dev–&gt;[userid]</strong></p>
+<p>Take a note of the revision number the branch was created at, and the branch name, <code class="docutils literal notranslate"><span class="pre">vn10.5_[branch_name]</span></code>.</p>
+<p>You can see your branch from within the MOSRS Trac (<a class="reference external" href="https://code.metoffice.gov.uk/trac/um">https://code.metoffice.gov.uk/trac/um</a>): Click on <span class="guilabel">Browse Source</span> on the Trac menu bar and then navigate through <span class="guilabel">main –&gt; branches –&gt; dev–&gt; [userid]</span></p>
 <p>Your branch will also appear on the UM repository mirror held on PUMA (within 5 minutes): <a class="reference external" href="https://puma.nerc.ac.uk/trac/um.xm">https://puma.nerc.ac.uk/trac/um.xm</a></p>
-<p><strong>ii. Making changes to a working copy</strong></p>
+</div>
+<div class="section" id="making-changes-to-a-working-copy">
+<h3>Making changes to a working copy<a class="headerlink" href="#making-changes-to-a-working-copy" title="Permalink to this headline">¶</a></h3>
 <p><strong>Checking out a working copy</strong></p>
-<p>You may have noticed that creating a branch does not create a source code tree that you can edit (working copy)!  To do this you need to <em>Checkout</em> your branch.  Make sure you have changed to the working directory you created earlier as by default code is checked out to the current directory.  To checkout a copy of the UM code type:</p>
+<p>You may have noticed that creating a branch does not create a source code tree that you can edit (working copy)!  To do this you need to <code class="docutils literal notranslate"><span class="pre">checkout</span></code> your branch.  Make sure you have changed to the working directory you created earlier as by default code is checked out to the current directory.  To checkout a copy of the UM code type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">checkout</span> <span class="n">URL</span>
 </pre></div>
 </div>
-<p>Where URL is the url of your branch.  This can be supplied in it’s full form:</p>
+<p>Where URL is the url of your branch.  This can be supplied in its full form:</p>
 <p><code class="docutils literal notranslate"><span class="pre">https://code.metoffice.gov.uk/svn/um/main/branches/dev/[userid]/vn10.5_[branch_name]</span></code></p>
 <p>or by a shorter way:</p>
 <p><code class="docutils literal notranslate"><span class="pre">fcm:um.x-br/dev/[userid]/vn10.5_[branch_name]</span></code></p>
-<p><strong>Note:</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <ul class="simple">
-<li>In the second form we have replaced the leading part of the Subversion URL <code class="docutils literal notranslate"><span class="pre">https://code.metoffice.gov.uk/um/main/branches</span></code> with the FCM repository keyword <code class="docutils literal notranslate"><span class="pre">fcm:um.x-br</span></code>.  Keywords are shortcuts to save you from having to type in the full URL.</li>
-<li>As we have not specified a local directory PATH in the checkout command, it will create a working copy in your current working directory, using the basename of the URL you are checking out.  For example, when you checkout the branch you have just created, the command should create the working copy in <code class="docutils literal notranslate"><span class="pre">$PWD/vn10.5_[branch_name]</span></code>. Make a note of the location of your working copy, in case you forget where you have put it.</li>
-<li>We are also not specifying a revision to checkout, so it will checkout the HEAD, i.e. the latest revision.</li>
+<li><p>In the second form we have replaced the leading part of the Subversion URL <code class="docutils literal notranslate"><span class="pre">https://code.metoffice.gov.uk/um/main/branches</span></code> with the FCM repository keyword <code class="docutils literal notranslate"><span class="pre">fcm:um.x-br</span></code>.  Keywords are shortcuts to save you from having to type in the full URL.</p></li>
+<li><p>As we have not specified a local directory PATH in the checkout command, it will create a working copy in your current working directory, using the basename of the URL you are checking out.  For example, when you checkout the branch you have just created, the command should create the working copy in <code class="docutils literal notranslate"><span class="pre">$PWD/vn10.5_[branch_name]</span></code>. Make a note of the location of your working copy, in case you forget where you have put it.</p></li>
+<li><p>We are also not specifying a revision to checkout, so it will checkout the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>, i.e. the latest revision.</p></li>
 </ul>
+</div>
 <p><strong>Changing code</strong></p>
-<p>Back in the work area directory you created at the beginning of branch creation you should now see that a new directory has appeared and that it is named the same as your branch.  This is your <em>working copy</em>. cd into this directory and explore the code structure to familiarise yourself with how the code is structured.</p>
+<p>Back in the work area directory you created at the beginning of branch creation you should now see that a new directory has appeared and that it is named the same as your branch.  This is your <em>working copy</em>. <cite>cd</cite> into this directory and explore the code structure to familiarise yourself with how the code is structured.</p>
 <p>Now make some code changes! Use the following scenario to take you through the basic method of changing, adding and deleting files:</p>
 <ul class="simple">
-<li>Change to the <code class="docutils literal notranslate"><span class="pre">src/control/top_level/</span></code> sub-directory in your working copy.</li>
-<li>Edit <code class="docutils literal notranslate"><span class="pre">um_shell.F90</span></code>, using your favourite editor</li>
-<li>Go to the line that says <strong>CALL umPrint(‘I am PE ‘//TRIM(str(mype))//’ on ‘//TRIM(env_myhost),</strong></li>
-<li>Change: ‘I am PE’ to ‘Hello World PE’</li>
-<li>Go to the line that says <strong>of UM RUN Job :</strong></li>
-<li>Change: ‘of UM RUN Job :’ to ‘of UM Tutorial RUN Job:’</li>
-<li>Save your changes and exit the editor</li>
+<li><p>Change to the <code class="docutils literal notranslate"><span class="pre">src/control/top_level/</span></code> sub-directory in your working copy.</p></li>
+<li><p>Edit <code class="docutils literal notranslate"><span class="pre">um_shell.F90</span></code>, using your favourite editor</p></li>
+<li><p>Go to the line that says <code class="docutils literal notranslate"><span class="pre">CALL</span> <span class="pre">umPrint('I</span> <span class="pre">am</span> <span class="pre">PE</span> <span class="pre">'//TRIM(str(mype))//'</span> <span class="pre">on</span> <span class="pre">'//TRIM(env_myhost),</span></code></p></li>
+<li><p>Change: <code class="docutils literal notranslate"><span class="pre">'I</span> <span class="pre">am</span> <span class="pre">PE'</span></code> to <code class="docutils literal notranslate"><span class="pre">'Hello</span> <span class="pre">World</span> <span class="pre">PE'</span></code></p></li>
+<li><p>Go to the line that says <code class="docutils literal notranslate"><span class="pre">of</span> <span class="pre">UM</span> <span class="pre">RUN</span> <span class="pre">Job</span> <span class="pre">:</span></code></p></li>
+<li><p>Change: <code class="docutils literal notranslate"><span class="pre">of</span> <span class="pre">UM</span> <span class="pre">RUN</span> <span class="pre">Job</span> <span class="pre">:</span></code> to <code class="docutils literal notranslate"><span class="pre">of</span> <span class="pre">UM</span> <span class="pre">Tutorial</span> <span class="pre">RUN</span> <span class="pre">Job:</span></code></p></li>
+<li><p><span class="guilabel">Save</span> your changes and <span class="guilabel">Exit</span> the editor</p></li>
 </ul>
 <p><strong>Adding a new file</strong></p>
+<ul class="simple">
+<li><p>Still in the <code class="docutils literal notranslate"><span class="pre">src/control/top_level</span></code> directory, add a new FORTRAN module file <code class="docutils literal notranslate"><span class="pre">um_shell_mod.F90</span></code> containing a subroutine called <code class="docutils literal notranslate"><span class="pre">um_shell_sub()</span></code>.</p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<ul class="simple">
+<li><p>An example file is available on PUMA: <code class="docutils literal notranslate"><span class="pre">~um/um-training/um_shell_mod.F90</span></code>.</p></li>
+<li><p>The routine <code class="docutils literal notranslate"><span class="pre">umPrint</span></code> should be used for writing out messages rather than standard FORTRAN <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statements.</p></li>
+</ul>
+</div>
 <ul>
-<li><p class="first">Still in the <code class="docutils literal notranslate"><span class="pre">src/control/top_level</span></code> directory, add a new FORTRAN module file (<code class="docutils literal notranslate"><span class="pre">um_shell_mod.F90</span></code>) containing a subroutine called <code class="docutils literal notranslate"><span class="pre">um_shell_sub()</span></code>.  (An example file is available on PUMA: <code class="docutils literal notranslate"><span class="pre">~um/um-training/um_shell_mod.F90</span></code>.  The routine <code class="docutils literal notranslate"><span class="pre">umPrint</span></code> should be used for writing out messages rather than standard FORTRAN <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statements.)</p>
-</li>
-<li><p class="first">Run <strong>fcm add</strong> on the command line, to let the repository know you’re adding a new file at the next commit. Make sure you are still in <code class="docutils literal notranslate"><span class="pre">src/control/top_level</span></code> and then type:</p>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">add</span></code> on the command line, to let the repository know you’re adding a new file at the next commit. Make sure you are still in <code class="docutils literal notranslate"><span class="pre">src/control/top_level</span></code> and then type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">add</span> <span class="n">um_shell_mod</span><span class="o">.</span><span class="n">F90</span>
 </pre></div>
 </div>
 </li>
 </ul>
 <blockquote>
-<div>at the command prompt.</div></blockquote>
+<div><p>at the command prompt.</p>
+</div></blockquote>
 <ul>
-<li><p class="first">Modify <code class="docutils literal notranslate"><span class="pre">um_shell.F90</span></code> to use this new module.  You’ll see lots of <code class="docutils literal notranslate"><span class="pre">USE</span></code> statements near the top of the file.  Add the following to use our new one.</p>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">um_shell.F90</span></code> to use this new module.  You’ll see lots of <code class="docutils literal notranslate"><span class="pre">USE</span></code> statements near the top of the file.  Add the following to use our new one.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">USE</span> <span class="n">um_shell_mod</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Then add a line to call the <code class="docutils literal notranslate"><span class="pre">um_shell_sub</span></code> subroutine (suggest around line 375):</p>
+<li><p>Then add a line to call the <code class="docutils literal notranslate"><span class="pre">um_shell_sub</span></code> subroutine (suggest around line 375):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CALL</span> <span class="n">um_shell_sub</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -189,16 +344,15 @@
 </ul>
 <p><strong>Deleting a file</strong></p>
 <ul>
-<li><p class="first">In the <code class="docutils literal notranslate"><span class="pre">fcm-make/ncas-xc30-ifort</span></code> directory, you should see a file <code class="docutils literal notranslate"><span class="pre">um-createbc-safe.cfg</span></code></p>
-</li>
-<li><p class="first">Run <strong>fcm delete</strong> on the command line, to let the repository know you want to remove this file from your branch: Make sure you are in <code class="docutils literal notranslate"><span class="pre">fcm-make/ncas-xc30-ifort</span></code> and then type:</p>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">fcm-make/ncas-xc30-ifort</span></code> directory, you should see a file <code class="docutils literal notranslate"><span class="pre">um-createbc-safe.cfg</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">delete</span></code> on the command line, to let the repository know you want to remove this file from your branch: Make sure you are in <code class="docutils literal notranslate"><span class="pre">fcm-make/ncas-xc30-ifort</span></code> and then type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">delete</span> <span class="n">um</span><span class="o">-</span><span class="n">createbc</span><span class="o">-</span><span class="n">safe</span><span class="o">.</span><span class="n">cfg</span>
 </pre></div>
 </div>
 </li>
 </ul>
 <p><strong>Getting information about changes to a working copy</strong></p>
-<p>All the changes you have made so far have not been committed - i.e. saved to your branch in the repository.  It is possible to list these changes using the <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">status</span></code> command.  Firstly, make sure you cd back up to the top level of your working directory and then type:</p>
+<p>All the changes you have made so far have not been committed - i.e. saved to your branch in the repository.  It is possible to list these changes using the <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">status</span></code> command.  Firstly, make sure you <code class="docutils literal notranslate"><span class="pre">cd</span></code> back up to the top level of your working directory and then type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">status</span>
 </pre></div>
 </div>
@@ -209,37 +363,42 @@ M       src/control/top_level/um_shell.F90
 A       src/control/top_level/um_shell_sub.F90
 </pre></div>
 </div>
-<p>Notice that each changed file is flagged with a letter that indicates what the change was: <strong>A</strong> for Added, <strong>D</strong> for Deleted and <strong>M</strong> for Modified.</p>
+<p>Notice that each changed file is flagged with a letter that indicates what the change was: <code class="docutils literal notranslate"><span class="pre">A</span></code> for Added, <code class="docutils literal notranslate"><span class="pre">D</span></code> for Deleted and <code class="docutils literal notranslate"><span class="pre">M</span></code> for Modified.</p>
 <p><strong>Reverting an uncommitted change</strong></p>
 <p>At this point you can undo any changes before committing. Try the following so that you know how to restore a changed file:</p>
 <ul class="simple">
-<li>Edit <code class="docutils literal notranslate"><span class="pre">src/control/top_level/initial.F90</span></code> to make any change and then save it.</li>
-<li>Run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">status</span></code> again to confirm it has been flagged as Modified.</li>
-<li>Run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">revert</span></code> on the command line: Make sure you are still in <code class="docutils literal notranslate"><span class="pre">src/control/top_level</span></code> and then type <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">revert</span> <span class="pre">initial.F90</span></code></li>
-<li>Re-run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">status</span></code> to see that the file is no longer modified.</li>
+<li><p>Edit <code class="docutils literal notranslate"><span class="pre">src/control/top_level/initial.F90</span></code> to make any change and then save it.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">status</span></code> again to confirm it has been flagged as Modified.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">revert</span></code> on the command line: Make sure you are still in <code class="docutils literal notranslate"><span class="pre">src/control/top_level</span></code> and then type <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">revert</span> <span class="pre">initial.F90</span></code></p></li>
+<li><p>Re-run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">status</span></code> to see that the file is no longer modified.</p></li>
 </ul>
-<p>Note that <strong>revert</strong> will undo ALL changes to a file relative to your branch. Therefore if you’ve made several uncommitted changes, <strong>revert</strong> will undo them all, not just the last one.</p>
-<p><strong>iii. Committing changes</strong></p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">revert</span></code> will undo ALL changes to a file relative to your branch. Therefore if you’ve made several uncommitted changes, <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">revert</span></code> will undo them all, not just the last one.</p>
+</div>
+<div class="section" id="committing-changes">
+<h3>Committing changes<a class="headerlink" href="#committing-changes" title="Permalink to this headline">¶</a></h3>
 <p>The change in your working copy remains local until you commit it to the repository where it becomes permanent.  If you are planning to make a large number of changes, you are encouraged to commit regularly to your branch at appropriate intervals.  Make sure you are in the top level directory of the working copy and then type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ fcm commit
 </pre></div>
 </div>
-<p>A text editor will appear to allow you to edit the commit message.  You must add a commit message to describe your change above the line that says <strong>“–Add your commit message ABOVE - do not alter this line or those below–”</strong>.  Your commit will fail if you do not enter a commit message.  Make sure you provide meaningful commit messages (if your change is intended for inclusion in the trunk you should reference your ticket number) as these will show up in the revision logs and can be a useful source of informtion.</p>
+<p>A text editor will appear to allow you to edit the commit message.  You must add a commit message to describe your change above the line that says <code class="docutils literal notranslate"><span class="pre">--Add</span> <span class="pre">your</span> <span class="pre">commit</span> <span class="pre">message</span> <span class="pre">ABOVE</span> <span class="pre">-</span> <span class="pre">do</span> <span class="pre">not</span> <span class="pre">alter</span> <span class="pre">this</span> <span class="pre">line</span> <span class="pre">or</span> <span class="pre">those</span> <span class="pre">below--</span></code>.  Your commit will fail if you do not enter a commit message.  Make sure you provide meaningful commit messages (if your change is intended for inclusion in the trunk you should reference your ticket number) as these will show up in the revision logs and can be a useful source of informtion.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p><strong>DO:</strong></p>
 <ul class="simple">
-<li>Put a link to the ticket that raises the issues you are addressing using a wiki syntax; e.g. #15.  Putting this as the first item in the commit message means it will show very clearly under Trac what ticket the change relates to.</li>
-<li>State the reason for the change</li>
-<li>List possible impacts to other users</li>
-<li>Use wiki syntax that can be displayed nicely in plain text</li>
+<li><p>Put a link to the ticket that raises the issues you are addressing using a wiki syntax; e.g. <code class="docutils literal notranslate"><span class="pre">#15</span></code>.  Putting this as the first item in the commit message means it will show very clearly under Trac what ticket the change relates to.</p></li>
+<li><p>State the reason for the change</p></li>
+<li><p>List possible impacts to other users</p></li>
+<li><p>Use wiki syntax that can be displayed nicely in plain text</p></li>
 </ul>
 <p><strong>DON’T:</strong></p>
 <ul class="simple">
-<li>Repeat what’s already stated in the merge template; e.g. statements such as <em>‘merge my branch to the trunk’</em> should be avoided</li>
-<li>List the files you have changed. This will already have been included in the commit log by FCM</li>
-<li>Use wiki syntax that cannot be displayed nicely in plain text</li>
-<li>Be vague. A commit message that just says <em>“Fix”</em> is insufficient!</li>
+<li><p>Repeat what’s already stated in the merge template; e.g. statements such as <code class="docutils literal notranslate"><span class="pre">merge</span> <span class="pre">my</span> <span class="pre">branch</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">trunk</span></code> should be avoided</p></li>
+<li><p>List the files you have changed. This will already have been included in the commit log by FCM</p></li>
+<li><p>Use wiki syntax that cannot be displayed nicely in plain text</p></li>
+<li><p>Be vague. A commit message that just says <code class="docutils literal notranslate"><span class="pre">Fix</span></code> is insufficient!</p></li>
 </ul>
-<p><strong>Save</strong> your change and exit the editor.  Answer <strong>y</strong> when you are prompted to confirm the commit.</p>
+</div>
+<p><span class="guilabel">Save</span> your change and exit the editor.  Answer <code class="docutils literal notranslate"><span class="pre">y</span></code> when you are prompted to confirm the commit.</p>
 <p>If you’ve followed the example scenario above you should see output similar to this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma$ fcm commit
 [info] emacs: starting commit message editor...
@@ -269,8 +428,10 @@ Updating &#39;.&#39;:
 At revision 29416.
 </pre></div>
 </div>
-<p><strong>iv. Getting information about your branch</strong></p>
-<p>If you need to find out information about your (or other users’) branches, you can use the <strong>fcm branch info</strong> command.</p>
+</div>
+<div class="section" id="getting-information-about-your-branch">
+<h3>Getting information about your branch<a class="headerlink" href="#getting-information-about-your-branch" title="Permalink to this headline">¶</a></h3>
+<p>If you need to find out information about your (or another user’s) branches, you can use the <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">branch</span> <span class="pre">info</span></code> command.</p>
 <p>In the directory where you checked out the code, type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ fcm branch-info
 </pre></div>
@@ -294,10 +455,12 @@ Merges Avail From Parent: 29409 29400 ....... 25507 25445 25365 25212 25077 2477
 Merges Avail Into Parent: 29416
 </pre></div>
 </div>
-<p><strong>v. Testing that your branch works</strong></p>
+</div>
+<div class="section" id="testing-that-your-branch-works">
+<h3>Testing that your branch works<a class="headerlink" href="#testing-that-your-branch-works" title="Permalink to this headline">¶</a></h3>
 <p>Now that you have made a branch you can use it in the suite you were running earlier.  Go back to the section where you added an existing branch to your suite and add your new branch as well.</p>
-<p><strong>Save</strong> and then <strong>Run</strong> your suite.</p>
-<p>If you have followed the tutorial scenario so far you should find that your suite fails during the <strong>fcm extract</strong> of code.  In the <code class="docutils literal notranslate"><span class="pre">job.err</span></code> file for the <em>fcm_make</em> task you will see an error message like this:</p>
+<p><span class="guilabel">Save</span> and then <span class="guilabel">Run</span> your suite.</p>
+<p>If you have followed the tutorial scenario so far you should find that your suite fails during the <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">extract</span></code> of code.  In the <code class="docutils literal notranslate"><span class="pre">job.err</span></code> file for the <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> task you will see an error message like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[FAIL] um/src/control/top_level/um_shell.F90: merge results in conflict
 [FAIL]     merge output: /home/ros/cylc-run/u-ag954/share/fcm_make/
 .fcm-make/extract/merge/um/src/control/top_level/um_shell.F90.diff
@@ -309,35 +472,32 @@ rosalynhatcher/vn10.5_um_shell1/src/control/top_level/um_shell.F90@29416
 rosalynhatcher/vn10.5_example_branch/src/control/top_level/um_shell.F90@29416
 </pre></div>
 </div>
-<p>This is because the sample branch and your branch contain modifications to the same line in file <code class="docutils literal notranslate"><span class="pre">um_shell.F90</span></code> and so conflict.  Errors like this can be quite common if you are working with others on the same section of code.  The default behaviour of FCM in this situation is to fail and force you to resolve the conflict.  For the purposes of this exercise we will simply remove the ‘um_shell1’ branch from the suite - we’ve decided we only want the changes we’ve put in our branch.  In practice you will need to go through the process of resolving a conflict which can be quite complex. There is a tutorial dedicated to conflict resolution should you wish to know more and is a good reference should you encounter conflicts in your development work.</p>
+<p>This is because the sample branch and your branch contain modifications to the same line in file <code class="docutils literal notranslate"><span class="pre">um_shell.F90</span></code> and so conflict.  Errors like this can be quite common if you are working with others on the same section of code.  The default behaviour of FCM in this situation is to fail and force you to resolve the conflict.  For the purposes of this exercise we will simply remove the <code class="docutils literal notranslate"><span class="pre">um_shell1</span></code> branch from the suite - we’ve decided we only want the changes we’ve put in our branch.  In practice you will need to go through the process of resolving a conflict which can be quite complex. There is a tutorial dedicated to conflict resolution should you wish to know more and is a good reference should you encounter conflicts in your development work.</p>
 <p><strong>Viewing your changes in Trac</strong></p>
-<p>Making a change to your branch results in a <strong>changeset</strong> which is basically a record of the changes.  One way of viewing the changeset you have just created is to click on <strong>Timeline</strong> in Trac.  The Timeline view is a sequential record of all events in the repository.  You should see changesets for your original commit to your branch and the subsequent commit after resolving the conflicts near the top.  The changesets are numbered corresponding to the revision of your branch which would have been displayed in the GUI when you did a commit or branch info.  To see all the details click on the line <em>‘Changeset[xxx]…’</em> relating to your changeset.  Alternatively, if you enter the number of the changeset “[<strong>xxx</strong>]” into the search box at the top right, it will take you directly to the numbered changeset.  Your changeset should look something like this:</p>
+<p>Making a change to your branch results in a <strong>changeset</strong> which is basically a record of the changes.  One way of viewing the changeset you have just created is to click on <span class="guilabel">Timeline</span> in Trac.  The Timeline view is a sequential record of all events in the repository.  You should see changesets for your original commit to your branch and the subsequent commit after resolving the conflicts near the top.  The changesets are numbered corresponding to the revision of your branch which would have been displayed in the GUI when you did a <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">commit</span></code> or <code class="docutils literal notranslate"><span class="pre">`fcm</span> <span class="pre">branch</span> <span class="pre">info</span></code>.  To see all the details click on the line <em>‘Changeset[xxx]…’</em> relating to your changeset.  Alternatively, if you enter the number of the changeset “[<strong>xxx</strong>]” into the search box at the top right, it will take you directly to the numbered changeset.  Your changeset should look something like this:</p>
 <a class="reference internal image-reference" href="_images/fcm_changeset.png"><img alt="_images/fcm_changeset.png" src="_images/fcm_changeset.png" style="width: 650px; height: 591px;" /></a>
 </div>
+</div>
 <div class="section" id="documenting-your-change">
-<h2>4.5. Documenting your change<a class="headerlink" href="#documenting-your-change" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.5. </span>Documenting your change<a class="headerlink" href="#documenting-your-change" title="Permalink to this headline">¶</a></h2>
 <p>Go back to the Trac ticket you created for your code change and add some documentation as follows:</p>
 <ul>
-<li><div class="first line-block">
+<li><div class="line-block">
 <div class="line">Add a link to your branch:</div>
 <div class="line">Development branch: <code class="docutils literal notranslate"><span class="pre">[source:main/branches/dev/&lt;username&gt;/&lt;branch_name&gt;]</span></code></div>
 </div>
 </li>
-<li><p class="first">A description of what code has changed</p>
-</li>
-<li><p class="first">Test results (i.e. Did your suite run? Were there any clashes to resolve?)</p>
-</li>
-<li><p class="first">Any other information you want to add</p>
-</li>
-<li><p class="first">As we have finished the change for this tutorial example we will resolve the ticket as <strong>fixed</strong> by clicking <strong>Modify Ticket</strong> and selecting <em>“resolve &amp; assign to &lt;username&gt; as fixed”</em>.</p>
-</li>
+<li><p>A description of what code has changed</p></li>
+<li><p>Test results (i.e. Did your suite run? Were there any clashes to resolve?)</p></li>
+<li><p>Any other information you want to add</p></li>
+<li><p>As we have finished the change for this tutorial example we will resolve the ticket as <strong>fixed</strong> by clicking <span class="guilabel">Modify Ticket`</span> and selecting <span class="guilabel">resolve &amp; assign to &lt;username&gt; as fixed</span>.</p></li>
 </ul>
-<p><strong>Preview</strong> and <strong>Submit</strong> your ticket to save the changes.  Check the link you added works.</p>
+<p><span class="guilabel">Preview</span> and <span class="guilabel">Submit</span> your ticket to save the changes.  Check the link you added works.</p>
 </div>
 <div class="section" id="tidying-up">
-<h2>4.6. Tidying Up<a class="headerlink" href="#tidying-up" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6. </span>Tidying Up<a class="headerlink" href="#tidying-up" title="Permalink to this headline">¶</a></h2>
 <p>If your development is destined for the UM trunk, then once you have finished your code changes and it has been tested and reviewed, your branch will be committed to the project shared package branch by the project owner.  Once this has been done and there are no problems, your branch is essentially redundant.  If no other users are using this branch in their suites it can be deleted.</p>
-<p>For the purposes of this tutorial, you can now proceed to delete your branch.  When you delete a branch, it becomes invisible from the HEAD revision, but will continue to exist in the repository should you want to refer to it in the future.</p>
+<p>For the purposes of this tutorial, you can now proceed to delete your branch.  When you delete a branch, it becomes invisible from the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> revision, but will continue to exist in the repository should you want to refer to it in the future.</p>
 <p><strong>List branches owned by you</strong></p>
 <p>If you forget what your branch is called and/or what other branches you have created, you can get a listing of all the branches you have created in a project.  To do this use the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">branch</span><span class="o">-</span><span class="nb">list</span> <span class="n">URL</span>
@@ -350,89 +510,79 @@ rosalynhatcher/vn10.5_example_branch/src/control/top_level/um_shell.F90@29416
 </pre></div>
 </div>
 <p>You will be prompted to edit the commit message file.  Again a standard template is automatically supplied for the commit.  Add your commit message, save your changes and exit the editor.</p>
-<p>Answer <strong>y</strong> when you are prompted to go ahead and delete this branch.</p>
-<p>Your working copy is now pointing to a branch that no longer exists at the HEAD revision of the repository.  It is possible to keep this working copy, create a new branch and switch your working copy to point to the new branch.  Otherwise, you can remove your working copy by issuing a careful <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-rf</span></code> command.</p>
+<p>Answer <code class="docutils literal notranslate"><span class="pre">y</span></code> when you are prompted to go ahead and delete this branch.</p>
+<p>Your working copy is now pointing to a branch that no longer exists at the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> revision of the repository.  It is possible to keep this working copy, create a new branch and switch your working copy to point to the new branch.  Otherwise, you can remove your working copy by issuing a careful <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-rf</span></code> command.</p>
 </div>
 <div class="section" id="version-control-of-suites">
-<h2>4.7. Version Control of Suites<a class="headerlink" href="#version-control-of-suites" title="Permalink to this headline">¶</a></h2>
-<p>Just like the model code, your UM suites are also under version control in a subversion repository, usually <em>roses-u</em> which is on the MOSRS.  Once you have a working copy of your suite under <code class="docutils literal notranslate"><span class="pre">~/roses</span></code> you can use FCM commands in the same way as for your source code branches; i.e. commit changes, diff changes, etc.</p>
+<h2><span class="section-number">4.7. </span>Version Control of Suites<a class="headerlink" href="#version-control-of-suites" title="Permalink to this headline">¶</a></h2>
+<p>Just like the model code, your UM suites are also under version control in a subversion repository called <code class="docutils literal notranslate"><span class="pre">roses-u</span></code> which is on the MOSRS.  Once you have a working copy of your suite under <code class="docutils literal notranslate"><span class="pre">~/roses</span></code> you can use FCM commands in the same way as for your source code branches; i.e. commit changes, diff changes, etc.</p>
 <ul class="simple">
-<li>Look in the roses-u repository via MOSRS Trac (<a class="reference external" href="https://code.metoffice.gov.uk/trac/roses-u">https://code.metoffice.gov.uk/trac/roses-u</a>) and find the suite you created in the previous section. (Hint: Go to <em>“Browse Source”</em> then drill down to find your suite. e.g. u-ag263 would be under a/g/2/6/3).  When was the suite last modified?</li>
-<li>Go to your suite working directory and type <strong>fcm status</strong> to see the changes you have made since you copied the suite.</li>
-<li>Run <strong>fcm commit</strong> to commit your changes to the repository.</li>
-<li>Look again in the MOSRS roses-u Trac and see that your commit has now appeared in the repository.  What is the suite’s last modified time now?</li>
-<li>Use Trac to view the changes you have made to the suite.  (Hint: click on the number in the revision column, and then on the <em>View changes</em> button to show a diff of your changes)</li>
+<li><p>Look in the roses-u repository via MOSRS Trac (<a class="reference external" href="https://code.metoffice.gov.uk/trac/roses-u">https://code.metoffice.gov.uk/trac/roses-u</a>) and find the suite you created in the previous section.</p></li>
 </ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Go to <span class="guilabel">Browse Source`</span> then drill down to find your suite. e.g. <code class="docutils literal notranslate"><span class="pre">u-ag263</span></code> would be under <code class="docutils literal notranslate"><span class="pre">a/g/2/6/3</span></code></p>
+</div>
+<ul class="simple">
+<li><p>When was the suite last modified?</p></li>
+<li><p>Go to your suite working directory and type <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">status</span></code> to see the changes you have made since you copied the suite.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">commit</span></code> to commit your changes to the repository.</p></li>
+<li><p>Look again in the MOSRS roses-u Trac and see that your commit has now appeared in the repository.  What is the suite’s last modified time now?</p></li>
+<li><p>Use Trac to view the changes you have made to the suite.</p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Click on the number in the revision column, and then on the <span class="guilabel">View changes</span> button to show a diff of your changes</p>
+</div>
 </div>
 </div>
 
 
+           </div>
+           
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">4. FCM tutorial</a><ul>
-<li><a class="reference internal" href="#setting-up-your-default-text-editor">4.1. Setting up your default text editor</a></li>
-<li><a class="reference internal" href="#applying-modifications-to-a-um-suite">4.2. Applying modifications to a UM suite</a></li>
-<li><a class="reference internal" href="#opening-a-ticket">4.3. Opening a Ticket</a></li>
-<li><a class="reference internal" href="#making-code-changes">4.4. Making Code Changes</a></li>
-<li><a class="reference internal" href="#documenting-your-change">4.5. Documenting your change</a></li>
-<li><a class="reference internal" href="#tidying-up">4.6. Tidying Up</a></li>
-<li><a class="reference internal" href="#version-control-of-suites">4.7. Version Control of Suites</a></li>
-</ul>
-</li>
-</ul>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="solving-problems.html" class="btn btn-neutral float-right" title="5. Solving Common UM Problems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="running.html" class="btn btn-neutral float-left" title="3. Running a UM suite on ARCHER2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="running.html"
-                        title="previous chapter">3. Running a UM suite on ARCHER</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="solving-problems.html"
-                        title="next chapter">5. Solving Common UM Problems</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/fcm-tutorial.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2017-2021, NCAS-CMS.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="solving-problems.html" title="5. Solving Common UM Problems"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="running.html" title="3. Running a UM suite on ARCHER"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">NCAS Unified Model Introduction</a> &#187;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2017-2019, NCAS-CMS.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

@@ -3,16 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-NCAS Unified Model Introduction: Practical sessions
-===================================================
+NCAS Unified Model Introduction Course
+======================================
 
-Practical exercises for the UM training course in Reading, 6-8 November 2019. 
+Practical exercises for the online UM training course 2021 
 
 NCAS Computational Modelling Services: http://cms.ncas.ac.uk/
 
 .. toctree::
+   :caption: Practicals
    :maxdepth: 1
-   :numbered:
+   :numbered: 2
 
    getting-setup 
    working-with-suites
