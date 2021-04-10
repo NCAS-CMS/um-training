@@ -1,6 +1,11 @@
 Getting set up
 ==============
 
+.. admonition:: Updated for ARCHER2
+
+   * Add instructions for X2Go?
+   * Needs testing
+   
 Setup connection to PUMA & ARCHER2
 ----------------------------------
 
@@ -117,7 +122,7 @@ Run the following command to generate your ``id_rsa_archerum`` ssh key: ::
 
 When prompted to **Enter passphrase**, this should be a fairly complicated and unguessable passphrase. You can use spaces in the passphrase if it helps you to remember it more readily. It is recommended that you don't use your password in case it is hacked.
 
-Your ``id_rsa_archerum`` key will be automatically detected and sent to ARCHER2 to be installed.  This may take up to 48 hours, excluding weekends, to become activated.
+Your ``id_rsa_archerum`` key will be automatically detected and sent to ARCHER2 to be installed.  This may take up to 48 hours, excluding weekends, to become activated and you will receive an email confirmation.
 
 .. warning::
    * **DO NOT** use an empty passphrase.  This presents a security issue.

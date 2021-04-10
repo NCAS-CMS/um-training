@@ -171,6 +171,14 @@
             
   <div class="section" id="solving-common-um-problems">
 <h1><span class="section-number">5. </span>Solving Common UM Problems<a class="headerlink" href="#solving-common-um-problems" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-updated-for-archer2 admonition">
+<p class="admonition-title">Updated for ARCHER2</p>
+<ul class="simple">
+<li><p>Planet Constant blowup no longer causes BICGSTAB error. Section needs rewording or a new error trigger.  Users can still follow the instructions to fix the segmentation fault.</p></li>
+<li><p>Instructions include use of training account - possibly move to an admonition box.</p></li>
+<li><p>Needs testing</p></li>
+</ul>
+</div>
 <p>This section exposes you to more typical UM errors and hints at how to find and fix those errors.</p>
 <p>You may encounter other errors, often as a result of mistyping, for which solution hints are not provided.</p>
 <div class="section" id="set-up-n96-ga7-0-amip-example-suite">
@@ -267,17 +275,20 @@
 <p class="admonition-title">Hint</p>
 <p>Look in the directory where it thinks the start file should be - is there a candidate in there?</p>
 </div>
-<p>Point your suite to the correct start dump.  Fixing this problem isn’t quite as easy as it sounds.  A search for <code class="docutils literal notranslate"><span class="pre">ainitial</span></code> in the Rose edit GUI will take you to the <span class="guilabel">General technical options</span> panel.</p>
-<ul class="simple">
-<li><p>Can you see the problem?</p></li>
-</ul>
-<p>The initial dump location is set with an environment variable: <code class="docutils literal notranslate"><span class="pre">AINITIAL</span></code>.  Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.</p>
-<p>In your suite directory on PUMA (<code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suitename&gt;</span></code>) use <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-R</span></code> to search for where the variable <code class="docutils literal notranslate"><span class="pre">AINITIAL</span></code> is set (If you are unfamiliar with using <cite>grep</cite> please ask for help).  Edit <code class="docutils literal notranslate"><span class="pre">AINITIAL</span></code> in the appropriate <code class="docutils literal notranslate"><span class="pre">.rc</span></code> file to point to the correct initial dump file.</p>
+<p>Point your suite to the correct start dump.  Fixing this problem isn’t quite as easy as it sounds.  A search in the Rose edit GUI for the dump file name <code class="docutils literal notranslate"><span class="pre">ab642a.da19880901_00_ros</span></code> will not locate anything.  For this suite it is not possible to fix this issue through the GUI, for some other suites you can edit the initial dump location in the panel <span class="guilabel">um –&gt; namelist –&gt; Reconfiguration and Ancillary Control –&gt; General technical options</span>.</p>
+<p>Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.</p>
+<p>In your suite directory on PUMA (<code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suitename&gt;</span></code>) use <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-R</span></code> to search for the start dump name <code class="docutils literal notranslate"><span class="pre">ab642a.da19880901_00_ros</span></code> in the suite files.  You should see 2 occurrences listed</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma$ grep -r ab642a.da19880901_00_ros *
+site/archer2.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901_00_ros&#39; %}
+site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901_00_ros&#39; %}
+</pre></div>
+</div>
+<p>Edit the dump name in the appropriate <code class="docutils literal notranslate"><span class="pre">.rc</span></code> file for the HPC we are running on, to point to the correct initial dump file.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>This suite is set up to run on multiple platforms, make sure you edit the file appropriate to ARCHER2. You may notice that <code class="docutils literal notranslate"><span class="pre">AINITIAL</span></code> is set 3 times; a different file is required depending on the resolution the model is being run at.  This suite is running at N96 resolution.</p>
 </div>
-<p><span class="guilabel">Reload</span> the suite definition and then <span class="guilabel">Re-trigger</span> the reconfiguration task.  The reconfiguration should succeed this time.</p>
+<p><span class="guilabel">Reload</span> the suite definition and then <span class="guilabel">Re-trigger</span> the <code class="docutils literal notranslate"><span class="pre">install_cold</span></code> task.  The task should succeed this time.</p>
 <ul class="simple">
 <li><p>Has the model run successfully?</p></li>
 </ul>
@@ -299,6 +310,10 @@
 </ul>
 <p>Change to the <code class="docutils literal notranslate"><span class="pre">pe_output</span></code> directory for the atmos_main task. This is under <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suite-id&gt;/work/&lt;cycle&gt;/atmos_main/pe_output</span></code> and contains the output from each PE.</p>
 <p>Open the file called <code class="docutils literal notranslate"><span class="pre">&lt;suite-id&gt;.fort6.pe&lt;pe</span> <span class="pre">noted</span> <span class="pre">above&gt;</span></code>.  Sometimes extra information about the error can be found in the individual PE output files.</p>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Model still crashes but not with a BICGSTAB error.  What do we want to do here?</p>
+</div>
 <p>The error message indicates that NaNs (NaN stands for Not a Number and is a numeric data type representing an undefined or unrepresentable value) have occurred in the routine <code class="docutils literal notranslate"><span class="pre">EG_BICGSTAB</span></code>.  This basically means something in the model has become unstable and “blown up”. In this case the failure results from an incorrect value for the solar constant <code class="docutils literal notranslate"><span class="pre">sc</span></code>.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">edit</span></code> may point you in the right direction.  Go to <span class="guilabel">um –&gt; namelist –&gt; UM Science Settings –&gt; Planet Constants</span> and set it to the suggested value. <span class="guilabel">Save</span>, <span class="guilabel">Reload</span> and <span class="guilabel">Re-trigger</span>.</p>
 <p>The model should fail with the same error.  So what’s gone wrong here?  We’ve changed the value of the solar constant to a valid value so why didn’t it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER2 navigate to the work directory for the <code class="docutils literal notranslate"><span class="pre">atmos_main</span></code> task (ie. <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suite-id&gt;/work/&lt;cycle&gt;/atmos_main</span></code>).  In here you will see several files with uppercase names (e.g. <code class="docutils literal notranslate"><span class="pre">ATMOSCNTL</span></code>, <code class="docutils literal notranslate"><span class="pre">SHARED</span></code>), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use <cite>grep</cite>) in these files for the solar constant variable <code class="docutils literal notranslate"><span class="pre">sc</span></code>.</p>
 <div class="admonition hint">

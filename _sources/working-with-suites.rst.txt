@@ -1,6 +1,10 @@
 Working with Suites
 ===================
 
+.. admonition:: Updated for ARCHER2
+		
+   * Needs testing
+		
 Suite Discovery and Management: rosie go
 ----------------------------------------
 

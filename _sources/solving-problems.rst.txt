@@ -1,6 +1,12 @@
 Solving Common UM Problems
 ==========================
 
+.. admonition:: Updated for ARCHER2
+
+   * Planet Constant blowup no longer causes BICGSTAB error. Section needs rewording or a new error trigger.  Users can still follow the instructions to fix the segmentation fault.
+   * Instructions include use of training account - possibly move to an admonition box.
+   * Needs testing
+
 This section exposes you to more typical UM errors and hints at how to find and fix those errors.
 
 You may encounter other errors, often as a result of mistyping, for which solution hints are not provided.
@@ -100,18 +106,22 @@ Note again that the task submitted successfully.
 .. Hint::
    Look in the directory where it thinks the start file should be - is there a candidate in there?
 
-Point your suite to the correct start dump.  Fixing this problem isn't quite as easy as it sounds.  A search for ``ainitial`` in the Rose edit GUI will take you to the :guilabel:`General technical options` panel.
+Point your suite to the correct start dump.  Fixing this problem isn't quite as easy as it sounds.  A search in the Rose edit GUI for the dump file name ``ab642a.da19880901_00_ros`` will not locate anything.  For this suite it is not possible to fix this issue through the GUI, for some other suites you can edit the initial dump location in the panel :guilabel:`um --> namelist --> Reconfiguration and Ancillary Control --> General technical options`.
 
-* Can you see the problem?
+Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.
 
-The initial dump location is set with an environment variable: ``AINITIAL``.  Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.
+In your suite directory on PUMA (``~/roses/<suitename>``) use ``grep -R`` to search for the start dump name ``ab642a.da19880901_00_ros`` in the suite files.  You should see 2 occurrences listed ::
 
-In your suite directory on PUMA (``~/roses/<suitename>``) use ``grep -R`` to search for where the variable ``AINITIAL`` is set (If you are unfamiliar with using `grep` please ask for help).  Edit ``AINITIAL`` in the appropriate ``.rc`` file to point to the correct initial dump file.
+  ros@puma$ grep -r ab642a.da19880901_00_ros *
+  site/archer2.rc:{% set AINITIAL = AINITIAL_DIR + 'N96L85/ab642a.da19880901_00_ros' %}
+  site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + 'N96L85/ab642a.da19880901_00_ros' %}
+
+Edit the dump name in the appropriate ``.rc`` file for the HPC we are running on, to point to the correct initial dump file.
 
 .. Hint::
    This suite is set up to run on multiple platforms, make sure you edit the file appropriate to ARCHER2. You may notice that ``AINITIAL`` is set 3 times; a different file is required depending on the resolution the model is being run at.  This suite is running at N96 resolution.
 
-:guilabel:`Reload` the suite definition and then :guilabel:`Re-trigger` the reconfiguration task.  The reconfiguration should succeed this time.
+:guilabel:`Reload` the suite definition and then :guilabel:`Re-trigger` the ``install_cold`` task.  The task should succeed this time.
 
 * Has the model run successfully?
 
@@ -132,6 +142,9 @@ Change to the ``pe_output`` directory for the atmos_main task. This is under ``~
 
 Open the file called ``<suite-id>.fort6.pe<pe noted above>``.  Sometimes extra information about the error can be found in the individual PE output files.
 
+.. Todo::
+   Model still crashes but not with a BICGSTAB error.  What do we want to do here?
+   
 The error message indicates that NaNs (NaN stands for Not a Number and is a numeric data type representing an undefined or unrepresentable value) have occurred in the routine ``EG_BICGSTAB``.  This basically means something in the model has become unstable and "blown up". In this case the failure results from an incorrect value for the solar constant ``sc``.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within ``rose edit`` may point you in the right direction.  Go to :guilabel:`um --> namelist --> UM Science Settings --> Planet Constants` and set it to the suggested value. :guilabel:`Save`, :guilabel:`Reload` and :guilabel:`Re-trigger`.
 
 The model should fail with the same error.  So what's gone wrong here?  We've changed the value of the solar constant to a valid value so why didn't it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER2 navigate to the work directory for the ``atmos_main`` task (ie. ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main``).  In here you will see several files with uppercase names (e.g. ``ATMOSCNTL``, ``SHARED``), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use `grep`) in these files for the solar constant variable ``sc``.

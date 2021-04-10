@@ -1,6 +1,9 @@
 Further Exercises (2)
 =====================
 
+.. warning::
+   Not updated for ARCHER2
+   
 The exercises in this section are all optional.  We suggest you pick and choose the exercises that you feel are most relevant to the work you are/will be doing.
 
 .. note:: Use your copy of suite ``u-ba799`` for these exercises unless otherwise specified.

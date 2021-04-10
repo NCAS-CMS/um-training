@@ -1,6 +1,9 @@
 Further Exercises (1)
 =====================
 
+.. warning::
+   Not updated for ARCHER2
+   
 Now that we have built the suite, there is no need to rebuild it each time you run it.  Switch off compilation of the UM and reconfiguration.
 
 .. hint:: See the :guilabel:`suite conf` section in the Rose edit GUI.

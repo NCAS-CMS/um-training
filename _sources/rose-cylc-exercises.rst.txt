@@ -1,6 +1,10 @@
 Rose/Cylc Exercises
 ===================
 
+.. warning::
+   * Not updated for ARCHER2
+   * Most exercises should still work though with the suites from Chapter 2 & 3.
+   
 Differencing suites
 -------------------
 
