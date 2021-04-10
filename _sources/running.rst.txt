@@ -1,6 +1,12 @@
 Running a UM suite on ARCHER2
 =============================
 
+.. admonition:: Updated for ARCHER2 with the following caveats...
+
+   * Needs testing
+   * Equivalent of serialJobs or any other scheduler information that should be added
+   * Rework of walltime and accounting section needed
+   
 ARCHER2 architecture
 --------------------
 
