@@ -99,6 +99,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#committing-changes">Committing changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#getting-information-about-your-branch">Getting information about your branch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-that-your-branch-works">Testing that your branch works</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#viewing-your-changes-in-trac">Viewing your changes in Trac</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#documenting-your-change">4.5. Documenting your change</a></li>
@@ -485,9 +486,11 @@ rosalynhatcher/vn11.8_tutorial/src/control/top_level/um_shell.F90@97842
 </div></blockquote>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Remember not all run output is in the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> or <code class="docutils literal notranslate"><span class="pre">job.err</span></code> files.  You’ll need to look in the <code class="docutils literal notranslate"><span class="pre">pe_output</span></code> directory too.</p>
+<p>Remember not all run output is in the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> or <code class="docutils literal notranslate"><span class="pre">job.err</span></code> files.  You may need to look in the <code class="docutils literal notranslate"><span class="pre">pe_output</span></code> directory too.</p>
 </div>
-<p><strong>Viewing your changes in Trac</strong></p>
+</div>
+<div class="section" id="viewing-your-changes-in-trac">
+<h3>Viewing your changes in Trac<a class="headerlink" href="#viewing-your-changes-in-trac" title="Permalink to this headline">¶</a></h3>
 <p>Making a change to your branch results in a <strong>changeset</strong> which is basically a record of the changes.  One way of viewing the changeset you have just created is to click on <span class="guilabel">Timeline</span> in Trac.  The Timeline view is a sequential record of all events in the repository.  You should see changesets for your original commit to your branch and the subsequent commit after resolving the conflicts near the top.  The changesets are numbered corresponding to the revision of your branch which would have been displayed in the GUI when you did a <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">commit</span></code> or <code class="docutils literal notranslate"><span class="pre">`fcm</span> <span class="pre">branch</span> <span class="pre">info</span></code>.  To see all the details click on the line <em>‘Changeset[xxx]…’</em> relating to your changeset.  Alternatively, if you enter the number of the changeset “[<strong>xxx</strong>]” into the search box at the top right, it will take you directly to the numbered changeset.  Your changeset should look something like this:</p>
 <a class="reference internal image-reference" href="_images/fcm_changeset.png"><img alt="_images/fcm_changeset.png" src="_images/fcm_changeset.png" style="width: 650px; height: 591px;" /></a>
 </div>

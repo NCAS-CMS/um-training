@@ -223,23 +223,34 @@
 <ul class="simple">
 <li><p>Open your new suite in the Rose config editor GUI.</p></li>
 </ul>
-<p>Before you can run the suite you need to change the <em>userid</em>, <em>queue</em> and <em>account code</em>:</p>
+<p>Before you can run the suite you need to change the <em>userid</em>, <em>queue</em>, <em>account code</em> and <em>reservation</em>:</p>
 <ul class="simple">
 <li><p>Click on <span class="guilabel">suite conf –&gt; jinja2</span> in the left hand panel</p></li>
-<li><p>Change <code class="docutils literal notranslate"><span class="pre">HPC_USER</span></code> (that’s your ARCHER2 training account)</p></li>
-<li><p>Change <code class="docutils literal notranslate"><span class="pre">HPC_ACCOUNT</span></code> to <strong>‘n02-training’</strong></p></li>
-<li><p>Change <code class="docutils literal notranslate"><span class="pre">HPC_QUEUE</span></code> to <strong>‘standard’</strong></p></li>
-<li><p>Change <code class="docutils literal notranslate"><span class="pre">HPC_RESERVATION</span></code> to be the reservation code for today. (e.g. <strong>‘n02_135’</strong>)</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_USER</span></code> (that’s your ARCHER2 username)</p></li>
+</ul>
+<p>If following the tutorial as part of an organised training event:</p>
+<ul class="simple">
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_ACCOUNT</span></code> to <strong>‘n02-training’</strong></p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_QUEUE</span></code> to <strong>‘standard’</strong></p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_RESERVATION</span></code> to be the reservation code for today. (e.g. <strong>‘n02_135’</strong>)</p></li>
+</ul>
+<p>If following the tutorial as self-study:</p>
+<ul class="simple">
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_ACCOUNT</span></code> to the budget code for your project. (e.g. <strong>‘n02-cms’</strong>)</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_QUEUE</span></code> to <strong>‘short’</strong></p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_RESERVATION</span></code> to <strong>‘shortqos’</strong></p></li>
+</ul>
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
+<ul class="simple">
+<li><p>Quotes around the variable values are essential otherwise the suite will not run.</p></li>
+<li><p>In normal practice you submit your suites to the parallel queue (either <strong>short</strong> or <strong>standard</strong>) on ARCHER2.</p></li>
+<li><p>For organised training events, we use processor reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource.  Reservations are specified by adding an additional setting called the reservation code; e.g. <strong>n02_135</strong>.</p></li>
+</ul>
+</div>
+<ul class="simple">
 <li><p>Save the suite (<span class="guilabel">File &gt; Save</span> or click the <em>down arrow</em> icon)</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Quotes around the ‘n02-training’, reservation code and your ARCHER2 username are essential otherwise the suite won’t run.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In normal practice you submit your suites to the parallel queue (either ‘short’ or ‘standard’) on ARCHER2.  For this training course, we are using processor reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource.  Reservations are specified by adding an additional setting called the reservation code; e.g. n02_135.</p>
-</div>
 </div>
 <div class="section" id="run-the-suite">
 <h3>Run the suite<a class="headerlink" href="#run-the-suite" title="Permalink to this headline">¶</a></h3>
@@ -309,24 +320,38 @@
 <p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/log/job/1/atmos/NN/job.err</span></code></p>
 <p>Here <code class="docutils literal notranslate"><span class="pre">NN</span></code> is a symbolic link created by Rose pointing to the output of the most recently run <code class="docutils literal notranslate"><span class="pre">atmos</span></code> task.</p>
 <p>Take a look at the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> for the <code class="docutils literal notranslate"><span class="pre">atmos</span></code> task either on the command-line or through Rose Bush.</p>
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
+<div class="admonition-needs-reviewing admonition">
+<p class="admonition-title">Needs Reviewing</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sacct</span></code> command displays accounting data for all jobs that are run on ARCHER2.  <code class="docutils literal notranslate"><span class="pre">sacct</span></code> can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This information is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.</p>
+<p>Let’s take a look at the resources used by your copy of <code class="docutils literal notranslate"><span class="pre">u-cc519</span></code> run.</p>
+<ul class="simple">
+<li><p>Locate the SLURM Job Id for your run.  This is a 6 digit number and can be found in the <code class="docutils literal notranslate"><span class="pre">job.status</span></code> file in the cylc task log directory.  Look for the line <code class="docutils literal notranslate"><span class="pre">CYLC_BATCH_SYS_JOB_ID=</span></code> and take note of the number after the <code class="docutils literal notranslate"><span class="pre">=</span></code> sign.</p></li>
+</ul>
+<p>Run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sacct</span> <span class="o">--</span><span class="n">job</span><span class="o">=&lt;</span><span class="n">slurm</span><span class="o">-</span><span class="n">job</span><span class="o">-</span><span class="nb">id</span><span class="o">&gt;</span> <span class="o">--</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JobID,JobName,Elapsed,Timelimit,NNodes&quot;</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;slurm-job-id&gt;</span></code> is the number you just noted above.  You should get output similar to the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ARCHER2</span><span class="o">-</span><span class="n">ex</span><span class="o">&gt;</span> <span class="n">sacct</span> <span class="o">--</span><span class="n">job</span><span class="o">=</span><span class="mi">204175</span> <span class="o">--</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JobID,JobName,Elapsed,Timelimit,NNodes&quot;</span>
+       <span class="n">JobID</span>    <span class="n">JobName</span>    <span class="n">Elapsed</span>  <span class="n">Timelimit</span>   <span class="n">NNodes</span>
+<span class="o">------------</span> <span class="o">----------</span> <span class="o">----------</span> <span class="o">----------</span> <span class="o">--------</span>
+<span class="mi">204175</span>       <span class="n">u</span><span class="o">-</span><span class="n">cc519</span><span class="o">.</span><span class="n">a</span><span class="o">+</span>   <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">23</span>   <span class="mi">00</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mi">00</span>        <span class="mi">1</span>
+<span class="mf">204175.</span><span class="n">batch</span>      <span class="n">batch</span>   <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">23</span>                   <span class="mi">1</span>
+<span class="mf">204175.</span><span class="n">exte</span><span class="o">+</span>     <span class="n">extern</span>   <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">23</span>                   <span class="mi">1</span>
+<span class="mf">204175.0</span>     <span class="n">um</span><span class="o">-</span><span class="n">atmos</span><span class="o">.+</span>   <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">14</span>                   <span class="mi">1</span>
+</pre></div>
+</div>
+<p>The important line is the first line.</p>
 <ul class="simple">
 <li><p>How much walltime did the run consume?</p></li>
-</ul>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>Go to the bottom of the file and find walltime.</p>
-</div>
-<ul class="simple">
-<li><p>Why does the phrase walltime appear twice?</p></li>
 <li><p>How much time did you request for the task?</p></li>
-<li><p>How many AUs (Accounting Units) did the job cost?</p></li>
+<li><p>How many CUs (Accounting Units) did the job cost?</p></li>
 </ul>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>1 node hour currently = 1 CU (You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project). See the ARCHER website for information about the CU.</p>
+<p>1 node hour currently = 1 CU. See the ARCHER2 website for information about the CU.</p>
 </div>
+<p>There are many other fields that can be output for a job.  For more information see the Man page (<code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">sacct</span></code>).  You can see a list of all the fields that can be specified in the <code class="docutils literal notranslate"><span class="pre">--format</span></code> option by running <code class="docutils literal notranslate"><span class="pre">sacct</span> <span class="pre">--helpformat</span></code>.</p>
 </div>
 <ul class="simple">
 <li><p>Did the linear solve for the Helmholtz problem converge in the final timestep?</p></li>
@@ -352,7 +377,7 @@
 <li><p>How many boundary layer levels did you run with?</p></li>
 <li><p>What was the range of gridpoints handled by this processor?</p></li>
 </ul>
-<p>Check the file sizes of the different file types. The output directory will contain start dumps, diagnostic output files and possibly a core dump file if the model failed) and these usually have very different sizes.</p>
+<p>Check the file sizes of the different file types. The output directory will contain start dumps, diagnostic output files and possibly a core dump file if the model failed and these usually have very different sizes.</p>
 </div>
 </div>
 </div>

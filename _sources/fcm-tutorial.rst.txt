@@ -312,10 +312,10 @@ This is because the sample branch and your branch contain modifications to the s
  * Check that you can see the changed print statements and that the subroutine ``um_training_sub`` was called.
 
 .. hint::
-   Remember not all run output is in the ``job.out`` or ``job.err`` files.  You'll need to look in the ``pe_output`` directory too.
+   Remember not all run output is in the ``job.out`` or ``job.err`` files.  You may need to look in the ``pe_output`` directory too.
 
-**Viewing your changes in Trac**
-
+Viewing your changes in Trac
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Making a change to your branch results in a **changeset** which is basically a record of the changes.  One way of viewing the changeset you have just created is to click on :guilabel:`Timeline` in Trac.  The Timeline view is a sequential record of all events in the repository.  You should see changesets for your original commit to your branch and the subsequent commit after resolving the conflicts near the top.  The changesets are numbered corresponding to the revision of your branch which would have been displayed in the GUI when you did a ``fcm commit`` or ```fcm branch info``.  To see all the details click on the line *'Changeset[xxx]...'* relating to your changeset.  Alternatively, if you enter the number of the changeset "[**xxx**]" into the search box at the top right, it will take you directly to the numbered changeset.  Your changeset should look something like this: 
 
 .. image:: /images/fcm_changeset.png

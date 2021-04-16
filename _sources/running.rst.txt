@@ -45,18 +45,30 @@ Edit the suite
 ^^^^^^^^^^^^^^
 * Open your new suite in the Rose config editor GUI.
 
-Before you can run the suite you need to change the *userid*, *queue* and *account code*:
+Before you can run the suite you need to change the *userid*, *queue*, *account code* and *reservation*:
 
 * Click on :guilabel:`suite conf --> jinja2` in the left hand panel
-* Change ``HPC_USER`` (that's your ARCHER2 training account)
-* Change ``HPC_ACCOUNT`` to **'n02-training'**
-* Change ``HPC_QUEUE`` to **'standard'**  
-* Change ``HPC_RESERVATION`` to be the reservation code for today. (e.g. **'n02_135'**)
+* Set ``HPC_USER`` (that's your ARCHER2 username)
+
+If following the tutorial as part of an organised training event:  
+
+* Set ``HPC_ACCOUNT`` to **'n02-training'**
+* Set ``HPC_QUEUE`` to **'standard'**  
+* Set ``HPC_RESERVATION`` to be the reservation code for today. (e.g. **'n02_135'**)
+
+If following the tutorial as self-study:
+
+* Set ``HPC_ACCOUNT`` to the budget code for your project. (e.g. **'n02-cms'**)
+* Set ``HPC_QUEUE`` to **'short'**  
+* Set ``HPC_RESERVATION`` to **'shortqos'**
+
+.. admonition:: Notes
+		
+   * Quotes around the variable values are essential otherwise the suite will not run.
+   * In normal practice you submit your suites to the parallel queue (either **short** or **standard**) on ARCHER2.
+   * For organised training events, we use processor reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource.  Reservations are specified by adding an additional setting called the reservation code; e.g. **n02_135**.
+
 * Save the suite (:guilabel:`File > Save` or click the *down arrow* icon)
-
-.. note:: Quotes around the 'n02-training', reservation code and your ARCHER2 username are essential otherwise the suite won't run.
-
-.. note:: In normal practice you submit your suites to the parallel queue (either 'short' or 'standard') on ARCHER2.  For this training course, we are using processor reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource.  Reservations are specified by adding an additional setting called the reservation code; e.g. n02_135.
 
 Run the suite
 ^^^^^^^^^^^^^
@@ -132,18 +144,40 @@ Here ``NN`` is a symbolic link created by Rose pointing to the output of the mos
 
 Take a look at the ``job.out`` for the ``atmos`` task either on the command-line or through Rose Bush.
 
-.. todo::
+.. admonition::  Needs Reviewing
+		 
+  The ``sacct`` command displays accounting data for all jobs that are run on ARCHER2.  ``sacct`` can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This information is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.
+
+  Let's take a look at the resources used by your copy of ``u-cc519`` run.
+
+  * Locate the SLURM Job Id for your run.  This is a 6 digit number and can be found in the ``job.status`` file in the cylc task log directory.  Look for the line ``CYLC_BATCH_SYS_JOB_ID=`` and take note of the number after the ``=`` sign.
+
+
+  Run the following command: ::
+
+    sacct --job=<slurm-job-id> --format="JobID,JobName,Elapsed,Timelimit,NNodes"
+
+  Where ``<slurm-job-id>`` is the number you just noted above.  You should get output similar to the following: ::
+
+    ARCHER2-ex> sacct --job=204175 --format="JobID,JobName,Elapsed,Timelimit,NNodes"
+           JobID    JobName    Elapsed  Timelimit   NNodes 
+    ------------ ---------- ---------- ---------- --------
+    204175       u-cc519.a+   00:00:23   00:20:00        1
+    204175.batch      batch   00:00:23                   1 
+    204175.exte+     extern   00:00:23                   1
+    204175.0     um-atmos.+   00:00:14                   1    
+
+  The important line is the first line.
+  
   * How much walltime did the run consume?
-
-  .. hint:: Go to the bottom of the file and find walltime.  
-
-  * Why does the phrase walltime appear twice?
 
   * How much time did you request for the task?
 
-  * How many AUs (Accounting Units) did the job cost?
+  * How many CUs (Accounting Units) did the job cost?
 
-  .. hint:: 1 node hour currently = 1 CU (You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project). See the ARCHER website for information about the CU.
+  .. hint:: 1 node hour currently = 1 CU. See the ARCHER2 website for information about the CU.
+
+  There are many other fields that can be output for a job.  For more information see the Man page (``man sacct``).  You can see a list of all the fields that can be specified in the ``--format`` option by running ``sacct --helpformat``. 
 
 * Did the linear solve for the Helmholtz problem converge in the final timestep?
 
@@ -177,7 +211,7 @@ It is well worth taking a little time to look through this file and to recognise
 * How many boundary layer levels did you run with?
 * What was the range of gridpoints handled by this processor?
 
-Check the file sizes of the different file types. The output directory will contain start dumps, diagnostic output files and possibly a core dump file if the model failed) and these usually have very different sizes.
+Check the file sizes of the different file types. The output directory will contain start dumps, diagnostic output files and possibly a core dump file if the model failed and these usually have very different sizes.
 
 
 
