@@ -217,24 +217,27 @@
 </ul>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The base ARCHER2 charging unit is a node irrespective of how many cores on the node are being used. ARCHER2 has 128 cores per node, and for the UM each MPI task and OpenMP thread is mapped to a separate core.  So in this case we are running 8x10 (x 2 OMP threads) for a total of 160 cores, but are charged for 7 nodes (168 cores).</p>
+<p>The base ARCHER2 charging unit is a node irrespective of how many cores on the node are being used. ARCHER2 has 128 cores per node, and for the UM each MPI task and OpenMP thread is mapped to a separate core.  So in this case we are running 10x16 (x 2 OMP threads) for a total of 320 cores, but are charged for 3 nodes (384 cores).</p>
 </div>
+<div class="admonition-remove-more-memory-per-node-on-archer2-so-no-longer-works admonition">
+<p class="admonition-title">Remove - more memory per node on ARCHER2 so no longer works</p>
 <p>Try reducing the processor decomposition to 4(EW) x 3(NS). Run the model.</p>
 <ul class="simple">
 <li><p>What is the error?</p></li>
 </ul>
 <p>Using too few cores has resulted in the model failing due to insufficient memory, indicated by the message <em>“OOM killer terminated this process”</em>.  In this case it is easy to diagnose the problem, but sometimes it can be difficult to diagnose, so it’s worth trying to increase the number of processors if you suspect memory resource issues.</p>
-<p>Try experimenting with different processor decompositions (E.g. 8x6, 12x12, etc)</p>
+</div>
+<p>Try experimenting with different processor decompositions (E.g. 10x32, 16x32, etc)</p>
 <ul class="simple">
-<li><p>How do the timings compare to when you ran on 7 nodes?</p></li>
+<li><p>How do the timings compare to when you ran on 3 nodes?</p></li>
 </ul>
-<p>You can come up with a performance vs processor count curve in this way which might be valuable if you are planning an experiment - it’s also worth adding in the AU cost calculation when doing this.  An example of this can be seen below:</p>
+<p>You can come up with a performance vs processor count curve in this way which might be valuable if you are planning an experiment - it’s also worth adding in the CU cost calculation when doing this.  An example of this can be seen below:</p>
 <a class="reference internal image-reference" href="_images/cost-curves.jpg"><img alt="_images/cost-curves.jpg" src="_images/cost-curves.jpg" style="width: 650px; height: 366px;" /></a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Running “under populated”, i.e. with fewer than the total cores per node, gives access to more memory per parallel task.</p>
 </div>
-<p>Change the processor decomposition to run fully populated on 8 nodes with 2 OpenMP threads.</p>
+<p>Change the processor decomposition to run fully populated on 3 nodes with 2 OpenMP threads.</p>
 </div>
 <div class="section" id="stash">
 <h2><span class="section-number">6.3. </span>STASH<a class="headerlink" href="#stash" title="Permalink to this headline">¶</a></h2>
