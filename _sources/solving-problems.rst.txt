@@ -18,23 +18,22 @@ Find and make a copy of suite ``u-cc654``.
 
 Firstly make the essential changes required to run the suite.  That is:
 
-* The account code ('n02-training')
+* The account code ('n02-training' if you're on an organised training event)
 * Your ARCHER2 user name
 * The queue to run in.
 
 .. Hint::
-   Look in the :guilabel:`suite conf` section.  You will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.
+   Look in the :guilabel:`suite conf` section.  For organised training events you will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.  For self-study select the ``short`` queue.
 
-* Did you manage to find where to set your ARCHER2 username?  
+.. admonition:: Remove.  Do we need to have a replacement latent variables task??
+		
+  * Did you manage to find where to set your ARCHER2 username?  
 
-This suite is set up slightly differently to the one used in the previous sections; suites do vary on how they are set up but you will soon learn where to look for things.  This suite is set up so that specifying your username on the remote HPC is optional.  If your PUMA username is the same as your username on ARCHER2, or if the remote username is set in your ``~/.ssh/config`` file Cylc will be able to submit your suite without having to explicitly set your username in the suite.
+  This suite is set up slightly differently to the one used in the previous sections; suites do vary on how they are set up but you will soon learn where to look for things.  This suite is set up so that specifying your username on the remote HPC is optional.  If your PUMA username is the same as your username on ARCHER2, or if the remote username is set in your ``~/.ssh/config`` file Cylc will be able to submit your suite without having to explicitly set your username in the suite.
 
-.. todo::
-   Possibly remove.....However, on this course, we are using training accounts on ARCHER so you will need to set the username.
-
-* Click :guilabel:`View --> View Latent Variables`. You should see ``HPC_USER`` appear in the panel greyed out.
-* Click the :guilabel:`+` sign next to it and select :guilabel:`Add to configuration`
-* Enter your ARCHER2 username (e.g. 'ncastr01')
+  * Click :guilabel:`View --> View Latent Variables`. You should see ``HPC_USER`` appear in the panel greyed out.
+  * Click the :guilabel:`+` sign next to it and select :guilabel:`Add to configuration`
+  * Enter your ARCHER2 username (e.g. 'ncastr01')
 
 Errors resolved in the code extraction
 --------------------------------------

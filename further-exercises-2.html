@@ -259,33 +259,23 @@
 </div>
 <div class="section" id="running-the-coupled-model">
 <h2><span class="section-number">7.4. </span>Running the coupled model<a class="headerlink" href="#running-the-coupled-model" title="Permalink to this headline">¶</a></h2>
-<p>The coupled model consists of the UM Atmosphere model coupled to the NEMO ocean and CICE sea ice models.  The coupled configuration used for this exercise is N96 resolution for the atmosphere and a 1 degree ocean - you will see this written N96 ORCA1.</p>
+<p>The coupled model consists of the UM Atmosphere model coupled to the NEMO ocean and CICE sea ice models.  The coupled configuration used for this exercise is the UKESM Historical configuration with an N96 resolution for the atmosphere and a 1 degree ocean - you will see this written N96 ORCA1.</p>
 <div class="section" id="checkout-and-run-the-suite">
 <h3>Checkout and run the suite<a class="headerlink" href="#checkout-and-run-the-suite" title="Permalink to this headline">¶</a></h3>
-<p>Checkout and open the suite <code class="docutils literal notranslate"><span class="pre">u-ak943</span></code>.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> and <code class="docutils literal notranslate"><span class="pre">fcm_make_ocean</span></code> respectively. The model configuration is under <span class="guilabel">coupled</span> rather than <span class="guilabel">um</span>.</p>
-<p>Make the usual changes required to run the suite (i.e. set username, account code, queue)</p>
-<p>Check that the suite is set to build both the UM and ocean, as well as run the reconfiguration and model.</p>
+<p>Checkout and open the suite <code class="docutils literal notranslate"><span class="pre">u-ce119</span></code>.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> and <code class="docutils literal notranslate"><span class="pre">fcm_make_ocean</span></code> respectively. Similarly there are separate apps for the atmos and ocean model settings, called <code class="docutils literal notranslate"><span class="pre">um</span></code> and <code class="docutils literal notranslate"><span class="pre">nemo_cice</span></code>.</p>
+<p>Make the usual changes required to run the suite (i.e. set username, account code, queue). If you are following the tutorial as part of an organised training event, select one of the special queues, otherwise, select to run in the <code class="docutils literal notranslate"><span class="pre">short</span></code> queue.</p>
+<p>Check that the suite is set to build the UM, Ocean, and Drivers as well as run the reconfiguration and model.</p>
 <p><span class="guilabel">Run</span> the suite.</p>
 </div>
 <div class="section" id="exploring-the-suite">
 <h3>Exploring the suite<a class="headerlink" href="#exploring-the-suite" title="Permalink to this headline">¶</a></h3>
-<p>Whilst the suite is compiling and running which will take around 45 minutes, take some time to look around the suite.</p>
+<p>Whilst the suite is compiling and running which will take around 40 minutes, take some time to look around the suite.</p>
 <ul class="simple">
 <li><p>How many nodes is the atmosphere running on?</p></li>
 <li><p>How many nodes is the ocean running on?</p></li>
+<li><p>What is the cycling frequency?</p></li>
 </ul>
-<p>Changing the processor decomposition for the ocean is not as simple as just changing the EW/NS processes.  You also need to:</p>
-<ol class="arabic simple">
-<li><p>Recalculate the CICE number of columns per block EW and rows per block NS. (Normally the model is set up so that NEMO and CICE use the same decomposition). Looking at the current settings we calculate as follows:</p></li>
-</ol>
-<blockquote>
-<div><p>Num of cols per block EW = Num of cols EW / Num of processes EW (E.g. 360 / 9 = 40)</p>
-<p>Num of rows per block NS = Num of rows NS / Num of processes NS (E.g. 330 / 8 = 42)</p>
-</div></blockquote>
-<ol class="arabic simple" start="2">
-<li><p>Recompile the ocean executable. Note the executable comprises both the ocean (NEMO) and sea-ice (CICE) code.</p></li>
-</ol>
-<p>Now look at the <code class="docutils literal notranslate"><span class="pre">coupled</span></code> settings.</p>
+<p>The version of NEMO used in this suite (and most suites you will come across) uses the XML IO Server (XIOS) to wite its diagnostic output. XIOS runs on dedicated nodes (one node in this case). Running <code class="docutils literal notranslate"><span class="pre">squeue</span></code> will show three status entries corresponding to the Atmosphere, Ocean, and XIOS components of the coupled suite. XIOS is running in <code class="docutils literal notranslate"><span class="pre">multiple-file</span></code> mode with 6 servers.</p>
 <ul class="simple">
 <li><p>Can you see where the NEMO model settings appear?</p></li>
 </ul>
@@ -301,10 +291,11 @@
 <ul class="simple">
 <li><p>Can you find what the CICE restart frequency is set to?</p></li>
 </ul>
-<p>NEMO and CICE are developed separately from the UM, and you should have seen that they work in very different ways. See the websites for documentation:</p>
+<p>NEMO, CICE and XIOS are developed separately from the UM, and you should have seen that they work in very different ways. See the following websites for documentation:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="http://oceans11.lanl.gov/trac/CICE">http://oceans11.lanl.gov/trac/CICE</a></p></li>
 <li><p><a class="reference external" href="http://www.nemo-ocean.eu/">http://www.nemo-ocean.eu/</a></p></li>
+<li><p><a class="reference external" href="https://forge.ipsl.jussieu.fr/ioserver">https://forge.ipsl.jussieu.fr/ioserver</a></p></li>
 </ul>
 </div>
 <div class="section" id="output-files">
@@ -324,20 +315,19 @@
 <p>Restart files go to the subdirectories <code class="docutils literal notranslate"><span class="pre">NEMOhist</span></code> and <code class="docutils literal notranslate"><span class="pre">CICEhist</span></code> in the standard data directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/share/data/History_Data</span></code>.</p>
 <p><strong>Diagnostic files</strong></p>
 <p>Diagnostic files are left in the <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/&lt;cycle&gt;/coupled/</span></code> directory.</p>
-<p>CICE files start with <code class="docutils literal notranslate"><span class="pre">&lt;suitename&gt;i</span></code>. Once your suite has run you should see the following CICE file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ ls ak943i*
-ak943i.10d.1978-09-10.nc
+<p>CICE files start with <code class="docutils literal notranslate"><span class="pre">&lt;suitename&gt;i</span></code>. Once your suite has run you should see the following CICE file (and more):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ ls ce119i*
+ce119i.10d.1850-01-10.nc
 </pre></div>
 </div>
 <p>NEMO diagnostic files are named <code class="docutils literal notranslate"><span class="pre">&lt;suitename&gt;o*grid_[TUVW]*</span></code>. To see what files are produced, run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ ls ak943o*grid*
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ ls ce119o*grid*
 </pre></div>
 </div>
-<p>In this case each processor writes to a separate file. To concatenate these into a global file use the <code class="docutils literal notranslate"><span class="pre">rebuild_nemo</span></code> tool, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ rebuild_nemo ak943o_10d_19780901_19780910_grid_W_19780901-19780910 72
+<p>In this case each XIOS IO server writes to a separate file. To concatenate these into a global file use the <code class="docutils literal notranslate"><span class="pre">rebuild_nemo</span></code> tool, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ rebuild_nemo rebuild_nemo ce119o_1m_18500101_18500330_grid_T_185001-185001 6
 </pre></div>
 </div>
-<p>Higher resolution NEMO suites may use the XIOS IO server. In this case, global files may be written directly, or each server process may write its own file.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The coupled atmos-ocean model setup is complex so we recommend you find a suite already setup for your needs.  If you find you do need to modify a coupled suite setup please contact NCAS-CMS for advice.</p>
@@ -346,15 +336,13 @@ ak943i.10d.1978-09-10.nc
 </div>
 <div class="section" id="running-the-nesting-suite">
 <h2><span class="section-number">7.5. </span>Running the Nesting Suite<a class="headerlink" href="#running-the-nesting-suite" title="Permalink to this headline">¶</a></h2>
-<p>The Nesting Suite drives a series of nested limited area models (LAM)
-from a global model.  It allows the user to specify the domains and it
-then automatically creates the required ancillary files and lateral
-boundary condition files.</p>
+<p>The Nesting Suite drives a series of nested limited area models (LAM) from a global model.  It allows the user to specify the domains and it then automatically creates the required ancillary files and lateral boundary condition files.</p>
 <div class="section" id="id1">
 <h3>Checkout and run the suite<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p>Checkout and open the suite <code class="docutils literal notranslate"><span class="pre">u-ba621</span></code>. There are a number of tasks for creating ancillary files (<code class="docutils literal notranslate"><span class="pre">ancil_*</span></code> and <code class="docutils literal notranslate"><span class="pre">ants_*</span></code>).  The global model set up is in <span class="guilabel">glm_um</span> and the LAMs are in <span class="guilabel">um</span>.  The task <code class="docutils literal notranslate"><span class="pre">um-createbc</span></code> creates the lateral boundary condition files.</p>
-<p>Under <span class="guilabel">suite conf –&gt; jinja2:suite.rc</span> are the main panels for controlling the Nesting Suite. Make the usual changes required to run the suite (i.e. set username, account code, queue). The training nesting suite has pre-built executables so you don’t have to spend
-time building it.  <span class="guilabel">Run</span> the suite.</p>
+<p>Checkout and open the suite <code class="docutils literal notranslate"><span class="pre">u-ce122</span></code>.  There are a number of tasks for creating ancillary files (<code class="docutils literal notranslate"><span class="pre">ancil_*</span></code> and <code class="docutils literal notranslate"><span class="pre">ants_*</span></code>).  The global model set up is in <span class="guilabel">glm_um</span> and the LAMs are in <span class="guilabel">um</span>.  The task <code class="docutils literal notranslate"><span class="pre">um-createbc</span></code> creates the lateral boundary condition files.</p>
+<p>Under <span class="guilabel">suite conf –&gt; jinja2:suite.rc</span> are the main panels for controlling the Nesting Suite. Make the usual changes required to run the suite (i.e. set username, account code, queue).</p>
+<p>If following the tutorial as part of an organised training event, select one of the special queues, otherwise, select the <code class="docutils literal notranslate"><span class="pre">short</span></code> queue.</p>
+<p><span class="guilabel">Run</span> the suite.</p>
 <p>This particular suite has a global model and one limited area model. It should complete in about 45 - 60 minutes.</p>
 </div>
 <div class="section" id="id2">
@@ -366,11 +354,11 @@ time building it.  <span class="guilabel">Run</span> the suite.</p>
 <div><ul class="simple">
 <li><p>Can you find out where the first LAM is located?</p></li>
 </ul>
-</div></blockquote>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Look at the orography file output during the ancillary creation.</p>
 </div>
+</div></blockquote>
 <p>The <span class="guilabel">resolution 1</span> set up panel specifies the grid and the run length.</p>
 <p>The <span class="guilabel">Config 1</span> set up panel specifies the science configuration to be run.  Each LAM can have multiple science configurations.</p>
 </div>
@@ -393,9 +381,7 @@ time building it.  <span class="guilabel">Run</span> the suite.</p>
 </div>
 <div class="section" id="further-information">
 <h3>Further Information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h3>
-<p>This has been a very brief overview of the functionality of the Nesting Suite. The Nesting Suite is developed and maintained by Stuart
-Webster at the Met Office.  He has a web page all about the Nesting Suite at <a class="reference external" href="https://code.metoffice.gov.uk/trac/rmed/wiki/suites/nesting">https://code.metoffice.gov.uk/trac/rmed/wiki/suites/nesting</a>.
-This includes a more detailed tutorial.</p>
+<p>This has been a very brief overview of the functionality of the Nesting Suite. The Nesting Suite is developed and maintained by Stuart Webster at the Met Office.  He has a web page all about the Nesting Suite at <a class="reference external" href="https://code.metoffice.gov.uk/trac/rmed/wiki/suites/nesting">https://code.metoffice.gov.uk/trac/rmed/wiki/suites/nesting</a>. This includes a more detailed tutorial.</p>
 </div>
 </div>
 </div>

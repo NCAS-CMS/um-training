@@ -186,27 +186,26 @@
 <p>Find and make a copy of suite <code class="docutils literal notranslate"><span class="pre">u-cc654</span></code>.</p>
 <p>Firstly make the essential changes required to run the suite.  That is:</p>
 <ul class="simple">
-<li><p>The account code (‘n02-training’)</p></li>
+<li><p>The account code (‘n02-training’ if you’re on an organised training event)</p></li>
 <li><p>Your ARCHER2 user name</p></li>
 <li><p>The queue to run in.</p></li>
 </ul>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Look in the <span class="guilabel">suite conf</span> section.  You will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.</p>
+<p>Look in the <span class="guilabel">suite conf</span> section.  For organised training events you will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.  For self-study select the <code class="docutils literal notranslate"><span class="pre">short</span></code> queue.</p>
 </div>
+<div class="admonition-remove-do-we-need-to-have-a-replacement-latent-variables-task admonition">
+<p class="admonition-title">Remove.  Do we need to have a replacement latent variables task??</p>
 <ul class="simple">
 <li><p>Did you manage to find where to set your ARCHER2 username?</p></li>
 </ul>
 <p>This suite is set up slightly differently to the one used in the previous sections; suites do vary on how they are set up but you will soon learn where to look for things.  This suite is set up so that specifying your username on the remote HPC is optional.  If your PUMA username is the same as your username on ARCHER2, or if the remote username is set in your <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file Cylc will be able to submit your suite without having to explicitly set your username in the suite.</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Possibly remove…..However, on this course, we are using training accounts on ARCHER so you will need to set the username.</p>
-</div>
 <ul class="simple">
 <li><p>Click <span class="guilabel">View –&gt; View Latent Variables</span>. You should see <code class="docutils literal notranslate"><span class="pre">HPC_USER</span></code> appear in the panel greyed out.</p></li>
 <li><p>Click the <span class="guilabel">+</span> sign next to it and select <span class="guilabel">Add to configuration</span></p></li>
 <li><p>Enter your ARCHER2 username (e.g. ‘ncastr01’)</p></li>
 </ul>
+</div>
 </div>
 <div class="section" id="errors-resolved-in-the-code-extraction">
 <h2><span class="section-number">5.2. </span>Errors resolved in the code extraction<a class="headerlink" href="#errors-resolved-in-the-code-extraction" title="Permalink to this headline">¶</a></h2>
@@ -310,7 +309,7 @@ site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901
 </ul>
 <p>Change to the <code class="docutils literal notranslate"><span class="pre">pe_output</span></code> directory for the atmos_main task. This is under <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suite-id&gt;/work/&lt;cycle&gt;/atmos_main/pe_output</span></code> and contains the output from each PE.</p>
 <p>Open the file called <code class="docutils literal notranslate"><span class="pre">&lt;suite-id&gt;.fort6.pe&lt;pe</span> <span class="pre">noted</span> <span class="pre">above&gt;</span></code>.  Sometimes extra information about the error can be found in the individual PE output files.</p>
-<div class="admonition-todo admonition" id="id2">
+<div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <p>Model still crashes but not with a BICGSTAB error.  What do we want to do here?</p>
 </div>
