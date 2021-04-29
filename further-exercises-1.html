@@ -243,13 +243,13 @@
 <h2><span class="section-number">6.3. </span>STASH<a class="headerlink" href="#stash" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="exploring-stash">
 <h3>Exploring STASH<a class="headerlink" href="#exploring-stash" title="Permalink to this headline">¶</a></h3>
-<p>Navigate to <span class="guilabel">um –&gt; namelist –&gt; Model Input and Output –&gt; STASH Requests and Profiles</span>. Look at the time profiles called <code class="docutils literal notranslate"><span class="pre">TALLTS</span></code> and <code class="docutils literal notranslate"><span class="pre">T1H</span></code>.</p>
+<p>Navigate to <span class="guilabel">um –&gt; namelist –&gt; Model Input and Output –&gt; STASH Requests and Profiles</span>. Look at the time profiles called <code class="docutils literal notranslate"><span class="pre">TALLTS</span></code> and <code class="docutils literal notranslate"><span class="pre">T6H</span></code>.</p>
 <ul class="simple">
 <li><p>What are they doing?</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">TALLTS</span></code> says output on every timestep, <code class="docutils literal notranslate"><span class="pre">T1H</span></code> says output hourly.</p>
+<p><code class="docutils literal notranslate"><span class="pre">TALLTS</span></code> says output on every timestep, <code class="docutils literal notranslate"><span class="pre">T6H</span></code> says output 6 hourly.</p>
 <p>Look also at some of the other time, domain and usage profiles.  The domain profiles determine spatial output and the usage profiles effectively specify a Fortran LUN (Logical Unit Number) on which the associated data is written.</p>
-<p>Click on <span class="guilabel">STASH Requests</span>. Now change the time profile for all stash output whose <code class="docutils literal notranslate"><span class="pre">Usage</span></code> profile is UPC and <code class="docutils literal notranslate"><span class="pre">Time</span></code> profile is T1H. To do this, click on each diagnostic you wish to change and then click the time profile, a drop-down list should appear containing all the available time profiles.  Select <code class="docutils literal notranslate"><span class="pre">TALLTS</span></code>.  You can sort the STASH table to make it more convenient to make these changes.  Click on the <code class="docutils literal notranslate"><span class="pre">use_name</span></code> column header to sort by usage profile.</p>
+<p>Click on <span class="guilabel">STASH Requests</span>. Now change the time profile for all stash output whose <code class="docutils literal notranslate"><span class="pre">Usage</span></code> profile is UPC and <code class="docutils literal notranslate"><span class="pre">Time</span></code> profile is T6H. To do this, click on each diagnostic you wish to change and then click the time profile, a drop-down list should appear containing all the available time profiles.  Select <code class="docutils literal notranslate"><span class="pre">TALLTS</span></code>.  You can sort the STASH table to make it more convenient to make these changes.  Click on the <code class="docutils literal notranslate"><span class="pre">use_name</span></code> column header to sort by usage profile.</p>
 </div>
 <div class="section" id="stash-validation-macro">
 <h3>STASH validation macro<a class="headerlink" href="#stash-validation-macro" title="Permalink to this headline">¶</a></h3>
@@ -286,7 +286,7 @@
 </div>
 <div class="section" id="change-the-dump-frequency">
 <span id="change-dump-freq"></span><h2><span class="section-number">6.4. </span>Change the dump frequency<a class="headerlink" href="#change-the-dump-frequency" title="Permalink to this headline">¶</a></h2>
-<p>Set the model run length to 2 hours.</p>
+<p>Set the model run length to 1 day.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Look in the <span class="guilabel">suite conf –&gt; Run Initialisation and Cycling</span>.</p>
@@ -295,7 +295,7 @@
 <p class="admonition-title">Note</p>
 <p>Hours are represented in the ISO 8601 standard as <code class="docutils literal notranslate"><span class="pre">PT&lt;num-hours&gt;H</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">PT1H</span></code> represents 1 hour). Days are represented as <code class="docutils literal notranslate"><span class="pre">P&lt;num-days&gt;D</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">P10D</span></code> represents 10 days)</p>
 </div>
-<p>Reset the STASH output for stream UPC to hourly and the file reinitialisation frequency to 4 hourly.</p>
+<p>Reset the STASH output for stream UPC to 6 hourly and the file reinitialisation frequency to daily.</p>
 <p>Navigate to <span class="guilabel">um –&gt; namelist –&gt; Model Input and Output –&gt; Dumping and Meaning</span>.</p>
 <ul class="simple">
 <li><p>What is the current dump frequency?</p></li>
@@ -304,7 +304,7 @@
 <ul class="simple">
 <li><p>How much time was spent in <code class="docutils literal notranslate"><span class="pre">DUMPCTL</span></code>?</p></li>
 </ul>
-<p>Set the dump frequency to 1 hour. <span class="guilabel">Run</span> the model.</p>
+<p>Set the dump frequency to 1 day. <span class="guilabel">Run</span> the model.</p>
 <ul class="simple">
 <li><p>What happened to the time spent in <code class="docutils literal notranslate"><span class="pre">DUMPCTL</span></code>?</p></li>
 </ul>
@@ -330,12 +330,12 @@
 <div class="section" id="setting-up-a-suite-to-cycle">
 <h2><span class="section-number">6.6. </span>Setting up a suite to cycle<a class="headerlink" href="#setting-up-a-suite-to-cycle" title="Permalink to this headline">¶</a></h2>
 <p>We mentioned in the presentations that the length of an integration will be limited by the time that a model is allowed to run on the HPC (see the ARCHER2 web pages for information about the time limits).  Clearly this is no good for much of our work which may need to run on the machine for several months.  Cylc and the UM allow for long integrations to be split up into multiple shorter jobs - this is called <strong>cycling</strong>.</p>
-<p>Let’s run the model for 3 hours with 1 hour cycling:</p>
+<p>Let’s run the model for 1 day with 8 hour cycling:</p>
 <ul class="simple">
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Total</span> <span class="pre">run</span> <span class="pre">length</span></code> to 3 hours.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Cycling</span> <span class="pre">frequency</span></code> to 1 hour.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Wallclock</span> <span class="pre">time</span></code> to 10 minutes.</p></li>
-<li><p>Ensure that the model dump frequency is hourly, in this case.</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Total</span> <span class="pre">run</span> <span class="pre">length</span></code> to 1 day.</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Cycling</span> <span class="pre">frequency</span></code> to 8 hours.</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Wallclock</span> <span class="pre">time</span></code> to 20 minutes.</p></li>
+<li><p>Ensure that the model dump frequency is 8 hourly, in this case.</p></li>
 </ul>
 <p><span class="guilabel">Save</span> and <span class="guilabel">Run</span> the suite.</p>
 <div class="admonition note">
@@ -350,8 +350,8 @@
 </div>
 <div class="section" id="restarting-a-suite">
 <h2><span class="section-number">6.7. </span>Restarting a suite<a class="headerlink" href="#restarting-a-suite" title="Permalink to this headline">¶</a></h2>
-<p>Let’s now extend this run out to 6 hours.  Change the <code class="docutils literal notranslate"><span class="pre">Total</span> <span class="pre">run</span> <span class="pre">length</span></code> to <code class="docutils literal notranslate"><span class="pre">6</span></code> hours and <span class="guilabel">Save</span> the suite.</p>
-<p>Having already run the first 3 hours we just want the suite to pick up where it left off and run the remaining 3 hours.  To do this we <em>restart</em> the suite, by typing:</p>
+<p>Let’s now extend this run out to 2 days.  Change the <code class="docutils literal notranslate"><span class="pre">Total</span> <span class="pre">run</span> <span class="pre">length</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span></code> days and <span class="guilabel">Save</span> the suite.</p>
+<p>Having already run the first day we just want the suite to pick up where it left off and run the remaining day.  To do this we <em>restart</em> the suite, by typing:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ rose suite-run --restart
 </pre></div>
 </div>
