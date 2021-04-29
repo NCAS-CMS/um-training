@@ -277,7 +277,7 @@
 <p>Point your suite to the correct start dump.  Fixing this problem isn’t quite as easy as it sounds.  A search in the Rose edit GUI for the dump file name <code class="docutils literal notranslate"><span class="pre">ab642a.da19880901_00_err</span></code> will not locate anything.  For this suite it is not possible to fix this issue through the GUI, for some other suites you can edit the initial dump location in the panel <span class="guilabel">um –&gt; namelist –&gt; Reconfiguration and Ancillary Control –&gt; General technical options</span>.</p>
 <p>Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.</p>
 <p>In your suite directory on PUMA (<code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suitename&gt;</span></code>) use <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-R</span></code> to search for the start dump name <code class="docutils literal notranslate"><span class="pre">ab642a.da19880901_00_err</span></code> in the suite files.  You should see 2 occurrences listed</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma$ grep -r ab642a.da19880901_00_ros *
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma$ grep -r ab642a.da19880901_00_err *
 site/archer2.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901_00_err&#39; %}
 site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901_00_err&#39; %}
 </pre></div>

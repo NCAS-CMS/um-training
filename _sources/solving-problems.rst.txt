@@ -111,7 +111,7 @@ Suites can be and are set up differently and there will be times when you need t
 
 In your suite directory on PUMA (``~/roses/<suitename>``) use ``grep -R`` to search for the start dump name ``ab642a.da19880901_00_err`` in the suite files.  You should see 2 occurrences listed ::
 
-  ros@puma$ grep -r ab642a.da19880901_00_ros *
+  ros@puma$ grep -r ab642a.da19880901_00_err *
   site/archer2.rc:{% set AINITIAL = AINITIAL_DIR + 'N96L85/ab642a.da19880901_00_err' %}
   site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + 'N96L85/ab642a.da19880901_00_err' %}
 
