@@ -78,43 +78,35 @@ Expand :guilabel:`STASH Requests and Profiles`, then expand :guilabel:`Usage Pro
 
 Try adding more nc streams to mimic the pp stream behaviour.
 
+
 Running the coupled model
 -------------------------
 
-The coupled model consists of the UM Atmosphere model coupled to the NEMO ocean and CICE sea ice models.  The coupled configuration used for this exercise is N96 resolution for the atmosphere and a 1 degree ocean - you will see this written N96 ORCA1.
+The coupled model consists of the UM Atmosphere model coupled to the NEMO ocean and CICE sea ice models.  The coupled configuration used for this exercise is the UKESM Historical configuration with an N96 resolution for the atmosphere and a 1 degree ocean - you will see this written N96 ORCA1.
 
 Checkout and run the suite
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-Checkout and open the suite ``u-ak943``.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called ``fcm_make_um`` and ``fcm_make_ocean`` respectively. The model configuration is under :guilabel:`coupled` rather than :guilabel:`um`.
+Checkout and open the suite ``u-ce119``.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called ``fcm_make_um`` and ``fcm_make_ocean`` respectively. Similarly there are separate apps for the atmos and ocean model settings, called ``um`` and ``nemo_cice``.
 
-Make the usual changes required to run the suite (i.e. set username, account code, queue)
+Make the usual changes required to run the suite (i.e. set username, account code, queue). If you are following the tutorial as part of an organised training event, select one of the special queues, otherwise, select to run in the ``short`` queue.
 
-Check that the suite is set to build both the UM and ocean, as well as run the reconfiguration and model.
+Check that the suite is set to build the UM, Ocean, and Drivers as well as run the reconfiguration and model.
 
 :guilabel:`Run` the suite.
 
 Exploring the suite
 ^^^^^^^^^^^^^^^^^^^
-Whilst the suite is compiling and running which will take around 45 minutes, take some time to look around the suite.
+Whilst the suite is compiling and running which will take around 40 minutes, take some time to look around the suite.
 
 * How many nodes is the atmosphere running on?
 * How many nodes is the ocean running on?
+* What is the cycling frequency?
 
-Changing the processor decomposition for the ocean is not as simple as just changing the EW/NS processes.  You also need to:
-
-1. Recalculate the CICE number of columns per block EW and rows per block NS. (Normally the model is set up so that NEMO and CICE use the same decomposition). Looking at the current settings we calculate as follows:
-
-  Num of cols per block EW = Num of cols EW / Num of processes EW (E.g. 360 / 9 = 40)
-
-  Num of rows per block NS = Num of rows NS / Num of processes NS (E.g. 330 / 8 = 42) 
-
-2. Recompile the ocean executable. Note the executable comprises both the ocean (NEMO) and sea-ice (CICE) code. 
-
-Now look at the ``coupled`` settings.   
+The version of NEMO used in this suite (and most suites you will come across) uses the XML IO Server (XIOS) to wite its diagnostic output. XIOS runs on dedicated nodes (one node in this case). Running ``squeue`` will show three status entries corresponding to the Atmosphere, Ocean, and XIOS components of the coupled suite. XIOS is running in ``multiple-file`` mode with 6 servers.
 
 * Can you see where the NEMO model settings appear? 
 
-Look under :guilabel:`Run settings (namrun)`. The variables ``nn_stock`` and ``nn_write`` control the frequency of output files. 
+Look under :guilabel:`Run settings (namrun)`. The variables ``nn_stock`` and ``nn_write`` control the frequency of output files.
 
 * How often are NEMO restart files written?
 
@@ -124,10 +116,11 @@ Now browse the CICE settings.
 
 * Can you find what the CICE restart frequency is set to? 
 
-NEMO and CICE are developed separately from the UM, and you should have seen that they work in very different ways. See the websites for documentation: 
+NEMO, CICE and XIOS are developed separately from the UM, and you should have seen that they work in very different ways. See the following websites for documentation: 
 
 * http://oceans11.lanl.gov/trac/CICE 
 * http://www.nemo-ocean.eu/
+* https://forge.ipsl.jussieu.fr/ioserver
 
 Output files
 ^^^^^^^^^^^^
@@ -153,37 +146,35 @@ Restart files go to the subdirectories ``NEMOhist`` and ``CICEhist`` in the stan
 
 Diagnostic files are left in the ``~/cylc-run/<suitename>/work/<cycle>/coupled/`` directory. 
 
-CICE files start with ``<suitename>i``. Once your suite has run you should see the following CICE file: :: 
+CICE files start with ``<suitename>i``. Once your suite has run you should see the following CICE file (and more): :: 
 
-  archer$ ls ak943i*
-  ak943i.10d.1978-09-10.nc
+  archer$ ls ce119i*
+  ce119i.10d.1850-01-10.nc
 
 NEMO diagnostic files are named ``<suitename>o*grid_[TUVW]*``. To see what files are produced, run: :: 
 
-  archer$ ls ak943o*grid*
+  archer$ ls ce119o*grid*
 
-In this case each processor writes to a separate file. To concatenate these into a global file use the ``rebuild_nemo`` tool, e.g.: :: 
+In this case each XIOS IO server writes to a separate file. To concatenate these into a global file use the ``rebuild_nemo`` tool, e.g.: :: 
 
-  archer$ rebuild_nemo ak943o_10d_19780901_19780910_grid_W_19780901-19780910 72
+  archer$ rebuild_nemo rebuild_nemo ce119o_1m_18500101_18500330_grid_T_185001-185001 6
 
-Higher resolution NEMO suites may use the XIOS IO server. In this case, global files may be written directly, or each server process may write its own file. 
-  
 .. note:: The coupled atmos-ocean model setup is complex so we recommend you find a suite already setup for your needs.  If you find you do need to modify a coupled suite setup please contact NCAS-CMS for advice. 
 
 Running the Nesting Suite
 -------------------------
 
-The Nesting Suite drives a series of nested limited area models (LAM)
-from a global model.  It allows the user to specify the domains and it
-then automatically creates the required ancillary files and lateral
-boundary condition files.
+The Nesting Suite drives a series of nested limited area models (LAM) from a global model.  It allows the user to specify the domains and it then automatically creates the required ancillary files and lateral boundary condition files.
 
 Checkout and run the suite
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-Checkout and open the suite ``u-ba621``. There are a number of tasks for creating ancillary files (``ancil_*`` and ``ants_*``).  The global model set up is in :guilabel:`glm_um` and the LAMs are in :guilabel:`um`.  The task ``um-createbc`` creates the lateral boundary condition files.
+Checkout and open the suite ``u-ce122``.  There are a number of tasks for creating ancillary files (``ancil_*`` and ``ants_*``).  The global model set up is in :guilabel:`glm_um` and the LAMs are in :guilabel:`um`.  The task ``um-createbc`` creates the lateral boundary condition files.
 
-Under :guilabel:`suite conf --> jinja2:suite.rc` are the main panels for controlling the Nesting Suite. Make the usual changes required to run the suite (i.e. set username, account code, queue). The training nesting suite has pre-built executables so you don't have to spend
-time building it.  :guilabel:`Run` the suite.
+Under :guilabel:`suite conf --> jinja2:suite.rc` are the main panels for controlling the Nesting Suite. Make the usual changes required to run the suite (i.e. set username, account code, queue).
+
+If following the tutorial as part of an organised training event, select one of the special queues, otherwise, select the ``short`` queue.
+
+:guilabel:`Run` the suite.
 
 This particular suite has a global model and one limited area model. It should complete in about 45 - 60 minutes.
 
@@ -197,7 +188,7 @@ A useful way to get this information is to use Google Maps.  Find the place you 
 
  * Can you find out where the first LAM is located?
 
-.. hint:: Look at the orography file output during the ancillary creation.
+ .. hint:: Look at the orography file output during the ancillary creation.
 
 The :guilabel:`resolution 1` set up panel specifies the grid and the run length.
 
@@ -227,6 +218,4 @@ The output for the first LAM is in ``share/cycle/<cycle time>/Regn1/resn_1/RA1M/
 
 Further Information
 ^^^^^^^^^^^^^^^^^^^
-This has been a very brief overview of the functionality of the Nesting Suite. The Nesting Suite is developed and maintained by Stuart
-Webster at the Met Office.  He has a web page all about the Nesting Suite at https://code.metoffice.gov.uk/trac/rmed/wiki/suites/nesting.
-This includes a more detailed tutorial.
+This has been a very brief overview of the functionality of the Nesting Suite. The Nesting Suite is developed and maintained by Stuart Webster at the Met Office.  He has a web page all about the Nesting Suite at https://code.metoffice.gov.uk/trac/rmed/wiki/suites/nesting. This includes a more detailed tutorial.

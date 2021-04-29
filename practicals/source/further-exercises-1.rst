@@ -68,15 +68,15 @@ STASH
 
 Exploring STASH
 ^^^^^^^^^^^^^^^
-Navigate to :guilabel:`um --> namelist --> Model Input and Output --> STASH Requests and Profiles`. Look at the time profiles called ``TALLTS`` and ``T1H``.
+Navigate to :guilabel:`um --> namelist --> Model Input and Output --> STASH Requests and Profiles`. Look at the time profiles called ``TALLTS`` and ``T6H``.
 
 * What are they doing?
 
-``TALLTS`` says output on every timestep, ``T1H`` says output hourly.
+``TALLTS`` says output on every timestep, ``T6H`` says output 6 hourly.
 
 Look also at some of the other time, domain and usage profiles.  The domain profiles determine spatial output and the usage profiles effectively specify a Fortran LUN (Logical Unit Number) on which the associated data is written.  
 
-Click on :guilabel:`STASH Requests`. Now change the time profile for all stash output whose ``Usage`` profile is UPC and ``Time`` profile is T1H. To do this, click on each diagnostic you wish to change and then click the time profile, a drop-down list should appear containing all the available time profiles.  Select ``TALLTS``.  You can sort the STASH table to make it more convenient to make these changes.  Click on the ``use_name`` column header to sort by usage profile.
+Click on :guilabel:`STASH Requests`. Now change the time profile for all stash output whose ``Usage`` profile is UPC and ``Time`` profile is T6H. To do this, click on each diagnostic you wish to change and then click the time profile, a drop-down list should appear containing all the available time profiles.  Select ``TALLTS``.  You can sort the STASH table to make it more convenient to make these changes.  Click on the ``use_name`` column header to sort by usage profile.
 
 STASH validation macro
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -121,13 +121,13 @@ Once you have added a new STASH request, you need to run a macro to generate an 
 Change the dump frequency
 -------------------------
 
-Set the model run length to 2 hours.
+Set the model run length to 1 day.
 
 .. hint:: Look in the :guilabel:`suite conf --> Run Initialisation and Cycling`.
 
 .. note:: Hours are represented in the ISO 8601 standard as ``PT<num-hours>H`` (e.g. ``PT1H`` represents 1 hour). Days are represented as ``P<num-days>D`` (e.g. ``P10D`` represents 10 days)
 
-Reset the STASH output for stream UPC to hourly and the file reinitialisation frequency to 4 hourly.
+Reset the STASH output for stream UPC to 6 hourly and the file reinitialisation frequency to daily.
 
 Navigate to :guilabel:`um --> namelist --> Model Input and Output --> Dumping and Meaning`.
 
@@ -137,7 +137,7 @@ Set the dump frequency to 2 hours.  :guilabel:`Run` the model.
 
 * How much time was spent in ``DUMPCTL``?
 
-Set the dump frequency to 1 hour. :guilabel:`Run` the model.
+Set the dump frequency to 1 day. :guilabel:`Run` the model.
 
 * What happened to the time spent in ``DUMPCTL``?
 
@@ -164,12 +164,12 @@ Setting up a suite to cycle
 
 We mentioned in the presentations that the length of an integration will be limited by the time that a model is allowed to run on the HPC (see the ARCHER2 web pages for information about the time limits).  Clearly this is no good for much of our work which may need to run on the machine for several months.  Cylc and the UM allow for long integrations to be split up into multiple shorter jobs - this is called **cycling**.
 
-Let's run the model for 3 hours with 1 hour cycling:
+Let's run the model for 1 day with 8 hour cycling:
 
-* Set the ``Total run length`` to 3 hours.
-* Set the ``Cycling frequency`` to 1 hour.
-* Set the ``Wallclock time`` to 10 minutes.
-* Ensure that the model dump frequency is hourly, in this case.
+* Set the ``Total run length`` to 1 day.
+* Set the ``Cycling frequency`` to 8 hours.
+* Set the ``Wallclock time`` to 20 minutes.
+* Ensure that the model dump frequency is 8 hourly, in this case.
 
 :guilabel:`Save` and :guilabel:`Run` the suite.
 
@@ -182,9 +182,9 @@ The model will submit the first cycle and once that has succeeded you will see t
 Restarting a suite
 ------------------
 
-Let's now extend this run out to 6 hours.  Change the ``Total run length`` to ``6`` hours and :guilabel:`Save` the suite.
+Let's now extend this run out to 2 days.  Change the ``Total run length`` to ``2`` days and :guilabel:`Save` the suite.
 
-Having already run the first 3 hours we just want the suite to pick up where it left off and run the remaining 3 hours.  To do this we *restart* the suite, by typing: ::
+Having already run the first day we just want the suite to pick up where it left off and run the remaining day.  To do this we *restart* the suite, by typing: ::
 
   puma$ rose suite-run --restart
 
