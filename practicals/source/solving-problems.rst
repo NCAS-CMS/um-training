@@ -1,12 +1,6 @@
 Solving Common UM Problems
 ==========================
 
-.. admonition:: Updated for ARCHER2
-
-   * Planet Constant blowup no longer causes BICGSTAB error. Section needs rewording or a new error trigger.  Users can still follow the instructions to fix the segmentation fault.
-   * Instructions include use of training account - possibly move to an admonition box.
-   * Needs testing
-
 This section exposes you to more typical UM errors and hints at how to find and fix those errors.
 
 You may encounter other errors, often as a result of mistyping, for which solution hints are not provided.
@@ -25,13 +19,11 @@ Firstly make the essential changes required to run the suite.  That is:
 .. Hint::
    Look in the :guilabel:`suite conf` section.  For organised training events you will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.  For self-study select the ``short`` queue.
 
-.. admonition:: Remove.  Do we need to have a replacement latent variables task??
-		
   * Did you manage to find where to set your ARCHER2 username?  
 
   This suite is set up slightly differently to the one used in the previous sections; suites do vary on how they are set up but you will soon learn where to look for things.  This suite is set up so that specifying your username on the remote HPC is optional.  If your PUMA username is the same as your username on ARCHER2, or if the remote username is set in your ``~/.ssh/config`` file Cylc will be able to submit your suite without having to explicitly set your username in the suite.
 
-  * Click :guilabel:`View --> View Latent Variables`. You should see ``HPC_USER`` appear in the panel greyed out.
+  * Click :guilabel:`View --> View Latent Variables`. You should see ``Username on ARCHER2`` appear in the panel greyed out.
   * Click the :guilabel:`+` sign next to it and select :guilabel:`Add to configuration`
   * Enter your ARCHER2 username (e.g. 'ncastr01')
 
@@ -135,31 +127,29 @@ This time the model should have failed with an error.
 
 * At what timestep did the error occur?
 
-* Which PE Ranks signalled the Abort?  Make a note of which ones
+* Which PE Ranks signalled the Abort?  Make a note of which ones.
 
 Change to the ``pe_output`` directory for the atmos_main task. This is under ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main/pe_output`` and contains the output from each PE.
 
 Open the file called ``<suite-id>.fort6.pe<pe noted above>``.  Sometimes extra information about the error can be found in the individual PE output files.
 
-.. Todo::
-   Model still crashes but not with a BICGSTAB error.  What do we want to do here?
    
-The error message indicates that NaNs (NaN stands for Not a Number and is a numeric data type representing an undefined or unrepresentable value) have occurred in the routine ``EG_BICGSTAB``.  This basically means something in the model has become unstable and "blown up". In this case the failure results from an incorrect value for the solar constant ``sc``.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within ``rose edit`` may point you in the right direction.  Go to :guilabel:`um --> namelist --> UM Science Settings --> Planet Constants` and set it to the suggested value. :guilabel:`Save`, :guilabel:`Reload` and :guilabel:`Re-trigger`.
+The error message indicates that the model has suffered a convergence failure in the routine ``EG_BICGSTAB_MIXED_PREC``. This basically means that the model was not able to find a solution to the requested accuracy with the amount of effort specified. In this case the failure results from the value chosen for ``gcr_max_iterations``.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within ``rose edit`` may point you in the right direction.  Go to :guilabel:`um --> namelist --> UM Science Settings --> Sections 10 11 12 - Dynamics settings -->  Solver` and set it to the suggested value. :guilabel:`Save`, :guilabel:`Reload` and :guilabel:`Re-trigger`.
 
-The model should fail with the same error.  So what's gone wrong here?  We've changed the value of the solar constant to a valid value so why didn't it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER2 navigate to the work directory for the ``atmos_main`` task (ie. ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main``).  In here you will see several files with uppercase names (e.g. ``ATMOSCNTL``, ``SHARED``), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use `grep`) in these files for the solar constant variable ``sc``.
+The model should fail with the same error.  So what's gone wrong here?  We've changed the value of the number of iterations to a recommended value so why didn't it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER2 navigate to the work directory for the ``atmos_main`` task (ie. ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main``).  In here you will see several files with uppercase names (e.g. ``ATMOSCNTL``, ``SHARED``), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use `grep`) in these files for the solar constant variable ``gcr_max_iterations``.
 
 .. Hint::
-   Search for the string ``sc=``.
+   Search for the string ``gcr_max_iterations=``.
 
 * What value does it have?  Is this what you changed it to in the Rose edit GUI?
 
-So why was the change not picked up?  Go back to view the setting in the Rose GUI.  By the side of the variable ``sc`` there is a little icon of a hand on paper, this indicates that there is an *"optional configuration override"* for this variable.
+So why was the change not picked up?  Go back to view the setting in the Rose GUI.  By the side of the variable ``gcr_max_iterations`` there is a little icon of a hand on paper, this indicates that there is an *"optional configuration override"* for this variable.
 
 Optional configuration overrides add to or overwrite the default configuration. They are useful to make it easier to switch between different configurations of the model.  For example switching between different resolutions.
 
-Click on the icon and the list of overrides appears.  You will see that the variable is set to 120000.0 in the *training* override file and it is this value that is being used in the model.  Unfortunately optional configuration override files cannot be changed through the GUI so we will need to edit the Rose file directly. Override files for the ``um`` app live in the directory ``~/roses/<suite-id>/app/um/opt``.  Open the file ``rose-app-training.conf`` and edit the value for ``sc``. :guilabel:`Save`, :guilabel:`Reload` and :guilabel:`Re-trigger` the suite.
+Click on the icon and the list of overrides appears.  You will see that the variable is set to 1 in the *training* override file and it is this value that is being used in the model.  Unfortunately optional configuration override files cannot be changed through the GUI so we will need to edit the Rose file directly. Override files for the ``um`` app live in the directory ``~/roses/<suite-id>/app/um/opt``.  Open the file ``rose-app-training.conf`` and edit the value for ``gcr_max_iterations``. :guilabel:`Save`, :guilabel:`Reload` and :guilabel:`Re-trigger` the suite.
 
-Check the ``sc`` variable in the namelist file again to confirm that it does now have the correct value. This time the model should run successfully. Check the output to confirm that there are no errors.  Check that the model converged at all time steps.
+Check the ``gcr_max_iterations`` variable in the namelist file again to confirm that it does now have the correct value. This time the model should run successfully. Check the output to confirm that there are no errors.  Check that the model converged at all time steps.
 
 
 
