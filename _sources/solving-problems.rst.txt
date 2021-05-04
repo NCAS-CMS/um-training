@@ -25,7 +25,7 @@ Firstly make the essential changes required to run the suite.  That is:
 
 * Did you manage to find where to set your ARCHER2 username?  
 
-This suite is set up slightly differently to the one used in the previous sections; suites do vary on how they are set up but you will soon learn where to look for things.  This suite is set up so that specifying your username on the remote HPC is optional.  If your PUMA username is the same as your username on ARCHER2, or if the remote username is set in your ``~/.ssh/config`` file Cylc will be able to submit your suite without having to explicitly set your username in the suite.
+This suite is set up slightly differently to the one used in the previous sections; suites do vary on how they are set up but you will soon learn where to look for things.  This suite is set up so that specifying your username on the remote HPC is optional. 
 
 * Click :guilabel:`View --> View Latent Variables`. You should see ``Username on ARCHER2`` appear in the panel greyed out.
 * Click the :guilabel:`+` sign next to it and select :guilabel:`Add to configuration`
@@ -40,7 +40,7 @@ The suite should fail in the ``fcm_make_um`` task. This is the task that extract
 
 * What is the error? 
 
-.. HINT::
+.. hint::
    Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files through Rose Bush, as we have done previously, however you can also view them quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View -> job stderr`
 
 This indicates that the branch cannot be found due to an incorrect branch name. You will need to look at the UM code repository through Trac either on MOSRS (https://code.metoffice.gov.uk/trac/um/browser) or the PUMA mirror (https://puma.nerc.ac.uk/trac/um.xm/browser with username: guest1 and password: tra1n1ng or use your own) to determine the correct name.
@@ -129,18 +129,17 @@ This time the model should have failed with an error.
 
 .. note:: If you use the search ``job.err`` box at the bottom of the gcylc viewer, when you select :guilabel:`Find Next` you will see a message indicating the live feed will be disconnected. Click :guilabel:`Close`.
 
+* Which PE Ranks signalled the Abort?
+
+In general it can be useful to note which processors failed and then look at the detailed output for those processors. In this scenario, however, all the processors aborted.  We'll now take a look at the individual PE output file. Change to the ``pe_output`` directory for the atmos_main task. This is under ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main/pe_output``. 
+
+Open the file called ``<suite-id>.fort6.pe0``.  Sometimes extra information about the error can be found in the individual PE output files.
+   
 * At what timestep did the error occur?
-
-* Which PE Ranks signalled the Abort?  Make a note of which ones.
-
-Change to the ``pe_output`` directory for the atmos_main task. This is under ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main/pe_output`` and contains the output from each PE.
-
-Open the file called ``<suite-id>.fort6.pe<pe noted above>``.  Sometimes extra information about the error can be found in the individual PE output files.
-
    
 The error message indicates that the model has suffered a convergence failure in the routine ``EG_BICGSTAB_MIXED_PREC``. This basically means that the model was not able to find a solution to the requested accuracy with the amount of effort specified. In this case the failure results from the value chosen for ``gcr_max_iterations``.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within ``rose edit`` may point you in the right direction.  Go to :guilabel:`um --> namelist --> UM Science Settings --> Sections 10 11 12 - Dynamics settings -->  Solver` and set it to the suggested value. :guilabel:`Save`, :guilabel:`Reload` and :guilabel:`Re-trigger`.
 
-The model should fail with the same error.  So what's gone wrong here?  We've changed the value of the number of iterations to a recommended value so why didn't it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER2 navigate to the work directory for the ``atmos_main`` task (ie. ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main``).  In here you will see several files with uppercase names (e.g. ``ATMOSCNTL``, ``SHARED``), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use `grep`) in these files for the solar constant variable ``gcr_max_iterations``.
+The model should fail with the same error.  So what's gone wrong here?  We've changed the value of the number of iterations to a recommended value so why didn't it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER2 navigate to the work directory for the ``atmos_main`` task (ie. ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main``).  In here you will see several files with uppercase names (e.g. ``ATMOSCNTL``, ``SHARED``), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use `grep`) in these files for the max number of solver iterations variable ``gcr_max_iterations``.
 
 .. Hint::
    Search for the string ``gcr_max_iterations=``.

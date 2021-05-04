@@ -121,7 +121,7 @@ Once you have added a new STASH request, you need to run a macro to generate an 
 Change the dump frequency
 -------------------------
 
-Set the model run length to 1 day.
+Set the model run length to 6 hours.
 
 .. hint:: Look in the :guilabel:`suite conf --> Run Initialisation and Cycling`.
 
@@ -133,11 +133,11 @@ Navigate to :guilabel:`um --> namelist --> Model Input and Output --> Dumping an
 
 * What is the current dump frequency?
 
-Set the dump frequency to 2 hours.  :guilabel:`Run` the model.
+Set the dump frequency to 6 hours.  :guilabel:`Run` the model.
 
 * How much time was spent in ``DUMPCTL``?
 
-Set the dump frequency to 1 day. :guilabel:`Run` the model.
+Set the dump frequency to 1 hour. :guilabel:`Run` the model.
 
 * What happened to the time spent in ``DUMPCTL``?
 
@@ -164,18 +164,18 @@ Setting up a suite to cycle
 
 We mentioned in the presentations that the length of an integration will be limited by the time that a model is allowed to run on the HPC (see the ARCHER2 web pages for information about the time limits).  Clearly this is no good for much of our work which may need to run on the machine for several months.  Cylc and the UM allow for long integrations to be split up into multiple shorter jobs - this is called **cycling**.
 
-Let's run the model for 1 day with 8 hour cycling:
+Let's run the model for 1 day with 6 hour cycling:
 
 * Set the ``Total run length`` to 1 day.
-* Set the ``Cycling frequency`` to 8 hours.
-* Set the ``Wallclock time`` to 20 minutes.
-* Ensure that the model dump frequency is 8 hourly, in this case.
+* Set the ``Cycling frequency`` to 6 hours.
+* Set the ``Wallclock time`` to 10 minutes.
+* Ensure that the model dump frequency is 6 hourly, in this case.
 
 :guilabel:`Save` and :guilabel:`Run` the suite.
 
 .. note:: The cycling frequency must be a multiple of the dump frequency.
 
-The model will submit the first cycle and once that has succeeded you will see the following 2 cycles submitted and run.
+The model will submit the first cycle and once that has succeeded you will see the following 3 cycles submitted and run.
 
 .. note:: It is always wise, particularly when you plan to run a long integration, that you only run the first cycle initially so that you can check that the model is doing what you expect before committing to a longer simulation.  It also enables you to determine how long it takes your model to run and thus be able to calculate an appropriate cycling frequency for your simulation.
 
@@ -188,5 +188,5 @@ Having already run the first day we just want the suite to pick up where it left
 
   puma$ rose suite-run --restart
 
-The cylc GUI will pop up and you should see the run resuming from where it left off (i.e. from cycle point ``19880901T0300Z``).
+The cylc GUI will pop up and you should see the run resuming from where it left off (i.e. from cycle point ``19880902T0000Z``).
 

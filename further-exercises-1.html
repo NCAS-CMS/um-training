@@ -286,7 +286,7 @@
 </div>
 <div class="section" id="change-the-dump-frequency">
 <span id="change-dump-freq"></span><h2><span class="section-number">6.4. </span>Change the dump frequency<a class="headerlink" href="#change-the-dump-frequency" title="Permalink to this headline">¶</a></h2>
-<p>Set the model run length to 1 day.</p>
+<p>Set the model run length to 6 hours.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Look in the <span class="guilabel">suite conf –&gt; Run Initialisation and Cycling</span>.</p>
@@ -300,11 +300,11 @@
 <ul class="simple">
 <li><p>What is the current dump frequency?</p></li>
 </ul>
-<p>Set the dump frequency to 2 hours.  <span class="guilabel">Run</span> the model.</p>
+<p>Set the dump frequency to 6 hours.  <span class="guilabel">Run</span> the model.</p>
 <ul class="simple">
 <li><p>How much time was spent in <code class="docutils literal notranslate"><span class="pre">DUMPCTL</span></code>?</p></li>
 </ul>
-<p>Set the dump frequency to 1 day. <span class="guilabel">Run</span> the model.</p>
+<p>Set the dump frequency to 1 hour. <span class="guilabel">Run</span> the model.</p>
 <ul class="simple">
 <li><p>What happened to the time spent in <code class="docutils literal notranslate"><span class="pre">DUMPCTL</span></code>?</p></li>
 </ul>
@@ -330,19 +330,19 @@
 <div class="section" id="setting-up-a-suite-to-cycle">
 <h2><span class="section-number">6.6. </span>Setting up a suite to cycle<a class="headerlink" href="#setting-up-a-suite-to-cycle" title="Permalink to this headline">¶</a></h2>
 <p>We mentioned in the presentations that the length of an integration will be limited by the time that a model is allowed to run on the HPC (see the ARCHER2 web pages for information about the time limits).  Clearly this is no good for much of our work which may need to run on the machine for several months.  Cylc and the UM allow for long integrations to be split up into multiple shorter jobs - this is called <strong>cycling</strong>.</p>
-<p>Let’s run the model for 1 day with 8 hour cycling:</p>
+<p>Let’s run the model for 1 day with 6 hour cycling:</p>
 <ul class="simple">
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">Total</span> <span class="pre">run</span> <span class="pre">length</span></code> to 1 day.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Cycling</span> <span class="pre">frequency</span></code> to 8 hours.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Wallclock</span> <span class="pre">time</span></code> to 20 minutes.</p></li>
-<li><p>Ensure that the model dump frequency is 8 hourly, in this case.</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Cycling</span> <span class="pre">frequency</span></code> to 6 hours.</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Wallclock</span> <span class="pre">time</span></code> to 10 minutes.</p></li>
+<li><p>Ensure that the model dump frequency is 6 hourly, in this case.</p></li>
 </ul>
 <p><span class="guilabel">Save</span> and <span class="guilabel">Run</span> the suite.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The cycling frequency must be a multiple of the dump frequency.</p>
 </div>
-<p>The model will submit the first cycle and once that has succeeded you will see the following 2 cycles submitted and run.</p>
+<p>The model will submit the first cycle and once that has succeeded you will see the following 3 cycles submitted and run.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>It is always wise, particularly when you plan to run a long integration, that you only run the first cycle initially so that you can check that the model is doing what you expect before committing to a longer simulation.  It also enables you to determine how long it takes your model to run and thus be able to calculate an appropriate cycling frequency for your simulation.</p>
@@ -355,7 +355,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ rose suite-run --restart
 </pre></div>
 </div>
-<p>The cylc GUI will pop up and you should see the run resuming from where it left off (i.e. from cycle point <code class="docutils literal notranslate"><span class="pre">19880901T0300Z</span></code>).</p>
+<p>The cylc GUI will pop up and you should see the run resuming from where it left off (i.e. from cycle point <code class="docutils literal notranslate"><span class="pre">19880902T0000Z</span></code>).</p>
 </div>
 </div>
 
