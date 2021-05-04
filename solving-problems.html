@@ -173,11 +173,7 @@
 <h1><span class="section-number">5. </span>Solving Common UM Problems<a class="headerlink" href="#solving-common-um-problems" title="Permalink to this headline">¶</a></h1>
 <div class="admonition-updated-for-archer2 admonition">
 <p class="admonition-title">Updated for ARCHER2</p>
-<ul class="simple">
-<li><p>Planet Constant blowup no longer causes BICGSTAB error. Section needs rewording or a new error trigger.  Users can still follow the instructions to fix the segmentation fault.</p></li>
-<li><p>Instructions include use of training account - possibly move to an admonition box.</p></li>
-<li><p>Needs testing</p></li>
-</ul>
+<p>Needs Testing</p>
 </div>
 <p>This section exposes you to more typical UM errors and hints at how to find and fix those errors.</p>
 <p>You may encounter other errors, often as a result of mistyping, for which solution hints are not provided.</p>
@@ -194,18 +190,15 @@
 <p class="admonition-title">Hint</p>
 <p>Look in the <span class="guilabel">suite conf</span> section.  For organised training events you will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.  For self-study select the <code class="docutils literal notranslate"><span class="pre">short</span></code> queue.</p>
 </div>
-<div class="admonition-remove-do-we-need-to-have-a-replacement-latent-variables-task admonition">
-<p class="admonition-title">Remove.  Do we need to have a replacement latent variables task??</p>
 <ul class="simple">
 <li><p>Did you manage to find where to set your ARCHER2 username?</p></li>
 </ul>
 <p>This suite is set up slightly differently to the one used in the previous sections; suites do vary on how they are set up but you will soon learn where to look for things.  This suite is set up so that specifying your username on the remote HPC is optional.  If your PUMA username is the same as your username on ARCHER2, or if the remote username is set in your <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file Cylc will be able to submit your suite without having to explicitly set your username in the suite.</p>
 <ul class="simple">
-<li><p>Click <span class="guilabel">View –&gt; View Latent Variables</span>. You should see <code class="docutils literal notranslate"><span class="pre">HPC_USER</span></code> appear in the panel greyed out.</p></li>
+<li><p>Click <span class="guilabel">View –&gt; View Latent Variables</span>. You should see <code class="docutils literal notranslate"><span class="pre">Username</span> <span class="pre">on</span> <span class="pre">ARCHER2</span></code> appear in the panel greyed out.</p></li>
 <li><p>Click the <span class="guilabel">+</span> sign next to it and select <span class="guilabel">Add to configuration</span></p></li>
-<li><p>Enter your ARCHER2 username (e.g. ‘ncastr01’)</p></li>
+<li><p>Enter your ARCHER2 username</p></li>
 </ul>
-</div>
 </div>
 <div class="section" id="errors-resolved-in-the-code-extraction">
 <h2><span class="section-number">5.2. </span>Errors resolved in the code extraction<a class="headerlink" href="#errors-resolved-in-the-code-extraction" title="Permalink to this headline">¶</a></h2>
@@ -305,27 +298,23 @@ site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901
 </div>
 <ul class="simple">
 <li><p>At what timestep did the error occur?</p></li>
-<li><p>Which PE Ranks signalled the Abort?  Make a note of which ones</p></li>
+<li><p>Which PE Ranks signalled the Abort?  Make a note of which ones.</p></li>
 </ul>
 <p>Change to the <code class="docutils literal notranslate"><span class="pre">pe_output</span></code> directory for the atmos_main task. This is under <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suite-id&gt;/work/&lt;cycle&gt;/atmos_main/pe_output</span></code> and contains the output from each PE.</p>
 <p>Open the file called <code class="docutils literal notranslate"><span class="pre">&lt;suite-id&gt;.fort6.pe&lt;pe</span> <span class="pre">noted</span> <span class="pre">above&gt;</span></code>.  Sometimes extra information about the error can be found in the individual PE output files.</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Model still crashes but not with a BICGSTAB error.  What do we want to do here?</p>
-</div>
-<p>The error message indicates that NaNs (NaN stands for Not a Number and is a numeric data type representing an undefined or unrepresentable value) have occurred in the routine <code class="docutils literal notranslate"><span class="pre">EG_BICGSTAB</span></code>.  This basically means something in the model has become unstable and “blown up”. In this case the failure results from an incorrect value for the solar constant <code class="docutils literal notranslate"><span class="pre">sc</span></code>.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">edit</span></code> may point you in the right direction.  Go to <span class="guilabel">um –&gt; namelist –&gt; UM Science Settings –&gt; Planet Constants</span> and set it to the suggested value. <span class="guilabel">Save</span>, <span class="guilabel">Reload</span> and <span class="guilabel">Re-trigger</span>.</p>
-<p>The model should fail with the same error.  So what’s gone wrong here?  We’ve changed the value of the solar constant to a valid value so why didn’t it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER2 navigate to the work directory for the <code class="docutils literal notranslate"><span class="pre">atmos_main</span></code> task (ie. <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suite-id&gt;/work/&lt;cycle&gt;/atmos_main</span></code>).  In here you will see several files with uppercase names (e.g. <code class="docutils literal notranslate"><span class="pre">ATMOSCNTL</span></code>, <code class="docutils literal notranslate"><span class="pre">SHARED</span></code>), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use <cite>grep</cite>) in these files for the solar constant variable <code class="docutils literal notranslate"><span class="pre">sc</span></code>.</p>
+<p>The error message indicates that the model has suffered a convergence failure in the routine <code class="docutils literal notranslate"><span class="pre">EG_BICGSTAB_MIXED_PREC</span></code>. This basically means that the model was not able to find a solution to the requested accuracy with the amount of effort specified. In this case the failure results from the value chosen for <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations</span></code>.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">edit</span></code> may point you in the right direction.  Go to <span class="guilabel">um –&gt; namelist –&gt; UM Science Settings –&gt; Sections 10 11 12 - Dynamics settings –&gt;  Solver</span> and set it to the suggested value. <span class="guilabel">Save</span>, <span class="guilabel">Reload</span> and <span class="guilabel">Re-trigger</span>.</p>
+<p>The model should fail with the same error.  So what’s gone wrong here?  We’ve changed the value of the number of iterations to a recommended value so why didn’t it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER2 navigate to the work directory for the <code class="docutils literal notranslate"><span class="pre">atmos_main</span></code> task (ie. <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suite-id&gt;/work/&lt;cycle&gt;/atmos_main</span></code>).  In here you will see several files with uppercase names (e.g. <code class="docutils literal notranslate"><span class="pre">ATMOSCNTL</span></code>, <code class="docutils literal notranslate"><span class="pre">SHARED</span></code>), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use <cite>grep</cite>) in these files for the solar constant variable <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations</span></code>.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Search for the string <code class="docutils literal notranslate"><span class="pre">sc=</span></code>.</p>
+<p>Search for the string <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations=</span></code>.</p>
 </div>
 <ul class="simple">
 <li><p>What value does it have?  Is this what you changed it to in the Rose edit GUI?</p></li>
 </ul>
-<p>So why was the change not picked up?  Go back to view the setting in the Rose GUI.  By the side of the variable <code class="docutils literal notranslate"><span class="pre">sc</span></code> there is a little icon of a hand on paper, this indicates that there is an <em>“optional configuration override”</em> for this variable.</p>
+<p>So why was the change not picked up?  Go back to view the setting in the Rose GUI.  By the side of the variable <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations</span></code> there is a little icon of a hand on paper, this indicates that there is an <em>“optional configuration override”</em> for this variable.</p>
 <p>Optional configuration overrides add to or overwrite the default configuration. They are useful to make it easier to switch between different configurations of the model.  For example switching between different resolutions.</p>
-<p>Click on the icon and the list of overrides appears.  You will see that the variable is set to 120000.0 in the <em>training</em> override file and it is this value that is being used in the model.  Unfortunately optional configuration override files cannot be changed through the GUI so we will need to edit the Rose file directly. Override files for the <code class="docutils literal notranslate"><span class="pre">um</span></code> app live in the directory <code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suite-id&gt;/app/um/opt</span></code>.  Open the file <code class="docutils literal notranslate"><span class="pre">rose-app-training.conf</span></code> and edit the value for <code class="docutils literal notranslate"><span class="pre">sc</span></code>. <span class="guilabel">Save</span>, <span class="guilabel">Reload</span> and <span class="guilabel">Re-trigger</span> the suite.</p>
-<p>Check the <code class="docutils literal notranslate"><span class="pre">sc</span></code> variable in the namelist file again to confirm that it does now have the correct value. This time the model should run successfully. Check the output to confirm that there are no errors.  Check that the model converged at all time steps.</p>
+<p>Click on the icon and the list of overrides appears.  You will see that the variable is set to 1 in the <em>training</em> override file and it is this value that is being used in the model.  Unfortunately optional configuration override files cannot be changed through the GUI so we will need to edit the Rose file directly. Override files for the <code class="docutils literal notranslate"><span class="pre">um</span></code> app live in the directory <code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suite-id&gt;/app/um/opt</span></code>.  Open the file <code class="docutils literal notranslate"><span class="pre">rose-app-training.conf</span></code> and edit the value for <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations</span></code>. <span class="guilabel">Save</span>, <span class="guilabel">Reload</span> and <span class="guilabel">Re-trigger</span> the suite.</p>
+<p>Check the <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations</span></code> variable in the namelist file again to confirm that it does now have the correct value. This time the model should run successfully. Check the output to confirm that there are no errors.  Check that the model converged at all time steps.</p>
 </div>
 </div>
 
