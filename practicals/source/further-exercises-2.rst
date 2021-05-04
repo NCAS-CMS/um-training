@@ -1,12 +1,13 @@
 Further Exercises (2)
 =====================
 
-.. warning::
-   Not updated for ARCHER2
+.. admonition:: Updated for ARCHER2
+
+   Needs Testing
    
 The exercises in this section are all optional.  We suggest you pick and choose the exercises that you feel are most relevant to the work you are/will be doing.
 
-.. note:: Use your copy of suite ``u-ba799`` for these exercises unless otherwise specified.
+.. note:: Use your copy of suite ``u-cc654`` for these exercises unless otherwise specified.
 
 Post-Processing (archive and transfer of model data)
 ----------------------------------------------------
@@ -31,7 +32,9 @@ You will need to run the model for at least 1 day as archiving doesn't work for 
 
 :guilabel:`Run` the suite.
 
-Once the run has completed go to the archive directory for this cycle (e.g. ``/nerc/n02/n02/<userid>/<suiteid>/19880901T0000Z``) and you should see several files have been copied over (e.g ``ba902a.pc19880901_00.pp``).  Data is only archived when it is no longer required by the model for restarting or for calculating means (seasonal, annual, etc). This run is reinitialising the ``pc`` data stream every 4 hours and you should see that it has only archived data files up to 16:00hrs (``ba902a.pc19880901_16.pp``).  The last file containing data for hours 20-24 is still required by the model. Equally seasonal mean files would not be archived until the end of the year, after the annual mean has been created.
+Once the run has completed go to the archive directory for this cycle (e.g. ``/nerc/n02/n02/<userid>/<suiteid>/19880901T0000Z``) and you should see several files have been copied over (e.g ``cc654a.pc19880901_00.pp``).
+
+Data files that have been archived and are no longer required by the model for restarting or for calculating means (seasonal, annual, etc) are deleted from the suite ``History_Data`` directory. Go to the ``History_Data`` directory for your suite and confirm that this has happened. This run is reinitialising the ``pc`` data stream every 6 hours and you should see that it has only removed data files for this stream up to 18:00hrs, the ``cc654a.pc19880901_18.pp`` file is still present.  This file contains data for the hours 18-24 and would be required by the model in order to restart. Equally seasonal mean files would not be fully archived until the end of the year, after the annual mean has been created.
 
 .. note:: The post-processing app can also be configured to transfer the archived data over to JASMIN.  Details on how to do this are available on the CMS website: http://cms.ncas.ac.uk/wiki/Docs/PostProcessingApp
 
