@@ -191,14 +191,14 @@
             
   <div class="section" id="further-exercises-2">
 <h1><span class="section-number">7. </span>Further Exercises (2)<a class="headerlink" href="#further-exercises-2" title="Permalink to this headline">¶</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Not updated for ARCHER2</p>
+<div class="admonition-updated-for-archer2 admonition">
+<p class="admonition-title">Updated for ARCHER2</p>
+<p>Needs Testing</p>
 </div>
 <p>The exercises in this section are all optional.  We suggest you pick and choose the exercises that you feel are most relevant to the work you are/will be doing.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Use your copy of suite <code class="docutils literal notranslate"><span class="pre">u-ba799</span></code> for these exercises unless otherwise specified.</p>
+<p>Use your copy of suite <code class="docutils literal notranslate"><span class="pre">u-cc654</span></code> for these exercises unless otherwise specified.</p>
 </div>
 <div class="section" id="post-processing-archive-and-transfer-of-model-data">
 <h2><span class="section-number">7.1. </span>Post-Processing (archive and transfer of model data)<a class="headerlink" href="#post-processing-archive-and-transfer-of-model-data" title="Permalink to this headline">¶</a></h2>
@@ -218,7 +218,8 @@
 </ul>
 <p>You will need to run the model for at least 1 day as archiving doesn’t work for periods of less than 1 day.  Change the <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">length</span></code> and <code class="docutils literal notranslate"><span class="pre">cycling</span> <span class="pre">frequency</span></code> to be 1 day.  This should complete in about 5 minutes so set the <code class="docutils literal notranslate"><span class="pre">wallclock</span> <span class="pre">time</span></code> to be 10 minutes.</p>
 <p><span class="guilabel">Run</span> the suite.</p>
-<p>Once the run has completed go to the archive directory for this cycle (e.g. <code class="docutils literal notranslate"><span class="pre">/nerc/n02/n02/&lt;userid&gt;/&lt;suiteid&gt;/19880901T0000Z</span></code>) and you should see several files have been copied over (e.g <code class="docutils literal notranslate"><span class="pre">ba902a.pc19880901_00.pp</span></code>).  Data is only archived when it is no longer required by the model for restarting or for calculating means (seasonal, annual, etc). This run is reinitialising the <code class="docutils literal notranslate"><span class="pre">pc</span></code> data stream every 4 hours and you should see that it has only archived data files up to 16:00hrs (<code class="docutils literal notranslate"><span class="pre">ba902a.pc19880901_16.pp</span></code>).  The last file containing data for hours 20-24 is still required by the model. Equally seasonal mean files would not be archived until the end of the year, after the annual mean has been created.</p>
+<p>Once the run has completed go to the archive directory for this cycle (e.g. <code class="docutils literal notranslate"><span class="pre">/nerc/n02/n02/&lt;userid&gt;/&lt;suiteid&gt;/19880901T0000Z</span></code>) and you should see several files have been copied over (e.g <code class="docutils literal notranslate"><span class="pre">cc654a.pc19880901_00.pp</span></code>).</p>
+<p>Data files that have been archived and are no longer required by the model for restarting or for calculating means (seasonal, annual, etc) are deleted from the suite <code class="docutils literal notranslate"><span class="pre">History_Data</span></code> directory. Go to the <code class="docutils literal notranslate"><span class="pre">History_Data</span></code> directory for your suite and confirm that this has happened. This run is reinitialising the <code class="docutils literal notranslate"><span class="pre">pc</span></code> data stream every 6 hours and you should see that it has only removed data files for this stream up to 18:00hrs, the <code class="docutils literal notranslate"><span class="pre">cc654a.pc19880901_18.pp</span></code> file is still present.  This file contains data for the hours 18-24 and would be required by the model in order to restart. Equally seasonal mean files would not be fully archived until the end of the year, after the annual mean has been created.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The post-processing app can also be configured to transfer the archived data over to JASMIN.  Details on how to do this are available on the CMS website: <a class="reference external" href="http://cms.ncas.ac.uk/wiki/Docs/PostProcessingApp">http://cms.ncas.ac.uk/wiki/Docs/PostProcessingApp</a></p>
