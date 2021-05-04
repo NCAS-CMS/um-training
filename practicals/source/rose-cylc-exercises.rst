@@ -1,9 +1,9 @@
 Rose/Cylc Exercises
 ===================
 
-.. warning::
-   * Not updated for ARCHER2
-   * Most exercises should still work though with the suites from Chapter 2 & 3.
+.. admonition:: Updated for ARCHER2
+
+   Needs Testing
    
 Differencing suites
 -------------------
@@ -13,10 +13,10 @@ Currently there is no Rose tool to difference two suites. Since a suite consists
 We will difference your copy of the GA7.0 suite with the original one: ::
 
   puma$ cd ~/roses
-  puma$ rosie checkout u-ba799
-  puma$ rose config-dump -C u-ba799
+  puma$ rosie checkout u-cc654
+  puma$ rose config-dump -C u-cc654
   puma$ rose config-dump -C <your-suitename>
-  puma$ diff -r u-ba799 <your-suitename>
+  puma$ diff -r u-cc654 <your-suitename>
 
 * Are the differences what you expected?
 
@@ -27,12 +27,12 @@ When developing suites, it can be useful to check what the run graph looks like 
 
 The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
 
-  puma$ rosie checkout u-ah076
-  puma$ cd ~/roses/u-ah076
-  puma$ rose suite-run -l --name=u-ah076 # install suite in local cylc db only
-  puma$ cylc graph u-ah076               # view graph in browser
+  puma$ rosie checkout u-ce122
+  puma$ cd ~/roses/u-ce122
+  puma$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
+  puma$ cylc graph u-ce122               # view graph in browser
 
-A window containing the graph of the suite should appear.
+A window containing the graph of the suite should appear. By default tasks in the same family are grouped together. Click the :guilabel:`Ungroup all families` button at the top of the window to expand the graph to view all tasks within this suite.
 
 Exploring the suite definition files
 ------------------------------------
@@ -77,7 +77,7 @@ This has just given you a very brief look at the suite definitions files.  More 
 Suite and task event handling
 -----------------------------
 
-Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting ``[[[events]]] mail events`` to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite u-ba799 to send an email on task (submission) failure, retry and timeout. 
+Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting ``[[[events]]] mail events`` to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite ``u-cc654`` to send an email on task (submission) failure, retry and timeout. 
 
 Edit the ``suite.rc`` file to add the ``[[[events]]]`` section below: ::
 
@@ -100,7 +100,7 @@ To test this out we need to force the suite to fail.  Change the account code to
 * Did you get an email when the suite failed?
 * Look in the suite error files to find the error message?
 
-Change the account code back to 'n02-training' before continuing.
+Change the account code back to its previous setting before continuing.
 
 Further information about event handlers can be found in the Cylc documentation: https://cylc.github.io/doc/built-sphinx-single/index.html#eventhandling
 
@@ -153,7 +153,7 @@ In order to actually run the app, we need to add a new "task" to the suite which
 
 3. How the task will run (i.e. which computer and the resources it will need).
 
-In this example, we will add an app that prints ``Hello World``, which will execute after the reconfiguration and before the main model. We will add the app to your copy of u-ba799.
+In this example, we will add an app that prints ``Hello World``, which will execute after the reconfiguration and before the main model. We will add the app to your copy of ``u-cc654``.
 
 Create the Rose application directory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -239,7 +239,7 @@ The app can be tested in isolation by changing into the ``new_app/`` directory a
 This should produce output similar to: ::
 
   ros@puma$ rose app-run
-  [INFO] export PATH=/home/ros/roses/u-ba799/app/new_app/bin:/home/fcm/rose-2016.11.1/bin:/usr/local/python/bin:
+  [INFO] export PATH=/home/ros/roses/u-cc654/app/new_app/bin:/home/fcm/rose-2016.11.1/bin:/usr/local/python/bin:
   ...
   [INFO] export PLANET=Jupiter
   [INFO] command: hello.sh ${PLANET}
