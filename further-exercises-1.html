@@ -180,10 +180,6 @@
             
   <div class="section" id="further-exercises-1">
 <h1><span class="section-number">6. </span>Further Exercises (1)<a class="headerlink" href="#further-exercises-1" title="Permalink to this headline">¶</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Not updated for ARCHER2</p>
-</div>
 <p>Now that we have built the suite, there is no need to rebuild it each time you run it.  Switch off compilation of the UM and reconfiguration.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
@@ -194,7 +190,7 @@
 <p>Navigate to <span class="guilabel">um –&gt; namelist –&gt; Top Level Model Control –&gt; Run Control and Time Settings</span>.</p>
 <p>Set <code class="docutils literal notranslate"><span class="pre">ltimer</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.  Timer diagnostics outputs timing information and can be very useful in diagnosing performance problems.</p>
 <p><span class="guilabel">Save</span> and <span class="guilabel">Run</span> the suite.</p>
-<p>Check the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> file.</p>
+<p>Check the output from processor 0 in the``fort6.pe000`` file.</p>
 <ul class="simple">
 <li><p>Which routine took the most time?</p></li>
 <li><p>How many times was <code class="docutils literal notranslate"><span class="pre">Atm_Step</span></code> called?</p></li>
@@ -218,14 +214,6 @@
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>The base ARCHER2 charging unit is a node irrespective of how many cores on the node are being used. ARCHER2 has 128 cores per node, and for the UM each MPI task and OpenMP thread is mapped to a separate core.  So in this case we are running 10x16 (x 2 OMP threads) for a total of 320 cores, but are charged for 3 nodes (384 cores).</p>
-</div>
-<div class="admonition-remove-more-memory-per-node-on-archer2-so-no-longer-works admonition">
-<p class="admonition-title">Remove - more memory per node on ARCHER2 so no longer works</p>
-<p>Try reducing the processor decomposition to 4(EW) x 3(NS). Run the model.</p>
-<ul class="simple">
-<li><p>What is the error?</p></li>
-</ul>
-<p>Using too few cores has resulted in the model failing due to insufficient memory, indicated by the message <em>“OOM killer terminated this process”</em>.  In this case it is easy to diagnose the problem, but sometimes it can be difficult to diagnose, so it’s worth trying to increase the number of processors if you suspect memory resource issues.</p>
 </div>
 <p>Try experimenting with different processor decompositions (E.g. 10x32, 16x32, etc)</p>
 <ul class="simple">

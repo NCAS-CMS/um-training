@@ -34,7 +34,7 @@ Now that you've run a basic suite, you need to know how to apply changes to the 
 
 As a user, you will be supplied with the **URL** and possibly a version number of a branch.  FCM keywords can be used to specify the URL which is a way of using shorthand for standard bits of the URL path.  For example, this branch has been created in the MOSRS UM repository: ::
 
-  https://code.metoffice.gov.uk/um/main/branches/dev/rosalynhatcher/vn11.8_training_um_shell1
+  https://code.metoffice.gov.uk/svn/um/main/branches/dev/rosalynhatcher/vn11.8_training_um_shell1
 
 A shorter way to specify this is: ::
 

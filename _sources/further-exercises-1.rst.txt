@@ -1,9 +1,6 @@
 Further Exercises (1)
 =====================
 
-.. warning::
-   Not updated for ARCHER2
-   
 Now that we have built the suite, there is no need to rebuild it each time you run it.  Switch off compilation of the UM and reconfiguration.
 
 .. hint:: See the :guilabel:`suite conf` section in the Rose edit GUI.
@@ -17,7 +14,7 @@ Set ``ltimer`` to ``True``.  Timer diagnostics outputs timing information and ca
 
 :guilabel:`Save` and :guilabel:`Run` the suite.
 
-Check the ``job.out`` file.
+Check the output from processor 0 in the``fort6.pe000`` file.
 
 * Which routine took the most time?
 * How many times was ``Atm_Step`` called?
@@ -40,14 +37,6 @@ Navigate to :guilabel:`suite conf --> Domain Decomposition --> Atmosphere`.
 
 .. hint::
    The base ARCHER2 charging unit is a node irrespective of how many cores on the node are being used. ARCHER2 has 128 cores per node, and for the UM each MPI task and OpenMP thread is mapped to a separate core.  So in this case we are running 10x16 (x 2 OMP threads) for a total of 320 cores, but are charged for 3 nodes (384 cores).
-
-.. admonition:: Remove - more memory per node on ARCHER2 so no longer works
-
-  Try reducing the processor decomposition to 4(EW) x 3(NS). Run the model.
-
-  * What is the error?  
-
-  Using too few cores has resulted in the model failing due to insufficient memory, indicated by the message *"OOM killer terminated this process"*.  In this case it is easy to diagnose the problem, but sometimes it can be difficult to diagnose, so it's worth trying to increase the number of processors if you suspect memory resource issues. 
 
 Try experimenting with different processor decompositions (E.g. 10x32, 16x32, etc)
 
