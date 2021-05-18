@@ -45,7 +45,7 @@ Older versions of the UM did not have IO servers, which meant that all reading a
 
 Here's just a taste of how to get this working in your suite.
 
-Set the suite to run for 6 hours with an appropriate cycling frequency, then check that ``OpenMP`` is switched on as this is needed for the IO servers to work.
+Set the suite to run for 1 day with an appropriate cycling frequency, then check that ``OpenMP`` is switched on as this is needed for the IO servers to work.
 
 .. hint::
    Search for ``openmp`` in the rose edit GUI
