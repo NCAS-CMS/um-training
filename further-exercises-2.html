@@ -229,7 +229,7 @@
 <h2><span class="section-number">7.2. </span>Using IO Servers<a class="headerlink" href="#using-io-servers" title="Permalink to this headline">¶</a></h2>
 <p>Older versions of the UM did not have IO servers, which meant that all reading and writing of fields files went through a single processor (pe0).  When the model is producing lots of data and is running on many processors, this method of IO is very inefficient and costly - when pe0 is writing data, all the other processors have to wait around doing nothing but still consuming AUs.  Later UM versions, including UM 10.5, have IO servers which are processors dedicated to performing IO and which work asynchronously with processors doing the computation.</p>
 <p>Here’s just a taste of how to get this working in your suite.</p>
-<p>Set the suite to run for 6 hours with an appropriate cycling frequency, then check that <code class="docutils literal notranslate"><span class="pre">OpenMP</span></code> is switched on as this is needed for the IO servers to work.</p>
+<p>Set the suite to run for 1 day with an appropriate cycling frequency, then check that <code class="docutils literal notranslate"><span class="pre">OpenMP</span></code> is switched on as this is needed for the IO servers to work.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Search for <code class="docutils literal notranslate"><span class="pre">openmp</span></code> in the rose edit GUI</p>
