@@ -193,14 +193,25 @@ Note that the latitude and longitude coordinates are now shorter in length.
 
   >>> import cfplot
 
-* Make a default contour plot of the original GCM data ::
-
-   >>> cfplot.con(g)
-
-* Make a default contour plot of the field, f ::
+* Make a default contour plot of the regridded observed data, `f` ::
 
    >>> cfplot.con(f)
+on(f.subspace(X=cf.wi(-10, 40), Y=cf.wi(35, 70)))
 
+* Make a "blockfill" plot of the regridded observed data, `f` ::
+
+   >>> cfplot.con(f, blockfill=True)
+
+* Make a default contour plot of the model data, `g` ::
+
+   >>> cfplot.con(g)
+   
+* Make a "blockfill" plot of the model data, `g`, over the
+  same region ::
+
+   >>> g = g.subspace(X=cf.wi(-10, 40), Y=cf.wi(35, 70))
+   >>> cfplot.con(g, blockfill=True)
+   
 * Write out the new field f to disk ::
 
   >>> cf.write(f, 'cru_precip_european_mean_regridded.nc')
