@@ -108,7 +108,7 @@ features - we'll use it to convert UM fields file or PP data to
 CF-compliant data in NetCDF format. You first need to set the
 environment to run ``cfa``: ::
 
- esPP001$ export PATH=/home/n02/n02/ajh/anaconda3/bin:$PATH
+ esPP001$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
  esPP001$ cfa -i -o ba799a.pc19880901_00.nc ba799a.pc19880901_00.pp
  
 Try viewing the NetCDF file with xconv.
@@ -146,15 +146,19 @@ Many tools exist for analysing data from NWP and climate models and there are ma
 * Set up the environment and start python. ::
 
    
-   archer$ export PATH=/home/n02/n02/ajh/anaconda3/bin:$PATH
+   archer$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
    archer$ python
-   >>> import cf
+   >>>
 
-We'll be looking at CRU observed precipitation data
+We'll be looking at CRU observed precipitation data.
+
+* Import the cf-python library ::
+
+  >>> import cf
 
 * Read in data files ::
 
-  >>> f = cf.read('~charles/UM_Training/cru/*.nc')[0]
+  >>> f = cf.read('~dch/UM_Training/cru/*.nc')[0]
 
 * Inspect the file contents with different amounts of detail ::
 
@@ -162,44 +166,60 @@ We'll be looking at CRU observed precipitation data
   >>> print(f)
   >>> f.dump()
   
-Note that the three files in the cru directory are aggregated into one
+Note that the two files in the cru directory are aggregated into one
 field.
 
-* Average the field with respect to time ::
+* Read in another field produced by a GCM, this has a different
+  latitude/longitude grid to regrid the CRU data to ::
+
+  >>> g = cf.read('~dch/UM_Training/N96_DJF_precip_means.nc')[0]
+  >>> print(g)
+
+* Regrid the field of observed data, ``f`` to the grid of the model
+  field (g) ::
+
+  >>> f = f.regrids(g, method='linear')
+  >>> print(f)
+
+* Average the regridded field with respect to time ::
 
   >>> f = f.collapse('T: mean')
   >>> print(f)
 
-Note that the time coordinate is now of length 1.
+Note that the time axis is now of length 1.
 
-* Read in another field produced by a GCM, this has a different latitude/longitude grid to regrid the CRU data to ::
-
-  >>> g = cf.read('~charles/UM_Training/N96_DJF_precip_means.nc')[0]
-  >>> print(g)
-
-* Regrid the field of observed data (f) to the grid of the model field (g) ::
-
-  >>> f = f.regrids(g, method='bilinear')
-  >>> print(f)
-
-* Subspace the regridded field, f, to a European region ::
+* Subspace the regridded field to a European region ::
 
   >>> f = f.subspace(X=cf.wi(-10, 40), Y=cf.wi(35, 70))
   >>> print(f)
 
-Note that the latitude and longitude coordinates are now shorter in length.
+Note that the latitude and longitude axes are now shorter in length.
 
 * Import the cfplot visualisation library ::
 
   >>> import cfplot
 
-* Make a default contour plot of the field, f ::
+* Make a default contour plot of the regridded observed data, ``f`` ::
 
    >>> cfplot.con(f)
 
+* Make a "blockfill" plot of the regridded observed data, ``f`` ::
+
+   >>> cfplot.con(f, blockfill=True)
+
+* Make a default contour plot of the model data, ``g`` ::
+
+   >>> cfplot.con(g)
+   
+* Make a "blockfill" plot of the model data, ``g``, over the
+  same region ::
+
+   >>> g = g.subspace(X=cf.wi(-10, 40), Y=cf.wi(35, 70))
+   >>> cfplot.con(g, blockfill=True)
+   
 * Write out the new field f to disk ::
 
   >>> cf.write(f, 'cru_precip_european_mean_regridded.nc')
 
-This has just given you a taster of CF-Python & CF-Plot, if you would like to try out some more exercises please take a look at http://ajheaps.github.io/cf-plot
+This has just given you a taster of CF-Python & CF-Plot, if you would like to try out some more exercises please take a look at https://github.com/NCAS-CMS/cf-training
 
