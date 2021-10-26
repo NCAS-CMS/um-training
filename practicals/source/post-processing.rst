@@ -1,10 +1,7 @@
 Post processing
 ===============
 
-.. warning::
-   Not updated for ARCHER2
-   
-This is simply a very basic introduction to some of the more widely used useful tools for viewing, checking, and converting UM input and output data. The tools described below all run on the ARCHER login nodes, and you can run them there, but they also run on the ARCHER post-processors (see http://www.archer.ac.uk/documentation/user-guide/connecting.php#sec-2.1.2). Try logging on to one of the post-processors for these exercises: ``ssh -X espp1``. The post processors can see /home and /work and /nerc.
+This is simply a very basic introduction to some of the more widely used useful tools for viewing, checking, and converting UM input and output data. The tools described below all run on the ARCHER login nodes.
 
 xconv
 -----
@@ -45,7 +42,7 @@ Mule consists of a Python API for reading and writing UM files and a set of UM u
 
 Before running the mule commands you will need to load the python environment on ARCHER by running: ::
 
-  archer$ module load anaconda
+  archer$ module load cray-python
 
 **i. mule-pumf**
 
@@ -82,9 +79,10 @@ um-convpp
 
 We have mentioned in the presentations the PP file format - this is a sequential format (a fields file is random access) still much used in the community. PP data is stored as 32-bit, which provides a significant saving of space, but means that a conversion step is required from a fields file (64-bit). The utility to do this is called ``um-convpp``.  ``um-convpp`` converts directly from 64-bit files produced by the UM to 32-bit PP files.  You must, however, make sure you are using a version 10.4 or greater - you can check that you are using the right one by typing ``which um-convpp``. 
 
-Add the path to ``um-convpp`` to your environment - you can also add this to your ``~/.profile`` so it is available everytime you log in. ::
+Set the stack size limit to unlimited, and add the path to ``um-convpp`` to your environment - you can also add this to your ``~/.profile`` so it is available everytime you log in. ::
 
-  archer$ export PATH=$UMDIR/vn11.0/cce/utilities:$PATH
+  archer$ ulimit -s unlimited
+  archer$ export PATH=$UMDIR/vn11.2/cce/utilities:$PATH
 
 Run ``um-convpp`` on a fieldsfile (E.g ba799a.pc19880901_00) ::
 
@@ -108,8 +106,8 @@ features - we'll use it to convert UM fields file or PP data to
 CF-compliant data in NetCDF format. You first need to set the
 environment to run ``cfa``: ::
 
- esPP001$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
- esPP001$ cfa -i -o ba799a.pc19880901_00.nc ba799a.pc19880901_00.pp
+ archer$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
+ archer$ cfa -i -o ba799a.pc19880901_00.nc ba799a.pc19880901_00.pp
  
 Try viewing the NetCDF file with xconv.
 
