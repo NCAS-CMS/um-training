@@ -16,13 +16,13 @@ The ``xconv`` window lists the fields in the file, the dimensions of those field
 
 Both files have the same fields. Double click on a field to reveal its coordinate data. Check the time for this field (select the "t" checkbox in the upper right panel).
 
-Plot both sets of data - click the "Plot Data" button.
+Plot both sets of data - click the :guilabel:`Plot Data` button.
 
 View the data - this shows numerical data values and their coordinates and can be helpful for finding spurious data values.
 
 **ii. Convert UM fields data to netCDF**
 
-Select a single-level field (one for which nz=1), choose "Output format" to be "Netcdf", enter an "Output file name", and select "Convert". Information relevant to the file conversion will appear in the lower left panel.
+Select a single-level field (one for which nz=1), choose :guilabel:`Output format` to be :guilabel:`Netcdf`, enter an "Output file name", and select :guilabel:`Convert`. Information relevant to the file conversion will appear in the lower left panel.
 
 Use ``xconv`` to view the netcdf file just created.
 
@@ -40,7 +40,7 @@ Mule
 
 Mule consists of a Python API for reading and writing UM files and a set of UM utilities.  This section introduces you to some of the most useful UM utilities.  Full details of Mule can be found on the MOSRS: https://code.metoffice.gov.uk/doc/um/index.html
 
-Before running the mule commands you will need to load the python environment on ARCHER by running: ::
+Before running the mule commands you will need to load the python environment on ARCHER2 by running: ::
 
   archer$ module load cray-python
 
@@ -84,7 +84,7 @@ Set the stack size limit to unlimited, and add the path to ``um-convpp`` to your
   archer$ ulimit -s unlimited
   archer$ export PATH=$UMDIR/vn11.2/cce/utilities:$PATH
 
-Run ``um-convpp`` on a fieldsfile (E.g ba799a.pc19880901_00) ::
+Run ``um-convpp`` on a fieldsfile (E.g `ba799a.pc19880901_00`) ::
 
   archer$ cd /home/n02/n02/ros/cylc-run/u-ba799/share/data/History_Data
   archer$ um-convpp ba799a.pc19880901_00 ba799a.pc19880901_00.pp
