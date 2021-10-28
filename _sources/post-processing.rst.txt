@@ -1,14 +1,14 @@
 Post processing
 ===============
 
-This is simply a very basic introduction to some of the more widely used useful tools for viewing, checking, and converting UM input and output data. The tools described below all run on the ARCHER login nodes.
+This is simply a very basic introduction to some of the more widely used useful tools for viewing, checking, and converting UM input and output data. The tools described below all run on the ARCHER2 login nodes.
 
 xconv
 -----
 
 **i. View data**
 
-On ARCHER go to the output directory of the global job that you ran previously (the one copied from u-ba799). Run ``xconv`` on the file ending with, for example, ``da19880901_04``. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.
+On ARCHER2 go to the output directory of the global job that you ran previously (the one copied from u-cc654). Run ``xconv`` on the file ending with, for example, ``da19880901_04``. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.
 
 In the same directory is a file whose name ends in ``.astart``; run a second instance of ``xconv`` on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.
 
@@ -51,9 +51,9 @@ This provides another way of seeing header information, but also gives some info
 Run ``mule-pumf`` on the start file - here's a couple of examples on one of Ros' files: :: 
 
  archer$ mule-pumf --print-columns 2 --headers-only \\
-                        ba799.astart > ~/mule-pumf-header.out
+                        cc654.astart > ~/mule-pumf-header.out
 
- archer$ mule-pumf --print-columns 2 ba799.astart > ~/mule-pumf.out
+ archer$ mule-pumf --print-columns 2 cc654.astart > ~/mule-pumf.out
 
 * Can you see what the difference is in the output of these 2 commands?
 
@@ -84,12 +84,12 @@ Set the stack size limit to unlimited, and add the path to ``um-convpp`` to your
   archer$ ulimit -s unlimited
   archer$ export PATH=$UMDIR/vn11.2/cce/utilities:$PATH
 
-Run ``um-convpp`` on a fieldsfile (E.g `ba799a.pc19880901_00`) ::
+Run ``um-convpp`` on a fieldsfile (E.g `cc654a.pc19880901_00`) ::
 
-  archer$ cd /home/n02/n02/ros/cylc-run/u-ba799/share/data/History_Data
-  archer$ um-convpp ba799a.pc19880901_00 ba799a.pc19880901_00.pp
+  archer$ cd /home/n02/n02/ros/cylc-run/u-cc654/share/data/History_Data
+  archer$ um-convpp cc654a.pc19880901_00 cc654a.pc19880901_00.pp
 
-  archer$ ls -l ba799a.pc19880901*
+  archer$ ls -l cc654a.pc19880901*
   -rw-r--r-- 1 ros n02 64917504 Mar 15 11:56 ag761a.pc19880901_00
   -rw-r--r-- 1 ros n02 48581456 Mar 21 10:19 ag761a.pc19880901_00.pp
 
@@ -107,7 +107,7 @@ CF-compliant data in NetCDF format. You first need to set the
 environment to run ``cfa``: ::
 
  archer$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
- archer$ cfa -i -o ba799a.pc19880901_00.nc ba799a.pc19880901_00.pp
+ archer$ cfa -i -o cc654a.pc19880901_00.nc cc654a.pc19880901_00.pp
  
 Try viewing the NetCDF file with xconv.
 
@@ -117,7 +117,7 @@ files, to provide a text representation of the CF fields contained in
 the input files. Try it on a PP file and its NetCDF equivalent,
 e.g. ::
 
-  archer$ cfa -vm ba799a.pc19880901_00.pp | less
+  archer$ cfa -vm cc654a.pc19880901_00.pp | less
   Field: long_name:HEAVYSIDE FN ON P LEV/UV GRID (ncvar%UM_m01s30i301_vn1100)
   ---------------------------------------------------------------------------
   Data           : long_name:HEAVYSIDE FN ON P LEV/UV GRID(time(5), air_pressure(17), latitude(145), longitude(192)) 

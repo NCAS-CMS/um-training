@@ -1,9 +1,5 @@
 Solving Common UM Problems
 ==========================
-
-.. admonition:: Updated for ARCHER2
-
-  Needs Testing
    
 This section exposes you to more typical UM errors and hints at how to find and fix those errors.
 

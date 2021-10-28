@@ -173,7 +173,7 @@
 <p>This Sections provides instructions for some common ssh tasks. If you have any problems, contact a member of the CMS team.</p>
 <div class="section" id="using-an-existing-ssh-agent">
 <span id="using-existing-agent"></span><h2><span class="section-number">11.1. </span>Using an existing ssh agent<a class="headerlink" href="#using-an-existing-ssh-agent" title="Permalink to this headline">¶</a></h2>
-<p>If you already have an ssh-agent set up on PUMA, you can use this one to connect to your Archer training account. Conversely, after the course you may wish to use the keys you set up for own Archer account.</p>
+<p>If you already have an ssh-agent set up on PUMA, you can use this one to connect to your ARCHER2 training account. Conversely, after the course you may wish to use the keys you set up for own Archer account.</p>
 <p>You can copy your ssh key over to Archer using the <code class="docutils literal notranslate"><span class="pre">ssh-copy-id</span></code> script.</p>
 <p>First you need to find the name of the public key in your <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> directory.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cd ~/.ssh
@@ -182,8 +182,8 @@ environment.puma  id_rsa  id_rsa.pub  known_hosts  ssh-setup
 </pre></div>
 </div>
 <p>The public key ends with <code class="docutils literal notranslate"><span class="pre">.pub</span></code> and will usually be called <code class="docutils literal notranslate"><span class="pre">id_rsa.pub</span></code> or <code class="docutils literal notranslate"><span class="pre">id_dsa.pub</span></code>.</p>
-<p>Now run the script to copy the key to your Archer account, making sure to use the correct name for your key:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh-copy-id -i ~/.ssh/id_rsa.pub &lt;archer-username&gt;@login.archer.ac.uk
+<p>Now run the script to copy the key to your ARCHER2 account, making sure to use the correct name for your key:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh-copy-id -i ~/.ssh/id_rsa.pub &lt;archer-username&gt;@login-4c.archer2.ac.uk
 </pre></div>
 </div>
 <p>You will be prompted for your Archer password.</p>
@@ -192,13 +192,13 @@ environment.puma  id_rsa  id_rsa.pub  known_hosts  ssh-setup
 <div class="section" id="restarting-your-ssh-agent">
 <span id="restarting-agent"></span><h2><span class="section-number">11.2. </span>Restarting your ssh agent<a class="headerlink" href="#restarting-your-ssh-agent" title="Permalink to this headline">¶</a></h2>
 <p>Normally your ssh agent persists even when you log out of puma. However, from time to time it can vanish.</p>
-<p>If you are prompted for your passphrase, this means the ssh agent has stopped for some reason. The agent <em>should</em> have been re-initialised when you logged into puma, but you will need to re-associate your ssh keys to the agent.</p>
+<p>If you are prompted for your passphrase, this means the ssh agent has stopped for some reason. The agent <em>should</em> have been re-initialised when you logged into PUMA, but you will need to re-associate your ssh keys to the agent.</p>
 <p>To do so, run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh-add
 </pre></div>
 </div>
 <p>If successful this will prompt for your passphrase:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Enter</span> <span class="n">passphrase</span> <span class="k">for</span> <span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">puma</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Enter</span> <span class="n">passphrase</span> <span class="k">for</span> <span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">puma</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archerum</span><span class="p">:</span>
 </pre></div>
 </div>
 <p>Sometimes this step will fail with the following error:</p>

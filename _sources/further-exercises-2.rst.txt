@@ -1,9 +1,5 @@
 Further Exercises (2)
 =====================
-
-.. admonition:: Updated for ARCHER2
-
-   Needs Testing
    
 The exercises in this section are all optional.  We suggest you pick and choose the exercises that you feel are most relevant to the work you are/will be doing.
 

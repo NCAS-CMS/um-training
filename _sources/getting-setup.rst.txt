@@ -1,17 +1,11 @@
 Getting set up
 ==============
-
-.. admonition:: Updated for ARCHER2
-
-   * Add instructions for X2Go?
-   * Needs testing
    
 Setup connection to PUMA & ARCHER2
 ----------------------------------
 
 To use the UM Introduction Tutorials you will first need to ensure you can connect from your local desktop to a both PUMA & ARCHER2.  There a multiple ways in which you can do this depending on your desktop platform:
 
-* via `X2Go <x2go_>`_
 * via `Terminal <terminal_>`_ on GNU/Linux & macOS
 * via `MobaXTerm <mobaxterm_>`_ on Windows
 
@@ -32,11 +26,11 @@ Login to PUMA: ::
 
 Login to ARCHER2: ::
 
-  ssh -Y -i /path/to/id_rsa_archer <archer2-username>@login.archer2.ac.uk
+  ssh -Y -i /path/to/id_rsa_archer <archer2-username>@login-4c.archer2.ac.uk
 
 It is also possible to define a ``~/.ssh/config`` file entry for each with the necessary information, if desired. For example: ::
 
-  Host login.archer2.ac.uk
+  Host login-4c.archer2.ac.uk
   User <archer2_username>
   IdentityFile ~/.ssh/id_rsa_archer
   ForwardX11 no
@@ -44,7 +38,7 @@ It is also possible to define a ``~/.ssh/config`` file entry for each with the n
 
 so that you could then just connect using the command: ::
   
-  ssh -Y login.archer2.ac.uk
+  ssh -Y login-4c.archer2.ac.uk
 
 and similarly for PUMA.
 
@@ -63,15 +57,6 @@ Connecting via MobaXTerm
 * Double-click **MobaXterm_Personal_21.0** to launch the application.
 
 Next time, navigate to “Downloads” to open the application.
-
-.. _x2go:
-
-Connecting via X2Go
-^^^^^^^^^^^^^^^^^^^
-
-When first starting X2Go, you should be presented with a new session dialog box to complete.  If this doesn't appear, press the :guilabel:`New Session` button (which looks like a piece of paper with a star on it).  Once this is open, fill in the details below.
-
-.. todo:: Copy from UKCA course!
 
 Set up your ARCHER2 environment 
 --------------------------------
@@ -132,7 +117,7 @@ Your ``id_rsa_archerum`` key will be automatically detected and sent to ARCHER2 
 
 In your PUMA ``~/.ssh/config`` file add the following section: ::
 
-  Host login.archer2.ac.uk
+  Host login-4c.archer2.ac.uk
   User <archer2_username>
   IdentityFile ~/.ssh/id_rsa_archerum
   ForwardX11 no
@@ -162,11 +147,11 @@ Enter your passphrase when prompted.  The ``ssh-agent`` will continue to run eve
 
 Log in to ARCHER2 with: ::
 
-  puma$ ssh login.archer2.ac.uk
+  puma$ ssh login-4c.archer2.ac.uk
 
 You should not be prompted for your passphrase.  The response from ARCHER2 should be: ::
 
-  puma$ ssh login.archer2.ac.uk
+  puma$ ssh login-4c.archer2.ac.uk
   PTY allocation request failed on channel 0
   Comand rejected by policy. Not in authorised list 
   Connection to login.archer2.ac.uk closed.

@@ -1,9 +1,5 @@
 FCM tutorial
 ============
-
-.. admonition:: Updated for ARCHER2 with the following caveats...
-
-   * Needs testing
    
 In this section you will learn about:
 

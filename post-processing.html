@@ -174,11 +174,11 @@
             
   <div class="section" id="post-processing">
 <h1><span class="section-number">9. </span>Post processing<a class="headerlink" href="#post-processing" title="Permalink to this headline">¶</a></h1>
-<p>This is simply a very basic introduction to some of the more widely used useful tools for viewing, checking, and converting UM input and output data. The tools described below all run on the ARCHER login nodes.</p>
+<p>This is simply a very basic introduction to some of the more widely used useful tools for viewing, checking, and converting UM input and output data. The tools described below all run on the ARCHER2 login nodes.</p>
 <div class="section" id="xconv">
 <h2><span class="section-number">9.1. </span>xconv<a class="headerlink" href="#xconv" title="Permalink to this headline">¶</a></h2>
 <p><strong>i. View data</strong></p>
-<p>On ARCHER go to the output directory of the global job that you ran previously (the one copied from u-ba799). Run <code class="docutils literal notranslate"><span class="pre">xconv</span></code> on the file ending with, for example, <code class="docutils literal notranslate"><span class="pre">da19880901_04</span></code>. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.</p>
+<p>On ARCHER2 go to the output directory of the global job that you ran previously (the one copied from u-cc654). Run <code class="docutils literal notranslate"><span class="pre">xconv</span></code> on the file ending with, for example, <code class="docutils literal notranslate"><span class="pre">da19880901_04</span></code>. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.</p>
 <p>In the same directory is a file whose name ends in <code class="docutils literal notranslate"><span class="pre">.astart</span></code>; run a second instance of <code class="docutils literal notranslate"><span class="pre">xconv</span></code> on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">xconv</span></code> window lists the fields in the file, the dimensions of those fields (upper left panel), the coordinates of the grid underlying the data, the time(s) of the data (upper right panel), some information about the type of file (lower left panel), and general data about the field (lower right panel.)</p>
 <p>Both files have the same fields. Double click on a field to reveal its coordinate data. Check the time for this field (select the “t” checkbox in the upper right panel).</p>
@@ -207,9 +207,9 @@
 <p>This provides another way of seeing header information, but also gives some information about the fields themselves. Its intended use is to aid in quick inspections of files for diagnostic purposes.</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">mule-pumf</span></code> on the start file - here’s a couple of examples on one of Ros’ files:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ mule-pumf --print-columns 2 --headers-only \\
-                       ba799.astart &gt; ~/mule-pumf-header.out
+                       cc654.astart &gt; ~/mule-pumf-header.out
 
-archer$ mule-pumf --print-columns 2 ba799.astart &gt; ~/mule-pumf.out
+archer$ mule-pumf --print-columns 2 cc654.astart &gt; ~/mule-pumf.out
 </pre></div>
 </div>
 <ul class="simple">
@@ -236,11 +236,11 @@ archer$ mule-pumf --print-columns 2 ba799.astart &gt; ~/mule-pumf.out
 archer$ export PATH=$UMDIR/vn11.2/cce/utilities:$PATH
 </pre></div>
 </div>
-<p>Run <code class="docutils literal notranslate"><span class="pre">um-convpp</span></code> on a fieldsfile (E.g <cite>ba799a.pc19880901_00</cite>)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ cd /home/n02/n02/ros/cylc-run/u-ba799/share/data/History_Data
-archer$ um-convpp ba799a.pc19880901_00 ba799a.pc19880901_00.pp
+<p>Run <code class="docutils literal notranslate"><span class="pre">um-convpp</span></code> on a fieldsfile (E.g <cite>cc654a.pc19880901_00</cite>)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ cd /home/n02/n02/ros/cylc-run/u-cc654/share/data/History_Data
+archer$ um-convpp cc654a.pc19880901_00 cc654a.pc19880901_00.pp
 
-archer$ ls -l ba799a.pc19880901*
+archer$ ls -l cc654a.pc19880901*
 -rw-r--r-- 1 ros n02 64917504 Mar 15 11:56 ag761a.pc19880901_00
 -rw-r--r-- 1 ros n02 48581456 Mar 21 10:19 ag761a.pc19880901_00.pp
 </pre></div>
@@ -257,7 +257,7 @@ features - we’ll use it to convert UM fields file or PP data to
 CF-compliant data in NetCDF format. You first need to set the
 environment to run <code class="docutils literal notranslate"><span class="pre">cfa</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
-archer$ cfa -i -o ba799a.pc19880901_00.nc ba799a.pc19880901_00.pp
+archer$ cfa -i -o cc654a.pc19880901_00.nc cc654a.pc19880901_00.pp
 </pre></div>
 </div>
 <p>Try viewing the NetCDF file with xconv.</p>
@@ -265,7 +265,7 @@ archer$ cfa -i -o ba799a.pc19880901_00.nc ba799a.pc19880901_00.pp
 files, to provide a text representation of the CF fields contained in
 the input files. Try it on a PP file and its NetCDF equivalent,
 e.g.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ cfa -vm ba799a.pc19880901_00.pp | less
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ cfa -vm cc654a.pc19880901_00.pp | less
 Field: long_name:HEAVYSIDE FN ON P LEV/UV GRID (ncvar%UM_m01s30i301_vn1100)
 ---------------------------------------------------------------------------
 Data           : long_name:HEAVYSIDE FN ON P LEV/UV GRID(time(5), air_pressure(17), latitude(145), longitude(192))

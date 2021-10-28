@@ -97,9 +97,9 @@
 <li class="toctree-l1"><a class="reference internal" href="post-processing.html">9. Post processing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">10. Appendix A: Useful information</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#um-output">10.1. UM output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#archer-architecture">10.2. ARCHER architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#archer-file-systems">10.3. ARCHER file systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#archer-node-reservations">10.4. ARCHER node reservations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#archer2-architecture">10.2. ARCHER2 architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#archer2-file-systems">10.3. ARCHER2 file systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#archer2-node-reservations">10.4. ARCHER2 node reservations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#useful-rose-commands">10.5. Useful Rose commands</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#problems-shutting-down-suites">10.6. Problems shutting down suites</a></li>
 </ul>
@@ -176,33 +176,33 @@
 <h1><span class="section-number">10. </span>Appendix A: Useful information<a class="headerlink" href="#appendix-a-useful-information" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="um-output">
 <h2><span class="section-number">10.1. </span>UM output<a class="headerlink" href="#um-output" title="Permalink to this headline">¶</a></h2>
-<p><strong>ARCHER job output directory:</strong></p>
+<p><strong>ARCHER2 job output directory:</strong></p>
 <p>The standard output and error files (job.out &amp; job.err) for the compile, reconfiguration and run are written to the directory:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">cylc</span><span class="o">-</span><span class="n">run</span><span class="o">/&lt;</span><span class="n">suite</span><span class="o">-</span><span class="nb">id</span><span class="o">&gt;/</span><span class="n">log</span><span class="o">/</span><span class="n">job</span><span class="o">/&lt;</span><span class="n">cycle</span><span class="o">&gt;/&lt;</span><span class="n">app</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p><strong>ARCHER model output:</strong></p>
+<p><strong>ARCHER2 model output:</strong></p>
 <p>By default the UM will write all output (e.g. processor output and data files) to the directory it was launched from, which will be the task’s <strong>work</strong> directory. However, all output paths can be configured in the GUI and in practice most UM tasks will send output to one or both of the suite’s <strong>work</strong> or <strong>share</strong> directories:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">cylc</span><span class="o">-</span><span class="n">run</span><span class="o">/&lt;</span><span class="n">suitename</span><span class="o">&gt;/</span><span class="n">work</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">atmos</span>
 <span class="o">~/</span><span class="n">cylc</span><span class="o">-</span><span class="n">run</span><span class="o">/&lt;</span><span class="n">suitename</span><span class="o">&gt;/</span><span class="n">share</span><span class="o">/</span><span class="n">data</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="archer-architecture">
-<h2><span class="section-number">10.2. </span>ARCHER architecture<a class="headerlink" href="#archer-architecture" title="Permalink to this headline">¶</a></h2>
-<p>ARCHER has two kinds of processor which we commonly use - they have several names, but roughly speaking they are the service processors (several nodes worth) sometimes referred to as the front end, and the compute processors (many many nodes worth) sometimes referred to as the back end. We login to the front end and build the model on the front end. We run the model on the back end. You wouldn’t generally have an interactive session on the back end and will submit jobs there through the batch scheduler (PBS).</p>
+<div class="section" id="archer2-architecture">
+<h2><span class="section-number">10.2. </span>ARCHER2 architecture<a class="headerlink" href="#archer2-architecture" title="Permalink to this headline">¶</a></h2>
+<p>ARCHER2 has two kinds of processor which we commonly use - they have several names, but roughly speaking they are the service processors (several nodes worth) sometimes referred to as the front end, and the compute processors (many many nodes worth) sometimes referred to as the back end. We login to the front end and build the model on the front end. We run the model on the back end. You wouldn’t generally have an interactive session on the back end and will submit jobs there through the batch scheduler (PBS).</p>
 <p>The UM infrastructure recognises this architecture and will run tasks in the appropriate place.</p>
 <p>If you are doing any post-processing or analysis you may wish to submit your own parallel or serial jobs. Intensive interactive tasks should be run on the post-processor nodes. For analysing data on the /nerc disk, use the RDF cluster.</p>
-<p>Consult the ARCHER documentation for details.</p>
+<p>Consult the ARCHER2 documentation for details (See www.archer2.ac.uk).</p>
 </div>
-<div class="section" id="archer-file-systems">
-<h2><span class="section-number">10.3. </span>ARCHER file systems<a class="headerlink" href="#archer-file-systems" title="Permalink to this headline">¶</a></h2>
-<p>ARCHER, in common with some other HPC systems, such as MONSooN and Polaris, has (at least) two file systems which have different properties, different uses, different associated policies and different names. On ARCHER there are <code class="docutils literal notranslate"><span class="pre">/home</span></code> and <code class="docutils literal notranslate"><span class="pre">/work</span></code>. The <code class="docutils literal notranslate"><span class="pre">/home</span></code> file system is backed up regularly (only for disaster recovery), has relatively small volume, can efficiently handle many small files, and is where we recommend the UM code is saved and built. The <code class="docutils literal notranslate"><span class="pre">/home</span></code> system can not be accessed by jobs running on the compute processors.</p>
+<div class="section" id="archer2-file-systems">
+<h2><span class="section-number">10.3. </span>ARCHER2 file systems<a class="headerlink" href="#archer2-file-systems" title="Permalink to this headline">¶</a></h2>
+<p>ARCHER2, in common with some other HPC systems, such as MONSooN and Polaris, has (at least) two file systems which have different properties, different uses, different associated policies and different names. On ARCHER there are <code class="docutils literal notranslate"><span class="pre">/home</span></code> and <code class="docutils literal notranslate"><span class="pre">/work</span></code>. The <code class="docutils literal notranslate"><span class="pre">/home</span></code> file system is backed up regularly (only for disaster recovery), has relatively small volume, can efficiently handle many small files, and is where we recommend the UM code is saved and built. The <code class="docutils literal notranslate"><span class="pre">/home</span></code> system can not be accessed by jobs running on the compute processors.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">/work</span></code> file system is optimized for fast parallel IO - it doesn’t handle small files very efficiently. It is where your model will write to and read from.</p>
 </div>
-<div class="section" id="archer-node-reservations">
-<h2><span class="section-number">10.4. </span>ARCHER node reservations<a class="headerlink" href="#archer-node-reservations" title="Permalink to this headline">¶</a></h2>
-<p>In normal practice you will submit your jobs to the parallel queue on ARCHER; the job scheduler will then manage your job request along with all those from the thousands of other users. For this training course, we will be using processor Reservations, whereby we have exclusive access to a prearranged amount of ARCHER resource meaning that you will not need to wait in the general ARCHER queues. Reservations are specified by a reservation code - e.g. R4943949. As an ARCHER user you can make a reservation so that you have access to the machine at a time of your choosing - reservations incur a cost overhead (50%), so best used when you are sure you need them.</p>
+<div class="section" id="archer2-node-reservations">
+<h2><span class="section-number">10.4. </span>ARCHER2 node reservations<a class="headerlink" href="#archer2-node-reservations" title="Permalink to this headline">¶</a></h2>
+<p>In normal practice you will submit your jobs to the parallel queue on ARCHER; the job scheduler will then manage your job request along with all those from the thousands of other users. For this training course, we will be using processor Reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource meaning that you will not need to wait in the general ARCHER2 queues. Reservations are specified by a reservation code - e.g. n02-training_266. As an ARCHER2 user you can make a reservation so that you have access to the machine at a time of your choosing - reservations incur a cost overhead (50%), so best used when you are sure you need them.</p>
 </div>
 <div class="section" id="useful-rose-commands">
 <h2><span class="section-number">10.5. </span>Useful Rose commands<a class="headerlink" href="#useful-rose-commands" title="Permalink to this headline">¶</a></h2>

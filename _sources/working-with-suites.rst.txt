@@ -1,9 +1,5 @@
 Working with Suites
 ===================
-
-.. admonition:: Updated for ARCHER2
-		
-   * Needs testing
 		
 Suite Discovery and Management: rosie go
 ----------------------------------------
@@ -28,7 +24,7 @@ More advanced queries can be run by clicking the :guilabel:`+` button next to th
 
 This time you should only see one suite listed in the results pane.
 
-* Now run a query to list all suites **owned by rosalynhatcher containing ARCHER in their title**.
+* Now run a query to list all suites **owned by rosalynhatcher containing ARCHER2 in their title**.
 
 The searches you run within ``rosie go`` are recorded in your search history.
 
