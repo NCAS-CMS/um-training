@@ -6,8 +6,8 @@ This is simply a very basic introduction to some of the more widely used useful 
 xconv
 -----
 
-**i. View data**
-
+View data
+^^^^^^^^^
 On ARCHER2 go to the output directory of the global job that you ran previously (the one copied from u-cc654). Run ``xconv`` on the file ending with, for example, ``da19880901_04``. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.
 
 In the same directory is a file whose name ends in ``.astart``; run a second instance of ``xconv`` on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.
@@ -20,8 +20,8 @@ Plot both sets of data - click the :guilabel:`Plot Data` button.
 
 View the data - this shows numerical data values and their coordinates and can be helpful for finding spurious data values.
 
-**ii. Convert UM fields data to netCDF**
-
+Convert UM fields data to netCDF
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Select a single-level field (one for which nz=1), choose :guilabel:`Output format` to be :guilabel:`Netcdf`, enter an "Output file name", and select :guilabel:`Convert`. Information relevant to the file conversion will appear in the lower left panel.
 
 Use ``xconv`` to view the netcdf file just created.
@@ -44,8 +44,8 @@ Before running the mule commands you will need to load the python environment on
 
   archer$ module load cray-python
 
-**i. mule-pumf**
-
+mule-pumf
+^^^^^^^^^
 This provides another way of seeing header information, but also gives some information about the fields themselves. Its intended use is to aid in quick inspections of files for diagnostic purposes. 
 
 Run ``mule-pumf`` on the start file - here's a couple of examples on one of Ros' files: :: 
@@ -59,14 +59,14 @@ Run ``mule-pumf`` on the start file - here's a couple of examples on one of Ros'
 
 Take a look at the man page (``mule-pumf -h``) and experiment with some of the other options
 
-**ii. mule-summary**
-
+mule-summary
+^^^^^^^^^^^^
 This utility is used to print out a summary of the lookup headers which describe the fields from a UM file. Its intended use is to aid in quick inspections of files for diagnostic purposes.
 
 Run ``mule-summary`` on the start file again.
 
-**iii. mule-cumf**
-
+mule-cumf
+^^^^^^^^^
 This utility is used to compare two UM files and report on any differences found in either the headers or field data. Its intended use is to test results from different UM runs against each other to investigate possible changes. Note, differences in header information can arise even when field data is identical. Try out the following:
 
 * Run ``mule-cumf`` on the two start files referred to above (in the *"View data"* section). You may wish to direct the output to a file.
