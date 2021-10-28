@@ -174,11 +174,7 @@
             
   <div class="section" id="post-processing">
 <h1><span class="section-number">9. </span>Post processing<a class="headerlink" href="#post-processing" title="Permalink to this headline">¶</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Not updated for ARCHER2</p>
-</div>
-<p>This is simply a very basic introduction to some of the more widely used useful tools for viewing, checking, and converting UM input and output data. The tools described below all run on the ARCHER login nodes, and you can run them there, but they also run on the ARCHER post-processors (see <a class="reference external" href="http://www.archer.ac.uk/documentation/user-guide/connecting.php#sec-2.1.2">http://www.archer.ac.uk/documentation/user-guide/connecting.php#sec-2.1.2</a>). Try logging on to one of the post-processors for these exercises: <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-X</span> <span class="pre">espp1</span></code>. The post processors can see /home and /work and /nerc.</p>
+<p>This is simply a very basic introduction to some of the more widely used useful tools for viewing, checking, and converting UM input and output data. The tools described below all run on the ARCHER login nodes.</p>
 <div class="section" id="xconv">
 <h2><span class="section-number">9.1. </span>xconv<a class="headerlink" href="#xconv" title="Permalink to this headline">¶</a></h2>
 <p><strong>i. View data</strong></p>
@@ -186,10 +182,10 @@
 <p>In the same directory is a file whose name ends in <code class="docutils literal notranslate"><span class="pre">.astart</span></code>; run a second instance of <code class="docutils literal notranslate"><span class="pre">xconv</span></code> on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">xconv</span></code> window lists the fields in the file, the dimensions of those fields (upper left panel), the coordinates of the grid underlying the data, the time(s) of the data (upper right panel), some information about the type of file (lower left panel), and general data about the field (lower right panel.)</p>
 <p>Both files have the same fields. Double click on a field to reveal its coordinate data. Check the time for this field (select the “t” checkbox in the upper right panel).</p>
-<p>Plot both sets of data - click the “Plot Data” button.</p>
+<p>Plot both sets of data - click the <span class="guilabel">Plot Data</span> button.</p>
 <p>View the data - this shows numerical data values and their coordinates and can be helpful for finding spurious data values.</p>
 <p><strong>ii. Convert UM fields data to netCDF</strong></p>
-<p>Select a single-level field (one for which nz=1), choose “Output format” to be “Netcdf”, enter an “Output file name”, and select “Convert”. Information relevant to the file conversion will appear in the lower left panel.</p>
+<p>Select a single-level field (one for which nz=1), choose <span class="guilabel">Output format</span> to be <span class="guilabel">Netcdf</span>, enter an “Output file name”, and select <span class="guilabel">Convert</span>. Information relevant to the file conversion will appear in the lower left panel.</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">xconv</span></code> to view the netcdf file just created.</p>
 </div>
 <div class="section" id="uminfo">
@@ -203,8 +199,8 @@
 <div class="section" id="mule">
 <h2><span class="section-number">9.3. </span>Mule<a class="headerlink" href="#mule" title="Permalink to this headline">¶</a></h2>
 <p>Mule consists of a Python API for reading and writing UM files and a set of UM utilities.  This section introduces you to some of the most useful UM utilities.  Full details of Mule can be found on the MOSRS: <a class="reference external" href="https://code.metoffice.gov.uk/doc/um/index.html">https://code.metoffice.gov.uk/doc/um/index.html</a></p>
-<p>Before running the mule commands you will need to load the python environment on ARCHER by running:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ module load anaconda
+<p>Before running the mule commands you will need to load the python environment on ARCHER2 by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ module load cray-python
 </pre></div>
 </div>
 <p><strong>i. mule-pumf</strong></p>
@@ -235,11 +231,12 @@ archer$ mule-pumf --print-columns 2 ba799.astart &gt; ~/mule-pumf.out
 <div class="section" id="um-convpp">
 <h2><span class="section-number">9.4. </span>um-convpp<a class="headerlink" href="#um-convpp" title="Permalink to this headline">¶</a></h2>
 <p>We have mentioned in the presentations the PP file format - this is a sequential format (a fields file is random access) still much used in the community. PP data is stored as 32-bit, which provides a significant saving of space, but means that a conversion step is required from a fields file (64-bit). The utility to do this is called <code class="docutils literal notranslate"><span class="pre">um-convpp</span></code>.  <code class="docutils literal notranslate"><span class="pre">um-convpp</span></code> converts directly from 64-bit files produced by the UM to 32-bit PP files.  You must, however, make sure you are using a version 10.4 or greater - you can check that you are using the right one by typing <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">um-convpp</span></code>.</p>
-<p>Add the path to <code class="docutils literal notranslate"><span class="pre">um-convpp</span></code> to your environment - you can also add this to your <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code> so it is available everytime you log in.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ export PATH=$UMDIR/vn11.0/cce/utilities:$PATH
+<p>Set the stack size limit to unlimited, and add the path to <code class="docutils literal notranslate"><span class="pre">um-convpp</span></code> to your environment - you can also add this to your <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code> so it is available everytime you log in.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ ulimit -s unlimited
+archer$ export PATH=$UMDIR/vn11.2/cce/utilities:$PATH
 </pre></div>
 </div>
-<p>Run <code class="docutils literal notranslate"><span class="pre">um-convpp</span></code> on a fieldsfile (E.g ba799a.pc19880901_00)</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">um-convpp</span></code> on a fieldsfile (E.g <cite>ba799a.pc19880901_00</cite>)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ cd /home/n02/n02/ros/cylc-run/u-ba799/share/data/History_Data
 archer$ um-convpp ba799a.pc19880901_00 ba799a.pc19880901_00.pp
 
@@ -259,8 +256,8 @@ functionality. <code class="docutils literal notranslate"><span class="pre">cfa<
 features - we’ll use it to convert UM fields file or PP data to
 CF-compliant data in NetCDF format. You first need to set the
 environment to run <code class="docutils literal notranslate"><span class="pre">cfa</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>esPP001$ export PATH=/home/n02/n02/ajh/anaconda3/bin:$PATH
-esPP001$ cfa -i -o ba799a.pc19880901_00.nc ba799a.pc19880901_00.pp
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
+archer$ cfa -i -o ba799a.pc19880901_00.nc ba799a.pc19880901_00.pp
 </pre></div>
 </div>
 <p>Try viewing the NetCDF file with xconv.</p>
@@ -294,17 +291,22 @@ Axes           : air_pressure(1) = [-1.0] hPa
 <p>Many tools exist for analysing data from NWP and climate models and there are many contributing factors for the proliferation of these analysis utilities, for example, the disparity of data formats used by the authors of the models, and/or the availability of the underlying sofware. There is a strong push towards developing and using python as the underlying language and CF-netCDF as the data format. CMS is home to tools in the CF-netCDF stable - here’s an example of the use of these tools to perform some quite complex data manipulations. The user is insulated from virtually all of the details of the methods allowing them to concentrate on scientific analysis rather than programming intricacies.</p>
 <ul>
 <li><p>Set up the environment and start python.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ export PATH=/home/n02/n02/ajh/anaconda3/bin:$PATH
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
 archer$ python
-&gt;&gt;&gt; import cf
+&gt;&gt;&gt;
 </pre></div>
 </div>
 </li>
 </ul>
-<p>We’ll be looking at CRU observed precipitation data</p>
+<p>We’ll be looking at CRU observed precipitation data.</p>
 <ul>
+<li><p>Import the cf-python library</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cf</span>
+</pre></div>
+</div>
+</li>
 <li><p>Read in data files</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;~charles/UM_Training/cru/*.nc&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;~dch/UM_Training/cru/*.nc&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </li>
@@ -316,46 +318,65 @@ archer$ python
 </div>
 </li>
 </ul>
-<p>Note that the three files in the cru directory are aggregated into one
+<p>Note that the two files in the cru directory are aggregated into one
 field.</p>
 <ul>
-<li><p>Average the field with respect to time</p>
+<li><p>Read in another field produced by a GCM, this has a different
+latitude/longitude grid to regrid the CRU data to</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;~dch/UM_Training/N96_DJF_precip_means.nc&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Regrid the field of observed data, <code class="docutils literal notranslate"><span class="pre">f</span></code> to the grid of the model
+field (g)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">regrids</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Average the regridded field with respect to time</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">collapse</span><span class="p">(</span><span class="s1">&#39;T: mean&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 </ul>
-<p>Note that the time coordinate is now of length 1.</p>
+<p>Note that the time axis is now of length 1.</p>
 <ul>
-<li><p>Read in another field produced by a GCM, this has a different latitude/longitude grid to regrid the CRU data to</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;~charles/UM_Training/N96_DJF_precip_means.nc&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p>Regrid the field of observed data (f) to the grid of the model field (g)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">regrids</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p>Subspace the regridded field, f, to a European region</p>
+<li><p>Subspace the regridded field to a European region</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">subspace</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">wi</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">Y</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">wi</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">70</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 </ul>
-<p>Note that the latitude and longitude coordinates are now shorter in length.</p>
+<p>Note that the latitude and longitude axes are now shorter in length.</p>
 <ul>
 <li><p>Import the cfplot visualisation library</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cfplot</span>
 </pre></div>
 </div>
 </li>
-<li><p>Make a default contour plot of the field, f</p>
+<li><p>Make a default contour plot of the regridded observed data, <code class="docutils literal notranslate"><span class="pre">f</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cfplot</span><span class="o">.</span><span class="n">con</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Make a “blockfill” plot of the regridded observed data, <code class="docutils literal notranslate"><span class="pre">f</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cfplot</span><span class="o">.</span><span class="n">con</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">blockfill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Make a default contour plot of the model data, <code class="docutils literal notranslate"><span class="pre">g</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cfplot</span><span class="o">.</span><span class="n">con</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Make a “blockfill” plot of the model data, <code class="docutils literal notranslate"><span class="pre">g</span></code>, over the
+same region</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">subspace</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">wi</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">Y</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">wi</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">70</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cfplot</span><span class="o">.</span><span class="n">con</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">blockfill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -365,7 +386,7 @@ field.</p>
 </div>
 </li>
 </ul>
-<p>This has just given you a taster of CF-Python &amp; CF-Plot, if you would like to try out some more exercises please take a look at <a class="reference external" href="http://ajheaps.github.io/cf-plot">http://ajheaps.github.io/cf-plot</a></p>
+<p>This has just given you a taster of CF-Python &amp; CF-Plot, if you would like to try out some more exercises please take a look at <a class="reference external" href="https://github.com/NCAS-CMS/cf-training">https://github.com/NCAS-CMS/cf-training</a></p>
 </div>
 </div>
 
