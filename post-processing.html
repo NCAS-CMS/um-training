@@ -95,9 +95,18 @@
 <li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">7. Further Exercises (2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">8. Rose/Cylc Exercises</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">9. Post processing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#xconv">9.1. xconv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xconv">9.1. xconv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#view-data">View data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-um-fields-data-to-netcdf">Convert UM fields data to netCDF</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#uminfo">9.2. uminfo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mule">9.3. Mule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mule">9.3. Mule</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mule-pumf">mule-pumf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mule-summary">mule-summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mule-cumf">mule-cumf</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#um-convpp">9.4. um-convpp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cfa">9.5. cfa</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cf-python-cf-plot">9.6. CF-python CF-plot</a></li>
@@ -177,16 +186,20 @@
 <p>This is simply a very basic introduction to some of the more widely used useful tools for viewing, checking, and converting UM input and output data. The tools described below all run on the ARCHER2 login nodes.</p>
 <div class="section" id="xconv">
 <h2><span class="section-number">9.1. </span>xconv<a class="headerlink" href="#xconv" title="Permalink to this headline">¶</a></h2>
-<p><strong>i. View data</strong></p>
+<div class="section" id="view-data">
+<h3>View data<a class="headerlink" href="#view-data" title="Permalink to this headline">¶</a></h3>
 <p>On ARCHER2 go to the output directory of the global job that you ran previously (the one copied from u-cc654). Run <code class="docutils literal notranslate"><span class="pre">xconv</span></code> on the file ending with, for example, <code class="docutils literal notranslate"><span class="pre">da19880901_04</span></code>. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.</p>
 <p>In the same directory is a file whose name ends in <code class="docutils literal notranslate"><span class="pre">.astart</span></code>; run a second instance of <code class="docutils literal notranslate"><span class="pre">xconv</span></code> on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">xconv</span></code> window lists the fields in the file, the dimensions of those fields (upper left panel), the coordinates of the grid underlying the data, the time(s) of the data (upper right panel), some information about the type of file (lower left panel), and general data about the field (lower right panel.)</p>
 <p>Both files have the same fields. Double click on a field to reveal its coordinate data. Check the time for this field (select the “t” checkbox in the upper right panel).</p>
 <p>Plot both sets of data - click the <span class="guilabel">Plot Data</span> button.</p>
 <p>View the data - this shows numerical data values and their coordinates and can be helpful for finding spurious data values.</p>
-<p><strong>ii. Convert UM fields data to netCDF</strong></p>
+</div>
+<div class="section" id="convert-um-fields-data-to-netcdf">
+<h3>Convert UM fields data to netCDF<a class="headerlink" href="#convert-um-fields-data-to-netcdf" title="Permalink to this headline">¶</a></h3>
 <p>Select a single-level field (one for which nz=1), choose <span class="guilabel">Output format</span> to be <span class="guilabel">Netcdf</span>, enter an “Output file name”, and select <span class="guilabel">Convert</span>. Information relevant to the file conversion will appear in the lower left panel.</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">xconv</span></code> to view the netcdf file just created.</p>
+</div>
 </div>
 <div class="section" id="uminfo">
 <h2><span class="section-number">9.2. </span>uminfo<a class="headerlink" href="#uminfo" title="Permalink to this headline">¶</a></h2>
@@ -203,7 +216,8 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ module load cray-python
 </pre></div>
 </div>
-<p><strong>i. mule-pumf</strong></p>
+<div class="section" id="mule-pumf">
+<h3>mule-pumf<a class="headerlink" href="#mule-pumf" title="Permalink to this headline">¶</a></h3>
 <p>This provides another way of seeing header information, but also gives some information about the fields themselves. Its intended use is to aid in quick inspections of files for diagnostic purposes.</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">mule-pumf</span></code> on the start file - here’s a couple of examples on one of Ros’ files:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ mule-pumf --print-columns 2 --headers-only \\
@@ -216,10 +230,14 @@ archer$ mule-pumf --print-columns 2 cc654.astart &gt; ~/mule-pumf.out
 <li><p>Can you see what the difference is in the output of these 2 commands?</p></li>
 </ul>
 <p>Take a look at the man page (<code class="docutils literal notranslate"><span class="pre">mule-pumf</span> <span class="pre">-h</span></code>) and experiment with some of the other options</p>
-<p><strong>ii. mule-summary</strong></p>
+</div>
+<div class="section" id="mule-summary">
+<h3>mule-summary<a class="headerlink" href="#mule-summary" title="Permalink to this headline">¶</a></h3>
 <p>This utility is used to print out a summary of the lookup headers which describe the fields from a UM file. Its intended use is to aid in quick inspections of files for diagnostic purposes.</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">mule-summary</span></code> on the start file again.</p>
-<p><strong>iii. mule-cumf</strong></p>
+</div>
+<div class="section" id="mule-cumf">
+<h3>mule-cumf<a class="headerlink" href="#mule-cumf" title="Permalink to this headline">¶</a></h3>
 <p>This utility is used to compare two UM files and report on any differences found in either the headers or field data. Its intended use is to test results from different UM runs against each other to investigate possible changes. Note, differences in header information can arise even when field data is identical. Try out the following:</p>
 <ul class="simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">mule-cumf</span></code> on the two start files referred to above (in the <em>“View data”</em> section). You may wish to direct the output to a file.</p></li>
@@ -227,6 +245,7 @@ archer$ mule-pumf --print-columns 2 cc654.astart &gt; ~/mule-pumf.out
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">mule-cumf</span></code> on a file and itself.</p></li>
 <li><p>View the help page with <code class="docutils literal notranslate"><span class="pre">mule-cumf</span> <span class="pre">-h</span></code> to find view all the available options.</p></li>
 </ul>
+</div>
 </div>
 <div class="section" id="um-convpp">
 <h2><span class="section-number">9.4. </span>um-convpp<a class="headerlink" href="#um-convpp" title="Permalink to this headline">¶</a></h2>
