@@ -1,11 +1,5 @@
 Running a UM suite on ARCHER2
 =============================
-
-.. admonition:: Updated for ARCHER2 with the following caveats...
-
-   * Needs testing
-   * Equivalent of serialJobs or any other scheduler information that should be added
-   * Rework of walltime and accounting section needed
    
 ARCHER2 architecture
 --------------------
@@ -16,7 +10,7 @@ In common with many HPC systems, ARCHER2 consists of different types of processo
 
 * **Compute / batch nodes:** These make up most of the ARCHER2 system, and this is where the model runs. 
 
-* **Serial / post-processing nodes:** This is where less intensive tasks such as compilation and archiving take place. 
+* **Serial / post-processing nodes:** This is where less intensive tasks such as compilation and archiving take place when the full 23-cabinet system is available. 
 
 ARCHER2 has two file systems: 
 
@@ -54,7 +48,7 @@ If following the tutorial as part of an organised training event:
 
 * Set ``HPC_ACCOUNT`` to **'n02-training'**
 * Set ``HPC_QUEUE`` to **'standard'**  
-* Set ``HPC_RESERVATION`` to be the reservation code for today. (e.g. **'n02_135'**)
+* Set ``HPC_RESERVATION`` to be the reservation code for today. (e.g. **'n02-training_226'**)
 
 If following the tutorial as self-study:
 
@@ -66,7 +60,7 @@ If following the tutorial as self-study:
 		
    * Quotes around the variable values are essential otherwise the suite will not run.
    * In normal practice you submit your suites to the parallel queue (either **short** or **standard**) on ARCHER2.
-   * For organised training events, we use processor reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource.  Reservations are specified by adding an additional setting called the reservation code; e.g. **n02_135**.
+   * For organised training events, we use processor reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource.  Reservations are specified by adding an additional setting called the reservation code; e.g. **n02-training_226**.
 
 * Save the suite (:guilabel:`File > Save` or click the *down arrow* icon)
 
@@ -95,12 +89,6 @@ This will show the status of jobs you are running.  You will see output similar 
        148599  standard u-cc519.      ros  R       0:11      1 nid001001
 
 At this stage you will probably only have a job running or waiting to run in the serial queue. Running ``squeue`` will show all jobs currently on ARCHER2, most of which will be in the parallel queues. 
-
-.. todo::  
-  Another useful command is ``serialJobs``, which lists the jobs in the serial queue only. You will need to run ``module load anaconda`` before running the ``serialJobs`` command.  Try it now: ::
-
-    ncastr01@eslogin005:~> module load anaconda
-    ncastr01@eslogin005:~> serialJobs
 
 Once your suite has finished running the Cylc GUI will go blank and you should get a message in the bottom left hand corner saying ``Stopped with succeeded``.
 
@@ -144,7 +132,7 @@ Here ``NN`` is a symbolic link created by Rose pointing to the output of the mos
 
 Take a look at the ``job.out`` for the ``atmos`` task either on the command-line or through Rose Bush.
 
-.. admonition::  Needs Reviewing
+.. admonition::  Job Accounting
 		 
   The ``sacct`` command displays accounting data for all jobs that are run on ARCHER2.  ``sacct`` can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This information is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.
 

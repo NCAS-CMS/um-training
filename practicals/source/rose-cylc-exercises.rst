@@ -1,9 +1,5 @@
 Rose/Cylc Exercises
 ===================
-
-.. admonition:: Updated for ARCHER2
-
-   Needs Testing
    
 Differencing suites
 -------------------
