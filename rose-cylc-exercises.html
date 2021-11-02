@@ -214,7 +214,7 @@ puma$ cylc graph u-ce122               # view graph in browser
 </div>
 <div class="section" id="exploring-the-suite-definition-files">
 <h2><span class="section-number">8.3. </span>Exploring the suite definition files<a class="headerlink" href="#exploring-the-suite-definition-files" title="Permalink to this headline">¶</a></h2>
-<p>Change to the <code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suite-id&gt;</span></code> directory for your copy of <code class="docutils literal notranslate"><span class="pre">u-ag263</span></code>.</p>
+<p>Change to the <code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suite-id&gt;</span></code> directory for your copy of <code class="docutils literal notranslate"><span class="pre">u-cc519</span></code>.</p>
 <p>Open the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file in your favourite editor.</p>
 <p>Look at the <code class="docutils literal notranslate"><span class="pre">[scheduling]</span></code> section.  This contains some Jinja2 variables (<code class="docutils literal notranslate"><span class="pre">BUILD</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">RECON</span></code>) which allow the user to select which tasks appear in the dependency graph. The dependency graph tells Cylc the order in which to run tasks.  The <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> and <code class="docutils literal notranslate"><span class="pre">recon</span></code> tasks are only included if the <code class="docutils literal notranslate"><span class="pre">BUILD</span></code> and <code class="docutils literal notranslate"><span class="pre">RECON</span></code> variables are set to true. These variables are located in the <code class="docutils literal notranslate"><span class="pre">rose-suite.conf</span></code> and can be changed using the rose edit GUI or by directly editing the <code class="docutils literal notranslate"><span class="pre">rose-suite.conf</span></code> file.  When you run a suite, a processed version of the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file, with all the Jinja2 code evaluated, is placed in your suite’s <code class="docutils literal notranslate"><span class="pre">cylc-run</span></code> directory.</p>
 <ul class="simple">
@@ -239,13 +239,13 @@ puma$ cylc graph u-ce122               # view graph in browser
 <p class="admonition-title">Hint</p>
 <p>Look in the usual <code class="docutils literal notranslate"><span class="pre">job.out/job.err</span></code> or it may be in the <code class="docutils literal notranslate"><span class="pre">job-activity.log</span></code> file.</p>
 </div>
-<p>This error is caused by a mismatch in the number of nodes requested by the PBS job script header and the number of processors requested by the <code class="docutils literal notranslate"><span class="pre">aprun</span></code> command which launches the executable. (For further information on PBS and the aprun command on ARCHER see: <a class="reference external" href="http://www.archer.ac.uk/documentation/user-guide/batch.php">http://www.archer.ac.uk/documentation/user-guide/batch.php</a>).</p>
-<p>In the <code class="docutils literal notranslate"><span class="pre">[[atmos]]</span> <span class="pre">[[[directives]]]</span></code> section change <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">select=1</span></code> to <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">select=2</span></code> to tell the PBS scheduler that you require 2 nodes.</p>
+<p>This error is caused by a mismatch in the number of nodes requested by the Slurm job script header and the number of processors requested by the <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> command which launches the executable. (For further information on Slurm and the sbatch command on ARCHER2 see: <a class="reference external" href="https://docs.archer2.ac.uk/user-guide/scheduler/">https://docs.archer2.ac.uk/user-guide/scheduler/</a>).</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">[[atmos]]</span> <span class="pre">[[[directives]]]</span></code> section change <code class="docutils literal notranslate"><span class="pre">--nodes=1</span></code> to <code class="docutils literal notranslate"><span class="pre">--nodes=2</span></code> to tell the Slurm scheduler that you require 2 nodes.</p>
 <ul class="simple">
 <li><p>The suite should run this time. Did it run on 2 nodes as requested?</p></li>
 <li><p>How much walltime has been requested for the reconfiguration?</p></li>
 </ul>
-<p>Now take a look at the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file for your other suite (the one copied from <code class="docutils literal notranslate"><span class="pre">u-ba799</span></code>). See how it differs.  This one is set up to run on multiple platforms.</p>
+<p>Now take a look at the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file for your other suite (the one copied from <code class="docutils literal notranslate"><span class="pre">u-cc654</span></code>). See how it differs.  This one is set up to run on multiple platforms.</p>
 <ul class="simple">
 <li><p>Can you see the more complex dependency graph?</p></li>
 <li><p>Can you see where to change the reconfiguration walltime for this suite?</p></li>
@@ -331,10 +331,10 @@ puma$ mkdir new_app
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ touch rose-app.conf
 </pre></div>
 </div>
-<p>Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on the little triangle to the left of <span class="guilabel">new_app</span> to expand its contents.</p>
+<p>Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on <span class="guilabel">new_app</span> to load the app and then the little triangle to the left of <span class="guilabel">new_app</span> to expand its contents.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>You may need to select <span class="guilabel">View &gt; View Latent Pages</span> to see this</p>
+<p>You may need to select <span class="guilabel">View &gt; View Latent Pages</span> to see the little triangle this</p>
 </div>
 <p>Everything is greyed out.  Click on <span class="guilabel">command</span> to see the command page and then click the <span class="guilabel">+</span> sign next to <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">default</span></code>. Again you may need to select <span class="guilabel">View -&gt; View Latent Variables</span> to see it.  Select <span class="guilabel">add to configuration</span> to add a command to the application. Enter <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;Hello</span> <span class="pre">World&quot;</span></code> in the <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">default</span></code> box.  <span class="guilabel">Save</span> this and then have a look at the contents of the <code class="docutils literal notranslate"><span class="pre">rose-app.conf</span></code> file to see the effect.</p>
 </div>
@@ -347,11 +347,11 @@ puma$ mkdir new_app
 </pre></div>
 </div>
 <p>find the line</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="n">recon</span>  <span class="o">=&gt;</span> <span class="n">atmos_main</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">INIT_GRAPH</span> <span class="o">=</span> <span class="n">INIT_GRAPH</span> <span class="o">~</span> <span class="s1">&#39; =&gt; atmos_main&#39;</span> <span class="k">if</span> <span class="n">TASK_RUN</span> <span class="k">else</span> <span class="n">INIT_GRAPH</span> <span class="o">%</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>and change it to</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="n">recon</span> <span class="o">=&gt;</span> <span class="n">hello</span> <span class="o">=&gt;</span> <span class="n">atmos_main</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="nb">set</span> <span class="n">INIT_GRAPH</span> <span class="o">=</span> <span class="n">INIT_GRAPH</span> <span class="o">~</span> <span class="s1">&#39; =&gt; hello =&gt; atmos_main&#39;</span> <span class="k">if</span> <span class="n">TASK_RUN</span> <span class="k">else</span> <span class="n">INIT_GRAPH</span> <span class="o">%</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>This puts the task <code class="docutils literal notranslate"><span class="pre">hello</span></code> in the right place in the task list.</p>
@@ -368,7 +368,7 @@ puma$ mkdir new_app
 <div class="section" id="running-the-new-app">
 <h3>Running the new app<a class="headerlink" href="#running-the-new-app" title="Permalink to this headline">¶</a></h3>
 <p>We are now ready to go.  <span class="guilabel">Run</span> the suite. Look at the task graph: <code class="docutils literal notranslate"><span class="pre">recon</span></code> and <code class="docutils literal notranslate"><span class="pre">atmos_main</span></code> are there, but a new hierarchy of tasks has appeared.</p>
-<img alt="_images/ba799-new-app.png" src="_images/ba799-new-app.png" />
+<img alt="_images/u-cc654-new-app.png" src="_images/u-cc654-new-app.png" />
 <p>Notice that <code class="docutils literal notranslate"><span class="pre">atmos_main</span></code> no longer runs after the reconfiguration, but our new task <code class="docutils literal notranslate"><span class="pre">hello</span></code> does and when that has completed, <code class="docutils literal notranslate"><span class="pre">atmos_main</span></code> starts. The output from the <code class="docutils literal notranslate"><span class="pre">hello</span></code> task can be found in the cylc output directory: <code class="docutils literal notranslate"><span class="pre">log/job/19880901T0000Z/hello/NN/job.out</span></code>.</p>
 </div>
 <div class="section" id="extending-the-app-to-run-a-script">

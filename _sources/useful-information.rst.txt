@@ -20,25 +20,25 @@ By default the UM will write all output (e.g. processor output and data files) t
 ARCHER2 architecture
 --------------------
 
-ARCHER2 has two kinds of processor which we commonly use - they have several names, but roughly speaking they are the service processors (several nodes worth) sometimes referred to as the front end, and the compute processors (many many nodes worth) sometimes referred to as the back end. We login to the front end and build the model on the front end. We run the model on the back end. You wouldn't generally have an interactive session on the back end and will submit jobs there through the batch scheduler (PBS). 
+ARCHER2 has two kinds of processor which we commonly use - they have several names, but roughly speaking they are the service processors (several nodes worth) sometimes referred to as the front end, and the compute processors (many many nodes worth) sometimes referred to as the back end. We login to the front end and build the model on the front end. We run the model on the back end. You wouldn't generally have an interactive session on the back end and will submit jobs there through the batch scheduler (slurm). 
 
 The UM infrastructure recognises this architecture and will run tasks in the appropriate place. 
 
-If you are doing any post-processing or analysis you may wish to submit your own parallel or serial jobs. Intensive interactive tasks should be run on the post-processor nodes. For analysing data on the /nerc disk, use the RDF cluster. 
+If you are doing any post-processing or analysis you may wish to submit your own parallel or serial jobs. Intensive interactive tasks should be run on the post-processor nodes (note. these will be available when the full system is in service.) 
 
 Consult the ARCHER2 documentation for details (See www.archer2.ac.uk). 
 
 ARCHER2 file systems
 --------------------
 
-ARCHER2, in common with some other HPC systems, such as MONSooN and Polaris, has (at least) two file systems which have different properties, different uses, different associated policies and different names. On ARCHER there are ``/home`` and ``/work``. The ``/home`` file system is backed up regularly (only for disaster recovery), has relatively small volume, can efficiently handle many small files, and is where we recommend the UM code is saved and built. The ``/home`` system can not be accessed by jobs running on the compute processors.
+ARCHER2, in common with some other HPC systems, such as MONSooN, has (at least) two file systems which have different properties, different uses, different associated policies and different names. On ARCHER2 there are ``/home`` and ``/work``. The ``/home`` file system is backed up regularly (only for disaster recovery), has relatively small volume, can efficiently handle many small files, and is where we recommend the UM code is saved and built. The ``/home`` system can not be accessed by jobs running on the compute processors.
 
 The ``/work`` file system is optimized for fast parallel IO - it doesn't handle small files very efficiently. It is where your model will write to and read from.
 
 ARCHER2 node reservations
 -------------------------
 
-In normal practice you will submit your jobs to the parallel queue on ARCHER; the job scheduler will then manage your job request along with all those from the thousands of other users. For this training course, we will be using processor Reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource meaning that you will not need to wait in the general ARCHER2 queues. Reservations are specified by a reservation code - e.g. n02-training_266. As an ARCHER2 user you can make a reservation so that you have access to the machine at a time of your choosing - reservations incur a cost overhead (50%), so best used when you are sure you need them.
+In normal practice you will submit your jobs to the parallel queue on ARCHER2; the job scheduler will then manage your job request along with all those from the thousands of other users. For this training course, we will be using processor Reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource meaning that you will not need to wait in the general ARCHER2 queues. Reservations are specified by a reservation code - e.g. n02-training_266. As an ARCHER2 user you can make a reservation so that you have access to the machine at a time of your choosing - reservations incur a cost overhead (50%), so best used when you are sure you need them.
 
 Useful Rose commands
 --------------------

@@ -8,7 +8,7 @@ xconv
 
 View data
 ^^^^^^^^^
-On ARCHER2 go to the output directory of the global job that you ran previously (the one copied from u-cc654). Run ``xconv`` on the file ending with, for example, ``da19880901_04``. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.
+On ARCHER2 go to the output directory of the global job that you ran previously (the one copied from ``u-cc654``). Run ``xconv`` on the file ending with, for example, ``da19880901_04``. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.
 
 In the same directory is a file whose name ends in ``.astart``; run a second instance of ``xconv`` on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.
 
@@ -22,7 +22,7 @@ View the data - this shows numerical data values and their coordinates and can b
 
 Convert UM fields data to netCDF
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Select a single-level field (one for which nz=1), choose :guilabel:`Output format` to be :guilabel:`Netcdf`, enter an "Output file name", and select :guilabel:`Convert`. Information relevant to the file conversion will appear in the lower left panel.
+Select a single-level field (one for which ``nz=1``), choose :guilabel:`Output format` to be :guilabel:`Netcdf`, enter an "Output file name", and select :guilabel:`Convert`. Information relevant to the file conversion will appear in the lower left panel.
 
 Use ``xconv`` to view the netcdf file just created.
 
@@ -31,7 +31,7 @@ uminfo
 
 You can view the header information for the fields in a UM file by using the utility ``uminfo`` - redirect the output to a file or pipe it to ``less``: :: 
 
-  archer$ uminfo <one-of-your-fields-files> | less
+  archer2$ uminfo <one-of-your-fields-files> | less
 
 The output from this command is best viewed in conjunction with the Unified Model Documentation Paper F3 which explains in depth the various header fields.
 
@@ -42,7 +42,7 @@ Mule consists of a Python API for reading and writing UM files and a set of UM u
 
 Before running the mule commands you will need to load the python environment on ARCHER2 by running: ::
 
-  archer$ module load cray-python
+  archer2$ module load cray-python
 
 mule-pumf
 ^^^^^^^^^
@@ -50,10 +50,10 @@ This provides another way of seeing header information, but also gives some info
 
 Run ``mule-pumf`` on the start file - here's a couple of examples on one of Ros' files: :: 
 
- archer$ mule-pumf --print-columns 2 --headers-only \\
+ archer2$ mule-pumf --print-columns 2 --headers-only \\
                         cc654.astart > ~/mule-pumf-header.out
 
- archer$ mule-pumf --print-columns 2 cc654.astart > ~/mule-pumf.out
+ archer2$ mule-pumf --print-columns 2 cc654.astart > ~/mule-pumf.out
 
 * Can you see what the difference is in the output of these 2 commands?
 
@@ -81,19 +81,21 @@ We have mentioned in the presentations the PP file format - this is a sequential
 
 Set the stack size limit to unlimited, and add the path to ``um-convpp`` to your environment - you can also add this to your ``~/.profile`` so it is available everytime you log in. ::
 
-  archer$ ulimit -s unlimited
-  archer$ export PATH=$UMDIR/vn11.2/cce/utilities:$PATH
+  archer2$ ulimit -s unlimited
+  archer2$ export PATH=$UMDIR/vn11.2/cce/utilities:$PATH
 
 Run ``um-convpp`` on a fieldsfile (E.g `cc654a.pc19880901_00`) ::
 
-  archer$ cd /home/n02/n02/ros/cylc-run/u-cc654/share/data/History_Data
-  archer$ um-convpp cc654a.pc19880901_00 cc654a.pc19880901_00.pp
+  archer2$ cd /home/n02/n02/ros/cylc-run/u-cc654/share/data/History_Data
+  archer2$ um-convpp cc654a.pc19880901_00 cc654a.pc19880901_00.pp
 
-  archer$ ls -l cc654a.pc19880901*
-  -rw-r--r-- 1 ros n02 64917504 Mar 15 11:56 ag761a.pc19880901_00
-  -rw-r--r-- 1 ros n02 48581456 Mar 21 10:19 ag761a.pc19880901_00.pp
+  archer2$ ls -l cc654a.pc19880901*
+  -rw-r--r-- 1 ros n02 26447872 Nov  2 10:36 cc654a.pc19880901_00
+  -rw-r--r-- 1 ros n02 20372768 Nov  2 10:47 cc654a.pc19880901_00.pp
+  -rw-r--r-- 1 ros n02 26476544 Nov  2 10:36 cc654a.pc19880901_06
 
-Note the reduction in file size. Now use xconv to examine the contents of the PP file.
+
+Note the reduction in file size. Now use ``xconv`` to examine the contents of the PP file.
 
 cfa
 ---
@@ -106,8 +108,8 @@ features - we'll use it to convert UM fields file or PP data to
 CF-compliant data in NetCDF format. You first need to set the
 environment to run ``cfa``: ::
 
- archer$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
- archer$ cfa -i -o cc654a.pc19880901_00.nc cc654a.pc19880901_00.pp
+ archer2$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
+ archer2$ cfa -i -o cc654a.pc19880901_00.nc cc654a.pc19880901_00.pp
  
 Try viewing the NetCDF file with xconv.
 
@@ -117,7 +119,7 @@ files, to provide a text representation of the CF fields contained in
 the input files. Try it on a PP file and its NetCDF equivalent,
 e.g. ::
 
-  archer$ cfa -vm cc654a.pc19880901_00.pp | less
+  archer2$ cfa -vm cc654a.pc19880901_00.pp | less
   Field: long_name:HEAVYSIDE FN ON P LEV/UV GRID (ncvar%UM_m01s30i301_vn1100)
   ---------------------------------------------------------------------------
   Data           : long_name:HEAVYSIDE FN ON P LEV/UV GRID(time(5), air_pressure(17), latitude(145), longitude(192)) 
@@ -144,8 +146,8 @@ Many tools exist for analysing data from NWP and climate models and there are ma
 * Set up the environment and start python. ::
 
    
-   archer$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
-   archer$ python
+   archer2$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
+   archer2$ python
    >>>
 
 We'll be looking at CRU observed precipitation data.
