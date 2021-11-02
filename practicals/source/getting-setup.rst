@@ -1,5 +1,8 @@
 Getting set up
 ==============
+
+.. warning::
+   You **MUST** have PUMA, ARCHER2 and MOSRS accounts setup before starting this section.
    
 Setup connection to PUMA & ARCHER2
 ----------------------------------
@@ -49,19 +52,19 @@ Connecting via MobaXTerm
 
 * From Chrome, go to page: https://mobaxterm.mobatek.net/download.html 
 * Under “Home Edition” select “Download now”
-* | On next page select **“MobaXterm Home Edition v21.0 (Portable edition)”**. 
+* | On next page select **“MobaXterm Home Edition v21.4 (Portable edition)”**. 
   | This should download the package.
 * Click the download icon in the bottom left hand corner. 
-* | Double-click on the **MobaXterm_Personal_21.0** application file, and select “Extract all”. 
+* | Double-click on the **MobaXterm_Personal_21.4** application file, and select “Extract all”. 
   | A new directory window will open up. 
-* Double-click **MobaXterm_Personal_21.0** to launch the application.
+* Double-click **MobaXterm_Personal_21.4** to launch the application.
 
 Next time, navigate to “Downloads” to open the application.
 
 Set up your ARCHER2 environment 
 --------------------------------
 
-Login to ARCHER2, copy the following profile to your home directory. :: 
+Login to ARCHER2 from your local desktop, copy the following profile to your home directory. :: 
 
   archer2$ cp /work/y07/shared/umshared/um-training/rose-profile ~/.profile
 
@@ -73,7 +76,7 @@ Change the permissions on your ``/home`` and ``/work`` directories to enable the
 Set up your PUMA environment
 ----------------------------
 
-Login to PUMA.
+Login to PUMA from your local desktop.
 
 Configure ``~/.profile``
 ^^^^^^^^^^^^^^^^^^^^^^^^

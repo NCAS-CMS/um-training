@@ -33,7 +33,7 @@ A window containing the graph of the suite should appear. By default tasks in th
 Exploring the suite definition files
 ------------------------------------
 
-Change to the ``~/roses/<suite-id>`` directory for your copy of ``u-ag263``.
+Change to the ``~/roses/<suite-id>`` directory for your copy of ``u-cc519``.
 
 Open the ``suite.rc`` file in your favourite editor.  
 
@@ -56,14 +56,14 @@ As we saw earlier when changing the path to the start dump, some settings can't 
 
 .. hint:: Look in the usual ``job.out/job.err`` or it may be in the ``job-activity.log`` file.
 
-This error is caused by a mismatch in the number of nodes requested by the PBS job script header and the number of processors requested by the ``aprun`` command which launches the executable. (For further information on PBS and the aprun command on ARCHER see: http://www.archer.ac.uk/documentation/user-guide/batch.php).
+This error is caused by a mismatch in the number of nodes requested by the Slurm job script header and the number of processors requested by the ``sbatch`` command which launches the executable. (For further information on Slurm and the sbatch command on ARCHER2 see: https://docs.archer2.ac.uk/user-guide/scheduler/).
 
-In the ``[[atmos]] [[[directives]]]`` section change ``-l select=1`` to ``-l select=2`` to tell the PBS scheduler that you require 2 nodes. 
+In the ``[[atmos]] [[[directives]]]`` section change ``--nodes=1`` to ``--nodes=2`` to tell the Slurm scheduler that you require 2 nodes. 
 
 * The suite should run this time. Did it run on 2 nodes as requested?
 * How much walltime has been requested for the reconfiguration?
 
-Now take a look at the ``suite.rc`` file for your other suite (the one copied from ``u-ba799``). See how it differs.  This one is set up to run on multiple platforms.  
+Now take a look at the ``suite.rc`` file for your other suite (the one copied from ``u-cc654``). See how it differs.  This one is set up to run on multiple platforms.  
 
 * Can you see the more complex dependency graph?
 * Can you see where to change the reconfiguration walltime for this suite?
@@ -164,10 +164,10 @@ Change into the ``new_app`` directory and create a blank app configuration file 
 
   puma$ touch rose-app.conf
 
-Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on the little triangle to the left of :guilabel:`new_app` to expand its contents.
+Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on :guilabel:`new_app` to load the app and then the little triangle to the left of :guilabel:`new_app` to expand its contents.
 
 .. tip::
-   You may need to select :guilabel:`View > View Latent Pages` to see this
+   You may need to select :guilabel:`View > View Latent Pages` to see the little triangle this
 
 Everything is greyed out.  Click on :guilabel:`command` to see the command page and then click the :guilabel:`+` sign next to ``command default``. Again you may need to select :guilabel:`View -> View Latent Variables` to see it.  Select :guilabel:`add to configuration` to add a command to the application. Enter ``echo "Hello World"`` in the ``command default`` box.  :guilabel:`Save` this and then have a look at the contents of the ``rose-app.conf`` file to see the effect.
 
@@ -182,11 +182,11 @@ To set this up, edit the ``suite.rc`` file. Under, ::
 
 find the line ::
 
-  graph = recon  => atmos_main
+  {% set INIT_GRAPH = INIT_GRAPH ~ ' => atmos_main' if TASK_RUN else INIT_GRAPH %}
 
 and change it to ::
 
-  graph = recon => hello => atmos_main
+  % set INIT_GRAPH = INIT_GRAPH ~ ' => hello => atmos_main' if TASK_RUN else INIT_GRAPH %}
 
 This puts the task ``hello`` in the right place in the task list.
 
@@ -203,7 +203,7 @@ Running the new app
 ^^^^^^^^^^^^^^^^^^^	    
 We are now ready to go.  :guilabel:`Run` the suite. Look at the task graph: ``recon`` and ``atmos_main`` are there, but a new hierarchy of tasks has appeared.
 
-..  image:: /images/ba799-new-app.png
+..  image:: /images/u-cc654-new-app.png
 
 Notice that ``atmos_main`` no longer runs after the reconfiguration, but our new task ``hello`` does and when that has completed, ``atmos_main`` starts. The output from the ``hello`` task can be found in the cylc output directory: ``log/job/19880901T0000Z/hello/NN/job.out``.
 
