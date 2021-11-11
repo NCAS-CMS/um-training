@@ -17,7 +17,7 @@ Firstly make the essential changes required to run the suite.  That is:
 * The queue to run in.
 
 .. Hint::
-   Look in the :guilabel:`suite conf` section.  For organised training events you will see that this suite has the queue reservations listed as Wednesday, Thursday, Friday; select the appropriate day.  For self-study select the ``short`` queue.
+   Look in the :guilabel:`suite conf` section.  For organised training events you will see that this suite has the queue reservations listed as Monday, Tuesday, Wednesday, Thursday, Friday; select the appropriate day.  For self-study select the ``short`` queue.
 
 * Did you manage to find where to set your ARCHER2 username?  
 

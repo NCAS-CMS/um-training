@@ -40,7 +40,7 @@ This branch contains a code change to ``um_shell`` to print:
 
 ``Tutorial Change: Start of UM RUN Job:`` instead of ``Start of UM RUN job:``
 
-To add this branch go to the panel :guilabel:`fcm_make --> env --> sources` and click the :guilabel:'+' button next to ``um_sources`` to add a new branch URL: ::
+To add this branch go to the panel :guilabel:`fcm_make --> env --> sources` and click the :guilabel:`+` button next to ``um_sources`` to add a new branch URL: ::
 
   branches/dev/rosalynhatcher/vn11.8_training_um_shell1
 
