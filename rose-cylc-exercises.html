@@ -232,7 +232,7 @@ puma$ cylc graph u-ce122               # view graph in browser
 <p>As we saw earlier when changing the path to the start dump, some settings can’t be changed through the rose edit GUI.  Instead you have to edit the suite definition files directly.</p>
 <ul class="simple">
 <li><p>Can you find where the atmos processor decomposition is set for this suite?</p></li>
-<li><p>Change atmos processor decomposition to run on 2 nodes.  Run the suite.</p></li>
+<li><p>Change atmos processor decomposition to run on 2 nodes and set <code class="docutils literal notranslate"><span class="pre">ntasks</span></code> to 256.  Run the suite.</p></li>
 <li><p>What error message did you get?</p></li>
 </ul>
 <div class="admonition hint">
@@ -334,7 +334,7 @@ puma$ mkdir new_app
 <p>Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on <span class="guilabel">new_app</span> to load the app and then the little triangle to the left of <span class="guilabel">new_app</span> to expand its contents.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>You may need to select <span class="guilabel">View &gt; View Latent Pages</span> to see the little triangle this</p>
+<p>You may need to select <span class="guilabel">View &gt; View Latent Pages</span> to see the little triangle</p>
 </div>
 <p>Everything is greyed out.  Click on <span class="guilabel">command</span> to see the command page and then click the <span class="guilabel">+</span> sign next to <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">default</span></code>. Again you may need to select <span class="guilabel">View -&gt; View Latent Variables</span> to see it.  Select <span class="guilabel">add to configuration</span> to add a command to the application. Enter <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;Hello</span> <span class="pre">World&quot;</span></code> in the <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">default</span></code> box.  <span class="guilabel">Save</span> this and then have a look at the contents of the <code class="docutils literal notranslate"><span class="pre">rose-app.conf</span></code> file to see the effect.</p>
 </div>

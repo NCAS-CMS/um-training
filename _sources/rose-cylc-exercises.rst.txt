@@ -51,7 +51,7 @@ Make sure that you leave the suite with ``BUILD=false`` before continuing.
 As we saw earlier when changing the path to the start dump, some settings can't be changed through the rose edit GUI.  Instead you have to edit the suite definition files directly. 
 
 * Can you find where the atmos processor decomposition is set for this suite?
-* Change atmos processor decomposition to run on 2 nodes.  Run the suite.
+* Change atmos processor decomposition to run on 2 nodes and set ``ntasks`` to 256.  Run the suite.
 * What error message did you get?
 
 .. hint:: Look in the usual ``job.out/job.err`` or it may be in the ``job-activity.log`` file.
@@ -167,7 +167,7 @@ Change into the ``new_app`` directory and create a blank app configuration file 
 Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on :guilabel:`new_app` to load the app and then the little triangle to the left of :guilabel:`new_app` to expand its contents.
 
 .. tip::
-   You may need to select :guilabel:`View > View Latent Pages` to see the little triangle this
+   You may need to select :guilabel:`View > View Latent Pages` to see the little triangle
 
 Everything is greyed out.  Click on :guilabel:`command` to see the command page and then click the :guilabel:`+` sign next to ``command default``. Again you may need to select :guilabel:`View -> View Latent Variables` to see it.  Select :guilabel:`add to configuration` to add a command to the application. Enter ``echo "Hello World"`` in the ``command default`` box.  :guilabel:`Save` this and then have a look at the contents of the ``rose-app.conf`` file to see the effect.
 

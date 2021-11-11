@@ -304,6 +304,9 @@
 <p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/log/job/1/atmos/NN/job.err</span></code></p>
 <p>Here <code class="docutils literal notranslate"><span class="pre">NN</span></code> is a symbolic link created by Rose pointing to the output of the most recently run <code class="docutils literal notranslate"><span class="pre">atmos</span></code> task.</p>
 <p>Take a look at the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> for the <code class="docutils literal notranslate"><span class="pre">atmos</span></code> task either on the command-line or through Rose Bush.</p>
+<ul class="simple">
+<li><p>Did the linear solve for the Helmholtz problem converge in the final timestep?</p></li>
+</ul>
 <div class="admonition-job-accounting admonition">
 <p class="admonition-title">Job Accounting</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">sacct</span></code> command displays accounting data for all jobs that are run on ARCHER2.  <code class="docutils literal notranslate"><span class="pre">sacct</span></code> can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This information is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.</p>
@@ -337,10 +340,6 @@
 </div>
 <p>There are many other fields that can be output for a job.  For more information see the Man page (<code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">sacct</span></code>).  You can see a list of all the fields that can be specified in the <code class="docutils literal notranslate"><span class="pre">--format</span></code> option by running <code class="docutils literal notranslate"><span class="pre">sacct</span> <span class="pre">--helpformat</span></code>.</p>
 </div>
-<ul class="simple">
-<li><p>Did the linear solve for the Helmholtz problem converge in the final timestep?</p></li>
-<li><p>How many prognostic fields were read from the start file?</p></li>
-</ul>
 </div>
 <div class="section" id="binary-output-work-and-share">
 <h3>Binary output - work and share<a class="headerlink" href="#binary-output-work-and-share" title="Permalink to this headline">¶</a></h3>
@@ -358,6 +357,7 @@
 <p>The amount of output created by the suite and written to this file can be controlled in the suite configuration (<span class="guilabel">um –&gt; env –&gt; Runtime Controls –&gt; Atmosphere only</span>). For development work, and to gain familiarity with the system, make sure “Extra diagnostic messages” are output. Switch it on in this suite if it isn’t already.</p>
 <p>It is well worth taking a little time to look through this file and to recognise some of the key phrases output by the model. You will soon learn what to search for to tell you if the model ran successfully or not. Unfortunately, important information can be dotted about in the file, so just examining the first or last few lines may not be sufficient to find out why the model hasn’t behaved as you expected. Try to find answers to the following:</p>
 <ul class="simple">
+<li><p>How many prognostic fields were read from the start file?</p></li>
 <li><p>How many boundary layer levels did you run with?</p></li>
 <li><p>What was the range of gridpoints handled by this processor?</p></li>
 </ul>

@@ -156,7 +156,7 @@ NEMO diagnostic files are named ``<suitename>o*grid_[TUVW]*``. To see what files
 
 In this case each XIOS IO server writes to a separate file. To concatenate these into a global file use the ``rebuild_nemo`` tool, e.g.: :: 
 
-  archer$ rebuild_nemo rebuild_nemo ce119o_1m_18500101_18500330_grid_T_185001-185001 6
+  archer$ rebuild_nemo ce119o_1d_18500101_18500110_grid_T 6
 
 .. note:: The coupled atmos-ocean model setup is complex so we recommend you find a suite already setup for your needs.  If you find you do need to modify a coupled suite setup please contact NCAS-CMS for advice. 
 

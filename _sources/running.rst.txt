@@ -132,6 +132,8 @@ Here ``NN`` is a symbolic link created by Rose pointing to the output of the mos
 
 Take a look at the ``job.out`` for the ``atmos`` task either on the command-line or through Rose Bush.
 
+* Did the linear solve for the Helmholtz problem converge in the final timestep?
+  
 .. admonition::  Job Accounting
 		 
   The ``sacct`` command displays accounting data for all jobs that are run on ARCHER2.  ``sacct`` can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This information is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.
@@ -167,11 +169,6 @@ Take a look at the ``job.out`` for the ``atmos`` task either on the command-line
 
   There are many other fields that can be output for a job.  For more information see the Man page (``man sacct``).  You can see a list of all the fields that can be specified in the ``--format`` option by running ``sacct --helpformat``. 
 
-* Did the linear solve for the Helmholtz problem converge in the final timestep?
-
-* How many prognostic fields were read from the start file?
-
-
 Binary output - work and share
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 By default the UM will write all output to the directory it was launched from, which will be the task's ``work`` directory.  However, all output paths can be configured in the GUI and in practice most UM tasks will send output to one or both of the suite's ``work`` or ``share`` directories.
@@ -196,6 +193,7 @@ The amount of output created by the suite and written to this file can be contro
 
 It is well worth taking a little time to look through this file and to recognise some of the key phrases output by the model. You will soon learn what to search for to tell you if the model ran successfully or not. Unfortunately, important information can be dotted about in the file, so just examining the first or last few lines may not be sufficient to find out why the model hasn't behaved as you expected. Try to find answers to the following:
 
+* How many prognostic fields were read from the start file?
 * How many boundary layer levels did you run with?
 * What was the range of gridpoints handled by this processor?
 
