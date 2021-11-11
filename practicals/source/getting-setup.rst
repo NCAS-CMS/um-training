@@ -126,7 +126,7 @@ In your PUMA ``~/.ssh/config`` file add the following section: ::
   ForwardX11 no
   ForwardX11Trusted no
 
-Where ``<archer2_username`` should be replaced with your ARCHER2 username. If you don't have a ``~/.ssh/config`` file create one.
+Where ``<archer2_username>`` should be replaced with your ARCHER2 username. If you don't have a ``~/.ssh/config`` file create one.
 
 **iii. Set up ssh-agent**
 
@@ -157,7 +157,7 @@ You should not be prompted for your passphrase.  The response from ARCHER2 shoul
   puma$ ssh login-4c.archer2.ac.uk
   PTY allocation request failed on channel 0
   Comand rejected by policy. Not in authorised list 
-  Connection to login.archer2.ac.uk closed.
+  Connection to login-4c.archer2.ac.uk closed.
 
 .. note:: It is not possible to start an interactive login session on ARCHER2 from PUMA.  For an interactive session you need to login from your local desktop or via your host institution.
 
