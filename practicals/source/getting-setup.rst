@@ -29,11 +29,11 @@ Login to PUMA: ::
 
 Login to ARCHER2: ::
 
-  ssh -Y -i /path/to/id_rsa_archer <archer2-username>@login-4c.archer2.ac.uk
+  ssh -Y -i /path/to/id_rsa_archer <archer2-username>@login.archer2.ac.uk
 
 It is also possible to define a ``~/.ssh/config`` file entry for each with the necessary information, if desired. For example: ::
 
-  Host login-4c.archer2.ac.uk
+  Host login.archer2.ac.uk
   User <archer2_username>
   IdentityFile ~/.ssh/id_rsa_archer
   ForwardX11 no
@@ -41,7 +41,7 @@ It is also possible to define a ``~/.ssh/config`` file entry for each with the n
 
 so that you could then just connect using the command: ::
   
-  ssh -Y login-4c.archer2.ac.uk
+  ssh -Y login.archer2.ac.uk
 
 and similarly for PUMA.
 
@@ -120,7 +120,7 @@ Your ``id_rsa_archerum`` key will be automatically detected and sent to ARCHER2 
 
 In your PUMA ``~/.ssh/config`` file add the following section: ::
 
-  Host login-4c.archer2.ac.uk
+  Host login.archer2.ac.uk
   User <archer2_username>
   IdentityFile ~/.ssh/id_rsa_archerum
   ForwardX11 no
@@ -150,14 +150,14 @@ Enter your passphrase when prompted.  The ``ssh-agent`` will continue to run eve
 
 Log in to ARCHER2 with: ::
 
-  puma$ ssh login-4c.archer2.ac.uk
+  puma$ ssh login.archer2.ac.uk
 
 You should not be prompted for your passphrase.  The response from ARCHER2 should be: ::
 
-  puma$ ssh login-4c.archer2.ac.uk
+  puma$ ssh login.archer2.ac.uk
   PTY allocation request failed on channel 0
   Comand rejected by policy. Not in authorised list 
-  Connection to login-4c.archer2.ac.uk closed.
+  Connection to login.archer2.ac.uk closed.
 
 .. note:: It is not possible to start an interactive login session on ARCHER2 from PUMA.  For an interactive session you need to login from your local desktop or via your host institution.
 
