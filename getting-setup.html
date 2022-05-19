@@ -204,11 +204,11 @@
 </pre></div>
 </div>
 <p>Login to ARCHER2:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">id_rsa_archer</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span><span class="nd">@login</span><span class="o">-</span><span class="mi">4</span><span class="n">c</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">id_rsa_archer</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span><span class="nd">@login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 </pre></div>
 </div>
 <p>It is also possible to define a <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file entry for each with the necessary information, if desired. For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">login</span><span class="o">-</span><span class="mi">4</span><span class="n">c</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 <span class="n">User</span> <span class="o">&lt;</span><span class="n">archer2_username</span><span class="o">&gt;</span>
 <span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer</span>
 <span class="n">ForwardX11</span> <span class="n">no</span>
@@ -216,7 +216,7 @@
 </pre></div>
 </div>
 <p>so that you could then just connect using the command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="n">login</span><span class="o">-</span><span class="mi">4</span><span class="n">c</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 </pre></div>
 </div>
 <p>and similarly for PUMA.</p>
@@ -297,7 +297,7 @@ puma$ cp ~um/um-training/setup/.profile .
 </div>
 <p><strong>ii. Update ssh config file</strong></p>
 <p>In your PUMA <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file add the following section:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">login</span><span class="o">-</span><span class="mi">4</span><span class="n">c</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 <span class="n">User</span> <span class="o">&lt;</span><span class="n">archer2_username</span><span class="o">&gt;</span>
 <span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archerum</span>
 <span class="n">ForwardX11</span> <span class="n">no</span>
@@ -324,14 +324,14 @@ Enter passphrase for /home/&lt;puma-username&gt;/.ssh/id_rsa:
 <p>Only proceed to this step once your <code class="docutils literal notranslate"><span class="pre">id_rsa_archerum</span></code> key has been installed on ARCHER2.</p>
 </div>
 <p>Log in to ARCHER2 with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh login-4c.archer2.ac.uk
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh login.archer2.ac.uk
 </pre></div>
 </div>
 <p>You should not be prompted for your passphrase.  The response from ARCHER2 should be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh login-4c.archer2.ac.uk
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh login.archer2.ac.uk
 PTY allocation request failed on channel 0
 Comand rejected by policy. Not in authorised list
-Connection to login-4c.archer2.ac.uk closed.
+Connection to login.archer2.ac.uk closed.
 </pre></div>
 </div>
 <div class="admonition note">

@@ -24,7 +24,7 @@ The public key ends with ``.pub`` and will usually be called ``id_rsa.pub`` or `
 
 Now run the script to copy the key to your ARCHER2 account, making sure to use the correct name for your key: :: 
 
-  puma$ ssh-copy-id -i ~/.ssh/id_rsa.pub <archer-username>@login-4c.archer2.ac.uk
+  puma$ ssh-copy-id -i ~/.ssh/id_rsa.pub <archer-username>@login.archer2.ac.uk
 
 You will be prompted for your Archer password. 
 

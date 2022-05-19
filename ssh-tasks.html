@@ -183,7 +183,7 @@ environment.puma  id_rsa  id_rsa.pub  known_hosts  ssh-setup
 </div>
 <p>The public key ends with <code class="docutils literal notranslate"><span class="pre">.pub</span></code> and will usually be called <code class="docutils literal notranslate"><span class="pre">id_rsa.pub</span></code> or <code class="docutils literal notranslate"><span class="pre">id_dsa.pub</span></code>.</p>
 <p>Now run the script to copy the key to your ARCHER2 account, making sure to use the correct name for your key:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh-copy-id -i ~/.ssh/id_rsa.pub &lt;archer-username&gt;@login-4c.archer2.ac.uk
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh-copy-id -i ~/.ssh/id_rsa.pub &lt;archer-username&gt;@login.archer2.ac.uk
 </pre></div>
 </div>
 <p>You will be prompted for your Archer password.</p>
