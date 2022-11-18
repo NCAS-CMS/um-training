@@ -10,7 +10,7 @@ In common with many HPC systems, ARCHER2 consists of different types of processo
 
 * **Compute / batch nodes:** These make up most of the ARCHER2 system, and this is where the model runs. 
 
-* **Serial / post-processing nodes:** This is where less intensive tasks such as compilation and archiving take place when the full 23-cabinet system is available. 
+* **Serial / post-processing nodes:** This is where less intensive tasks such as compilation and archiving take place. 
 
 ARCHER2 has two file systems: 
 
@@ -24,7 +24,7 @@ Consult the ARCHER2 website for more information: http://www.archer2.ac.uk
 Running a Standard Suite
 ------------------------
 
-To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM11.8.  
+To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM13.0.  
 
 Copy the suite
 ^^^^^^^^^^^^^^
@@ -47,7 +47,8 @@ Before you can run the suite you need to change the *userid*, *queue*, *account 
 If following the tutorial as part of an organised training event:  
 
 * Set ``HPC_ACCOUNT`` to **'n02-training'**
-* Set ``HPC_QUEUE`` to **'standard'**  
+* Set ``HPC_QUEUE`` to **'standard'**
+* Ensure ``RESERVATION`` is set to **True**
 * Set ``HPC_RESERVATION`` to be the reservation code for today. (e.g. **'n02-training_226'**)
 
 If following the tutorial as self-study:

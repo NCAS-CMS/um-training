@@ -9,7 +9,7 @@ NCAS Unified Model Introduction Course
 .. warning::
    This training material is currently in the process of being updated for ARCHER2 and is not yet guaranteed to work.  Sections that have not been updated yet will be highlighted thoughout.
    
-Practical exercises for the self-study and online UM training course 2021
+Practical exercises for the self-study and online UM training course 2022
 
 NCAS Computational Modelling Services: http://cms.ncas.ac.uk/
 
