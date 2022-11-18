@@ -30,11 +30,11 @@ Now that you've run a basic suite, you need to know how to apply changes to the 
 
 As a user, you will be supplied with the **URL** and possibly a version number of a branch.  FCM keywords can be used to specify the URL which is a way of using shorthand for standard bits of the URL path.  For example, this branch has been created in the MOSRS UM repository: ::
 
-  https://code.metoffice.gov.uk/svn/um/main/branches/dev/rosalynhatcher/vn11.8_training_um_shell1
+  https://code.metoffice.gov.uk/svn/um/main/branches/dev/rosalynhatcher/vn13.0_training_um_shell1
 
 A shorter way to specify this is: ::
 
-  fcm:um.x-br/dev/rosalynhatcher/vn11.8_training_um_shell1
+  fcm:um.x-br/dev/rosalynhatcher/vn13.0_training_um_shell1
 
 This branch contains a code change to ``um_shell`` to print: 
 
@@ -42,7 +42,7 @@ This branch contains a code change to ``um_shell`` to print:
 
 To add this branch go to the panel :guilabel:`fcm_make --> env --> sources` and click the :guilabel:`+` button next to ``um_sources`` to add a new branch URL: ::
 
-  branches/dev/rosalynhatcher/vn11.8_training_um_shell1
+  branches/dev/rosalynhatcher/vn13.0_training_um_shell1
 
 Now :guilabel:`Save` your suite and then submit it either by running ``rose suite-run`` or clicking the "Play" button in the rose edit GUI.
 
@@ -62,7 +62,7 @@ We will now create a ticket for our code change. Navigate to the UM Trac page on
 * **Summary**: *"Code change for UM Tutorial"*
 * **Description**: provide as much detail as possible so that all reading the ticket are able to understand the planned change. You can use WikiFormatting to enhance the readability of your text.
 * **Type**: select *"task"*
-* **Milestone**: select *"Not for Builds"*; this indicates the ticket is not intended for the UM trunk. If your change is intended for the trunk this should be set to the UM release the change is being targeted at: e.g. *"UM11.8 code release"*
+* **Milestone**: select *"Not for Builds"*; this indicates the ticket is not intended for the UM trunk. If your change is intended for the trunk this should be set to the UM release the change is being targeted at: e.g. *"UM13.0 code release"*
 * **Severity**: leave this as *"minor"*
 * **Component**: select *"General"*
 * **cc**: leave this empty
@@ -83,7 +83,7 @@ Firstly create a new directory (e.g. ``um/branches``) in your ``$HOME`` director
 
 Create a new branch by running the command: ::
 
-  fcm branch-create -k <ticket> <branch_name> fcm:um.x-tr@vn11.8
+  fcm branch-create -k <ticket> <branch_name> fcm:um.x-tr@vn13.0
 
 Where:
 
@@ -94,22 +94,22 @@ You will be prompted to edit the message log file.  A standard template is autom
 
 If the branch is created successfully you will get a message similar to the following: ::
 
-  Committed revision 97811.
-  [info] Created: https://code.metoffice.gov.uk/svn/um/main/branches/dev/rosalynhatcher/vn11.8_tutorial
+  Committed revision 113820.
+  [info] Created: https://code.metoffice.gov.uk/svn/um/main/branches/dev/rosalynhatcher/vn13.0_tutorial
 
 The branch will have a URL (location in repository) like this:
 
-``https://code.metoffice.gov.uk/um/main/branches/dev/[userid]/vn11.8_[branch_name]``
+``https://code.metoffice.gov.uk/um/main/branches/dev/[userid]/vn13.0_[branch_name]``
 
-By default FCM prepends the revision of the trunk you have branched from to your branch name.  Here, as we have used version labelling it is ``vn11.8``.  If you had entered a version number instead of a label FCM would have added ``rxxx`` where ``xxx`` is the revision number instead.
+By default FCM prepends the revision of the trunk you have branched from to your branch name.  Here, as we have used version labelling it is ``vn13.0``.  If you had entered a version number instead of a label FCM would have added ``rxxx`` where ``xxx`` is the revision number instead.
 
 .. note:: For further information on the options available for branch creation type: ``fcm branch-create --help``
 
-Take a note of the revision number the branch was created at, and the branch name, ``vn11.8_[branch_name]``.
+Take a note of the revision number the branch was created at, and the branch name, ``vn13.0_[branch_name]``.
 
 You can see your branch from within the MOSRS Trac (https://code.metoffice.gov.uk/trac/um): Click on :guilabel:`Browse Source` on the Trac menu bar and then navigate through :guilabel:`main --> branches --> dev--> [userid]`
 
-Your branch will also appear on the UM repository mirror held on PUMA (within 5 minutes): https://puma.nerc.ac.uk/trac/um.xm
+Your branch will also appear in the UM repository mirror held on PUMA (within 5 minutes)
  
 Making changes to a working copy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -121,17 +121,17 @@ You may have noticed that creating a branch does not create a source code tree t
 
 Where URL is the url of your branch.  This can be supplied in its full form: 
 
-``https://code.metoffice.gov.uk/svn/um/main/branches/dev/[userid]/vn11.8_[branch_name]``
+``https://code.metoffice.gov.uk/svn/um/main/branches/dev/[userid]/vn13.0_[branch_name]``
 
 or by a shorter way:
 
-``fcm:um.x-br/dev/[userid]/vn11.8_[branch_name]``
+``fcm:um.x-br/dev/[userid]/vn13.0_[branch_name]``
 
 .. note::
 
   * In the second form we have replaced the leading part of the Subversion URL ``https://code.metoffice.gov.uk/um/main/branches`` with the FCM repository keyword ``fcm:um.x-br``.  Keywords are shortcuts to save you from having to type in the full URL.
 
-  * As we have not specified a local directory PATH in the checkout command, it will create a working copy in your current working directory, using the basename of the URL you are checking out.  For example, when you checkout the branch you have just created, the command should create the working copy in ``$PWD/vn11.8_[branch_name]``. Make a note of the location of your working copy, in case you forget where you have put it.
+  * As we have not specified a local directory PATH in the checkout command, it will create a working copy in your current working directory, using the basename of the URL you are checking out.  For example, when you checkout the branch you have just created, the command should create the working copy in ``$PWD/vn13.0_[branch_name]``. Make a note of the location of your working copy, in case you forget where you have put it.
 
   * We are also not specifying a revision to checkout, so it will checkout the ``HEAD``, i.e. the latest revision.
 
@@ -167,7 +167,7 @@ Now make some code changes! Use the following scenario to take you through the b
 
     USE um_training_mod
 
-* Then add a line to call the ``um_training_sub`` subroutine (suggest around line 907 within the ``um_Shell_banner`` subroutine): ::  
+* Then add a line to call the ``um_training_sub`` subroutine (suggest around line 903 within the ``um_Shell_banner`` subroutine): ::  
 
     CALL um_training_sub()
 
@@ -235,29 +235,30 @@ If you've followed the example scenario above you should see output similar to t
   ros@puma$ fcm commit
   [info] vi: starting commit message editor...
   Change summary:
-  --------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------
   [Root   : https://code.metoffice.gov.uk/svn/um]
   [Project: main]
-  [Branch : branches/dev/rosalynhatcher/vn11.8_tutorial]
+  [Branch : branches/dev/rosalynhatcher/vn13.0_tutorial]
   [Sub-dir: ]
-  
+ 
   D       fcm-make/ncas-xc30-ifort/um-createbc-safe.cfg
   M       src/control/top_level/um_shell.F90
   A       src/control/top_level/um_training_mod.F90
-  --------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------
   Commit message is as follows:
-  --------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------
   Testing FCM Tutorial
-  --------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------
   Would you like to commit this change?
   Enter "y" or "n" (or just press <return> for "n"): y
   Deleting       fcm-make/ncas-xc30-ifort/um-createbc-safe.cfg
   Sending        src/control/top_level/um_shell.F90
   Adding         src/control/top_level/um_training_mod.F90
-  Transmitting file data ..
-  Committed revision 97842.
+  Transmitting file data ..done
+  Committing transaction...
+  Committed revision 113821.
   Updating '.':
-  At revision 97842.
+  At revision 113821.
 
 Getting information about your branch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -270,20 +271,20 @@ In the directory where you checked out the code, type: ::
 You should see information about your branch revision, when it was last changed and the parent it was created from: ::
 
   ros@puma$ fcm branch-info
-  URL: https://code.metoffice.gov.uk/svn/um/main/branches/dev/rosalynhatcher/vn11.8_tutorial
+  URL: https://code.metoffice.gov.uk/svn/um/main/branches/dev/rosalynhatcher/vn13.0_tutorial
   Repository Root: https://code.metoffice.gov.uk/svn/um
-  Revision: 97842
+  Revision: 113821
   Last Changed Author: rosalynhatcher
-  Last Changed Rev: 97842
-  Last Changed Date: 2021-04-15T11:43:37.170651Z
-  --------------------------------------------------------------------------------
+  Last Changed Rev: 113821
+  Last Changed Date: 2022-11-18T10:44:16.243200Z
+  ----------------------------------------------------------------------------
   Branch Create Author: rosalynhatcher
-  Branch Create Rev: 97811
-  Branch Create Date: 2021-04-14 17:21:55 +0100 (Wed, 14 Apr 2021)
-  --------------------------------------------------------------------------------
-  Branch Parent: https://code.metoffice.gov.uk/svn/um/main/trunk@92349
-  Merges Avail From Parent: 97795 97786 ...... 93397 93201 93037 92990 92907 92797
-  Merges Avail Into Parent: 97842
+  Branch Create Rev: 113820
+  Branch Create Date: 2022-11-18 10:33:08 +0000 (Fri, 18 Nov 2022)
+   ---------------------------------------------------------------------------
+  Branch Parent: https://code.metoffice.gov.uk/svn/um/main/trunk@111272
+  Merges Avail From Parent: 113812 113786 ....... 111763 111761 111757 111726
+  Merges Avail Into Parent: 113821
 
 Testing that your branch works
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -294,14 +295,16 @@ Now that you have made a branch you can use it in the suite you were running ear
 If you have followed the tutorial scenario so far you should find that your suite fails during the ``fcm extract`` of code.  In the ``job.err`` file for the ``fcm_make`` task you will see an error message like this: ::
 
   [FAIL] um/src/control/top_level/um_shell.F90: merge results in conflict
-  [FAIL]     merge output: /home/ros/cylc-run/u-cc519/share/fcm_make/
+  [FAIL]     merge output: /home/ros/cylc-run/u-cc519-test/share/fcm_make/
   .fcm-make/extract/merge/um/src/control/top_level/um_shell.F90.diff
-  [FAIL]     source from location  0: svn://puma/um.xm_svn/main/trunk/src/
-  control/top_level/um_shell.F90@92349
-  [FAIL]     source from location  1: svn://puma/um.xm_svn/main/branches/dev/
-  rosalynhatcher/vn11.8_training_um_shell1/src/control/top_level/um_shell.F90@97842
-  [FAIL] !!! source from location  2: svn://puma/um.xm_svn/main/branches/dev/
-  rosalynhatcher/vn11.8_tutorial/src/control/top_level/um_shell.F90@97842
+  [FAIL]     source from location  0: svn://pumanew/um.xm_svn/main/trunk/src/
+  control/top_level/um_shell.F90@111272
+  [FAIL]     source from location  1: svn://pumanew/um.xm_svn/main/branches/
+  dev/rosalynhatcher/vn13.0_training_um_shell1/src/control/top_level/
+  um_shell.F90@113821
+  [FAIL] !!! source from location  2: svn://pumanew/um.xm_svn/main/branches/
+  dev/rosalynhatcher/vn13.0_tutorial/src/control/top_level/
+  um_shell.F90@113821
 
 This is because the sample branch and your branch contain modifications to the same line in file ``um_shell.F90`` and so conflict.  Errors like this can be quite common if you are working with others on the same section of code.  The default behaviour of FCM in this situation is to fail and force you to resolve the conflict.  For the purposes of this exercise we will simply remove the ``um_shell1`` branch from the suite and rerun it - we've decided we only want the changes we've put in our branch. In practice you will need to go through the process of resolving a conflict which can be quite complex. There is a tutorial dedicated to conflict resolution should you wish to know more and is a good reference should you encounter conflicts in your development work.
 
