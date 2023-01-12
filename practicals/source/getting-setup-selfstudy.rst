@@ -1,29 +1,27 @@
-Getting set up (7th-9th February, Leeds)
+Getting Set Up (Self-Study Instructions)
 ========================================
 
 .. warning::
    You **MUST** have PUMA, ARCHER2 and MOSRS accounts setup before starting this section.
    
-.. note::
-   These instructions are for use on the UM Training Course held on 7-9th February 2023.  If you are on self-study please see the instructions in the nex Chapter.
-   
 Setup connection to PUMA & ARCHER2
 ----------------------------------
 
-To use the UM Introduction Tutorials you will first need to ensure you can connect from the local desktop to both PUMA & ARCHER2.  
+To use the UM Introduction Tutorials you will first need to ensure you can connect from your local desktop to a both PUMA & ARCHER2.  There a multiple ways in which you can do this depending on your desktop platform:
+
+* via `Terminal <terminal_>`_ on GNU/Linux & macOS
+* via `MobaXTerm <mobaxterm_>`_ on Windows
 
 SSH key files
 ^^^^^^^^^^^^^
 
-Before you try and connect to PUMA or ARCHER2, you need to make sure that you have the ssh-keys for both platforms available on the local desktop.
+Before you try and connect to PUMA or ARCHER2, you need to make sure that you have the ssh-keys for both platforms available on your computer.
 
-Hopefully you remembered to bring your ssh-keys with you on a USB stick. Please talk to a course tutor if you have forgotten them.
-
-Copy your ssh-keys from the USB stick to the ``~/.ssh`` directory.
+.. _terminal:
 
 Connecting via a Terminal (GNU/Linux & macOS)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Connect via a terminal with an X11 connection (`XQuartz <https://www.xquartz.org/>`_ is also required when using macOS)
+It is possible to connect via a terminal with an X11 connection (`XQuartz <https://www.xquartz.org/>`_ is also required when using macOS)
 
 Login to PUMA: ::
 
@@ -46,7 +44,7 @@ Login to ARCHER2: ::
 
   ssh -Y -i /path/to/id_rsa_archer <archer2-username>@login.archer2.ac.uk
 
-Again you could define a ``~/.ssh/config`` file entry for each with the necessary information, if desired. For example: ::
+It is also possible to define a ``~/.ssh/config`` file entry for each with the necessary information, if desired. For example: ::
 
   Host login.archer2.ac.uk
   User <archer2_username>
@@ -57,6 +55,22 @@ Again you could define a ``~/.ssh/config`` file entry for each with the necessar
 so that you could then just connect using the command: ::
   
   ssh -Y login.archer2.ac.uk
+
+.. _mobaxterm:
+
+Connecting via MobaXTerm
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* From Chrome, go to page: https://mobaxterm.mobatek.net/download.html 
+* Under “Home Edition” select “Download now”
+* | On next page select **“MobaXterm Home Edition v21.4 (Portable edition)”**. 
+  | This should download the package.
+* Click the download icon in the bottom left hand corner. 
+* | Double-click on the **MobaXterm_Personal_21.4** application file, and select “Extract all”. 
+  | A new directory window will open up. 
+* Double-click **MobaXterm_Personal_21.4** to launch the application.
+
+Next time, navigate to “Downloads” to open the application.
 
 Set up your ARCHER2 environment 
 --------------------------------
@@ -97,10 +111,23 @@ Log out of PUMA and back in again (you will get a warning about not being able t
 Configure connection to ARCHER2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Due to ARCHER2 security and the UM workflow it is necessary to use a special ssh-key that allows submission of UM suite from PUMA.
-Prior to the course you generated a UM workflow ssh-key called ``~/.ssh/id_rsa_archerum``.
+Due to ARCHER2 security and the UM workflow it is necessary to generate a special ssh-key that allows submission of UM suite from PUMA.
 
-**i. Update ssh config file**
+**i. Generate UM workflow ssh-key**
+
+Run the following command to generate your ``id_rsa_archerum`` ssh key: ::
+
+  puma$ ssh-keygen -t rsa -b 4096 -C "ARCHER2 UM Workflow" -f ~/.ssh/id_rsa_archerum
+
+When prompted to **Enter passphrase**, this should be a fairly complicated and unguessable passphrase. You can use spaces in the passphrase if it helps you to remember it more readily. It is recommended that you don't use your password in case it is hacked.
+
+Your ``id_rsa_archerum`` key will be automatically detected and sent to ARCHER2 to be installed.  This may take up to 48 hours, excluding weekends, to become activated and you will receive an email confirmation.
+
+.. warning::
+   * **DO NOT** use an empty passphrase.  This presents a security issue.
+   * **DO NOT** regenerate your ``id_rsa_archerum`` key once you have a working one in place, unless absolutely necessary.
+
+**ii. Update ssh config file**
 
 In your PUMA ``~/.ssh/config`` file add the following section: ::
 
@@ -112,7 +139,7 @@ In your PUMA ``~/.ssh/config`` file add the following section: ::
 
 Where ``<archer2_username>`` should be replaced with your ARCHER2 username. If you don't have a ``~/.ssh/config`` file create one.
 
-**ii. Set up ssh-agent**
+**iii. Set up ssh-agent**
 
 Setting up an ``ssh-agent`` allows caching of your ``id_rsa_archerum`` key passphrase for a period of time. ::
 
@@ -128,7 +155,9 @@ Add your ``id_rsa_archerum`` key to your ``ssh-agent`` by running: ::
 
 Enter your passphrase when prompted.  The ``ssh-agent`` will continue to run even when you log out of PUMA, however, it may stop from time to time, for example if PUMA is rebooted.  For instructions on what to do in this situation see :ref:`restarting-agent` in the Appendix.
 
-**iii. Verify the setup is correct**
+**iv. Verify the setup is correct**
+
+.. note:: Only proceed to this step once your ``id_rsa_archerum`` key has been installed on ARCHER2.
 
 Log in to ARCHER2 with: ::
 
@@ -141,6 +170,6 @@ You should not be prompted for your passphrase.  The response from ARCHER2 shoul
   Comand rejected by policy. Not in authorised list 
   Connection to login.archer2.ac.uk closed.
 
-.. note:: It is not possible to start an interactive login session on ARCHER2 from PUMA.  For an interactive session you need to login from your local desktop.
+.. note:: It is not possible to start an interactive login session on ARCHER2 from PUMA.  For an interactive session you need to login from your local desktop or via your host institution.
 
 You are now ready to try running a UM suite! 
