@@ -85,7 +85,7 @@ The coupled model consists of the UM Atmosphere model coupled to the NEMO ocean 
 
 Checkout and run the suite
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-Checkout and open the suite ``u-ce119``.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called ``fcm_make_um`` and ``fcm_make_ocean`` respectively. Similarly there are separate apps for the atmos and ocean model settings, called ``um`` and ``nemo_cice``.
+Checkout and open the suite ``u-cs147``.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called ``fcm_make_um`` and ``fcm_make_ocean`` respectively. Similarly there are separate apps for the atmos and ocean model settings, called ``um`` and ``nemo_cice``.
 
 Make the usual changes required to run the suite (i.e. set username, account code, queue). If you are following the tutorial as part of an organised training event, select one of the special queues, otherwise, select to run in the ``short`` queue.
 

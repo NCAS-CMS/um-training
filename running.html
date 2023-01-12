@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>3. Running a UM suite on ARCHER2 &mdash; NCAS Unified Model Introduction</title>
+  <title>4. Running a UM suite on ARCHER2 &mdash; NCAS Unified Model Introduction</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. FCM tutorial" href="fcm-tutorial.html" />
-    <link rel="prev" title="2. Working with Suites" href="working-with-suites.html" /> 
+    <link rel="next" title="5. FCM tutorial" href="fcm-tutorial.html" />
+    <link rel="prev" title="3. Working with Suites" href="working-with-suites.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,18 +86,19 @@
             
               <p class="caption"><span class="caption-text">Practicals</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="getting-setup.html">1. Getting set up</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">2. Working with Suites</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Running a UM suite on ARCHER2</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#archer2-architecture">3.1. ARCHER2 architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-a-standard-suite">3.2. Running a Standard Suite</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-setup.html">1. Getting set up (7th-9th February, Leeds)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-setup-selfstudy.html">2. Getting Set Up (Self-Study Instructions)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">3. Working with Suites</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Running a UM suite on ARCHER2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#archer2-architecture">4.1. ARCHER2 architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-standard-suite">4.2. Running a Standard Suite</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#copy-the-suite">Copy the suite</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#edit-the-suite">Edit the suite</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-the-suite">Run the suite</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#looking-at-the-queues-on-archer2">Looking at the queues on ARCHER2</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#standard-suite-output">3.3. Standard Suite Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#standard-suite-output">4.3. Standard Suite Output</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#rose-bush">Rose bush</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compilation-output">Compilation output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#standard-output">Standard output</a></li>
@@ -106,14 +107,14 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">4. FCM tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solving-problems.html">5. Solving Common UM Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">6. Further Exercises (1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">7. Further Exercises (2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">8. Rose/Cylc Exercises</a></li>
-<li class="toctree-l1"><a class="reference internal" href="post-processing.html">9. Post processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="useful-information.html">10. Appendix A: Useful information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ssh-tasks.html">11. Appendix B: SSH FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">5. FCM tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solving-problems.html">6. Solving Common UM Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">7. Further Exercises (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">8. Further Exercises (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">9. Rose/Cylc Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post-processing.html">10. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="useful-information.html">11. Appendix A: Useful information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh-tasks.html">12. Appendix B: SSH FAQs</a></li>
 </ul>
 
             
@@ -162,7 +163,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">3. </span>Running a UM suite on ARCHER2</li>
+      <li><span class="section-number">4. </span>Running a UM suite on ARCHER2</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -182,9 +183,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="running-a-um-suite-on-archer2">
-<h1><span class="section-number">3. </span>Running a UM suite on ARCHER2<a class="headerlink" href="#running-a-um-suite-on-archer2" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4. </span>Running a UM suite on ARCHER2<a class="headerlink" href="#running-a-um-suite-on-archer2" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="archer2-architecture">
-<h2><span class="section-number">3.1. </span>ARCHER2 architecture<a class="headerlink" href="#archer2-architecture" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.1. </span>ARCHER2 architecture<a class="headerlink" href="#archer2-architecture" title="Permalink to this headline">¶</a></h2>
 <p>In common with many HPC systems, ARCHER2 consists of different types of processor nodes:</p>
 <ul class="simple">
 <li><p><strong>Login nodes:</strong> This is where you land when you ssh into ARCHER2. Typically these processors are used for file management tasks.</p></li>
@@ -199,7 +200,7 @@
 <p>Consult the ARCHER2 website for more information: <a class="reference external" href="http://www.archer2.ac.uk">http://www.archer2.ac.uk</a></p>
 </div>
 <div class="section" id="running-a-standard-suite">
-<h2><span class="section-number">3.2. </span>Running a Standard Suite<a class="headerlink" href="#running-a-standard-suite" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.2. </span>Running a Standard Suite<a class="headerlink" href="#running-a-standard-suite" title="Permalink to this headline">¶</a></h2>
 <p>To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM13.0.</p>
 <div class="section" id="copy-the-suite">
 <h3>Copy the suite<a class="headerlink" href="#copy-the-suite" title="Permalink to this headline">¶</a></h3>
@@ -231,7 +232,7 @@
 <ul class="simple">
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_ACCOUNT</span></code> to the budget code for your project. (e.g. <strong>‘n02-cms’</strong>)</p></li>
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_QUEUE</span></code> to <strong>‘short’</strong></p></li>
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_RESERVATION</span></code> to <strong>‘shortqos’</strong></p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">RESERVATION</span></code> to <strong>False</strong></p></li>
 </ul>
 <div class="admonition-notes admonition">
 <p class="admonition-title">Notes</p>
@@ -279,7 +280,7 @@
 </div>
 </div>
 <div class="section" id="standard-suite-output">
-<h2><span class="section-number">3.3. </span>Standard Suite Output<a class="headerlink" href="#standard-suite-output" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.3. </span>Standard Suite Output<a class="headerlink" href="#standard-suite-output" title="Permalink to this headline">¶</a></h2>
 <p>The output from a standard suite goes to a variety of places, depending on the type of the file.  On ARCHER2 you will find all the output from your run under the directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;suitename&gt;</span></code> is the name of the suite. This is actually a symbolic link to the equivalent location in your <code class="docutils literal notranslate"><span class="pre">/work</span></code> directory (E.g. <code class="docutils literal notranslate"><span class="pre">/work/n02/n02/&lt;username&gt;/cylc-run/&lt;suitename&gt;</span></code>.</p>
 <div class="section" id="rose-bush">
 <h3>Rose bush<a class="headerlink" href="#rose-bush" title="Permalink to this headline">¶</a></h3>
@@ -373,15 +374,15 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="fcm-tutorial.html" class="btn btn-neutral float-right" title="4. FCM tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="working-with-suites.html" class="btn btn-neutral float-left" title="2. Working with Suites" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fcm-tutorial.html" class="btn btn-neutral float-right" title="5. FCM tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="working-with-suites.html" class="btn btn-neutral float-left" title="3. Working with Suites" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2017-2022, NCAS-CMS.
+        &#169; Copyright 2017-2023, NCAS-CMS.
 
     </p>
   </div>

@@ -98,20 +98,19 @@ If it still appears to be running (for example you get an error when you try to 
 
 * Manually kill the active processes:
 
-  Get a list of processes associated with the suite. For example, for suite u-ak194 you would run: ::
+  Get a list of processes associated with the suite. For example, for suite u-cn134 you would run: ::
 
-    puma u-ak193$ ps -flu annette  | grep u-ak194
-    0 S annette   2735  5230  ... grep u-ak194
-    1 S annette  18713     1  ... python /home/fcm/cylc-6.11.4/bin/cylc-run u-ak194
-    1 S annette  18714 18713  ... python /home/fcm/cylc-6.11.4/bin/cylc-run u-ak194
-    1 S annette  18715 18713  ... python /home/fcm/cylc-6.11.4/bin/cylc-run u-ak194
-    1 S annette  18717 18713  ... python /home/fcm/cylc-6.11.4/bin/cylc-run u-ak194
-    1 S annette  18718 18713  ... python /home/fcm/cylc-6.11.4/bin/cylc-run u-ak194
+    puma$ ps -flu ros | grep u-cn134
+    1 S ros   15688     1  ... python2 /home/fcm/cylc-7.8.12/bin/cylc-restart u-cn134
+    0 S ros   15707     1  ... python2 /home/fcm/cylc-7.8.12/bin/cylc-gui u-cn134
+    0 S ros   16305 24946  ... grep --color=auto u-cn134
 
   This gives a list of processes. The number in the 4th column is the process-id. Use this to kill each of the processes, eg: ::
 
-    kill -9 18713
+    kill -9 15688
+    
+* Try restarting the suite. 
 
-* Delete the port file:
+* If that still doesn't work you may also need to delete the contact file:
  
-  This lives under ``~/.cylc/ports/``. For example: ``rm ~/.cylc/ports/u-ak194``
+  This lives in ``~/cylc-run/<suiteid>/.service`` directory. For example: ``rm ~/cylc-run/u-cn134/.service/contact``

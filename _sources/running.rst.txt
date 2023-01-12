@@ -55,7 +55,7 @@ If following the tutorial as self-study:
 
 * Set ``HPC_ACCOUNT`` to the budget code for your project. (e.g. **'n02-cms'**)
 * Set ``HPC_QUEUE`` to **'short'**  
-* Set ``HPC_RESERVATION`` to **'shortqos'**
+* Set ``RESERVATION`` to **False**
 
 .. admonition:: Notes
 		

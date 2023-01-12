@@ -16,19 +16,20 @@ We will difference your copy of the GA7.0 suite with the original one: ::
 
 * Are the differences what you expected?
 
-Graphing a suite
-----------------
+..
+   Graphing a suite
+   ----------------
 
-When developing suites, it can be useful to check what the run graph looks like after jinja evaluation, etc.  
+   When developing suites, it can be useful to check what the run graph looks like after jinja evaluation, etc.  
 
-The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
+   The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
 
-  puma$ rosie checkout u-ce122
-  puma$ cd ~/roses/u-ce122
-  puma$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
-  puma$ cylc graph u-ce122               # view graph in browser
+     puma$ rosie checkout u-ce122
+     puma$ cd ~/roses/u-ce122
+     puma$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
+     puma$ cylc graph u-ce122               # view graph in browser
 
-A window containing the graph of the suite should appear. By default tasks in the same family are grouped together. Click the :guilabel:`Ungroup all families` button at the top of the window to expand the graph to view all tasks within this suite.
+   A window containing the graph of the suite should appear. By default tasks in the same family are grouped together. Click the :guilabel:`Ungroup all families` button at the top of the window to expand the graph to view all tasks within this suite.
 
 Exploring the suite definition files
 ------------------------------------
@@ -70,35 +71,36 @@ Now take a look at the ``suite.rc`` file for your other suite (the one copied fr
 
 This has just given you a very brief look at the suite definitions files.  More information can be found in the cylc documentation.  
 
-Suite and task event handling
------------------------------
+..
+   Suite and task event handling
+   -----------------------------
 
-Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting ``[[[events]]] mail events`` to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite ``u-cc654`` to send an email on task (submission) failure, retry and timeout. 
+   Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting ``[[[events]]] mail events`` to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite ``u-cc654`` to send an email on task (submission) failure, retry and timeout. 
 
-Edit the ``suite.rc`` file to add the ``[[[events]]]`` section below: ::
+   Edit the ``suite.rc`` file to add the ``[[[events]]]`` section below: ::
 
-    [runtime]
-        [[root]]
-            ...
-            [[[environment]]]
-            ...
-            [[[events]]]
-                mail events = submission retry, retry, submission failed, failed, submission timeout, timeout
-                submission timeout = P1D
+       [runtime]
+           [[root]]
+               ...
+               [[[environment]]]
+               ...
+               [[[events]]]
+                   mail events = submission retry, retry, submission failed, failed, submission timeout, timeout
+                   submission timeout = P1D
 
-Configure cylc so it knows what your email address is. Edit the file ``~/.cylc/global.rc`` (create it if it doesn't exist) to add the following: ::
+   Configure cylc so it knows what your email address is. Edit the file ``~/.cylc/global.rc`` (create it if it doesn't exist) to add the following: ::
 
-   [task events] 
-       mail to = <enter-your-email-address>
+      [task events] 
+          mail to = <enter-your-email-address>
 
-To test this out we need to force the suite to fail.  Change the account code to a non-existent one; e.g. 'n02-fail'
+   To test this out we need to force the suite to fail.  Change the account code to a non-existent one; e.g. 'n02-fail'
 
-* Did you get an email when the suite failed?
-* Look in the suite error files to find the error message?
+   * Did you get an email when the suite failed?
+   * Look in the suite error files to find the error message?
 
-Change the account code back to its previous setting before continuing.
+   Change the account code back to its previous setting before continuing.
 
-Further information about event handlers can be found in the Cylc documentation: https://cylc.github.io/doc/built-sphinx-single/index.html#eventhandling
+   Further information about event handlers can be found in the Cylc documentation: https://cylc.github.io/doc/built-sphinx-single/index.html#eventhandling
 
 Starting a suite in "held" mode
 -------------------------------

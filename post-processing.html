@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>9. Post processing &mdash; NCAS Unified Model Introduction</title>
+  <title>10. Post processing &mdash; NCAS Unified Model Introduction</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="10. Appendix A: Useful information" href="useful-information.html" />
-    <link rel="prev" title="8. Rose/Cylc Exercises" href="rose-cylc-exercises.html" /> 
+    <link rel="next" title="11. Appendix A: Useful information" href="useful-information.html" />
+    <link rel="prev" title="9. Rose/Cylc Exercises" href="rose-cylc-exercises.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,34 +86,35 @@
             
               <p class="caption"><span class="caption-text">Practicals</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="getting-setup.html">1. Getting set up</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">2. Working with Suites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running.html">3. Running a UM suite on ARCHER2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">4. FCM tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solving-problems.html">5. Solving Common UM Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">6. Further Exercises (1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">7. Further Exercises (2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">8. Rose/Cylc Exercises</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Post processing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#xconv">9.1. xconv</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-setup.html">1. Getting set up (7th-9th February, Leeds)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-setup-selfstudy.html">2. Getting Set Up (Self-Study Instructions)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">3. Working with Suites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">4. Running a UM suite on ARCHER2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">5. FCM tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solving-problems.html">6. Solving Common UM Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">7. Further Exercises (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">8. Further Exercises (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">9. Rose/Cylc Exercises</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Post processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#xconv">10.1. xconv</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#view-data">View data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#convert-um-fields-data-to-netcdf">Convert UM fields data to netCDF</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#uminfo">9.2. uminfo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mule">9.3. Mule</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uminfo">10.2. uminfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mule">10.3. Mule</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#mule-pumf">mule-pumf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mule-summary">mule-summary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mule-cumf">mule-cumf</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#um-convpp">9.4. um-convpp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cfa">9.5. cfa</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cf-python-cf-plot">9.6. CF-python CF-plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#um-convpp">10.4. um-convpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cfa">10.5. cfa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cf-python-cf-plot">10.6. CF-python CF-plot</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="useful-information.html">10. Appendix A: Useful information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ssh-tasks.html">11. Appendix B: SSH FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="useful-information.html">11. Appendix A: Useful information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh-tasks.html">12. Appendix B: SSH FAQs</a></li>
 </ul>
 
             
@@ -162,7 +163,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">9. </span>Post processing</li>
+      <li><span class="section-number">10. </span>Post processing</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -182,10 +183,10 @@
            <div itemprop="articleBody">
             
   <div class="section" id="post-processing">
-<h1><span class="section-number">9. </span>Post processing<a class="headerlink" href="#post-processing" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">10. </span>Post processing<a class="headerlink" href="#post-processing" title="Permalink to this headline">¶</a></h1>
 <p>This is simply a very basic introduction to some of the more widely used useful tools for viewing, checking, and converting UM input and output data. The tools described below all run on the ARCHER2 login nodes.</p>
 <div class="section" id="xconv">
-<h2><span class="section-number">9.1. </span>xconv<a class="headerlink" href="#xconv" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.1. </span>xconv<a class="headerlink" href="#xconv" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="view-data">
 <h3>View data<a class="headerlink" href="#view-data" title="Permalink to this headline">¶</a></h3>
 <p>On ARCHER2 go to the output directory of the global job that you ran previously (the one copied from <code class="docutils literal notranslate"><span class="pre">u-cc654</span></code>). Run <code class="docutils literal notranslate"><span class="pre">xconv</span></code> on the file ending with, for example, <code class="docutils literal notranslate"><span class="pre">da19880901_04</span></code>. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.</p>
@@ -202,7 +203,7 @@
 </div>
 </div>
 <div class="section" id="uminfo">
-<h2><span class="section-number">9.2. </span>uminfo<a class="headerlink" href="#uminfo" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.2. </span>uminfo<a class="headerlink" href="#uminfo" title="Permalink to this headline">¶</a></h2>
 <p>You can view the header information for the fields in a UM file by using the utility <code class="docutils literal notranslate"><span class="pre">uminfo</span></code> - redirect the output to a file or pipe it to <code class="docutils literal notranslate"><span class="pre">less</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ uminfo &lt;one-of-your-fields-files&gt; | less
 </pre></div>
@@ -210,7 +211,7 @@
 <p>The output from this command is best viewed in conjunction with the Unified Model Documentation Paper F3 which explains in depth the various header fields.</p>
 </div>
 <div class="section" id="mule">
-<h2><span class="section-number">9.3. </span>Mule<a class="headerlink" href="#mule" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.3. </span>Mule<a class="headerlink" href="#mule" title="Permalink to this headline">¶</a></h2>
 <p>Mule consists of a Python API for reading and writing UM files and a set of UM utilities.  This section introduces you to some of the most useful UM utilities.  Full details of Mule can be found on the MOSRS: <a class="reference external" href="https://code.metoffice.gov.uk/doc/um/index.html">https://code.metoffice.gov.uk/doc/um/index.html</a></p>
 <p>Before running the mule commands you will need to load the python environment on ARCHER2 by running:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ module load cray-python
@@ -248,7 +249,7 @@ archer2$ mule-pumf --print-columns 2 cc654.astart &gt; ~/mule-pumf.out
 </div>
 </div>
 <div class="section" id="um-convpp">
-<h2><span class="section-number">9.4. </span>um-convpp<a class="headerlink" href="#um-convpp" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.4. </span>um-convpp<a class="headerlink" href="#um-convpp" title="Permalink to this headline">¶</a></h2>
 <p>We have mentioned in the presentations the PP file format - this is a sequential format (a fields file is random access) still much used in the community. PP data is stored as 32-bit, which provides a significant saving of space, but means that a conversion step is required from a fields file (64-bit). The utility to do this is called <code class="docutils literal notranslate"><span class="pre">um-convpp</span></code>.  <code class="docutils literal notranslate"><span class="pre">um-convpp</span></code> converts directly from 64-bit files produced by the UM to 32-bit PP files.  You must, however, make sure you are using a version 10.4 or greater - you can check that you are using the right one by typing <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">um-convpp</span></code>.</p>
 <p>Set the stack size limit to unlimited, and add the path to <code class="docutils literal notranslate"><span class="pre">um-convpp</span></code> to your environment - you can also add this to your <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code> so it is available everytime you log in.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ ulimit -s unlimited
@@ -268,7 +269,7 @@ archer2$ ls -l cc654a.pc19880901*
 <p>Note the reduction in file size. Now use <code class="docutils literal notranslate"><span class="pre">xconv</span></code> to examine the contents of the PP file.</p>
 </div>
 <div class="section" id="cfa">
-<h2><span class="section-number">9.5. </span>cfa<a class="headerlink" href="#cfa" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.5. </span>cfa<a class="headerlink" href="#cfa" title="Permalink to this headline">¶</a></h2>
 <p>There is an increasing use of python in the community and we have, and
 continue to develop, python tools to do much of the data processing
 previously done using IDL or MATLAB and are working to extend that
@@ -307,7 +308,7 @@ Axes           : air_pressure(1) = [-1.0] hPa
 </div>
 </div>
 <div class="section" id="cf-python-cf-plot">
-<h2><span class="section-number">9.6. </span>CF-python CF-plot<a class="headerlink" href="#cf-python-cf-plot" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.6. </span>CF-python CF-plot<a class="headerlink" href="#cf-python-cf-plot" title="Permalink to this headline">¶</a></h2>
 <p>Many tools exist for analysing data from NWP and climate models and there are many contributing factors for the proliferation of these analysis utilities, for example, the disparity of data formats used by the authors of the models, and/or the availability of the underlying sofware. There is a strong push towards developing and using python as the underlying language and CF-netCDF as the data format. CMS is home to tools in the CF-netCDF stable - here’s an example of the use of these tools to perform some quite complex data manipulations. The user is insulated from virtually all of the details of the methods allowing them to concentrate on scientific analysis rather than programming intricacies.</p>
 <ul>
 <li><p>Set up the environment and start python.</p>
@@ -416,15 +417,15 @@ same region</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="useful-information.html" class="btn btn-neutral float-right" title="10. Appendix A: Useful information" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="rose-cylc-exercises.html" class="btn btn-neutral float-left" title="8. Rose/Cylc Exercises" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="useful-information.html" class="btn btn-neutral float-right" title="11. Appendix A: Useful information" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="rose-cylc-exercises.html" class="btn btn-neutral float-left" title="9. Rose/Cylc Exercises" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2017-2022, NCAS-CMS.
+        &#169; Copyright 2017-2023, NCAS-CMS.
 
     </p>
   </div>
