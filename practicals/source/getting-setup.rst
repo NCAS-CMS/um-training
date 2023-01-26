@@ -90,7 +90,9 @@ Run the ``mosrs-setup`` script which will take you through the set up process to
 
   puma$ ~um/um-training/mosrs-setup
 
-Log out of PUMA and back in again (you will get a warning about not being able to find ``~/.ssh/ssh-setup`` this can be ignored and will be resolved in the next step). You should be prompted for your Met Office Science Repository Service password. A new window should then pop up (it may be hidden behind other windows) for ``Rosie`` asking for **Username for 'u' - 'https://code.metoffice.gov.uk/rosie/u'** . Enter your MOSRS username again.
+Log out of PUMA and back in again (you will get a warning about not being able to find ``~/.ssh/ssh-setup`` this can be ignored and will be resolved in the next step). You should first be prompted for your **Met Office Science Repository Service password**.  Enter your password. Then you will be prompted for **Username for 'u' - 'https://code.metoffice.gov.uk/rosie/u'** . Enter your MOSRS username.
+
+.. A new window should then pop up (it may be hidden behind other windows) for ``Rosie`` asking for **Username for 'u' - 'https://code.metoffice.gov.uk/rosie/u'** . Enter your MOSRS username again.
 
 .. note:: The cached password is configured to expire after 12 hours. Simply run the command ``mosrs-cache-password`` to re-cache it if this happens. Also if you know you won't need access to the repositories during a login session then just press return when asked for your MOSRS password.
 
