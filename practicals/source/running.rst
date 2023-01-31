@@ -101,15 +101,40 @@ Standard Suite Output
 
 The output from a standard suite goes to a variety of places, depending on the type of the file.  On ARCHER2 you will find all the output from your run under the directory ``~/cylc-run/<suitename>``, where ``<suitename>`` is the name of the suite. This is actually a symbolic link to the equivalent location in your ``/work`` directory (E.g. ``/work/n02/n02/<username>/cylc-run/<suitename>``. 
 
-Rose bush
-^^^^^^^^^
-The standard output and errors from the suite can be easily viewed using Rose Bush.
+Task output
+^^^^^^^^^^^
 
-For suites submitted from PUMA; in a browser navigate to: http://puma.nerc.ac.uk/rose-bush
+.. note:: Rose Bush is a web-based tool for viewing the standard output and errors from suites. Unfortunately this does not work on the current puma server, so we need to browse the log files directly.
 
-Enter your PUMA userid and click :guilabel:`Suites List`.  You should then see a list of all the suites you have run.  Click on :guilabel:`tasks jobs list` for the suite you have just run. You can examine the output of each task using the links, as well as see whether the suite contains failed tasks, or is currently running.  For this suite you should see output files for 4 tasks: ``fcm_make`` (code extraction), ``fcm_make2`` (compilation), ``recon`` & ``atmos``. The ``job.out`` and ``job.err`` files are the first places you should look for information when tasks fail.
+.. note:: To run Rose Bush on Monsoon run: ``firefox http://localhost/rose-bush``	  
 
-.. note:: To run Rose Bush on Monsoon run: ``firefox http://localhost/rose-bush``
+On puma, navigate to the cylc-run directory:
+
+  cd ~/cylc-run/<suitename>
+  ls 
+
+You should see directories for each of the suites that you have run. Go to the suite you have just run and into the log directory:
+
+  cd <suitename>/log/job/1
+  ls 
+
+You will see directories for each of the tasks in the suite. For this suite there are 4 tasks: ``fcm_make`` (code extraction), ``fcm_make2`` (compilation), ``recon`` & ``atmos``. Try looking in one of the task directories:
+
+  cd recon/NN
+  ls
+
+Here ``NN`` is a symbolic link created by Rose pointing to the output of the most recently run. You will see several files in this directory. The ``job.out`` and ``job.err`` files are the first places you should look for information when tasks fail.
+
+..
+
+  Rose bush
+  ^^^^^^^^^
+
+  The standard output and errors from the suite can be easily viewed using Rose Bush.
+
+  For suites submitted from PUMA; in a browser navigate to: http://puma.nerc.ac.uk/rose-bush
+  
+  Enter your PUMA userid and click :guilabel:`Suites List`.  You should then see a list of all the suites you have run.  Click on :guilabel:`tasks jobs list` for the suite you have just run. You can examine the output of each task using the links, as well as see whether the suite contains failed tasks, or is currently running.  For this suite you should see output files for 4 tasks: ``fcm_make`` (code extraction), ``fcm_make2`` (compilation), ``recon`` & ``atmos``. The ``job.out`` and ``job.err`` files are the first places you should look for information when tasks fail.
 
 Compilation output
 ^^^^^^^^^^^^^^^^^^
@@ -119,25 +144,20 @@ The output from the compilation is stored on the host upon which the compilation
 
 If you come across the word "failed", chances are your model didn't build correctly and this file is where you'd search for reasons why.
 
-Standard output
-^^^^^^^^^^^^^^^
-The output from the UM scripts and the output from PE0 is placed in the ``log`` subdirectory. As we saw in Rose Bush stdout and stderr are written to 2 separate files. For a task named ``atmos``, the output from the most recent run will be:
+UM standard output
+^^^^^^^^^^^^^^^^^^
+The output from the UM scripts and the output from PE0 of the model are written to the ``job.out`` and ``job.err`` files for that task. Sometimes extra information is written to the pe output directory which lives on the HPC.
+
+For now, take a look at the ``job.out`` for the ``atmos`` task, by opening the following file:
 
 ``~/cylc-run/<suitename>/log/job/1/atmos/NN/job.out``
-
-And the corresponding error file is:
-
-``~/cylc-run/<suitename>/log/job/1/atmos/NN/job.err``
-
-Here ``NN`` is a symbolic link created by Rose pointing to the output of the most recently run ``atmos`` task.
-
-Take a look at the ``job.out`` for the ``atmos`` task either on the command-line or through Rose Bush.
 
 * Did the linear solve for the Helmholtz problem converge in the final timestep?
   
 .. admonition::  Job Accounting
 		 
-  The ``sacct`` command displays accounting data for all jobs that are run on ARCHER2.  ``sacct`` can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This information is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.
+  The ``sacct`` command displays accounting data for all jobs that are run on ARCHER2.  ``sacct`` can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This informa
+  tion is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.
 
   Let's take a look at the resources used by your copy of ``u-cc519`` run.
 
