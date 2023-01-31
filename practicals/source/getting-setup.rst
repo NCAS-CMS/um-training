@@ -27,36 +27,36 @@ Connect via a terminal with an X11 connection (`XQuartz <https://www.xquartz.org
 
 Login to PUMA: ::
 
-  ssh -Y -i /path/to/id_rsa_puma <puma-username>@192.171.169.227
+  ssh -Y -i ~/.ssh/id_rsa_puma <puma-username>@192.171.169.138
   
 We suggest adding an entry to the ``~/.ssh/config`` file so you don't need to keep typing in the IP address. For example: ::
 
   Host puma
-  Hostname 192.171.169.227
+  Hostname 192.171.169.138
   User <puma_username>
   IdentityFile ~/.ssh/id_rsa_puma
-  ForwardX11 no
-  ForwardX11Trusted no
+  ForwardX11 yes
+  ForwardX11Trusted yes
    
 so that you can then connect using the command: ::
 
-  ssh -Y puma
+  ssh puma
 
-Login to ARCHER2: ::
+In a new terminal window, login to ARCHER2: ::
 
-  ssh -Y -i /path/to/id_rsa_archer <archer2-username>@login.archer2.ac.uk
+  ssh -Y -i ~/.ssh/id_rsa_archer <archer2-username>@login.archer2.ac.uk
 
 Again you could define a ``~/.ssh/config`` file entry for each with the necessary information, if desired. For example: ::
 
   Host login.archer2.ac.uk
   User <archer2_username>
   IdentityFile ~/.ssh/id_rsa_archer
-  ForwardX11 no
-  ForwardX11Trusted no
+  ForwardX11 yes
+  ForwardX11Trusted yes
 
 so that you could then just connect using the command: ::
   
-  ssh -Y login.archer2.ac.uk
+  ssh login.archer2.ac.uk
 
 Set up your ARCHER2 environment 
 --------------------------------
