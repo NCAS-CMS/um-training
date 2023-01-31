@@ -146,13 +146,11 @@ If you come across the word "failed", chances are your model didn't build correc
 
 UM standard output
 ^^^^^^^^^^^^^^^^^^
-The output from the UM scripts and the output from PE0 of the model are written to the ``job.out`` and ``job.err`` files for that task. Sometimes extra information is written to the pe output directory which lives on the HPC.
-
-For now, take a look at the ``job.out`` for the ``atmos`` task, by opening the following file:
+The output from the UM scripts and the output from PE0 of the model are written to the ``job.out`` and ``job.err`` files for that task. Take a look at the ``job.out`` for the ``atmos`` task, by opening the following file:
 
 ``~/cylc-run/<suitename>/log/job/1/atmos/NN/job.out``
 
-* Did the linear solve for the Helmholtz problem converge in the final timestep?
+* Did the linear solver for the Helmholtz problem converge in the final timestep?
   
 .. admonition::  Job Accounting
 		 

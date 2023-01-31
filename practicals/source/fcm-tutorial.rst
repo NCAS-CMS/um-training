@@ -137,7 +137,7 @@ or by a shorter way:
 
 **Changing code**
 
-Back in the work area directory you created at the beginning of branch creation you should now see that a new directory has appeared and that it is named the same as your branch.  This is your *working copy*. `cd` into this directory and explore the code structure to familiarise yourself with how the code is structured.
+Back in the work area directory you created at the beginning of branch creation you should now see that a new directory has appeared and that it is named the same as your branch.  This is your *working copy*. ``cd`` into this directory and explore the code structure to familiarise yourself with how the code is structured.
 
 Now make some code changes! Use the following scenario to take you through the basic method of changing, adding and deleting files:
 
@@ -247,7 +247,7 @@ If you've followed the example scenario above you should see output similar to t
   ---------------------------------------------------------------------------
   Commit message is as follows:
   ---------------------------------------------------------------------------
-  Testing FCM Tutorial
+  #7107 Testing FCM Tutorial
   ---------------------------------------------------------------------------
   Would you like to commit this change?
   Enter "y" or "n" (or just press <return> for "n"): y
@@ -315,7 +315,7 @@ This is because the sample branch and your branch contain modifications to the s
 
 Viewing your changes in Trac
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Making a change to your branch results in a **changeset** which is basically a record of the changes.  One way of viewing the changeset you have just created is to click on :guilabel:`Timeline` in Trac.  The Timeline view is a sequential record of all events in the repository.  You should see changesets for your original commit to your branch and the subsequent commit after resolving the conflicts near the top.  The changesets are numbered corresponding to the revision of your branch which would have been displayed in the GUI when you did a ``fcm commit`` or ```fcm branch info``.  To see all the details click on the line *'Changeset[xxx]...'* relating to your changeset.  Alternatively, if you enter the number of the changeset "[**xxx**]" into the search box at the top right, it will take you directly to the numbered changeset.  Your changeset should look something like this: 
+Making a change to your branch results in a **changeset** which is basically a record of the changes.  One way of viewing the changeset you have just created is to click on :guilabel:`Timeline` in Trac.  The Timeline view is a sequential record of all events in the repository.  Near the top, you should see changesets for the creation of your branch, and the subsequent commit for the code changes you made.  The changesets are numbered corresponding to the revision of your branch which would have been displayed in the GUI when you did a ``fcm commit`` or ```fcm branch info``.  To see all the details click on the line *'Changeset[xxx]...'* relating to your changeset.  Alternatively, if you enter the number of the changeset "[**xxx**]" into the search box at the top right, it will take you directly to the numbered changeset.  Your changeset should look something like this: 
 
 .. image:: /images/fcm_changeset.png
    :height: 591px
