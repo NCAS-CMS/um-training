@@ -17,7 +17,7 @@ Firstly make the essential changes required to run the suite.  That is:
 * The queue to run in.
 
 .. Hint::
-   Look in the :guilabel:`suite conf` section.  For organised training events you will see that this suite has the queue reservations listed as Monday, Tuesday, Wednesday, Thursday, Friday; select the appropriate day.  For self-study select the ``short`` queue.
+   Look in the :guilabel:`suite conf` section.  For organised training events you will see that this suite is setup to use reservations listed as Tuesday, Wednesday, Thursday; select the appropriate day.  For self-study switch off "Use a reservation on ARCHER2" and select the ``short`` queue.
 
 * Did you manage to find where to set your ARCHER2 username?  
 
@@ -36,10 +36,13 @@ The suite should fail in the ``fcm_make_um`` task. This is the task that extract
 
 * What is the error? 
 
-.. hint::
+.. 
    Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files through Rose Bush, as we have done previously, however you can also view them quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View -> job stderr`
 
-This indicates that the branch cannot be found due to an incorrect branch name. You will need to look at the UM code repository through Trac either on MOSRS (https://code.metoffice.gov.uk/trac/um/browser) or the PUMA mirror (https://puma.nerc.ac.uk/trac/um.xm/browser with username: guest1 and password: tra1n1ng or use your own) to determine the correct name.
+.. hint::
+   Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View -> job stderr`
+
+This indicates that the branch cannot be found due to an incorrect branch name. You will need to look at the UM code repository through Trac on MOSRS (https://code.metoffice.gov.uk/trac/um/browser) to determine the correct name.
 
 Fix the error, :guilabel:`Save` the suite.
 
