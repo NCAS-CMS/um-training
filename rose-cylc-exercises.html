@@ -311,7 +311,7 @@ puma$ mkdir new_app
 </pre></div>
 </div>
 <p>and change it to</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="nb">set</span> <span class="n">INIT_GRAPH</span> <span class="o">=</span> <span class="n">INIT_GRAPH</span> <span class="o">~</span> <span class="s1">&#39; =&gt; hello =&gt; atmos_main&#39;</span> <span class="k">if</span> <span class="n">TASK_RUN</span> <span class="k">else</span> <span class="n">INIT_GRAPH</span> <span class="o">%</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">INIT_GRAPH</span> <span class="o">=</span> <span class="n">INIT_GRAPH</span> <span class="o">~</span> <span class="s1">&#39; =&gt; hello =&gt; atmos_main&#39;</span> <span class="k">if</span> <span class="n">TASK_RUN</span> <span class="k">else</span> <span class="n">INIT_GRAPH</span> <span class="o">%</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>This puts the task <code class="docutils literal notranslate"><span class="pre">hello</span></code> in the right place in the task list.</p>

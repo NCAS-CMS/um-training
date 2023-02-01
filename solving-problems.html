@@ -185,7 +185,7 @@
 </ul>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Look in the <span class="guilabel">suite conf</span> section.  For organised training events you will see that this suite has the queue reservations listed as Monday, Tuesday, Wednesday, Thursday, Friday; select the appropriate day.  For self-study select the <code class="docutils literal notranslate"><span class="pre">short</span></code> queue.</p>
+<p>Look in the <span class="guilabel">suite conf</span> section.  For organised training events you will see that this suite is setup to use reservations listed as Tuesday, Wednesday, Thursday; select the appropriate day.  For self-study switch off “Use a reservation on ARCHER2” and select the <code class="docutils literal notranslate"><span class="pre">short</span></code> queue.</p>
 </div>
 <ul class="simple">
 <li><p>Did you manage to find where to set your ARCHER2 username?</p></li>
@@ -206,9 +206,9 @@
 </ul>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Examine the <code class="docutils literal notranslate"><span class="pre">job.err</span></code> and <code class="docutils literal notranslate"><span class="pre">job.out</span></code> to find the cause of the problem. You can view these files through Rose Bush, as we have done previously, however you can also view them quickly and easily directly from the Cylc GUI.  <strong>Right-click</strong> on the failed <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task and select <span class="guilabel">View -&gt; job stderr</span></p>
+<p>Examine the <code class="docutils literal notranslate"><span class="pre">job.err</span></code> and <code class="docutils literal notranslate"><span class="pre">job.out</span></code> to find the cause of the problem. You can view these files quickly and easily directly from the Cylc GUI.  <strong>Right-click</strong> on the failed <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task and select <span class="guilabel">View -&gt; job stderr</span></p>
 </div>
-<p>This indicates that the branch cannot be found due to an incorrect branch name. You will need to look at the UM code repository through Trac either on MOSRS (<a class="reference external" href="https://code.metoffice.gov.uk/trac/um/browser">https://code.metoffice.gov.uk/trac/um/browser</a>) or the PUMA mirror (<a class="reference external" href="https://puma.nerc.ac.uk/trac/um.xm/browser">https://puma.nerc.ac.uk/trac/um.xm/browser</a> with username: guest1 and password: tra1n1ng or use your own) to determine the correct name.</p>
+<p>This indicates that the branch cannot be found due to an incorrect branch name. You will need to look at the UM code repository through Trac on MOSRS (<a class="reference external" href="https://code.metoffice.gov.uk/trac/um/browser">https://code.metoffice.gov.uk/trac/um/browser</a>) to determine the correct name.</p>
 <p>Fix the error, <span class="guilabel">Save</span> the suite.</p>
 <p>Now we will stop the suite and then re-run it.  In the Cylc GUI click on <span class="guilabel">Control &gt; Stop Suite</span> and then select <span class="guilabel">Stop now</span> and then click on <span class="guilabel">OK</span>.  <span class="guilabel">Run</span> the suite again.</p>
 <p>The suite will fail in the <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task again.</p>

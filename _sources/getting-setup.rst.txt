@@ -114,6 +114,8 @@ In your PUMA ``~/.ssh/config`` file add the following section: ::
 
 Where ``<archer2_username>`` should be replaced with your ARCHER2 username. If you don't have a ``~/.ssh/config`` file create one.
 
+.. _ssh-setup:
+
 **ii. Set up ssh-agent**
 
 Setting up an ``ssh-agent`` allows caching of your ``id_rsa_archerum`` key passphrase for a period of time. ::
