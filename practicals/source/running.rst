@@ -108,17 +108,17 @@ Task output
 
 .. note:: To run Rose Bush on Monsoon run: ``firefox http://localhost/rose-bush``	  
 
-On puma, navigate to the cylc-run directory:
+On PUMA, navigate to the cylc-run directory: ::
 
   cd ~/cylc-run/<suitename>
   ls 
 
-You should see directories for each of the suites that you have run. Go to the suite you have just run and into the log directory:
+You should see directories for each of the suites that you have run. Go to the suite you have just run and into the log directory: ::
 
   cd <suitename>/log/job/1
   ls 
 
-You will see directories for each of the tasks in the suite. For this suite there are 4 tasks: ``fcm_make`` (code extraction), ``fcm_make2`` (compilation), ``recon`` & ``atmos``. Try looking in one of the task directories:
+You will see directories for each of the tasks in the suite. For this suite there are 4 tasks: ``fcm_make`` (code extraction), ``fcm_make2`` (compilation), ``recon`` & ``atmos``. Try looking in one of the task directories: ::
 
   cd recon/NN
   ls
@@ -126,10 +126,9 @@ You will see directories for each of the tasks in the suite. For this suite ther
 Here ``NN`` is a symbolic link created by Rose pointing to the output of the most recently run. You will see several files in this directory. The ``job.out`` and ``job.err`` files are the first places you should look for information when tasks fail.
 
 ..
-
   Rose bush
   ^^^^^^^^^
-
+ 
   The standard output and errors from the suite can be easily viewed using Rose Bush.
 
   For suites submitted from PUMA; in a browser navigate to: http://puma.nerc.ac.uk/rose-bush
@@ -138,7 +137,7 @@ Here ``NN`` is a symbolic link created by Rose pointing to the output of the mos
 
 Compilation output
 ^^^^^^^^^^^^^^^^^^
-The output from the compilation is stored on the host upon which the compilation was performed.  The output from `fcm_make` is inside the directory containing the build, which is inside the ``share`` subdirectory.
+The output from the compilation is stored on the host upon which the compilation was performed.  The output from ``fcm_make`` is inside the directory containing the build, which is inside the ``share`` subdirectory.
 
 ``~/cylc-run/<suitename>/share/fcm_make/fcm-make2.log``
 
@@ -154,8 +153,7 @@ The output from the UM scripts and the output from PE0 of the model are written 
   
 .. admonition::  Job Accounting
 		 
-  The ``sacct`` command displays accounting data for all jobs that are run on ARCHER2.  ``sacct`` can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This informa
-  tion is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.
+  The ``sacct`` command displays accounting data for all jobs that are run on ARCHER2.  ``sacct`` can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This information is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.
 
   Let's take a look at the resources used by your copy of ``u-cc519`` run.
 
