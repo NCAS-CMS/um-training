@@ -99,9 +99,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#standard-suite-output">4.3. Standard Suite Output</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#rose-bush">Rose bush</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#task-output">Task output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compilation-output">Compilation output</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#standard-output">Standard output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#um-standard-output">UM standard output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#binary-output-work-and-share">Binary output - work and share</a></li>
 </ul>
 </li>
@@ -282,32 +282,45 @@
 <div class="section" id="standard-suite-output">
 <h2><span class="section-number">4.3. </span>Standard Suite Output<a class="headerlink" href="#standard-suite-output" title="Permalink to this headline">¶</a></h2>
 <p>The output from a standard suite goes to a variety of places, depending on the type of the file.  On ARCHER2 you will find all the output from your run under the directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;suitename&gt;</span></code> is the name of the suite. This is actually a symbolic link to the equivalent location in your <code class="docutils literal notranslate"><span class="pre">/work</span></code> directory (E.g. <code class="docutils literal notranslate"><span class="pre">/work/n02/n02/&lt;username&gt;/cylc-run/&lt;suitename&gt;</span></code>.</p>
-<div class="section" id="rose-bush">
-<h3>Rose bush<a class="headerlink" href="#rose-bush" title="Permalink to this headline">¶</a></h3>
-<p>The standard output and errors from the suite can be easily viewed using Rose Bush.</p>
-<p>For suites submitted from PUMA; in a browser navigate to: <a class="reference external" href="http://puma.nerc.ac.uk/rose-bush">http://puma.nerc.ac.uk/rose-bush</a></p>
-<p>Enter your PUMA userid and click <span class="guilabel">Suites List</span>.  You should then see a list of all the suites you have run.  Click on <span class="guilabel">tasks jobs list</span> for the suite you have just run. You can examine the output of each task using the links, as well as see whether the suite contains failed tasks, or is currently running.  For this suite you should see output files for 4 tasks: <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> (code extraction), <code class="docutils literal notranslate"><span class="pre">fcm_make2</span></code> (compilation), <code class="docutils literal notranslate"><span class="pre">recon</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">atmos</span></code>. The <code class="docutils literal notranslate"><span class="pre">job.out</span></code> and <code class="docutils literal notranslate"><span class="pre">job.err</span></code> files are the first places you should look for information when tasks fail.</p>
+<div class="section" id="task-output">
+<h3>Task output<a class="headerlink" href="#task-output" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Rose Bush is a web-based tool for viewing the standard output and errors from suites. Unfortunately this does not work on the current puma server, so we need to browse the log files directly.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To run Rose Bush on Monsoon run: <code class="docutils literal notranslate"><span class="pre">firefox</span> <span class="pre">http://localhost/rose-bush</span></code></p>
 </div>
+<p>On PUMA, navigate to the cylc-run directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">cylc</span><span class="o">-</span><span class="n">run</span><span class="o">/&lt;</span><span class="n">suitename</span><span class="o">&gt;</span>
+<span class="n">ls</span>
+</pre></div>
+</div>
+<p>You should see directories for each of the suites that you have run. Go to the suite you have just run and into the log directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">suitename</span><span class="o">&gt;/</span><span class="n">log</span><span class="o">/</span><span class="n">job</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">ls</span>
+</pre></div>
+</div>
+<p>You will see directories for each of the tasks in the suite. For this suite there are 4 tasks: <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> (code extraction), <code class="docutils literal notranslate"><span class="pre">fcm_make2</span></code> (compilation), <code class="docutils literal notranslate"><span class="pre">recon</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">atmos</span></code>. Try looking in one of the task directories:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">recon</span><span class="o">/</span><span class="n">NN</span>
+<span class="n">ls</span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">NN</span></code> is a symbolic link created by Rose pointing to the output of the most recently run. You will see several files in this directory. The <code class="docutils literal notranslate"><span class="pre">job.out</span></code> and <code class="docutils literal notranslate"><span class="pre">job.err</span></code> files are the first places you should look for information when tasks fail.</p>
 </div>
 <div class="section" id="compilation-output">
 <h3>Compilation output<a class="headerlink" href="#compilation-output" title="Permalink to this headline">¶</a></h3>
-<p>The output from the compilation is stored on the host upon which the compilation was performed.  The output from <cite>fcm_make</cite> is inside the directory containing the build, which is inside the <code class="docutils literal notranslate"><span class="pre">share</span></code> subdirectory.</p>
+<p>The output from the compilation is stored on the host upon which the compilation was performed.  The output from <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> is inside the directory containing the build, which is inside the <code class="docutils literal notranslate"><span class="pre">share</span></code> subdirectory.</p>
 <p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/share/fcm_make/fcm-make2.log</span></code></p>
 <p>If you come across the word “failed”, chances are your model didn’t build correctly and this file is where you’d search for reasons why.</p>
 </div>
-<div class="section" id="standard-output">
-<h3>Standard output<a class="headerlink" href="#standard-output" title="Permalink to this headline">¶</a></h3>
-<p>The output from the UM scripts and the output from PE0 is placed in the <code class="docutils literal notranslate"><span class="pre">log</span></code> subdirectory. As we saw in Rose Bush stdout and stderr are written to 2 separate files. For a task named <code class="docutils literal notranslate"><span class="pre">atmos</span></code>, the output from the most recent run will be:</p>
+<div class="section" id="um-standard-output">
+<h3>UM standard output<a class="headerlink" href="#um-standard-output" title="Permalink to this headline">¶</a></h3>
+<p>The output from the UM scripts and the output from PE0 of the model are written to the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> and <code class="docutils literal notranslate"><span class="pre">job.err</span></code> files for that task. Take a look at the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> for the <code class="docutils literal notranslate"><span class="pre">atmos</span></code> task, by opening the following file:</p>
 <p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/log/job/1/atmos/NN/job.out</span></code></p>
-<p>And the corresponding error file is:</p>
-<p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/log/job/1/atmos/NN/job.err</span></code></p>
-<p>Here <code class="docutils literal notranslate"><span class="pre">NN</span></code> is a symbolic link created by Rose pointing to the output of the most recently run <code class="docutils literal notranslate"><span class="pre">atmos</span></code> task.</p>
-<p>Take a look at the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> for the <code class="docutils literal notranslate"><span class="pre">atmos</span></code> task either on the command-line or through Rose Bush.</p>
 <ul class="simple">
-<li><p>Did the linear solve for the Helmholtz problem converge in the final timestep?</p></li>
+<li><p>Did the linear solver for the Helmholtz problem converge in the final timestep?</p></li>
 </ul>
 <div class="admonition-job-accounting admonition">
 <p class="admonition-title">Job Accounting</p>

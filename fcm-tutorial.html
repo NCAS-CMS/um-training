@@ -300,7 +300,7 @@
 </ul>
 </div>
 <p><strong>Changing code</strong></p>
-<p>Back in the work area directory you created at the beginning of branch creation you should now see that a new directory has appeared and that it is named the same as your branch.  This is your <em>working copy</em>. <cite>cd</cite> into this directory and explore the code structure to familiarise yourself with how the code is structured.</p>
+<p>Back in the work area directory you created at the beginning of branch creation you should now see that a new directory has appeared and that it is named the same as your branch.  This is your <em>working copy</em>. <code class="docutils literal notranslate"><span class="pre">cd</span></code> into this directory and explore the code structure to familiarise yourself with how the code is structured.</p>
 <p>Now make some code changes! Use the following scenario to take you through the basic method of changing, adding and deleting files:</p>
 <ul class="simple">
 <li><p>Change to the <code class="docutils literal notranslate"><span class="pre">src/control/top_level/</span></code> sub-directory in your working copy.</p></li>
@@ -417,7 +417,7 @@ A       src/control/top_level/um_training_mod.F90
 ---------------------------------------------------------------------------
 Commit message is as follows:
 ---------------------------------------------------------------------------
-Testing FCM Tutorial
+#7107 Testing FCM Tutorial
 ---------------------------------------------------------------------------
 Would you like to commit this change?
 Enter &quot;y&quot; or &quot;n&quot; (or just press &lt;return&gt; for &quot;n&quot;): y
@@ -489,7 +489,7 @@ um_shell.F90@113821
 </div>
 <div class="section" id="viewing-your-changes-in-trac">
 <h3>Viewing your changes in Trac<a class="headerlink" href="#viewing-your-changes-in-trac" title="Permalink to this headline">¶</a></h3>
-<p>Making a change to your branch results in a <strong>changeset</strong> which is basically a record of the changes.  One way of viewing the changeset you have just created is to click on <span class="guilabel">Timeline</span> in Trac.  The Timeline view is a sequential record of all events in the repository.  You should see changesets for your original commit to your branch and the subsequent commit after resolving the conflicts near the top.  The changesets are numbered corresponding to the revision of your branch which would have been displayed in the GUI when you did a <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">commit</span></code> or <code class="docutils literal notranslate"><span class="pre">`fcm</span> <span class="pre">branch</span> <span class="pre">info</span></code>.  To see all the details click on the line <em>‘Changeset[xxx]…’</em> relating to your changeset.  Alternatively, if you enter the number of the changeset “[<strong>xxx</strong>]” into the search box at the top right, it will take you directly to the numbered changeset.  Your changeset should look something like this:</p>
+<p>Making a change to your branch results in a <strong>changeset</strong> which is basically a record of the changes.  One way of viewing the changeset you have just created is to click on <span class="guilabel">Timeline</span> in Trac.  The Timeline view is a sequential record of all events in the repository.  Near the top, you should see changesets for the creation of your branch, and the subsequent commit for the code changes you made.  The changesets are numbered corresponding to the revision of your branch which would have been displayed in the GUI when you did a <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">commit</span></code> or <code class="docutils literal notranslate"><span class="pre">`fcm</span> <span class="pre">branch</span> <span class="pre">info</span></code>.  To see all the details click on the line <em>‘Changeset[xxx]…’</em> relating to your changeset.  Alternatively, if you enter the number of the changeset “[<strong>xxx</strong>]” into the search box at the top right, it will take you directly to the numbered changeset.  Your changeset should look something like this:</p>
 <a class="reference internal image-reference" href="_images/fcm_changeset.png"><img alt="_images/fcm_changeset.png" src="_images/fcm_changeset.png" style="width: 650px; height: 591px;" /></a>
 </div>
 </div>

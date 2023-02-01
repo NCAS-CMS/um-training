@@ -202,36 +202,36 @@
 <h3>Connecting via a Terminal (GNU/Linux &amp; macOS)<a class="headerlink" href="#connecting-via-a-terminal-gnu-linux-macos" title="Permalink to this headline">¶</a></h3>
 <p>Connect via a terminal with an X11 connection (<a class="reference external" href="https://www.xquartz.org/">XQuartz</a> is also required when using macOS)</p>
 <p>Login to PUMA:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">id_rsa_puma</span> <span class="o">&lt;</span><span class="n">puma</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;@</span><span class="mf">192.171</span><span class="o">.</span><span class="mf">169.227</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_puma</span> <span class="o">&lt;</span><span class="n">puma</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;@</span><span class="mf">192.171</span><span class="o">.</span><span class="mf">169.138</span>
 </pre></div>
 </div>
 <p>We suggest adding an entry to the <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file so you don’t need to keep typing in the IP address. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">puma</span>
-<span class="n">Hostname</span> <span class="mf">192.171</span><span class="o">.</span><span class="mf">169.227</span>
+<span class="n">Hostname</span> <span class="mf">192.171</span><span class="o">.</span><span class="mf">169.138</span>
 <span class="n">User</span> <span class="o">&lt;</span><span class="n">puma_username</span><span class="o">&gt;</span>
 <span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_puma</span>
-<span class="n">ForwardX11</span> <span class="n">no</span>
-<span class="n">ForwardX11Trusted</span> <span class="n">no</span>
+<span class="n">ForwardX11</span> <span class="n">yes</span>
+<span class="n">ForwardX11Trusted</span> <span class="n">yes</span>
 </pre></div>
 </div>
 <p>so that you can then connect using the command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="n">puma</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">puma</span>
 </pre></div>
 </div>
-<p>Login to ARCHER2:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">id_rsa_archer</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span><span class="nd">@login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
+<p>In a new terminal window, login to ARCHER2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span><span class="nd">@login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 </pre></div>
 </div>
 <p>Again you could define a <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file entry for each with the necessary information, if desired. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 <span class="n">User</span> <span class="o">&lt;</span><span class="n">archer2_username</span><span class="o">&gt;</span>
 <span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer</span>
-<span class="n">ForwardX11</span> <span class="n">no</span>
-<span class="n">ForwardX11Trusted</span> <span class="n">no</span>
+<span class="n">ForwardX11</span> <span class="n">yes</span>
+<span class="n">ForwardX11Trusted</span> <span class="n">yes</span>
 </pre></div>
 </div>
 <p>so that you could then just connect using the command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 </pre></div>
 </div>
 </div>
