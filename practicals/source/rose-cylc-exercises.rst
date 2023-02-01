@@ -188,7 +188,7 @@ find the line ::
 
 and change it to ::
 
-  % set INIT_GRAPH = INIT_GRAPH ~ ' => hello => atmos_main' if TASK_RUN else INIT_GRAPH %}
+  {% set INIT_GRAPH = INIT_GRAPH ~ ' => hello => atmos_main' if TASK_RUN else INIT_GRAPH %}
 
 This puts the task ``hello`` in the right place in the task list.
 
