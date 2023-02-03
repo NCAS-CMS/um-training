@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>5. FCM tutorial &mdash; NCAS Unified Model Introduction</title>
+  <title>4. FCM tutorial &mdash; NCAS Unified Model Introduction</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6. Solving Common UM Problems" href="solving-problems.html" />
-    <link rel="prev" title="4. Running a UM suite on ARCHER2" href="running.html" /> 
+    <link rel="next" title="5. Solving Common UM Problems" href="solving-problems.html" />
+    <link rel="prev" title="3. Running a UM suite on ARCHER2" href="running.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,14 +87,13 @@
               <p class="caption"><span class="caption-text">Practicals</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting-setup.html">1. Getting set up (7th-9th February, Leeds)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-setup-selfstudy.html">2. Getting Set Up (Self-Study Instructions)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">3. Working with Suites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running.html">4. Running a UM suite on ARCHER2</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">5. FCM tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#setting-up-your-default-text-editor">5.1. Setting up your default text editor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#applying-modifications-to-a-um-suite">5.2. Applying modifications to a UM suite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#opening-a-ticket">5.3. Opening a Ticket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#making-code-changes">5.4. Making Code Changes</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">2. Working with Suites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">3. Running a UM suite on ARCHER2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. FCM tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-your-default-text-editor">4.1. Setting up your default text editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#applying-modifications-to-a-um-suite">4.2. Applying modifications to a UM suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opening-a-ticket">4.3. Opening a Ticket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#making-code-changes">4.4. Making Code Changes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#creating-a-branch">Creating a branch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#making-changes-to-a-working-copy">Making changes to a working copy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#committing-changes">Committing changes</a></li>
@@ -103,18 +102,18 @@
 <li class="toctree-l3"><a class="reference internal" href="#viewing-your-changes-in-trac">Viewing your changes in Trac</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#documenting-your-change">5.5. Documenting your change</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tidying-up">5.6. Tidying Up</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-control-of-suites">5.7. Version Control of Suites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documenting-your-change">4.5. Documenting your change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tidying-up">4.6. Tidying Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-control-of-suites">4.7. Version Control of Suites</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="solving-problems.html">6. Solving Common UM Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">7. Further Exercises (1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">8. Further Exercises (2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">9. Rose/Cylc Exercises</a></li>
-<li class="toctree-l1"><a class="reference internal" href="post-processing.html">10. Post processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="useful-information.html">11. Appendix A: Useful information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ssh-tasks.html">12. Appendix B: SSH FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solving-problems.html">5. Solving Common UM Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">6. Further Exercises (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">7. Further Exercises (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">8. Rose/Cylc Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post-processing.html">9. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="useful-information.html">10. Appendix A: Useful information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh-tasks.html">11. Appendix B: SSH FAQs</a></li>
 </ul>
 
             
@@ -163,7 +162,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">5. </span>FCM tutorial</li>
+      <li><span class="section-number">4. </span>FCM tutorial</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -183,7 +182,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="fcm-tutorial">
-<h1><span class="section-number">5. </span>FCM tutorial<a class="headerlink" href="#fcm-tutorial" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4. </span>FCM tutorial<a class="headerlink" href="#fcm-tutorial" title="Permalink to this headline">¶</a></h1>
 <p>In this section you will learn about:</p>
 <ul class="simple">
 <li><p>Incorporating modifications to your suite</p></li>
@@ -195,7 +194,7 @@
 <li><p>Version control of suites</p></li>
 </ul>
 <div class="section" id="setting-up-your-default-text-editor">
-<h2><span class="section-number">5.1. </span>Setting up your default text editor<a class="headerlink" href="#setting-up-your-default-text-editor" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.1. </span>Setting up your default text editor<a class="headerlink" href="#setting-up-your-default-text-editor" title="Permalink to this headline">¶</a></h2>
 <p>When you attempt to create a branch or commit changes to the repository, you will normally be prompted to edit your commit log message using a text editor. The system chooses its editor by searching for a non-empty string through a hierarchy of environment variables in this order: <code class="docutils literal notranslate"><span class="pre">SVN_EDITOR</span></code>, <code class="docutils literal notranslate"><span class="pre">VISUAL</span></code>, and <code class="docutils literal notranslate"><span class="pre">EDITOR</span></code>.</p>
 <p>The editor you select must able to run in the foreground. The default editor is <code class="docutils literal notranslate"><span class="pre">vi</span></code>.  If you prefer to use <code class="docutils literal notranslate"><span class="pre">emacs</span></code> or <code class="docutils literal notranslate"><span class="pre">nedit</span></code>, for example, you can add one of the following in your <code class="docutils literal notranslate"><span class="pre">$HOME/.profile</span></code>, <code class="docutils literal notranslate"><span class="pre">$HOME/.kshrc</span></code> (Korn) or <code class="docutils literal notranslate"><span class="pre">$HOME/.bashrc</span></code> (Bash):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Emacs</span>
@@ -207,7 +206,7 @@
 </div>
 </div>
 <div class="section" id="applying-modifications-to-a-um-suite">
-<h2><span class="section-number">5.2. </span>Applying modifications to a UM suite<a class="headerlink" href="#applying-modifications-to-a-um-suite" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.2. </span>Applying modifications to a UM suite<a class="headerlink" href="#applying-modifications-to-a-um-suite" title="Permalink to this headline">¶</a></h2>
 <p>Now that you’ve run a basic suite, you need to know how to apply changes to the trunk code.  We’ll start by applying existing changes (aka a branch) to your suite.  A branch equates to a copy of the UM source code tree with user modifications.  A branch can contain changes to many code files.</p>
 <p>As a user, you will be supplied with the <strong>URL</strong> and possibly a version number of a branch.  FCM keywords can be used to specify the URL which is a way of using shorthand for standard bits of the URL path.  For example, this branch has been created in the MOSRS UM repository:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">code</span><span class="o">.</span><span class="n">metoffice</span><span class="o">.</span><span class="n">gov</span><span class="o">.</span><span class="n">uk</span><span class="o">/</span><span class="n">svn</span><span class="o">/</span><span class="n">um</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">branches</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">rosalynhatcher</span><span class="o">/</span><span class="n">vn13</span><span class="o">.</span><span class="mi">0</span><span class="n">_training_um_shell1</span>
@@ -228,7 +227,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">Tutorial</span> <span class="pre">Change:</span> <span class="pre">Start</span> <span class="pre">of</span> <span class="pre">UM</span> <span class="pre">RUN</span> <span class="pre">Job:</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">of</span> <span class="pre">UM</span> <span class="pre">RUN</span> <span class="pre">job:</span></code></p>
 </div>
 <div class="section" id="opening-a-ticket">
-<h2><span class="section-number">5.3. </span>Opening a Ticket<a class="headerlink" href="#opening-a-ticket" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.3. </span>Opening a Ticket<a class="headerlink" href="#opening-a-ticket" title="Permalink to this headline">¶</a></h2>
 <p>All code changes destined for the UM trunk must have an associated Trac Ticket documenting the change (e.g. <a class="reference external" href="https://code.metoffice.gov.uk/trac/um/ticket/1957">https://code.metoffice.gov.uk/trac/um/ticket/1957</a>).  For all other changes creating a ticket to document your change is entirely optional.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -249,7 +248,7 @@
 <p>Remember the number of your new ticket as you will need it later in this tutorial.</p>
 </div>
 <div class="section" id="making-code-changes">
-<h2><span class="section-number">5.4. </span>Making Code Changes<a class="headerlink" href="#making-code-changes" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.4. </span>Making Code Changes<a class="headerlink" href="#making-code-changes" title="Permalink to this headline">¶</a></h2>
 <p>The default text editor for entering commit messages is <code class="docutils literal notranslate"><span class="pre">vi</span></code>.  If you would prefer to use a different editor; for example <code class="docutils literal notranslate"><span class="pre">emacs</span></code> or <code class="docutils literal notranslate"><span class="pre">vim</span></code>, please see the section on “Setting up your default text editor”.</p>
 <div class="section" id="creating-a-branch">
 <h3>Creating a branch<a class="headerlink" href="#creating-a-branch" title="Permalink to this headline">¶</a></h3>
@@ -494,7 +493,7 @@ um_shell.F90@113821
 </div>
 </div>
 <div class="section" id="documenting-your-change">
-<h2><span class="section-number">5.5. </span>Documenting your change<a class="headerlink" href="#documenting-your-change" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.5. </span>Documenting your change<a class="headerlink" href="#documenting-your-change" title="Permalink to this headline">¶</a></h2>
 <p>Go back to the Trac ticket you created for your code change and add some documentation as follows:</p>
 <ul>
 <li><div class="line-block">
@@ -510,7 +509,7 @@ um_shell.F90@113821
 <p><span class="guilabel">Preview</span> and <span class="guilabel">Submit</span> your ticket to save the changes.  Check the link you added works.</p>
 </div>
 <div class="section" id="tidying-up">
-<h2><span class="section-number">5.6. </span>Tidying Up<a class="headerlink" href="#tidying-up" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6. </span>Tidying Up<a class="headerlink" href="#tidying-up" title="Permalink to this headline">¶</a></h2>
 <p>If your development is destined for the UM trunk, then once you have finished your code changes and it has been tested and reviewed, your branch will be committed to the project shared package branch by the project owner.  Once this has been done and there are no problems, your branch is essentially redundant.  If no other users are using this branch in their suites it can be deleted.</p>
 <p>For the purposes of this tutorial, you can now proceed to delete your branch.  When you delete a branch, it becomes invisible from the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> revision, but will continue to exist in the repository should you want to refer to it in the future.</p>
 <p><strong>List branches owned by you</strong></p>
@@ -529,7 +528,7 @@ um_shell.F90@113821
 <p>Your working copy is now pointing to a branch that no longer exists at the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> revision of the repository.  It is possible to keep this working copy, create a new branch and switch your working copy to point to the new branch.  Otherwise, you can remove your working copy by issuing a careful <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-rf</span></code> command.</p>
 </div>
 <div class="section" id="version-control-of-suites">
-<h2><span class="section-number">5.7. </span>Version Control of Suites<a class="headerlink" href="#version-control-of-suites" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.7. </span>Version Control of Suites<a class="headerlink" href="#version-control-of-suites" title="Permalink to this headline">¶</a></h2>
 <p>Just like the model code, your UM suites are also under version control in a subversion repository called <code class="docutils literal notranslate"><span class="pre">roses-u</span></code> which is on the MOSRS.  Once you have a working copy of your suite under <code class="docutils literal notranslate"><span class="pre">~/roses</span></code> you can use FCM commands in the same way as for your source code branches; i.e. commit changes, diff changes, etc.</p>
 <ul class="simple">
 <li><p>Look in the roses-u repository via MOSRS Trac (<a class="reference external" href="https://code.metoffice.gov.uk/trac/roses-u">https://code.metoffice.gov.uk/trac/roses-u</a>) and find the suite you created in the previous section.</p></li>
@@ -558,8 +557,8 @@ um_shell.F90@113821
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="solving-problems.html" class="btn btn-neutral float-right" title="6. Solving Common UM Problems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="running.html" class="btn btn-neutral float-left" title="4. Running a UM suite on ARCHER2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="solving-problems.html" class="btn btn-neutral float-right" title="5. Solving Common UM Problems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="running.html" class="btn btn-neutral float-left" title="3. Running a UM suite on ARCHER2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
