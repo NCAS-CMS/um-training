@@ -10,7 +10,7 @@ View data
 ^^^^^^^^^
 On ARCHER2 go to the output directory of the global job that you ran previously (the one copied from ``u-cc654``). Run ``xconv`` on the file ending with, for example, ``da19880901_04``. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.
 
-In the same directory is a file whose name ends in ``.astart``; run a second instance of ``xconv`` on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.
+In the directory above is a file whose name ends in ``.astart``; run a second instance of ``xconv`` on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.
 
 The ``xconv`` window lists the fields in the file, the dimensions of those fields (upper left panel), the coordinates of the grid underlying the data, the time(s) of the data (upper right panel), some information about the type of file (lower left panel), and general data about the field (lower right panel.)
 

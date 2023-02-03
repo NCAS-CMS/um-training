@@ -5,7 +5,7 @@ Getting set up (7th-9th February, Leeds)
    You **MUST** have PUMA, ARCHER2 and MOSRS accounts setup before starting this section.
    
 .. note::
-   These instructions are for use on the UM Training Course held on 7-9th February 2023.  If you are on self-study please see the instructions in the nex Chapter.
+   These instructions are for use on the UM Training Course held on 7-9th February 2023.  If you are using them for self-study please contact NCAS-CMS for instructions.
    
 Setup connection to PUMA & ARCHER2
 ----------------------------------
