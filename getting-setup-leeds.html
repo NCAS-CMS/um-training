@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>1. Getting Set Up (Self-Study Instructions) &mdash; NCAS Unified Model Introduction</title>
+  <title>Getting set up (7th-9th February, Leeds) &mdash; NCAS Unified Model Introduction</title>
   
 
   
@@ -37,9 +37,7 @@
 
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. Working with Suites" href="working-with-suites.html" />
-    <link rel="prev" title="NCAS Unified Model Introduction Course" href="index.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,23 +83,8 @@
             
             
               <p class="caption"><span class="caption-text">Practicals</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Getting Set Up (Self-Study Instructions)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#setup-connection-to-puma-archer2">1.1. Setup connection to PUMA &amp; ARCHER2</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ssh-key-files">SSH key files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#connecting-via-a-terminal-gnu-linux-macos">Connecting via a Terminal (GNU/Linux &amp; macOS)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#connecting-via-mobaxterm">Connecting via MobaXTerm</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#set-up-your-archer2-environment">1.2. Set up your ARCHER2 environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#set-up-your-puma-environment">1.3. Set up your PUMA environment</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#configure-profile">Configure <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#configure-access-to-mosrs">Configure access to MOSRS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#configure-connection-to-archer2">Configure connection to ARCHER2</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-setup-selfstudy.html">1. Getting Set Up (Self-Study Instructions)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">2. Working with Suites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running.html">3. Running a UM suite on ARCHER2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">4. FCM tutorial</a></li>
@@ -160,13 +143,13 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">1. </span>Getting Set Up (Self-Study Instructions)</li>
+      <li>Getting set up (7th-9th February, Leeds)</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/getting-setup-selfstudy.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/getting-setup-leeds.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -179,26 +162,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="getting-set-up-self-study-instructions">
-<h1><span class="section-number">1. </span>Getting Set Up (Self-Study Instructions)<a class="headerlink" href="#getting-set-up-self-study-instructions" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="getting-set-up-7th-9th-february-leeds">
+<h1>Getting set up (7th-9th February, Leeds)<a class="headerlink" href="#getting-set-up-7th-9th-february-leeds" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>You <strong>MUST</strong> have PUMA, ARCHER2 and MOSRS accounts setup before starting this section.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These instructions are for use on the UM Training Course held on 7-9th February 2023.  If you are using them for self-study please contact NCAS-CMS for instructions.</p>
+</div>
 <div class="section" id="setup-connection-to-puma-archer2">
-<h2><span class="section-number">1.1. </span>Setup connection to PUMA &amp; ARCHER2<a class="headerlink" href="#setup-connection-to-puma-archer2" title="Permalink to this headline">¶</a></h2>
-<p>To use the UM Introduction Tutorials you will first need to ensure you can connect from your local desktop to a both PUMA &amp; ARCHER2.  There a multiple ways in which you can do this depending on your desktop platform:</p>
-<ul class="simple">
-<li><p>via <a class="reference internal" href="#terminal">Terminal</a> on GNU/Linux &amp; macOS</p></li>
-<li><p>via <a class="reference internal" href="#mobaxterm">MobaXTerm</a> on Windows</p></li>
-</ul>
+<h2>Setup connection to PUMA &amp; ARCHER2<a class="headerlink" href="#setup-connection-to-puma-archer2" title="Permalink to this headline">¶</a></h2>
+<p>To use the UM Introduction Tutorials you will first need to ensure you can connect from the local desktop to both PUMA &amp; ARCHER2.</p>
 <div class="section" id="ssh-key-files">
 <h3>SSH key files<a class="headerlink" href="#ssh-key-files" title="Permalink to this headline">¶</a></h3>
-<p>Before you try and connect to PUMA or ARCHER2, you need to make sure that you have the ssh-keys for both platforms available on your computer.</p>
+<p>Before you try and connect to PUMA or ARCHER2, you need to make sure that you have the ssh-keys for both platforms available on the local desktop.</p>
+<p>Hopefully you remembered to bring your ssh-keys with you on a USB stick. Please talk to a course tutor if you have forgotten them.</p>
+<p>Copy your ssh-keys from the USB stick to the <code class="docutils literal notranslate"><span class="pre">~/.ssh</span></code> directory.</p>
 </div>
 <div class="section" id="connecting-via-a-terminal-gnu-linux-macos">
-<span id="terminal"></span><h3>Connecting via a Terminal (GNU/Linux &amp; macOS)<a class="headerlink" href="#connecting-via-a-terminal-gnu-linux-macos" title="Permalink to this headline">¶</a></h3>
-<p>It is possible to connect via a terminal with an X11 connection (<a class="reference external" href="https://www.xquartz.org/">XQuartz</a> is also required when using macOS)</p>
+<h3>Connecting via a Terminal (GNU/Linux &amp; macOS)<a class="headerlink" href="#connecting-via-a-terminal-gnu-linux-macos" title="Permalink to this headline">¶</a></h3>
+<p>Connect via a terminal with an X11 connection (<a class="reference external" href="https://www.xquartz.org/">XQuartz</a> is also required when using macOS)</p>
 <p>Login to PUMA:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_puma</span> <span class="o">&lt;</span><span class="n">puma</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;@</span><span class="mf">192.171</span><span class="o">.</span><span class="mf">169.138</span>
 </pre></div>
@@ -220,7 +205,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span><span class="nd">@login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 </pre></div>
 </div>
-<p>It is also possible to define a <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file entry for each with the necessary information, if desired. For example:</p>
+<p>Again you could define a <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file entry for each with the necessary information, if desired. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 <span class="n">User</span> <span class="o">&lt;</span><span class="n">archer2_username</span><span class="o">&gt;</span>
 <span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer</span>
@@ -233,29 +218,9 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="connecting-via-mobaxterm">
-<span id="mobaxterm"></span><h3>Connecting via MobaXTerm<a class="headerlink" href="#connecting-via-mobaxterm" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>From Chrome, go to page: <a class="reference external" href="https://mobaxterm.mobatek.net/download.html">https://mobaxterm.mobatek.net/download.html</a></p></li>
-<li><p>Under “Home Edition” select “Download now”</p></li>
-<li><div class="line-block">
-<div class="line">On next page select <strong>“MobaXterm Home Edition v21.4 (Portable edition)”</strong>.</div>
-<div class="line">This should download the package.</div>
-</div>
-</li>
-<li><p>Click the download icon in the bottom left hand corner.</p></li>
-<li><div class="line-block">
-<div class="line">Double-click on the <strong>MobaXterm_Personal_21.4</strong> application file, and select “Extract all”.</div>
-<div class="line">A new directory window will open up.</div>
-</div>
-</li>
-<li><p>Double-click <strong>MobaXterm_Personal_21.4</strong> to launch the application.</p></li>
-</ul>
-<p>Next time, navigate to “Downloads” to open the application.</p>
-</div>
 </div>
 <div class="section" id="set-up-your-archer2-environment">
-<h2><span class="section-number">1.2. </span>Set up your ARCHER2 environment<a class="headerlink" href="#set-up-your-archer2-environment" title="Permalink to this headline">¶</a></h2>
+<h2>Set up your ARCHER2 environment<a class="headerlink" href="#set-up-your-archer2-environment" title="Permalink to this headline">¶</a></h2>
 <p>Login to ARCHER2 from your local desktop, copy the following profile to your home directory.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ cp /work/y07/shared/umshared/um-training/rose-profile ~/.profile
 </pre></div>
@@ -267,7 +232,7 @@
 </div>
 </div>
 <div class="section" id="set-up-your-puma-environment">
-<h2><span class="section-number">1.3. </span>Set up your PUMA environment<a class="headerlink" href="#set-up-your-puma-environment" title="Permalink to this headline">¶</a></h2>
+<h2>Set up your PUMA environment<a class="headerlink" href="#set-up-your-puma-environment" title="Permalink to this headline">¶</a></h2>
 <p>Login to PUMA from your local desktop.</p>
 <div class="section" id="configure-profile">
 <h3>Configure <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code><a class="headerlink" href="#configure-profile" title="Permalink to this headline">¶</a></h3>
@@ -284,7 +249,7 @@ puma$ cp ~um/um-training/setup/.profile .
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ~um/um-training/mosrs-setup
 </pre></div>
 </div>
-<p>Log out of PUMA and back in again (you will get a warning about not being able to find <code class="docutils literal notranslate"><span class="pre">~/.ssh/ssh-setup</span></code> this can be ignored and will be resolved in the next step). You should be prompted for your Met Office Science Repository Service password. A new window should then pop up (it may be hidden behind other windows) for <code class="docutils literal notranslate"><span class="pre">Rosie</span></code> asking for <strong>Username for ‘u’ - ‘https://code.metoffice.gov.uk/rosie/u’</strong> . Enter your MOSRS username again.</p>
+<p>Log out of PUMA and back in again (you will get a warning about not being able to find <code class="docutils literal notranslate"><span class="pre">~/.ssh/ssh-setup</span></code> this can be ignored and will be resolved in the next step). You should first be prompted for your <strong>Met Office Science Repository Service password</strong>.  Enter your password. Then you will be prompted for <strong>Username for ‘u’ - ‘https://code.metoffice.gov.uk/rosie/u’</strong> . Enter your MOSRS username.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The cached password is configured to expire after 12 hours. Simply run the command <code class="docutils literal notranslate"><span class="pre">mosrs-cache-password</span></code> to re-cache it if this happens. Also if you know you won’t need access to the repositories during a login session then just press return when asked for your MOSRS password.</p>
@@ -292,22 +257,9 @@ puma$ cp ~um/um-training/setup/.profile .
 </div>
 <div class="section" id="configure-connection-to-archer2">
 <h3>Configure connection to ARCHER2<a class="headerlink" href="#configure-connection-to-archer2" title="Permalink to this headline">¶</a></h3>
-<p>Due to ARCHER2 security and the UM workflow it is necessary to generate a special ssh-key that allows submission of UM suite from PUMA.</p>
-<p><strong>i. Generate UM workflow ssh-key</strong></p>
-<p>Run the following command to generate your <code class="docutils literal notranslate"><span class="pre">id_rsa_archerum</span></code> ssh key:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh-keygen -t rsa -b 4096 -C &quot;ARCHER2 UM Workflow&quot; -f ~/.ssh/id_rsa_archerum
-</pre></div>
-</div>
-<p>When prompted to <strong>Enter passphrase</strong>, this should be a fairly complicated and unguessable passphrase. You can use spaces in the passphrase if it helps you to remember it more readily. It is recommended that you don’t use your password in case it is hacked.</p>
-<p>Your <code class="docutils literal notranslate"><span class="pre">id_rsa_archerum</span></code> key will be automatically detected and sent to ARCHER2 to be installed.  This may take up to 48 hours, excluding weekends, to become activated and you will receive an email confirmation.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<ul class="simple">
-<li><p><strong>DO NOT</strong> use an empty passphrase.  This presents a security issue.</p></li>
-<li><p><strong>DO NOT</strong> regenerate your <code class="docutils literal notranslate"><span class="pre">id_rsa_archerum</span></code> key once you have a working one in place, unless absolutely necessary.</p></li>
-</ul>
-</div>
-<p><strong>ii. Update ssh config file</strong></p>
+<p>Due to ARCHER2 security and the UM workflow it is necessary to use a special ssh-key that allows submission of UM suite from PUMA.
+Prior to the course you generated a UM workflow ssh-key called <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_rsa_archerum</span></code>.</p>
+<p><strong>i. Update ssh config file</strong></p>
 <p>In your PUMA <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file add the following section:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 <span class="n">User</span> <span class="o">&lt;</span><span class="n">archer2_username</span><span class="o">&gt;</span>
@@ -317,7 +269,7 @@ puma$ cp ~um/um-training/setup/.profile .
 </pre></div>
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">&lt;archer2_username&gt;</span></code> should be replaced with your ARCHER2 username. If you don’t have a <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file create one.</p>
-<p id="ssh-setup"><strong>iii. Set up ssh-agent</strong></p>
+<p id="ssh-setup"><strong>ii. Set up ssh-agent</strong></p>
 <p>Setting up an <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> allows caching of your <code class="docutils literal notranslate"><span class="pre">id_rsa_archerum</span></code> key passphrase for a period of time.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cp ~um/um-training/setup/ssh-setup ~/.ssh
 </pre></div>
@@ -330,11 +282,7 @@ Enter passphrase for /home/&lt;puma-username&gt;/.ssh/id_rsa:
 </pre></div>
 </div>
 <p>Enter your passphrase when prompted.  The <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> will continue to run even when you log out of PUMA, however, it may stop from time to time, for example if PUMA is rebooted.  For instructions on what to do in this situation see <a class="reference internal" href="ssh-tasks.html#restarting-agent"><span class="std std-ref">Restarting your ssh agent</span></a> in the Appendix.</p>
-<p><strong>iv. Verify the setup is correct</strong></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Only proceed to this step once your <code class="docutils literal notranslate"><span class="pre">id_rsa_archerum</span></code> key has been installed on ARCHER2.</p>
-</div>
+<p><strong>iii. Verify the setup is correct</strong></p>
 <p>Log in to ARCHER2 with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh login.archer2.ac.uk
 </pre></div>
@@ -348,7 +296,7 @@ Connection to login.archer2.ac.uk closed.
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>It is not possible to start an interactive login session on ARCHER2 from PUMA.  For an interactive session you need to login from your local desktop or via your host institution.</p>
+<p>It is not possible to start an interactive login session on ARCHER2 from PUMA.  For an interactive session you need to login from your local desktop.</p>
 </div>
 <p>You are now ready to try running a UM suite!</p>
 </div>
@@ -360,10 +308,6 @@ Connection to login.archer2.ac.uk closed.
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="working-with-suites.html" class="btn btn-neutral float-right" title="2. Working with Suites" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="index.html" class="btn btn-neutral float-left" title="NCAS Unified Model Introduction Course" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 
