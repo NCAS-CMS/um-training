@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8" /> 
+    <title>ApplicantWelcomeDetails</title>
+
+    <style>
+
+      @font-face {
+      font-family: "Consolas";
+      src: url("{{staticDir}}consolasFont/CONSOLA.TTF") format("truetype");-->
+      }
+      
+      .content {
+      font-style: normal;
+      font-size: 18px;
+      margin-left: 2.5em;
+      margin-right: 2.5em;
+      }
+      
+      .centerUnderline {
+      text-align: center !important;
+      text-decoration: underline;
+      font-size: 200%;
+      }
+
+      .underline {
+      text-decoration: underline;
+      font-size: 110%;
+      }
+
+      .center {
+      text-align: center;
+      font-size: 130%;
+      }
+
+      .indentBold {
+      margin-left: 40px;
+      font-weight: bold;
+      }
+
+      .indentBoldConsolas {
+      font-family: "Consolas";
+      margin-left: 40px;
+      font-weight: bold;
+      }
+
+      .bold {
+      font-weight: bold;
+      font-size: 120%;
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <div class="content">
+      <img src="{{staticDir}}NCAS_swirl.gif" style="float: left; width:140px; height:140px;"/>
+      <p class="centerUnderline">NCAS Unified Model Introduction</p>
+      <p class="center">{{ courseLocation }}</p>
+      <p class="center">{{ courseDates }}</p>
+      <br></br>
+      <p class="bold">{{ attendeeName }}</p>
+      <p>
+	Welcome to the NCAS Unified Model Introduction course. This document contains information about the computer accounts you will use during the training course. Please keep these details secure and do not share them with others, as they are unique to you.
+      </p>
+      <p class="underline">University of Reading</p>
+      <p>Log in to the computers using the University of Reading IT guest account provided, or your University of Reading staff or student account if you have one. Information about your guest account, including the password, is attached. Please take a moment to look through this document.</p>
+<!--      <p class="indentBold">UoR guest username:&nbsp&nbsp&nbsp&nbsp&nbsp{{ uorUsername }}</p>-->
+      <span class="indentBold">UoR guest username:&nbsp&nbsp&nbsp&nbsp</span>
+      <span class="indentBoldConsolas">{{ uorUsername }}</span>
+      <p>In the practical sessions you will be given instructions on accessing the NCAS UM server (PUMA), the Met Office Science Repository Service (MOSRS), and the ARCHER HPC system.</p>
+      <p class="underline">PUMA</p>
+      <p>For PUMA, you should use your own account. Note that you have the same PUMA username to ssh into the machine and to access the CMS helpdesk system, however these use a different password, which you will have received by email. If you are unsure of your PUMA ssh password, please ask for advice.</p>
+<!--      <p class="indentBold">PUMA username:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ pumaUsername }}</p>-->
+      <span class="indentBold">PUMA username:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+      <span class="indentBoldConsolas">{{ pumaUsername }}</span>
+      <p class="underline">MOSRS</p>
+      <p>You will also use your own MOSRS account. Again if you are unsure of your password, ask for help.</p>
+<!--      <p class="indentBold">MOSRS account:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ mosrsUsername }}</p>-->
+      <span class="indentBold">MOSRS account:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+      <span class="indentBoldConsolas">{{ mosrsUsername }}</span>
+      <p class="underline">ARCHER</p>
+      <p>For ARCHER you should use the training account that has been assigned to you, even if you have your own account. Details of where to find the password for this account will be provided in the practical session.</p>
+<!--      <p class="indentBold">ARCHER account:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ archerUsername }}</p>-->
+      <span class="indentBold">ARCHER account:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+      <span class="indentBoldConsolas">{{ archerUsername }}</span>
+
+    </div>
+
+  </body>
+
+</html>
