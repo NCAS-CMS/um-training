@@ -143,6 +143,10 @@ This means you can now access the code and roses suites stored in the Met Office
 
 .. note:: The cached password is configured to expire after 12 hours. Simply run the command ``mosrs-cache-password`` to re-cache it if this happens. Also if you know you won't need access to the repositories during a login session then just press return when asked for your MOSRS password.
 
+Finally, change the permission on your PUMA2 ``/home`` space: :: 
+
+   chmod -R g+rX /home/n02/n02/<your-username>
+
 .. _ssh-setup:
 
 Set up your ssh-agent
