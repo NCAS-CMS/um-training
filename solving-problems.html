@@ -141,11 +141,11 @@
 <p>In practice, you will need to fix the problem with the code conflict as you did in the FCM tutorial section.  To proceed in this case, navigate to <span class="guilabel">fcm_make_um –&gt; sources</span> and remove the branch called <code class="docutils literal notranslate"><span class="pre">vn11.7_training_merge_error</span></code> by clicking on it and then clicking the <span class="guilabel">-</span> sign.</p>
 <p><span class="guilabel">Save</span> the suite.</p>
 <p>Last time we stopped the suite and then re-ran it, however, it is possible to reload the suite definition and then re-trigger the failed task without first stopping the running suite. To do this change to the suite directory:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cd ~/roses/&lt;suitename&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cd ~/roses/&lt;suitename&gt;
 </pre></div>
 </div>
 <p>We then reload the suite definition by running the following Rose command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ rose suite-run --reload
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ rose suite-run --reload
 </pre></div>
 </div>
 <p>Wait for this command to complete before continuing. Finally in the Cylc GUI <em>right-click</em> on the failed task and select <span class="guilabel">Trigger (run now)</span>.  The <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task will then submit again.</p>
@@ -183,7 +183,7 @@
 <p>Point your suite to the correct start dump.  Fixing this problem isn’t quite as easy as it sounds.  A search in the Rose edit GUI for the dump file name <code class="docutils literal notranslate"><span class="pre">ab642a.da19880901_00_err</span></code> will not locate anything.  For this suite it is not possible to fix this issue through the GUI, for some other suites you can edit the initial dump location in the panel <span class="guilabel">um –&gt; namelist –&gt; Reconfiguration and Ancillary Control –&gt; General technical options</span>.</p>
 <p>Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.</p>
 <p>In your suite directory on PUMA (<code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suitename&gt;</span></code>) use <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-R</span></code> to search for the start dump name <code class="docutils literal notranslate"><span class="pre">ab642a.da19880901_00_err</span></code> in the suite files.  You should see 2 occurrences listed</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma$ grep -r ab642a.da19880901_00_err *
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma2$ grep -r ab642a.da19880901_00_err *
 site/archer2.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901_00_err&#39; %}
 site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901_00_err&#39; %}
 </pre></div>

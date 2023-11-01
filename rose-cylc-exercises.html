@@ -104,11 +104,11 @@
 <h2><span class="section-number">8.1. </span>Differencing suites<a class="headerlink" href="#differencing-suites" title="Link to this heading"></a></h2>
 <p>Currently there is no Rose tool to difference two suites. Since a suite consists of text files it is simply a matter of making sure all the Rose configuration files are in the common format by running <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">config-dump</span></code> on each suite and then running <code class="docutils literal notranslate"><span class="pre">diff</span></code>.</p>
 <p>We will difference your copy of the GA7.0 suite with the original one:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cd ~/roses
-puma$ rosie checkout u-cc654
-puma$ rose config-dump -C u-cc654
-puma$ rose config-dump -C &lt;your-suitename&gt;
-puma$ diff -r u-cc654 &lt;your-suitename&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cd ~/roses
+puma2$ rosie checkout u-cc654
+puma2$ rose config-dump -C u-cc654
+puma2$ rose config-dump -C &lt;your-suitename&gt;
+puma2$ diff -r u-cc654 &lt;your-suitename&gt;
 </pre></div>
 </div>
 <ul class="simple">
@@ -159,7 +159,7 @@ puma$ diff -r u-cc654 &lt;your-suitename&gt;
 <h2><span class="section-number">8.3. </span>Starting a suite in “held” mode<a class="headerlink" href="#starting-a-suite-in-held-mode" title="Link to this heading"></a></h2>
 <p>This allows you to trigger the running of tasks manually.</p>
 <p>To start a suite in held mode add <code class="docutils literal notranslate"><span class="pre">--</span> <span class="pre">--hold</span></code> to the end of the <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">suite-run</span></code> command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ rose suite-run -- --hold
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ rose suite-run -- --hold
 </pre></div>
 </div>
 <p>The first <code class="docutils literal notranslate"><span class="pre">--</span></code> tells Rose that all subsequent options should be passed on to Cylc.  This is why the hold option should be added to the end of the command, after any Rose options.  Once the suite has started all tasks will be in a held state.  It is then possible to select which tasks are run by right clicking on a task in the Cylc GUI and manually triggering it or resetting its state.</p>
@@ -170,13 +170,13 @@ puma$ diff -r u-cc654 &lt;your-suitename&gt;
 <p>Suites that are currently running can be detected with command line or GUI tools:</p>
 <p>Submit 2 of your suites. It doesn’t matter what tasks they are running for this exercise; compilation, recon or model run.</p>
 <p>Now try running the command <code class="docutils literal notranslate"><span class="pre">cylc</span> <span class="pre">scan</span></code>. This lists your currently running suites.  For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cylc scan
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cylc scan
 u-af140 ros@localhost:7770
 u-ag761 ros@localhost:7776
 </pre></div>
 </div>
 <p>There is also a multi-suite monitor GUI, which allows you to monitor the states of all suites you have running in one window.  Try running the command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cylc gscan &amp;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cylc gscan &amp;
 </pre></div>
 </div>
 <p>Double clicking on a suite in <code class="docutils literal notranslate"><span class="pre">gscan</span></code> GUI opens the Cylc GUI window, which you will be very familiar with by now. For each suite open the Cylc GUI window and stop the suite by going to <span class="guilabel">Control &gt; Stop Suite</span>, selecting  <span class="guilabel">Stop after killing active tasks</span> and clicking <span class="guilabel">Ok</span>.</p>
@@ -196,15 +196,15 @@ u-ag761 ros@localhost:7776
 <section id="create-the-rose-application-directory">
 <h3>Create the Rose application directory<a class="headerlink" href="#create-the-rose-application-directory" title="Link to this heading"></a></h3>
 <p>Make sure the Rose edit GUI for your suite is closed. <code class="docutils literal notranslate"><span class="pre">cd</span></code> into the suite <code class="docutils literal notranslate"><span class="pre">app/</span></code> directory and create a new directory called <code class="docutils literal notranslate"><span class="pre">new_app</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cd ~/roses/&lt;SUITEID&gt;/app
-puma$ mkdir new_app
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cd ~/roses/&lt;SUITEID&gt;/app
+puma2$ mkdir new_app
 </pre></div>
 </div>
 </section>
 <section id="create-the-rose-app-configuration-file">
 <h3>Create the Rose app configuration file<a class="headerlink" href="#create-the-rose-app-configuration-file" title="Link to this heading"></a></h3>
 <p>Change into the <code class="docutils literal notranslate"><span class="pre">new_app</span></code> directory and create a blank app configuration file called <code class="docutils literal notranslate"><span class="pre">rose-app.conf</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ touch rose-app.conf
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ touch rose-app.conf
 </pre></div>
 </div>
 <p>Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on <span class="guilabel">new_app</span> to load the app and then the little triangle to the left of <span class="guilabel">new_app</span> to expand its contents.</p>
@@ -270,7 +270,7 @@ puma$ mkdir new_app
 </pre></div>
 </div>
 <p>This should produce output similar to:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma$ rose app-run
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma2$ rose app-run
 [INFO] export PATH=/home/ros/roses/u-cc654/app/new_app/bin:/home/fcm/rose-2016.11.1/bin:/usr/local/python/bin:
 ...
 [INFO] export PLANET=Jupiter
@@ -284,7 +284,7 @@ Hello, Jupiter!
 <section id="rose-metadata">
 <h3>Rose Metadata<a class="headerlink" href="#rose-metadata" title="Link to this heading"></a></h3>
 <p>Metadata can be used to provide information about settings in Rose configurations.  It is used for documenting settings, performing automatic checking and for formatting the rose edit GUI. Metadata can be used to ensure that configurations are valid before they are run.</p>
-<p>Metadata for many standard applications, such as <code class="docutils literal notranslate"><span class="pre">um-atmos</span></code>, <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> are all stored centrally on PUMA in <code class="docutils literal notranslate"><span class="pre">~fcm/rose-meta</span></code>.  Have a look at this directory.</p>
+<p>Metadata for many standard applications, such as <code class="docutils literal notranslate"><span class="pre">um-atmos</span></code>, <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> are all stored centrally on PUMA2 in <code class="docutils literal notranslate"><span class="pre">~fcm/rose-meta</span></code>.  Have a look at this directory.</p>
 <p>For our example there are currently no restrictions on the variable <code class="docutils literal notranslate"><span class="pre">PLANET</span></code>.  We will now add some metadata to help the user understand what the variable <code class="docutils literal notranslate"><span class="pre">PLANET</span></code> is and what values it is limited to.</p>
 <p>Rose provides some tools to quickly guess at the metadata where there is none.  Create a directory <code class="docutils literal notranslate"><span class="pre">meta/</span></code> under <code class="docutils literal notranslate"><span class="pre">new_app/</span></code> .  Then execute the command,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rose</span> <span class="n">metadata</span><span class="o">-</span><span class="n">gen</span>

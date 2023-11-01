@@ -175,7 +175,7 @@ Let's now extend this run out to 2 days.  Change the ``Total run length`` to ``2
 
 Having already run the first day we just want the suite to pick up where it left off and run the remaining day.  To do this we *restart* the suite, by typing: ::
 
-  puma$ rose suite-run --restart
+  puma2$ rose suite-run --restart
 
 The cylc GUI will pop up and you should see the run resuming from where it left off (i.e. from cycle point ``19880902T0000Z``).
 

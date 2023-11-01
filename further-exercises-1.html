@@ -257,7 +257,7 @@
 <h2><span class="section-number">6.7. </span>Restarting a suite<a class="headerlink" href="#restarting-a-suite" title="Link to this heading"></a></h2>
 <p>Let’s now extend this run out to 2 days.  Change the <code class="docutils literal notranslate"><span class="pre">Total</span> <span class="pre">run</span> <span class="pre">length</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span></code> days and <span class="guilabel">Save</span> the suite.</p>
 <p>Having already run the first day we just want the suite to pick up where it left off and run the remaining day.  To do this we <em>restart</em> the suite, by typing:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ rose suite-run --restart
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ rose suite-run --restart
 </pre></div>
 </div>
 <p>The cylc GUI will pop up and you should see the run resuming from where it left off (i.e. from cycle point <code class="docutils literal notranslate"><span class="pre">19880902T0000Z</span></code>).</p>

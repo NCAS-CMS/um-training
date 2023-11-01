@@ -102,7 +102,7 @@
 <h2><span class="section-number">2.1. </span>Suite Discovery and Management: rosie go<a class="headerlink" href="#suite-discovery-and-management-rosie-go" title="Link to this heading"></a></h2>
 <p><strong>Rosie go</strong> is the suite manager GUI. It acts as a hub for all your suite work. From <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> it is possible to search for suites, create, checkout, delete, edit, run suites and more.  We will take a look at the main features here.</p>
 <p>Launch <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> by typing:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ rosie go
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ rosie go
 </pre></div>
 </div>
 <section id="searching-for-suites">
@@ -194,8 +194,8 @@
 <p>Some larger science sections have been been divided into subsections; take a look at <span class="guilabel">Section 05 - Convection</span> for an example of this. To open a section in a new tab click with the middle mouse button, expand the section by clicking the page triangles. Rose edit has a search box which can be used to search item names. Try searching for the variable <code class="docutils literal notranslate"><span class="pre">astart</span></code> where the input dump is specified, you will be taken directly to the <span class="guilabel">Dumping and Meaning</span> panel.</p>
 <p>Trigger ignored settings are hidden by default and only appear to the user when the appropriate options are selected. Open the <span class="guilabel">Gravity Wave Drag</span> panel, if you change <code class="docutils literal notranslate"><span class="pre">i_gwd_vn</span></code> from <code class="docutils literal notranslate"><span class="pre">5</span></code> to <code class="docutils literal notranslate"><span class="pre">4</span></code> the options available change. Click the <span class="guilabel">save</span> button to apply these changes to your app. Let’s take a look at what effect this has had to the <code class="docutils literal notranslate"><span class="pre">rose-app.conf</span></code> file, run <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">diff</span></code> in the suite directory.</p>
 <blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cd ~/roses/u-ag137
-puma$ fcm diff -g
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cd ~/roses/u-ag137
+puma2$ fcm diff -g
 </pre></div>
 </div>
 </div></blockquote>

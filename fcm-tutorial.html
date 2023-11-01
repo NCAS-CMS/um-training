@@ -169,7 +169,7 @@
 <p>The default text editor for entering commit messages is <code class="docutils literal notranslate"><span class="pre">vi</span></code>.  If you would prefer to use a different editor; for example <code class="docutils literal notranslate"><span class="pre">emacs</span></code> or <code class="docutils literal notranslate"><span class="pre">vim</span></code>, please see the section on “Setting up your default text editor”.</p>
 <section id="creating-a-branch">
 <h3>Creating a branch<a class="headerlink" href="#creating-a-branch" title="Link to this heading"></a></h3>
-<p>Firstly create a new directory (e.g. <code class="docutils literal notranslate"><span class="pre">um/branches</span></code>) in your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory on PUMA which will be your work area and <code class="docutils literal notranslate"><span class="pre">cd</span></code> to it.</p>
+<p>Firstly create a new directory (e.g. <code class="docutils literal notranslate"><span class="pre">um/branches</span></code>) in your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory on PUMA2 which will be your work area and <code class="docutils literal notranslate"><span class="pre">cd</span></code> to it.</p>
 <p>Create a new branch by running the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcm</span> <span class="n">branch</span><span class="o">-</span><span class="n">create</span> <span class="o">-</span><span class="n">k</span> <span class="o">&lt;</span><span class="n">ticket</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">branch_name</span><span class="o">&gt;</span> <span class="n">fcm</span><span class="p">:</span><span class="n">um</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="n">tr</span><span class="nd">@vn13</span><span class="mf">.0</span>
 </pre></div>
@@ -194,7 +194,7 @@
 </div>
 <p>Take a note of the revision number the branch was created at, and the branch name, <code class="docutils literal notranslate"><span class="pre">vn13.0_[branch_name]</span></code>.</p>
 <p>You can see your branch from within the MOSRS Trac (<a class="reference external" href="https://code.metoffice.gov.uk/trac/um">https://code.metoffice.gov.uk/trac/um</a>): Click on <span class="guilabel">Browse Source</span> on the Trac menu bar and then navigate through <span class="guilabel">main –&gt; branches –&gt; dev–&gt; [userid]</span></p>
-<p>Your branch will also appear in the UM repository mirror held on PUMA (within 5 minutes)</p>
+<p>Your branch will also appear in the UM repository mirror held on PUMA2 (within 5 minutes)</p>
 </section>
 <section id="making-changes-to-a-working-copy">
 <h3>Making changes to a working copy<a class="headerlink" href="#making-changes-to-a-working-copy" title="Link to this heading"></a></h3>
@@ -234,7 +234,7 @@
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <ul class="simple">
-<li><p>An example file is available on PUMA: <code class="docutils literal notranslate"><span class="pre">~um/um-training/um_training_mod.F90</span></code>.</p></li>
+<li><p>An example file is available on PUMA2: <code class="docutils literal notranslate"><span class="pre">~um/um-training/um_training_mod.F90</span></code>.</p></li>
 <li><p>The routine <code class="docutils literal notranslate"><span class="pre">umPrint</span></code> should be used for writing out messages rather than standard FORTRAN <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statements.</p></li>
 </ul>
 </div>
@@ -275,7 +275,7 @@
 </pre></div>
 </div>
 <p>and you should see a list of files that have been changed.  If you’ve followed the example scenario above you should see output similar to this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma$ fcm status
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma2$ fcm status
 D       fcm-make/ncas-xc30-ifort/um-createbc-safe.cfg
 M       src/control/top_level/um_shell.F90
 A       src/control/top_level/um_training_mod.F90
@@ -295,7 +295,7 @@ A       src/control/top_level/um_training_mod.F90
 <section id="committing-changes">
 <h3>Committing changes<a class="headerlink" href="#committing-changes" title="Link to this heading"></a></h3>
 <p>The change in your working copy remains local until you commit it to the repository where it becomes permanent.  If you are planning to make a large number of changes, you are encouraged to commit regularly to your branch at appropriate intervals.  Make sure you are in the top level directory of the working copy and then type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ fcm commit
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ fcm commit
 </pre></div>
 </div>
 <p>A text editor will appear to allow you to edit the commit message.  You must add a commit message to describe your change above the line that says <code class="docutils literal notranslate"><span class="pre">--Add</span> <span class="pre">your</span> <span class="pre">commit</span> <span class="pre">message</span> <span class="pre">ABOVE</span> <span class="pre">-</span> <span class="pre">do</span> <span class="pre">not</span> <span class="pre">alter</span> <span class="pre">this</span> <span class="pre">line</span> <span class="pre">or</span> <span class="pre">those</span> <span class="pre">below--</span></code>.  Your commit will fail if you do not enter a commit message.  Make sure you provide meaningful commit messages (if your change is intended for inclusion in the trunk you should reference your ticket number) as these will show up in the revision logs and can be a useful source of informtion.</p>
@@ -318,7 +318,7 @@ A       src/control/top_level/um_training_mod.F90
 </div>
 <p><span class="guilabel">Save</span> your change and exit the editor.  Answer <code class="docutils literal notranslate"><span class="pre">y</span></code> when you are prompted to confirm the commit.</p>
 <p>If you’ve followed the example scenario above you should see output similar to this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma$ fcm commit
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma2$ fcm commit
 [info] vi: starting commit message editor...
 Change summary:
 ---------------------------------------------------------------------------
@@ -352,11 +352,11 @@ At revision 113821.
 <h3>Getting information about your branch<a class="headerlink" href="#getting-information-about-your-branch" title="Link to this heading"></a></h3>
 <p>If you need to find out information about your (or another user’s) branches, you can use the <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">branch</span> <span class="pre">info</span></code> command.</p>
 <p>In the directory where you checked out the code, type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ fcm branch-info
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ fcm branch-info
 </pre></div>
 </div>
 <p>You should see information about your branch revision, when it was last changed and the parent it was created from:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma$ fcm branch-info
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma2$ fcm branch-info
 URL: https://code.metoffice.gov.uk/svn/um/main/branches/dev/rosalynhatcher/vn13.0_tutorial
 Repository Root: https://code.metoffice.gov.uk/svn/um
 Revision: 113821
@@ -382,12 +382,12 @@ Merges Avail Into Parent: 113821
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[FAIL] um/src/control/top_level/um_shell.F90: merge results in conflict
 [FAIL]     merge output: /home/ros/cylc-run/u-cc519-test/share/fcm_make/
 .fcm-make/extract/merge/um/src/control/top_level/um_shell.F90.diff
-[FAIL]     source from location  0: svn://pumanew/um.xm_svn/main/trunk/src/
+[FAIL]     source from location  0: svn://puma2.archer2.ac.uk/um.xm_svn/main/trunk/src/
 control/top_level/um_shell.F90@111272
-[FAIL]     source from location  1: svn://pumanew/um.xm_svn/main/branches/
+[FAIL]     source from location  1: svn://puma2.archer2.ac.uk/um.xm_svn/main/branches/
 dev/rosalynhatcher/vn13.0_training_um_shell1/src/control/top_level/
 um_shell.F90@113821
-[FAIL] !!! source from location  2: svn://pumanew/um.xm_svn/main/branches/
+[FAIL] !!! source from location  2: svn://puma2.archer2.ac.uk/um.xm_svn/main/branches/
 dev/rosalynhatcher/vn13.0_tutorial/src/control/top_level/
 um_shell.F90@113821
 </pre></div>

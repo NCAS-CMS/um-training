@@ -77,8 +77,6 @@ Looking at the queues on ARCHER2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 While you're waiting for the suite to run, let's log into ARCHER2 and learn how to look at the queues.
 
-.. tip:: Remember you will need to login to ARCHER2 from your local desktop NOT from PUMA.
-
 Run the following command: ::
 
   squeue -u <archer2-user-name>
@@ -108,7 +106,7 @@ Task output
 
 .. note:: To run Rose Bush on Monsoon run: ``firefox http://localhost/rose-bush``	  
 
-On PUMA, navigate to the cylc-run directory: ::
+On PUMA2, navigate to the cylc-run directory: ::
 
   cd ~/cylc-run/<suitename>
   ls 
@@ -131,9 +129,9 @@ Here ``NN`` is a symbolic link created by Rose pointing to the output of the mos
  
   The standard output and errors from the suite can be easily viewed using Rose Bush.
 
-  For suites submitted from PUMA; in a browser navigate to: http://puma.nerc.ac.uk/rose-bush
+  For suites submitted from PUMA2; in a browser navigate to: http://puma.nerc.ac.uk/rose-bush
   
-  Enter your PUMA userid and click :guilabel:`Suites List`.  You should then see a list of all the suites you have run.  Click on :guilabel:`tasks jobs list` for the suite you have just run. You can examine the output of each task using the links, as well as see whether the suite contains failed tasks, or is currently running.  For this suite you should see output files for 4 tasks: ``fcm_make`` (code extraction), ``fcm_make2`` (compilation), ``recon`` & ``atmos``. The ``job.out`` and ``job.err`` files are the first places you should look for information when tasks fail.
+  Enter your PUMA2 userid and click :guilabel:`Suites List`.  You should then see a list of all the suites you have run.  Click on :guilabel:`tasks jobs list` for the suite you have just run. You can examine the output of each task using the links, as well as see whether the suite contains failed tasks, or is currently running.  For this suite you should see output files for 4 tasks: ``fcm_make`` (code extraction), ``fcm_make2`` (compilation), ``recon`` & ``atmos``. The ``job.out`` and ``job.err`` files are the first places you should look for information when tasks fail.
 
 Compilation output
 ^^^^^^^^^^^^^^^^^^

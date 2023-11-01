@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting set up (7th-9th February, Leeds) &mdash; NCAS Unified Model Introduction</title>
+  <title>Getting Set Up (Self-Study Instructions) &mdash; NCAS Unified Model Introduction</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -69,7 +69,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Getting set up (7th-9th February, Leeds)</li>
+      <li class="breadcrumb-item active">Getting Set Up (Self-Study Instructions)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/getting-setup-leeds.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -79,59 +79,43 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="getting-set-up-7th-9th-february-leeds">
-<h1>Getting set up (7th-9th February, Leeds)<a class="headerlink" href="#getting-set-up-7th-9th-february-leeds" title="Link to this heading"></a></h1>
+  <section id="getting-set-up-self-study-instructions">
+<h1>Getting Set Up (Self-Study Instructions)<a class="headerlink" href="#getting-set-up-self-study-instructions" title="Link to this heading"></a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You <strong>MUST</strong> have PUMA, ARCHER2 and MOSRS accounts setup before starting this section.</p>
+<p>You <strong>MUST</strong> have PUMA2, ARCHER2 and MOSRS accounts setup before starting this section.</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>These instructions are for use on the UM Training Course held on 7-9th February 2023.  If you are using them for self-study please contact NCAS-CMS for instructions.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>These instructions are for use on the UM Training Course held on 28th-30th November 2023. If you are using them for self-study please contact NCAS-CMS for instructions.</p>
 </div>
-<section id="setup-connection-to-puma-archer2">
-<h2>Setup connection to PUMA &amp; ARCHER2<a class="headerlink" href="#setup-connection-to-puma-archer2" title="Link to this heading"></a></h2>
-<p>To use the UM Introduction Tutorials you will first need to ensure you can connect from the local desktop to both PUMA &amp; ARCHER2.</p>
+<section id="set-up-your-archer2-connection">
+<span id="archer2"></span><h2>Set up your ARCHER2 connection<a class="headerlink" href="#set-up-your-archer2-connection" title="Link to this heading"></a></h2>
+<p>To use the UM Introduction Tutorials you will first need to ensure you can connect from your local desktop to ARCHER2.</p>
 <section id="ssh-key-files">
 <h3>SSH key files<a class="headerlink" href="#ssh-key-files" title="Link to this heading"></a></h3>
-<p>Before you try and connect to PUMA or ARCHER2, you need to make sure that you have the ssh-keys for both platforms available on the local desktop.</p>
-<p>Hopefully you remembered to bring your ssh-keys with you on a USB stick. Please talk to a course tutor if you have forgotten them.</p>
-<p>Copy your ssh-keys from the USB stick to the <code class="docutils literal notranslate"><span class="pre">~/.ssh</span></code> directory.</p>
+<p>Before you try and connect to ARCHER2, you need to make sure that you have the ssh-keys available on your computer.</p>
+<p>Hopefully you remembered to bring your ARCHER2 ssh-key with you on a USB stick.  Please talk to a course tutor if you have forgotten it.</p>
+<p>Copy your ssh-key from the USB stick to the <code class="docutils literal notranslate"><span class="pre">~/.ssh</span></code> directory.</p>
 </section>
 <section id="connecting-via-a-terminal-gnu-linux-macos">
-<h3>Connecting via a Terminal (GNU/Linux &amp; macOS)<a class="headerlink" href="#connecting-via-a-terminal-gnu-linux-macos" title="Link to this heading"></a></h3>
-<p>Connect via a terminal with an X11 connection (<a class="reference external" href="https://www.xquartz.org/">XQuartz</a> is also required when using macOS)</p>
-<p>Login to PUMA:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_puma</span> <span class="o">&lt;</span><span class="n">puma</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;@</span><span class="mf">192.171.169.138</span>
+<span id="terminal"></span><h3>Connecting via a Terminal (GNU/Linux &amp; macOS)<a class="headerlink" href="#connecting-via-a-terminal-gnu-linux-macos" title="Link to this heading"></a></h3>
+<p>Connecting via a terminal with an X11 connection (<a class="reference external" href="https://www.xquartz.org/">XQuartz</a> is also required when using macOS)</p>
+<p>Login to ARCHER2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer2</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span><span class="nd">@login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 </pre></div>
 </div>
-<p>We suggest adding an entry to the <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file so you don’t need to keep typing in the IP address. For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">puma</span>
-<span class="n">Hostname</span> <span class="mf">192.171.169.138</span>
-<span class="n">User</span> <span class="o">&lt;</span><span class="n">puma_username</span><span class="o">&gt;</span>
-<span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_puma</span>
-<span class="n">ForwardX11</span> <span class="n">yes</span>
-<span class="n">ForwardX11Trusted</span> <span class="n">yes</span>
-</pre></div>
-</div>
-<p>so that you can then connect using the command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">puma</span>
-</pre></div>
-</div>
-<p>In a new terminal window, login to ARCHER2:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">Y</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span><span class="nd">@login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
-</pre></div>
-</div>
-<p>Again you could define a <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file entry for each with the necessary information, if desired. For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
+<p>To simplify the login process, you can define a <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file entry containing the necessary information. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">archer2</span>
+<span class="n">Hostname</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
 <span class="n">User</span> <span class="o">&lt;</span><span class="n">archer2_username</span><span class="o">&gt;</span>
-<span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer</span>
+<span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer2</span>
 <span class="n">ForwardX11</span> <span class="n">yes</span>
 <span class="n">ForwardX11Trusted</span> <span class="n">yes</span>
 </pre></div>
 </div>
-<p>so that you could then just connect using the command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
+<p>so that you can connect using just the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">archer2</span>
 </pre></div>
 </div>
 </section>
@@ -148,75 +132,117 @@
 </pre></div>
 </div>
 </section>
-<section id="set-up-your-puma-environment">
-<h2>Set up your PUMA environment<a class="headerlink" href="#set-up-your-puma-environment" title="Link to this heading"></a></h2>
-<p>Login to PUMA from your local desktop.</p>
-<section id="configure-profile">
-<h3>Configure <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code><a class="headerlink" href="#configure-profile" title="Link to this heading"></a></h3>
-<p>If this is the first time you have used your PUMA account, you will need to create a <code class="docutils literal notranslate"><span class="pre">.profile</span></code>. Copy our standard one:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cd
-puma$ cp ~um/um-training/setup/.profile .
+<section id="set-up-your-puma2-connection">
+<span id="puma2"></span><h2>Set up your PUMA2 connection<a class="headerlink" href="#set-up-your-puma2-connection" title="Link to this heading"></a></h2>
+<p>PUMA2 is accessed from the ARCHER2 login nodes, and you will use the same username and password.</p>
+<p>From an ARCHER2 terminal type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ ssh -Y puma2
 </pre></div>
 </div>
-<p>(If you already have a <code class="docutils literal notranslate"><span class="pre">.profile</span></code>, make sure it includes the lines from the standard file.)</p>
+<p>and type your ARCHER2 password when prompted.</p>
+<p>You should now be logged into PUMA2. To go back to the ARCHER2 login nodes, type <code class="docutils literal notranslate"><span class="pre">exit</span></code>.</p>
+<section id="set-up-passwordless-access-to-puma2">
+<h3>Set up passwordless access to PUMA2<a class="headerlink" href="#set-up-passwordless-access-to-puma2" title="Link to this heading"></a></h3>
+<p>You can set up a passphrase-less ssh-key to allow you to connect to PUMA2 without typing a password or passphrase.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We would never normally advise using an ssh-key without a passphrase, but in this case it is safe to do so since we are already authenticated within the ARCHER2 system.</p>
+</div>
+<p>From the ARCHER2 login nodes, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ ssh-keygen -t rsa -f ~/.ssh/id_rsa_puma2
+</pre></div>
+</div>
+<p>At the prompt, press enter for an empty passphrase.</p>
+<p>Copy the key over to PUMA2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ ssh-copy-id -i ~/.ssh/id_rsa_puma2 puma2
+</pre></div>
+</div>
+<p>Type in your ARCHER2 password when prompted.</p>
+<p>Next, create a file called <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> (if it doesn’t already exist), and add the following lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">puma2</span>
+<span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_puma2</span>
+<span class="n">ForwardX11</span> <span class="n">yes</span>
+</pre></div>
+</div>
+<p>Test it works by typing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ ssh puma2
+</pre></div>
+</div>
+<p>You should not be prompted for your password. Note that this should have set up X11 forwarding, so you no longer need the <code class="docutils literal notranslate"><span class="pre">-Y</span></code> option.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You should never use a passphrase-less key to access the ARCHER2 login nodes, as this is a serious security risk.</p>
+</div>
 </section>
-<section id="configure-access-to-mosrs">
-<h3>Configure access to MOSRS<a class="headerlink" href="#configure-access-to-mosrs" title="Link to this heading"></a></h3>
-<p>Run the <code class="docutils literal notranslate"><span class="pre">mosrs-setup</span></code> script which will take you through the set up process to access the Met Office Science Repository Service (Remember your MOSRS username is one word; usually firstnamelastname, all in lowercase):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ~um/um-training/mosrs-setup
+</section>
+<section id="set-up-your-puma2-environment">
+<h2>Set up your PUMA2 environment<a class="headerlink" href="#set-up-your-puma2-environment" title="Link to this heading"></a></h2>
+<p>Copy our standard <code class="docutils literal notranslate"><span class="pre">.profile</span></code> and <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cd
+puma2$ cp ~um1/um-training/puma2/.bash_profile .
+puma2$ cp ~um1/um-training/puma2/.bashrc .
 </pre></div>
 </div>
-<p>Log out of PUMA and back in again (you will get a warning about not being able to find <code class="docutils literal notranslate"><span class="pre">~/.ssh/ssh-setup</span></code> this can be ignored and will be resolved in the next step). You should first be prompted for your <strong>Met Office Science Repository Service password</strong>.  Enter your password. Then you will be prompted for <strong>Username for ‘u’ - ‘https://code.metoffice.gov.uk/rosie/u’</strong> . Enter your MOSRS username.</p>
+<p>Logout of PUMA2 and back in again to pick up these changes. You will get a warning about not being able to find <code class="docutils literal notranslate"><span class="pre">~/.ssh/ssh-setup</span></code>.  This can be ignored and will be resolved in the next step.</p>
+<p>You should then be prompted for your Met Office Science Repository Service password, then username. Note that it asks for your <strong>password</strong> first. Remember your MOSRS username is one word; usually firstnamelastname, all in lowercase.</p>
+<p>If the password caching works, you should see:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Subversion</span> <span class="n">password</span> <span class="n">cached</span>
+<span class="n">Rosie</span> <span class="n">password</span> <span class="n">cached</span>
+</pre></div>
+</div>
+<p>This means you can now access the code and roses suites stored in the Met Office respositories.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The cached password is configured to expire after 12 hours. Simply run the command <code class="docutils literal notranslate"><span class="pre">mosrs-cache-password</span></code> to re-cache it if this happens. Also if you know you won’t need access to the repositories during a login session then just press return when asked for your MOSRS password.</p>
 </div>
+<p>Finally, change the permission on your PUMA2 <code class="docutils literal notranslate"><span class="pre">/home</span></code> space:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="o">-</span><span class="n">R</span> <span class="n">g</span><span class="o">+</span><span class="n">rX</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">n02</span><span class="o">/</span><span class="n">n02</span><span class="o">/&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span>
+</pre></div>
+</div>
 </section>
-<section id="configure-connection-to-archer2">
-<h3>Configure connection to ARCHER2<a class="headerlink" href="#configure-connection-to-archer2" title="Link to this heading"></a></h3>
-<p>Due to ARCHER2 security and the UM workflow it is necessary to use a special ssh-key that allows submission of UM suite from PUMA.
-Prior to the course you generated a UM workflow ssh-key called <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_rsa_archerum</span></code>.</p>
-<p><strong>i. Update ssh config file</strong></p>
-<p>In your PUMA <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file add the following section:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
-<span class="n">User</span> <span class="o">&lt;</span><span class="n">archer2_username</span><span class="o">&gt;</span>
-<span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archerum</span>
-<span class="n">ForwardX11</span> <span class="n">no</span>
-<span class="n">ForwardX11Trusted</span> <span class="n">no</span>
+<section id="set-up-your-ssh-agent">
+<span id="ssh-setup"></span><h2>Set up your ssh-agent<a class="headerlink" href="#set-up-your-ssh-agent" title="Link to this heading"></a></h2>
+<p>In order to submit jobs to ARCHER2 from PUMA2, you will need to set up an <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> and use it to cache the passphrase to your ARCHER2.</p>
+<p><strong>i. Copy your ARCHER2 ssh-key pair to PUMA2</strong></p>
+<p>Your ARCHER2 key is the one that you use to ssh into the ARCHER2 login nodes.  You need to copy both the public and private keys into your <code class="docutils literal notranslate"><span class="pre">.ssh/</span></code> directory on PUMA2.</p>
+<p>Open a new terminal from wherever you originally connected to ARCHER2 in :ref:archer2:, and run the following command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer2</span><span class="o">*</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span><span class="nd">@login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">n02</span><span class="o">/</span><span class="n">n02</span><span class="o">-</span><span class="n">puma</span><span class="o">/&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/.</span><span class="n">ssh</span>
 </pre></div>
 </div>
-<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;archer2_username&gt;</span></code> should be replaced with your ARCHER2 username. If you don’t have a <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file create one.</p>
-<p id="ssh-setup"><strong>ii. Set up ssh-agent</strong></p>
-<p>Setting up an <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> allows caching of your <code class="docutils literal notranslate"><span class="pre">id_rsa_archerum</span></code> key passphrase for a period of time.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cp ~um/um-training/setup/ssh-setup ~/.ssh
+<p><strong>ii. Start up your ssh-agent</strong></p>
+<p>Setting up an <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> allows caching of your ARCHER2 key passphrase for a period of time.</p>
+<p>First copy the <code class="docutils literal notranslate"><span class="pre">ssh-setup</span></code> script to your <code class="docutils literal notranslate"><span class="pre">.ssh/</span></code> directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cp ~um/um-training/setup/ssh-setup ~/.ssh
 </pre></div>
 </div>
-<p>Log out of PUMA and back in again to start up the <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> process.</p>
-<p>Add your <code class="docutils literal notranslate"><span class="pre">id_rsa_archerum</span></code> key to your <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> by running:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh-add ~/.ssh/id_rsa_archerum
-Enter passphrase for /home/&lt;puma-username&gt;/.ssh/id_rsa:
-[TYPE_YOUR_PASSPHRASE]
+<p>Next log out of PUMA2 and back in again to start up the <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> process. You should see the following message</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Initialising</span> <span class="n">new</span> <span class="n">SSH</span> <span class="n">agent</span><span class="o">...</span>
 </pre></div>
 </div>
-<p>Enter your passphrase when prompted.  The <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> will continue to run even when you log out of PUMA, however, it may stop from time to time, for example if PUMA is rebooted.  For instructions on what to do in this situation see <a class="reference internal" href="ssh-tasks.html#restarting-agent"><span class="std std-ref">Restarting your ssh agent</span></a> in the Appendix.</p>
-<p><strong>iii. Verify the setup is correct</strong></p>
-<p>Log in to ARCHER2 with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh login.archer2.ac.uk
+<p><strong>iii. Add your ARCHER2 key</strong></p>
+<p>Add your ARCHER2 key to the <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code>, by running</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ ssh-add ~/.ssh/id_rsa_archer2
 </pre></div>
 </div>
-<p>You should not be prompted for your passphrase.  The response from ARCHER2 should be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ ssh login.archer2.ac.uk
-PTY allocation request failed on channel 0
-Comand rejected by policy. Not in authorised list
-Connection to login.archer2.ac.uk closed.
+<p>Enter your passphrase when prompted. If the passphrase has been cached successfully you should see a message like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Identity</span> <span class="n">add</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">n02</span><span class="o">/</span><span class="n">n02</span><span class="o">/&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer2</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It is not possible to start an interactive login session on ARCHER2 from PUMA.  For an interactive session you need to login from your local desktop.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> will continue to run even when you log out of PUMA2, however, it may stop from time to time, for example if PUMA2 is rebooted.  For instructions on what to do in this situation see <a class="reference internal" href="ssh-tasks.html#restarting-agent"><span class="std std-ref">Restarting your ssh agent</span></a> in the Appendix.</p>
+<p><strong>iv. Configure access to the ARCHER2 login nodes</strong></p>
+<p>Create a file <code class="docutils literal notranslate"><span class="pre">.ssh/config</span></code> (if it doesn’t already exist), and add the following lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ARCHER2 login nodes</span>
+<span class="n">Host</span> <span class="n">ln</span><span class="o">*</span>
+<span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/&lt;</span><span class="n">archer</span><span class="o">-</span><span class="n">key</span><span class="o">&gt;</span>
+</pre></div>
 </div>
+<p><strong>iv. Verify the setup is correct</strong></p>
+<p>To test this is all working correctly, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ rose host-select archer2
+</pre></div>
+</div>
+<p>This should return one of the login nodes, e.g. <code class="docutils literal notranslate"><span class="pre">ln01</span></code>. If it returns a message like <code class="docutils literal notranslate"><span class="pre">[WARN]</span> <span class="pre">ln03:</span> <span class="pre">(ssh</span> <span class="pre">failed)</span></code> then something has gone wrong with the ssh setup.</p>
 <p>You are now ready to try running a UM suite!</p>
-</section>
 </section>
 </section>
 
