@@ -8,11 +8,11 @@ Currently there is no Rose tool to difference two suites. Since a suite consists
 
 We will difference your copy of the GA7.0 suite with the original one: ::
 
-  puma$ cd ~/roses
-  puma$ rosie checkout u-cc654
-  puma$ rose config-dump -C u-cc654
-  puma$ rose config-dump -C <your-suitename>
-  puma$ diff -r u-cc654 <your-suitename>
+  puma2$ cd ~/roses
+  puma2$ rosie checkout u-cc654
+  puma2$ rose config-dump -C u-cc654
+  puma2$ rose config-dump -C <your-suitename>
+  puma2$ diff -r u-cc654 <your-suitename>
 
 * Are the differences what you expected?
 
@@ -24,10 +24,10 @@ We will difference your copy of the GA7.0 suite with the original one: ::
 
    The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
 
-     puma$ rosie checkout u-ce122
-     puma$ cd ~/roses/u-ce122
-     puma$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
-     puma$ cylc graph u-ce122               # view graph in browser
+     puma2$ rosie checkout u-ce122
+     puma2$ cd ~/roses/u-ce122
+     puma2$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
+     puma2$ cylc graph u-ce122               # view graph in browser
 
    A window containing the graph of the suite should appear. By default tasks in the same family are grouped together. Click the :guilabel:`Ungroup all families` button at the top of the window to expand the graph to view all tasks within this suite.
 
@@ -109,7 +109,7 @@ This allows you to trigger the running of tasks manually.
 
 To start a suite in held mode add ``-- --hold`` to the end of the ``rose suite-run`` command: ::
 
-  puma$ rose suite-run -- --hold
+  puma2$ rose suite-run -- --hold
 
 The first ``--`` tells Rose that all subsequent options should be passed on to Cylc.  This is why the hold option should be added to the end of the command, after any Rose options.  Once the suite has started all tasks will be in a held state.  It is then possible to select which tasks are run by right clicking on a task in the Cylc GUI and manually triggering it or resetting its state.
 
@@ -124,13 +124,13 @@ Submit 2 of your suites. It doesn't matter what tasks they are running for this 
 
 Now try running the command ``cylc scan``. This lists your currently running suites.  For example: ::
 
-  puma$ cylc scan
+  puma2$ cylc scan
   u-af140 ros@localhost:7770
   u-ag761 ros@localhost:7776
 
 There is also a multi-suite monitor GUI, which allows you to monitor the states of all suites you have running in one window.  Try running the command: ::
 
-  puma$ cylc gscan &
+  puma2$ cylc gscan &
 
 Double clicking on a suite in ``gscan`` GUI opens the Cylc GUI window, which you will be very familiar with by now. For each suite open the Cylc GUI window and stop the suite by going to :guilabel:`Control > Stop Suite`, selecting  :guilabel:`Stop after killing active tasks` and clicking :guilabel:`Ok`.
 
@@ -157,14 +157,14 @@ Create the Rose application directory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Make sure the Rose edit GUI for your suite is closed. ``cd`` into the suite ``app/`` directory and create a new directory called ``new_app`` ::
   
-  puma$ cd ~/roses/<SUITEID>/app
-  puma$ mkdir new_app
+  puma2$ cd ~/roses/<SUITEID>/app
+  puma2$ mkdir new_app
 
 Create the Rose app configuration file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Change into the ``new_app`` directory and create a blank app configuration file called ``rose-app.conf``: :: 
 
-  puma$ touch rose-app.conf
+  puma2$ touch rose-app.conf
 
 Start the Rose editor (remember you need to be in the top level of the suite directory).  You should now see the new application listed in the left hand panel.  At this point it is an empty application and is not integrated into the task chain.  Click on :guilabel:`new_app` to load the app and then the little triangle to the left of :guilabel:`new_app` to expand its contents.
 
@@ -236,7 +236,7 @@ The app can be tested in isolation by changing into the ``new_app/`` directory a
 
 This should produce output similar to: ::
 
-  ros@puma$ rose app-run
+  ros@puma2$ rose app-run
   [INFO] export PATH=/home/ros/roses/u-cc654/app/new_app/bin:/home/fcm/rose-2016.11.1/bin:/usr/local/python/bin:
   ...
   [INFO] export PLANET=Jupiter
@@ -251,7 +251,7 @@ Rose Metadata
 ^^^^^^^^^^^^^
 Metadata can be used to provide information about settings in Rose configurations.  It is used for documenting settings, performing automatic checking and for formatting the rose edit GUI. Metadata can be used to ensure that configurations are valid before they are run.
 
-Metadata for many standard applications, such as ``um-atmos``, ``fcm_make`` are all stored centrally on PUMA in ``~fcm/rose-meta``.  Have a look at this directory.
+Metadata for many standard applications, such as ``um-atmos``, ``fcm_make`` are all stored centrally on PUMA2 in ``~fcm/rose-meta``.  Have a look at this directory.
 
 For our example there are currently no restrictions on the variable ``PLANET``.  We will now add some metadata to help the user understand what the variable ``PLANET`` is and what values it is limited to.
 

@@ -100,7 +100,7 @@ If it still appears to be running (for example you get an error when you try to 
 
   Get a list of processes associated with the suite. For example, for suite u-cn134 you would run: ::
 
-    puma$ ps -flu ros | grep u-cn134
+    puma2$ ps -flu ros | grep u-cn134
     1 S ros   15688     1  ... python2 /home/fcm/cylc-7.8.12/bin/cylc-restart u-cn134
     0 S ros   15707     1  ... python2 /home/fcm/cylc-7.8.12/bin/cylc-gui u-cn134
     0 S ros   16305 24946  ... grep --color=auto u-cn134

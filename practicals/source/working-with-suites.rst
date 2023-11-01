@@ -8,7 +8,7 @@ Suite Discovery and Management: rosie go
 
 Launch ``rosie go`` by typing: ::
 
-  puma$ rosie go
+  puma2$ rosie go
 
 Searching for suites
 ^^^^^^^^^^^^^^^^^^^^
@@ -106,8 +106,8 @@ Trigger ignored settings are hidden by default and only appear to the user when 
 
   ::
 
-    puma$ cd ~/roses/u-ag137
-    puma$ fcm diff -g
+    puma2$ cd ~/roses/u-ag137
+    puma2$ fcm diff -g
 
 You should see that several namelist items have had ``!!`` added to the start of the line. This tells Rose to ignore these items when processing the app file into Fortran namelists. Should you wish to see all variables on a panel select :guilabel:`View All Ignored Variables` and :guilabel:`View Latent Variables` from the :guilabel:`View` menu.
 

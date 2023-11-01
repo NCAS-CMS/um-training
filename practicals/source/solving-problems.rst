@@ -63,11 +63,11 @@ In practice, you will need to fix the problem with the code conflict as you did 
 
 Last time we stopped the suite and then re-ran it, however, it is possible to reload the suite definition and then re-trigger the failed task without first stopping the running suite. To do this change to the suite directory: ::
 
-  puma$ cd ~/roses/<suitename>
+  puma2$ cd ~/roses/<suitename>
 
 We then reload the suite definition by running the following Rose command: ::
 
-  puma$ rose suite-run --reload
+  puma2$ rose suite-run --reload
 
 Wait for this command to complete before continuing. Finally in the Cylc GUI *right-click* on the failed task and select :guilabel:`Trigger (run now)`.  The ``fcm_make_um`` task will then submit again.
 
@@ -106,7 +106,7 @@ Suites can be and are set up differently and there will be times when you need t
 
 In your suite directory on PUMA (``~/roses/<suitename>``) use ``grep -R`` to search for the start dump name ``ab642a.da19880901_00_err`` in the suite files.  You should see 2 occurrences listed ::
 
-  ros@puma$ grep -r ab642a.da19880901_00_err *
+  ros@puma2$ grep -r ab642a.da19880901_00_err *
   site/archer2.rc:{% set AINITIAL = AINITIAL_DIR + 'N96L85/ab642a.da19880901_00_err' %}
   site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + 'N96L85/ab642a.da19880901_00_err' %}
 

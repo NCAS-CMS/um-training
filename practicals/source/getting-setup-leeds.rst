@@ -1,62 +1,50 @@
-Getting set up (7th-9th February, Leeds)
+Getting Set Up (Self-Study Instructions)
 ========================================
 
 .. warning::
-   You **MUST** have PUMA, ARCHER2 and MOSRS accounts setup before starting this section.
-   
-.. note::
-   These instructions are for use on the UM Training Course held on 7-9th February 2023.  If you are using them for self-study please contact NCAS-CMS for instructions.
-   
-Setup connection to PUMA & ARCHER2
-----------------------------------
+   You **MUST** have PUMA2, ARCHER2 and MOSRS accounts setup before starting this section.
 
-To use the UM Introduction Tutorials you will first need to ensure you can connect from the local desktop to both PUMA & ARCHER2.  
+.. warning:: 
+   These instructions are for use on the UM Training Course held on 28th-30th November 2023. If you are using them for self-study please contact NCAS-CMS for instructions.
+
+.. _archer2:
+   
+Set up your ARCHER2 connection
+------------------------------
+
+To use the UM Introduction Tutorials you will first need to ensure you can connect from your local desktop to ARCHER2.
 
 SSH key files
 ^^^^^^^^^^^^^
 
-Before you try and connect to PUMA or ARCHER2, you need to make sure that you have the ssh-keys for both platforms available on the local desktop.
+Before you try and connect to ARCHER2, you need to make sure that you have the ssh-keys available on your computer.
 
-Hopefully you remembered to bring your ssh-keys with you on a USB stick. Please talk to a course tutor if you have forgotten them.
+Hopefully you remembered to bring your ARCHER2 ssh-key with you on a USB stick.  Please talk to a course tutor if you have forgotten it.
 
-Copy your ssh-keys from the USB stick to the ``~/.ssh`` directory.
+Copy your ssh-key from the USB stick to the ``~/.ssh`` directory.
+
+.. _terminal:
 
 Connecting via a Terminal (GNU/Linux & macOS)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Connect via a terminal with an X11 connection (`XQuartz <https://www.xquartz.org/>`_ is also required when using macOS)
+Connecting via a terminal with an X11 connection (`XQuartz <https://www.xquartz.org/>`_ is also required when using macOS)
 
-Login to PUMA: ::
+Login to ARCHER2: ::
 
-  ssh -Y -i ~/.ssh/id_rsa_puma <puma-username>@192.171.169.138
-  
-We suggest adding an entry to the ``~/.ssh/config`` file so you don't need to keep typing in the IP address. For example: ::
+  ssh -Y -i ~/.ssh/id_rsa_archer2 <archer2-username>@login.archer2.ac.uk
 
-  Host puma
-  Hostname 192.171.169.138
-  User <puma_username>
-  IdentityFile ~/.ssh/id_rsa_puma
-  ForwardX11 yes
-  ForwardX11Trusted yes
-   
-so that you can then connect using the command: ::
+To simplify the login process, you can define a ``~/.ssh/config`` file entry containing the necessary information. For example: ::
 
-  ssh puma
-
-In a new terminal window, login to ARCHER2: ::
-
-  ssh -Y -i ~/.ssh/id_rsa_archer <archer2-username>@login.archer2.ac.uk
-
-Again you could define a ``~/.ssh/config`` file entry for each with the necessary information, if desired. For example: ::
-
-  Host login.archer2.ac.uk
+  Host archer2
+  Hostname login.archer2.ac.uk
   User <archer2_username>
-  IdentityFile ~/.ssh/id_rsa_archer
+  IdentityFile ~/.ssh/id_rsa_archer2
   ForwardX11 yes
   ForwardX11Trusted yes
 
-so that you could then just connect using the command: ::
+so that you can connect using just the command: ::
   
-  ssh login.archer2.ac.uk
+  ssh archer2
 
 Set up your ARCHER2 environment 
 --------------------------------
@@ -70,81 +58,133 @@ Change the permissions on your ``/home`` and ``/work`` directories to enable the
   chmod -R g+rX /home/n02/n02/<your-username>
   chmod -R g+rX /work/n02/n02/<your-username>
 
-Set up your PUMA environment
+.. _puma2:
+
+Set up your PUMA2 connection 
 ----------------------------
 
-Login to PUMA from your local desktop.
+PUMA2 is accessed from the ARCHER2 login nodes, and you will use the same username and password.
 
-Configure ``~/.profile``
-^^^^^^^^^^^^^^^^^^^^^^^^
-If this is the first time you have used your PUMA account, you will need to create a ``.profile``. Copy our standard one: :: 
+From an ARCHER2 terminal type: ::
 
-  puma$ cd
-  puma$ cp ~um/um-training/setup/.profile .
+    archer2$ ssh -Y puma2
 
-(If you already have a ``.profile``, make sure it includes the lines from the standard file.)
+and type your ARCHER2 password when prompted. 
 
-Configure access to MOSRS
-^^^^^^^^^^^^^^^^^^^^^^^^^
-Run the ``mosrs-setup`` script which will take you through the set up process to access the Met Office Science Repository Service (Remember your MOSRS username is one word; usually firstnamelastname, all in lowercase): ::
+You should now be logged into PUMA2. To go back to the ARCHER2 login nodes, type ``exit``. 
 
-  puma$ ~um/um-training/mosrs-setup
+Set up passwordless access to PUMA2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Log out of PUMA and back in again (you will get a warning about not being able to find ``~/.ssh/ssh-setup`` this can be ignored and will be resolved in the next step). You should first be prompted for your **Met Office Science Repository Service password**.  Enter your password. Then you will be prompted for **Username for 'u' - 'https://code.metoffice.gov.uk/rosie/u'** . Enter your MOSRS username.
+You can set up a passphrase-less ssh-key to allow you to connect to PUMA2 without typing a password or passphrase. 
 
-.. A new window should then pop up (it may be hidden behind other windows) for ``Rosie`` asking for **Username for 'u' - 'https://code.metoffice.gov.uk/rosie/u'** . Enter your MOSRS username again.
+.. note:: We would never normally advise using an ssh-key without a passphrase, but in this case it is safe to do so since we are already authenticated within the ARCHER2 system.
+
+From the ARCHER2 login nodes, type: :: 
+
+   archer2$ ssh-keygen -t rsa -f ~/.ssh/id_rsa_puma2
+
+At the prompt, press enter for an empty passphrase.
+
+Copy the key over to PUMA2: ::
+
+   archer2$ ssh-copy-id -i ~/.ssh/id_rsa_puma2 puma2
+
+Type in your ARCHER2 password when prompted.
+
+Next, create a file called ``~/.ssh/config`` (if it doesn’t already exist), and add the following lines: ::
+
+   Host puma2
+   IdentityFile ~/.ssh/id_rsa_puma2
+   ForwardX11 yes
+
+Test it works by typing: :: 
+
+   archer2$ ssh puma2
+
+You should not be prompted for your password. Note that this should have set up X11 forwarding, so you no longer need the ``-Y`` option.
+
+.. warning:: You should never use a passphrase-less key to access the ARCHER2 login nodes, as this is a serious security risk. 
+
+Set up your PUMA2 environment
+-----------------------------
+
+Copy our standard ``.profile`` and ``.bashrc`` files: :: 
+
+   puma2$ cd
+   puma2$ cp ~um1/um-training/puma2/.bash_profile .
+   puma2$ cp ~um1/um-training/puma2/.bashrc . 
+
+Logout of PUMA2 and back in again to pick up these changes. You will get a warning about not being able to find ``~/.ssh/ssh-setup``.  This can be ignored and will be resolved in the next step.
+
+You should then be prompted for your Met Office Science Repository Service password, then username. Note that it asks for your **password** first. Remember your MOSRS username is one word; usually firstnamelastname, all in lowercase. 
+
+If the password caching works, you should see: ::
+
+   Subversion password cached
+   Rosie password cached
+
+This means you can now access the code and roses suites stored in the Met Office respositories. 
 
 .. note:: The cached password is configured to expire after 12 hours. Simply run the command ``mosrs-cache-password`` to re-cache it if this happens. Also if you know you won't need access to the repositories during a login session then just press return when asked for your MOSRS password.
 
-Configure connection to ARCHER2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Finally, change the permission on your PUMA2 ``/home`` space: :: 
 
-Due to ARCHER2 security and the UM workflow it is necessary to use a special ssh-key that allows submission of UM suite from PUMA.
-Prior to the course you generated a UM workflow ssh-key called ``~/.ssh/id_rsa_archerum``.
-
-**i. Update ssh config file**
-
-In your PUMA ``~/.ssh/config`` file add the following section: ::
-
-  Host login.archer2.ac.uk
-  User <archer2_username>
-  IdentityFile ~/.ssh/id_rsa_archerum
-  ForwardX11 no
-  ForwardX11Trusted no
-
-Where ``<archer2_username>`` should be replaced with your ARCHER2 username. If you don't have a ``~/.ssh/config`` file create one.
+   chmod -R g+rX /home/n02/n02/<your-username>
 
 .. _ssh-setup:
 
-**ii. Set up ssh-agent**
+Set up your ssh-agent
+---------------------
 
-Setting up an ``ssh-agent`` allows caching of your ``id_rsa_archerum`` key passphrase for a period of time. ::
+In order to submit jobs to ARCHER2 from PUMA2, you will need to set up an ``ssh-agent`` and use it to cache the passphrase to your ARCHER2. 
 
-  puma$ cp ~um/um-training/setup/ssh-setup ~/.ssh
+**i. Copy your ARCHER2 ssh-key pair to PUMA2** 
 
-Log out of PUMA and back in again to start up the ``ssh-agent`` process.
+Your ARCHER2 key is the one that you use to ssh into the ARCHER2 login nodes.  You need to copy both the public and private keys into your ``.ssh/`` directory on PUMA2.
 
-Add your ``id_rsa_archerum`` key to your ``ssh-agent`` by running: ::
+Open a new terminal from wherever you originally connected to ARCHER2 in :ref:archer2:, and run the following command ::
 
-  puma$ ssh-add ~/.ssh/id_rsa_archerum
-  Enter passphrase for /home/<puma-username>/.ssh/id_rsa:
-  [TYPE_YOUR_PASSPHRASE]
+   scp ~/.ssh/id_rsa_archer2* <archer2-username>@login.archer2.ac.uk:/home/n02/n02-puma/<archer2-username>/.ssh
 
-Enter your passphrase when prompted.  The ``ssh-agent`` will continue to run even when you log out of PUMA, however, it may stop from time to time, for example if PUMA is rebooted.  For instructions on what to do in this situation see :ref:`restarting-agent` in the Appendix.
+**ii. Start up your ssh-agent**
 
-**iii. Verify the setup is correct**
+Setting up an ``ssh-agent`` allows caching of your ARCHER2 key passphrase for a period of time. 
 
-Log in to ARCHER2 with: ::
+First copy the ``ssh-setup`` script to your ``.ssh/`` directory. ::
 
-  puma$ ssh login.archer2.ac.uk
+   puma2$ cp ~um/um-training/setup/ssh-setup ~/.ssh
 
-You should not be prompted for your passphrase.  The response from ARCHER2 should be: ::
+Next log out of PUMA2 and back in again to start up the ``ssh-agent`` process. You should see the following message :: 
 
-  puma$ ssh login.archer2.ac.uk
-  PTY allocation request failed on channel 0
-  Comand rejected by policy. Not in authorised list 
-  Connection to login.archer2.ac.uk closed.
+   Initialising new SSH agent...
 
-.. note:: It is not possible to start an interactive login session on ARCHER2 from PUMA.  For an interactive session you need to login from your local desktop.
+**iii. Add your ARCHER2 key**
+
+Add your ARCHER2 key to the ``ssh-agent``, by running ::
+
+   puma2$ ssh-add ~/.ssh/id_rsa_archer2
+
+Enter your passphrase when prompted. If the passphrase has been cached successfully you should see a message like this: ::
+
+   Identity add: /home/n02/n02/<archer2-username>/.ssh/id_rsa_archer2
+
+The ``ssh-agent`` will continue to run even when you log out of PUMA2, however, it may stop from time to time, for example if PUMA2 is rebooted.  For instructions on what to do in this situation see :ref:`restarting-agent` in the Appendix.
+
+**iv. Configure access to the ARCHER2 login nodes**
+
+Create a file ``.ssh/config`` (if it doesn't already exist), and add the following lines: ::
+
+   # ARCHER2 login nodes
+   Host ln* 
+   IdentityFile ~/.ssh/<archer-key>
+
+**iv. Verify the setup is correct**
+
+To test this is all working correctly, run: ::
+
+   puma2$ rose host-select archer2
+
+This should return one of the login nodes, e.g. ``ln01``. If it returns a message like ``[WARN] ln03: (ssh failed)`` then something has gone wrong with the ssh setup.
 
 You are now ready to try running a UM suite! 

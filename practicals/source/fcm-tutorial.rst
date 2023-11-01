@@ -79,7 +79,7 @@ The default text editor for entering commit messages is ``vi``.  If you would pr
 
 Creating a branch
 ^^^^^^^^^^^^^^^^^
-Firstly create a new directory (e.g. ``um/branches``) in your ``$HOME`` directory on PUMA which will be your work area and ``cd`` to it.
+Firstly create a new directory (e.g. ``um/branches``) in your ``$HOME`` directory on PUMA2 which will be your work area and ``cd`` to it.
 
 Create a new branch by running the command: ::
 
@@ -109,7 +109,7 @@ Take a note of the revision number the branch was created at, and the branch nam
 
 You can see your branch from within the MOSRS Trac (https://code.metoffice.gov.uk/trac/um): Click on :guilabel:`Browse Source` on the Trac menu bar and then navigate through :guilabel:`main --> branches --> dev--> [userid]`
 
-Your branch will also appear in the UM repository mirror held on PUMA (within 5 minutes)
+Your branch will also appear in the UM repository mirror held on PUMA2 (within 5 minutes)
  
 Making changes to a working copy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -154,7 +154,7 @@ Now make some code changes! Use the following scenario to take you through the b
 * Still in the ``src/control/top_level`` directory, add a new FORTRAN module file ``um_training_mod.F90`` containing a subroutine called ``um_training_sub()``.
 
 .. hint::
-   * An example file is available on PUMA: ``~um/um-training/um_training_mod.F90``.
+   * An example file is available on PUMA2: ``~um/um-training/um_training_mod.F90``.
    * The routine ``umPrint`` should be used for writing out messages rather than standard FORTRAN ``WRITE`` statements.
    
 * Run ``fcm add`` on the command line, to let the repository know you're adding a new file at the next commit. Make sure you are still in ``src/control/top_level`` and then type: ::
@@ -186,7 +186,7 @@ All the changes you have made so far have not been committed - i.e. saved to you
 
 and you should see a list of files that have been changed.  If you've followed the example scenario above you should see output similar to this: ::
 
-  ros@puma$ fcm status
+  ros@puma2$ fcm status
   D       fcm-make/ncas-xc30-ifort/um-createbc-safe.cfg
   M       src/control/top_level/um_shell.F90
   A       src/control/top_level/um_training_mod.F90
@@ -208,7 +208,7 @@ Committing changes
 ^^^^^^^^^^^^^^^^^^
 The change in your working copy remains local until you commit it to the repository where it becomes permanent.  If you are planning to make a large number of changes, you are encouraged to commit regularly to your branch at appropriate intervals.  Make sure you are in the top level directory of the working copy and then type: ::
 
-  puma$ fcm commit
+  puma2$ fcm commit
 
 A text editor will appear to allow you to edit the commit message.  You must add a commit message to describe your change above the line that says ``--Add your commit message ABOVE - do not alter this line or those below--``.  Your commit will fail if you do not enter a commit message.  Make sure you provide meaningful commit messages (if your change is intended for inclusion in the trunk you should reference your ticket number) as these will show up in the revision logs and can be a useful source of informtion.
 
@@ -232,7 +232,7 @@ A text editor will appear to allow you to edit the commit message.  You must add
 
 If you've followed the example scenario above you should see output similar to this: ::
 
-  ros@puma$ fcm commit
+  ros@puma2$ fcm commit
   [info] vi: starting commit message editor...
   Change summary:
   ---------------------------------------------------------------------------
@@ -266,11 +266,11 @@ If you need to find out information about your (or another user's) branches, you
 
 In the directory where you checked out the code, type: ::
 
-  puma$ fcm branch-info
+  puma2$ fcm branch-info
 
 You should see information about your branch revision, when it was last changed and the parent it was created from: ::
 
-  ros@puma$ fcm branch-info
+  ros@puma2$ fcm branch-info
   URL: https://code.metoffice.gov.uk/svn/um/main/branches/dev/rosalynhatcher/vn13.0_tutorial
   Repository Root: https://code.metoffice.gov.uk/svn/um
   Revision: 113821
@@ -297,12 +297,12 @@ If you have followed the tutorial scenario so far you should find that your suit
   [FAIL] um/src/control/top_level/um_shell.F90: merge results in conflict
   [FAIL]     merge output: /home/ros/cylc-run/u-cc519-test/share/fcm_make/
   .fcm-make/extract/merge/um/src/control/top_level/um_shell.F90.diff
-  [FAIL]     source from location  0: svn://pumanew/um.xm_svn/main/trunk/src/
+  [FAIL]     source from location  0: svn://puma2.archer2.ac.uk/um.xm_svn/main/trunk/src/
   control/top_level/um_shell.F90@111272
-  [FAIL]     source from location  1: svn://pumanew/um.xm_svn/main/branches/
+  [FAIL]     source from location  1: svn://puma2.archer2.ac.uk/um.xm_svn/main/branches/
   dev/rosalynhatcher/vn13.0_training_um_shell1/src/control/top_level/
   um_shell.F90@113821
-  [FAIL] !!! source from location  2: svn://pumanew/um.xm_svn/main/branches/
+  [FAIL] !!! source from location  2: svn://puma2.archer2.ac.uk/um.xm_svn/main/branches/
   dev/rosalynhatcher/vn13.0_tutorial/src/control/top_level/
   um_shell.F90@113821
 

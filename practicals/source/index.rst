@@ -6,7 +6,7 @@
 NCAS Unified Model Introduction Course
 ======================================
 
-Practical exercises for UM training course in Leeds, 7th-9th February 2023. 
+Practical exercises for UM training course in Leeds, 28th-30th November 2023. 
 
 Can also be used for self-study.
 
