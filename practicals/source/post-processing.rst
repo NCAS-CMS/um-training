@@ -108,11 +108,10 @@ features - we'll use it to convert UM fields file or PP data to
 CF-compliant data in NetCDF format. You first need to set the
 environment to run ``cfa``: ::
 
- archer2$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
+ archer2$ export PATH=/home/n02/n02/dch/cf-analysis/bin:$PATH
  archer2$ cfa -i -o cc654a.pc19880901_00.nc cc654a.pc19880901_00.pp
  
 Try viewing the NetCDF file with xconv.
-
 
 ``cfa`` can also view CF fields. It can be run on PP or NetCDF
 files, to provide a text representation of the CF fields contained in
@@ -141,85 +140,78 @@ e.g. ::
 CF-python CF-plot
 -----------------
 
-Many tools exist for analysing data from NWP and climate models and there are many contributing factors for the proliferation of these analysis utilities, for example, the disparity of data formats used by the authors of the models, and/or the availability of the underlying sofware. There is a strong push towards developing and using python as the underlying language and CF-netCDF as the data format. CMS is home to tools in the CF-netCDF stable - here's an example of the use of these tools to perform some quite complex data manipulations. The user is insulated from virtually all of the details of the methods allowing them to concentrate on scientific analysis rather than programming intricacies.
+Many tools exist for analysing data from NWP and climate models and there are many contributing factors for the proliferation of these analysis utilities, for example, the disparity of data formats used by the authors of the models, and/or the availability of the underlying software. There is a strong push towards developing and using python as the underlying language and CF-netCDF as the data format. CMS is home to tools in the CF-netCDF stable - here's an example of the use of these tools to perform some quite complex data manipulations. The user is insulated from virtually all of the details of the methods allowing them to concentrate on scientific analysis rather than programming intricacies.
 
 * Set up the environment and start python. ::
 
    
-   archer2$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
+   archer2$ export PATH=/home/n02/n02/dch/cf-analysis/bin:$PATH
    archer2$ python
    >>>
 
-We'll be looking at CRU observed precipitation data.
+We'll be looking at some AIRS satellite-retrieved temperature data over sea.
 
 * Import the cf-python library ::
 
   >>> import cf
 
-* Read in data files ::
+* Read in the AIRS data files ::
 
-  >>> f = cf.read('~dch/UM_Training/cru/*.nc')[0]
+  >>> f = cf.read('~dch/UM_Training/ta_mon_AIRS-1-0_BE_gn_*.nc')[0]
 
 * Inspect the file contents with different amounts of detail ::
 
   >>> f
   >>> print(f)
   >>> f.dump()
-  
-Note that the two files in the cru directory are aggregated into one
-field.
 
-* Read in another field produced by a GCM, this has a different
-  latitude/longitude grid to regrid the CRU data to ::
+Note that the ten AIRS files (one for each year) are automatically aggregated into one field.
 
-  >>> g = cf.read('~dch/UM_Training/N96_DJF_precip_means.nc')[0]
+* Read in another field produced by a GCM, this has a different latitude/longitude grid to the AIRS data ::
+
+  >>> g = cf.read('~dch/UM_Training/tas_Amon_HadGEM3-GC3-1_hist-1p0_r3i1p1f2_gn_185001-201412.nc')[0]
   >>> print(g)
 
-* Regrid the field of observed data, ``f`` to the grid of the model
-  field (g) ::
+* Regrid the observed AIRS data (``f``) to the grid of the model field (``g``) over Europe. Use the "conservative" regridding method that preserves area integrals ::
 
-  >>> f = f.regrids(g, method='linear')
+  >>> f = f.regrids(g.subspace(X=cf.wi(-10, 40), Y=cf.wi(35, 70)), method='conservative')
   >>> print(f)
 
-* Average the regridded field with respect to time ::
+Note that the latitude and longitude dimensions are now shorter in length.
 
-  >>> f = f.collapse('T: mean')
+* Average the regridded field over June-August for each year ::
+
+  >>> f = f.collapse('T: mean within years T: mean over years', within_years=cf.jja())
   >>> print(f)
 
 Note that the time axis is now of length 1.
-
-* Subspace the regridded field to a European region ::
-
-  >>> f = f.subspace(X=cf.wi(-10, 40), Y=cf.wi(35, 70))
-  >>> print(f)
-
-Note that the latitude and longitude axes are now shorter in length.
 
 * Import the cfplot visualisation library ::
 
   >>> import cfplot
 
-* Make a default contour plot of the regridded observed data, ``f`` ::
+* Make a default contour plot of the regridded observed data, ``f`` at the 1000 hPa level ::
 
-   >>> cfplot.con(f)
+  >>> f = f.subspace(Z=cf.eq(1000, 'hPa'))
+  >>> cfplot.con(f)
 
 * Make a "blockfill" plot of the regridded observed data, ``f`` ::
 
-   >>> cfplot.con(f, blockfill=True)
+  >>> cfplot.con(f, blockfill=True)
 
-* Make a default contour plot of the model data, ``g`` ::
+* Make a default contour plot of the model data, ``g`` for its first time::
 
-   >>> cfplot.con(g)
+  >>> g = g.subspace(T=[0])
+  >>> cfplot.con(g)
    
-* Make a "blockfill" plot of the model data, ``g``, over the
-  same region ::
+* Make a "blockfill" plot of the model data, ``g``, restricting the view to over Europe ::
 
-   >>> g = g.subspace(X=cf.wi(-10, 40), Y=cf.wi(35, 70))
-   >>> cfplot.con(g, blockfill=True)
+  >>> cfplot.mapset(lonmin=-10, lonmax=40, latmin=25, latmax=70)
+  >>> cfplot.con(g, blockfill=True)
    
-* Write out the new field f to disk ::
+* Write out the regridded data to disk ::
 
-  >>> cf.write(f, 'cru_precip_european_mean_regridded.nc')
+  >>> cf.write(f, 'obs_temperature_Europe_JJA_2003-2010.regridded.nc')
 
-This has just given you a taster of CF-Python & CF-Plot, if you would like to try out some more exercises please take a look at https://github.com/NCAS-CMS/cf-training
+This has just given you a taster of CF-Python & CF-Plot, if you would like to try out some more exercises please take a look at https://github.com/NCAS-CMS/cf-tools-training.
 
