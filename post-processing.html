@@ -193,7 +193,7 @@ functionality. <code class="docutils literal notranslate"><span class="pre">cfa<
 features - we’ll use it to convert UM fields file or PP data to
 CF-compliant data in NetCDF format. You first need to set the
 environment to run <code class="docutils literal notranslate"><span class="pre">cfa</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ export PATH=/home/n02/n02/dch/cf-analysis/bin:$PATH
 archer2$ cfa -i -o cc654a.pc19880901_00.nc cc654a.pc19880901_00.pp
 </pre></div>
 </div>
@@ -225,25 +225,25 @@ Axes           : air_pressure(1) = [-1.0] hPa
 </section>
 <section id="cf-python-cf-plot">
 <h2><span class="section-number">9.6. </span>CF-python CF-plot<a class="headerlink" href="#cf-python-cf-plot" title="Link to this heading"></a></h2>
-<p>Many tools exist for analysing data from NWP and climate models and there are many contributing factors for the proliferation of these analysis utilities, for example, the disparity of data formats used by the authors of the models, and/or the availability of the underlying sofware. There is a strong push towards developing and using python as the underlying language and CF-netCDF as the data format. CMS is home to tools in the CF-netCDF stable - here’s an example of the use of these tools to perform some quite complex data manipulations. The user is insulated from virtually all of the details of the methods allowing them to concentrate on scientific analysis rather than programming intricacies.</p>
+<p>Many tools exist for analysing data from NWP and climate models and there are many contributing factors for the proliferation of these analysis utilities, for example, the disparity of data formats used by the authors of the models, and/or the availability of the underlying software. There is a strong push towards developing and using python as the underlying language and CF-netCDF as the data format. CMS is home to tools in the CF-netCDF stable - here’s an example of the use of these tools to perform some quite complex data manipulations. The user is insulated from virtually all of the details of the methods allowing them to concentrate on scientific analysis rather than programming intricacies.</p>
 <ul>
 <li><p>Set up the environment and start python.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ export PATH=/home/n02/n02/dch/cf/bin:$PATH
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ export PATH=/home/n02/n02/dch/cf-analysis/bin:$PATH
 archer2$ python
 &gt;&gt;&gt;
 </pre></div>
 </div>
 </li>
 </ul>
-<p>We’ll be looking at CRU observed precipitation data.</p>
+<p>We’ll be looking at some AIRS satellite-retrieved temperature data over sea.</p>
 <ul>
 <li><p>Import the cf-python library</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cf</span>
 </pre></div>
 </div>
 </li>
-<li><p>Read in data files</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;~dch/UM_Training/cru/*.nc&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<li><p>Read in the AIRS data files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;~dch/UM_Training/ta_mon_AIRS-1-0_BE_gn_*.nc&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </li>
@@ -255,25 +255,25 @@ archer2$ python
 </div>
 </li>
 </ul>
-<p>Note that the two files in the cru directory are aggregated into one
-field.</p>
+<p>Note that the ten AIRS files (one for each year) are automatically aggregated into one field.</p>
 <ul>
-<li><p>Read in another field produced by a GCM, this has a different
-latitude/longitude grid to regrid the CRU data to</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;~dch/UM_Training/N96_DJF_precip_means.nc&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<li><p>Read in another field produced by a GCM, this has a different latitude/longitude grid to the AIRS data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;~dch/UM_Training/tas_Amon_HadGEM3-GC3-1_hist-1p0_r3i1p1f2_gn_185001-201412.nc&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p>Regrid the field of observed data, <code class="docutils literal notranslate"><span class="pre">f</span></code> to the grid of the model
-field (g)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">regrids</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<li><p>Regrid the observed AIRS data (<code class="docutils literal notranslate"><span class="pre">f</span></code>) to the grid of the model field (<code class="docutils literal notranslate"><span class="pre">g</span></code>) over Europe. Use the “conservative” regridding method that preserves area integrals</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">regrids</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">subspace</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">wi</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">Y</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">wi</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">70</span><span class="p">)),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;conservative&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p>Average the regridded field with respect to time</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">collapse</span><span class="p">(</span><span class="s1">&#39;T: mean&#39;</span><span class="p">)</span>
+</ul>
+<p>Note that the latitude and longitude dimensions are now shorter in length.</p>
+<ul>
+<li><p>Average the regridded field over June-August for each year</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">collapse</span><span class="p">(</span><span class="s1">&#39;T: mean within years T: mean over years&#39;</span><span class="p">,</span> <span class="n">within_years</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">jja</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -281,22 +281,14 @@ field (g)</p>
 </ul>
 <p>Note that the time axis is now of length 1.</p>
 <ul>
-<li><p>Subspace the regridded field to a European region</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">subspace</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">wi</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">Y</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">wi</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">70</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-</ul>
-<p>Note that the latitude and longitude axes are now shorter in length.</p>
-<ul>
 <li><p>Import the cfplot visualisation library</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cfplot</span>
 </pre></div>
 </div>
 </li>
-<li><p>Make a default contour plot of the regridded observed data, <code class="docutils literal notranslate"><span class="pre">f</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cfplot</span><span class="o">.</span><span class="n">con</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<li><p>Make a default contour plot of the regridded observed data, <code class="docutils literal notranslate"><span class="pre">f</span></code> at the 1000 hPa level</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">subspace</span><span class="p">(</span><span class="n">Z</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;hPa&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cfplot</span><span class="o">.</span><span class="n">con</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -305,25 +297,25 @@ field (g)</p>
 </pre></div>
 </div>
 </li>
-<li><p>Make a default contour plot of the model data, <code class="docutils literal notranslate"><span class="pre">g</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cfplot</span><span class="o">.</span><span class="n">con</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<li><p>Make a default contour plot of the model data, <code class="docutils literal notranslate"><span class="pre">g</span></code> for its first time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">subspace</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cfplot</span><span class="o">.</span><span class="n">con</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p>Make a “blockfill” plot of the model data, <code class="docutils literal notranslate"><span class="pre">g</span></code>, over the
-same region</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">subspace</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">wi</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">Y</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">wi</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">70</span><span class="p">))</span>
+<li><p>Make a “blockfill” plot of the model data, <code class="docutils literal notranslate"><span class="pre">g</span></code>, restricting the view to over Europe</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cfplot</span><span class="o">.</span><span class="n">mapset</span><span class="p">(</span><span class="n">lonmin</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">lonmax</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">latmin</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">latmax</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cfplot</span><span class="o">.</span><span class="n">con</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">blockfill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p>Write out the new field f to disk</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;cru_precip_european_mean_regridded.nc&#39;</span><span class="p">)</span>
+<li><p>Write out the regridded data to disk</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;obs_temperature_Europe_JJA_2003-2010.regridded.nc&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 </ul>
-<p>This has just given you a taster of CF-Python &amp; CF-Plot, if you would like to try out some more exercises please take a look at <a class="reference external" href="https://github.com/NCAS-CMS/cf-training">https://github.com/NCAS-CMS/cf-training</a></p>
+<p>This has just given you a taster of CF-Python &amp; CF-Plot, if you would like to try out some more exercises please take a look at <a class="reference external" href="https://github.com/NCAS-CMS/cf-tools-training">https://github.com/NCAS-CMS/cf-tools-training</a>.</p>
 </section>
 </section>
 
