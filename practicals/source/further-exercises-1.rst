@@ -79,7 +79,7 @@ The model should fail with an error message similar to the following:
 
   **STWORK: Number of fields exceeds reserved headers for unit  14**
 
-This means that the number of output fields exceeds the limit set for a particular stream (the default is 4096 fields); in this case the stream attached to unit 14.  To find out what stream unit 14 is take a look in the ``job.out`` file and search for "unit 14". You should see that the file opened on unit 14 is ``<suite-id>a.pc19880901``, so this is the ``pc`` stream.  Back in ``rose edit`` for this suite look at the STASH usage profile for ``upc``.
+This means that the number of output fields exceeds the limit set for a particular stream (the default is 4096 fields); in this case the stream attached to unit 14.  To find out what stream unit 14 is take a look in the ``fort6.pe000`` file and search for "Unit 14". You should see that the file opened on unit 14 is ``<suite-id>a.pc19880901``, so this is the ``pc`` stream.  Back in ``rose edit`` for this suite look at the STASH usage profile for ``upc``.
 
 * What is the file ID of the failing output stream?
 
