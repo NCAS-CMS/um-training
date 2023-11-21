@@ -154,7 +154,7 @@ Now make some code changes! Use the following scenario to take you through the b
 * Still in the ``src/control/top_level`` directory, add a new FORTRAN module file ``um_training_mod.F90`` containing a subroutine called ``um_training_sub()``.
 
 .. hint::
-   * An example file is available on PUMA2: ``~um/um-training/um_training_mod.F90``.
+   * An example file is available on PUMA2: ``~um1/um-training/um_training_mod.F90``.
    * The routine ``umPrint`` should be used for writing out messages rather than standard FORTRAN ``WRITE`` statements.
    
 * Run ``fcm add`` on the command line, to let the repository know you're adding a new file at the next commit. Make sure you are still in ``src/control/top_level`` and then type: ::
