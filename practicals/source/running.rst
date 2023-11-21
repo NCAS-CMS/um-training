@@ -49,7 +49,7 @@ If following the tutorial as part of an organised training event:
 * Set ``HPC_ACCOUNT`` to **'n02-training'**
 * Set ``HPC_QUEUE`` to **'standard'**
 * Ensure ``RESERVATION`` is set to **True**
-* Set ``HPC_RESERVATION`` to be the reservation code for today. (e.g. **'n02-training_226'**)
+* Set ``HPC_RESERVATION`` to be the reservation code for today. (e.g. **'n02-training_1055426'**)
 
 If following the tutorial as self-study:
 

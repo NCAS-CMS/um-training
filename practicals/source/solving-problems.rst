@@ -37,7 +37,7 @@ The suite should fail in the ``fcm_make_um`` task. This is the task that extract
 * What is the error? 
 
 .. 
-   Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files through Rose Bush, as we have done previously, however you can also view them quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View -> job stderr`
+   Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files through Rose Bush, as we have done previously, however you can also view them quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View Job Logs -> job.err`
 
 .. hint::
    Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View -> job stderr`
