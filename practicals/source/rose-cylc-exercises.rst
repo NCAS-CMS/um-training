@@ -16,20 +16,20 @@ We will difference your copy of the GA7.0 suite with the original one: ::
 
 * Are the differences what you expected?
 
-..
-   Graphing a suite
-   ----------------
 
-   When developing suites, it can be useful to check what the run graph looks like after jinja evaluation, etc.  
+Graphing a suite
+----------------
 
-   The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
+When developing suites, it can be useful to check what the run graph looks like after jinja evaluation, etc.  
 
-     puma2$ rosie checkout u-ce122
-     puma2$ cd ~/roses/u-ce122
-     puma2$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
-     puma2$ cylc graph u-ce122               # view graph in browser
+The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
 
-   A window containing the graph of the suite should appear. By default tasks in the same family are grouped together. Click the :guilabel:`Ungroup all families` button at the top of the window to expand the graph to view all tasks within this suite.
+  puma2$ rosie checkout u-ce122
+  puma2$ cd ~/roses/u-ce122
+  puma2$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
+  puma2$ cylc graph u-ce122               # view graph in browser
+
+A window containing the graph of the suite should appear. By default tasks in the same family are grouped together. Click the :guilabel:`Ungroup all families` button at the top of the window to expand the graph to view all tasks within this suite.
 
 Exploring the suite definition files
 ------------------------------------
@@ -69,7 +69,7 @@ Now take a look at the ``suite.rc`` file for your other suite (the one copied fr
 * Can you see the more complex dependency graph?
 * Can you see where to change the reconfiguration walltime for this suite?
 
-This has just given you a very brief look at the suite definitions files.  More information can be found in the cylc documentation.  
+This has just given you a very brief look at the suite definitions files.  More information can be found in the cylc documentation: https://cylc.github.io/cylc-doc/7.8.8/html/index.html
 
 ..
    Suite and task event handling
@@ -270,6 +270,6 @@ Now go back to the Rose GUI and select :guilabel:`Metadata > Refresh Metadata`. 
 
 References
 ^^^^^^^^^^
-A fuller discussion of Rose metadata can be found at https://metomi.github.io/rose/doc/html/tutorial/rose/metadata.html.
+A fuller discussion of Rose metadata can be found at https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/metadata.html.
 
-Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For further details, see the Rose documentation at https://metomi.github.io/rose/doc/html/tutorial/rose/applications.html.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see https://metomi.github.io/rose/doc/html/api/rose-built-in-applications.html.
+Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For further details, see the Rose documentation at https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/applications.html.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see https://metomi.github.io/rose/2019.01.8/html/api/rose-built-in-applications.html.
