@@ -17,7 +17,7 @@ NCAS Computational Modelling Services: http://cms.ncas.ac.uk/
    :maxdepth: 1
    :numbered: 2
 
-   getting-setup-selfstudy 
+   getting-setup-leeds
    working-with-suites
    running
    fcm-tutorial
