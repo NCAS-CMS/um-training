@@ -16,20 +16,20 @@ We will difference your copy of the GA7.0 suite with the original one: ::
 
 * Are the differences what you expected?
 
-..
-   Graphing a suite
-   ----------------
 
-   When developing suites, it can be useful to check what the run graph looks like after jinja evaluation, etc.  
+Graphing a suite
+----------------
 
-   The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
+When developing suites, it can be useful to check what the run graph looks like after jinja evaluation, etc.  
 
-     puma2$ rosie checkout u-ce122
-     puma2$ cd ~/roses/u-ce122
-     puma2$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
-     puma2$ cylc graph u-ce122               # view graph in browser
+The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
 
-   A window containing the graph of the suite should appear. By default tasks in the same family are grouped together. Click the :guilabel:`Ungroup all families` button at the top of the window to expand the graph to view all tasks within this suite.
+  puma2$ rosie checkout u-ce122
+  puma2$ cd ~/roses/u-ce122
+  puma2$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
+  puma2$ cylc graph u-ce122               # view graph in browser
+
+A window containing the graph of the suite should appear. By default tasks in the same family are grouped together. Click the :guilabel:`Ungroup all families` button at the top of the window to expand the graph to view all tasks within this suite.
 
 Exploring the suite definition files
 ------------------------------------
@@ -52,14 +52,14 @@ Make sure that you leave the suite with ``BUILD=false`` before continuing.
 As we saw earlier when changing the path to the start dump, some settings can't be changed through the rose edit GUI.  Instead you have to edit the suite definition files directly. 
 
 * Can you find where the atmos processor decomposition is set for this suite?
-* Change atmos processor decomposition to run on 2 nodes and set ``ntasks`` to 256.  Run the suite.
-* What error message did you get?
+* Change atmos processor decomposition to run on 2 nodes.  Run the suite.
+* Did it work?  If not, what error message did you get?
 
 .. hint:: Look in the usual ``job.out/job.err`` or it may be in the ``job-activity.log`` file.
 
-This error is caused by a mismatch in the number of nodes requested by the Slurm job script header and the number of processors requested by the ``sbatch`` command which launches the executable. (For further information on Slurm and the sbatch command on ARCHER2 see: https://docs.archer2.ac.uk/user-guide/scheduler/).
+You will get an error if the processor decomposition of the model does not match the number of tasks and nodes requested by Slurm.  For details on the Slurm batch system on ARCHER2 see: https://docs.archer2.ac.uk/user-guide/scheduler/).
 
-In the ``[[atmos]] [[[directives]]]`` section change ``--nodes=1`` to ``--nodes=2`` to tell the Slurm scheduler that you require 2 nodes. 
+In the ``[[atmos]] [[[directives]]]`` section, set ``--nodes=2`` and ``--ntasks=256`` to tell the Slurm scheduler that you require 2 nodes and a total of 256 MPI tasks. 
 
 * The suite should run this time. Did it run on 2 nodes as requested?
 * How much walltime has been requested for the reconfiguration?
@@ -67,9 +67,10 @@ In the ``[[atmos]] [[[directives]]]`` section change ``--nodes=1`` to ``--nodes=
 Now take a look at the ``suite.rc`` file for your other suite (the one copied from ``u-cc654``). See how it differs.  This one is set up to run on multiple platforms.  
 
 * Can you see the more complex dependency graph?
+* Why do you not need to adjust the Slurm directives to change the processor decomposition in this suite? 
 * Can you see where to change the reconfiguration walltime for this suite?
 
-This has just given you a very brief look at the suite definitions files.  More information can be found in the cylc documentation.  
+This has just given you a very brief look at the suite definitions files.  More information can be found in the cylc documentation: https://cylc.github.io/cylc-doc/7.8.8/html/index.html
 
 ..
    Suite and task event handling
@@ -270,6 +271,6 @@ Now go back to the Rose GUI and select :guilabel:`Metadata > Refresh Metadata`. 
 
 References
 ^^^^^^^^^^
-A fuller discussion of Rose metadata can be found at https://metomi.github.io/rose/doc/html/tutorial/rose/metadata.html.
+A fuller discussion of Rose metadata can be found at https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/metadata.html.
 
-Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For further details, see the Rose documentation at https://metomi.github.io/rose/doc/html/tutorial/rose/applications.html.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see https://metomi.github.io/rose/doc/html/api/rose-built-in-applications.html.
+Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For further details, see the Rose documentation at https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/applications.html.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see https://metomi.github.io/rose/2019.01.8/html/api/rose-built-in-applications.html.

@@ -37,7 +37,7 @@ The suite should fail in the ``fcm_make_um`` task. This is the task that extract
 * What is the error? 
 
 .. 
-   Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files through Rose Bush, as we have done previously, however you can also view them quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View Job Logs -> job.err`
+   Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files through Rose Bush, as we have done previously, however you can also view them quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View -> job stderr`
 
 .. hint::
    Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View -> job stderr`
@@ -84,7 +84,7 @@ Errors resolved in the compile and run
 * What is the error?
 * What line of the Fortran file does it occur on?
 
-In practice, you would need to fix the error in your branch on PUMA and then restart the suite.  In this case, navigate to :guilabel:`fcm_make_um --> sources` and remove the branch ``vn11.7_training_compile_error``.  :guilabel:`Save` the suite, :guilabel:`Shutdown` or :guilabel:`Stop` the failed run and then :guilabel:`Run` it again.
+In practice, you would need to fix the error in your branch on PUMA2 and then restart the suite.  In this case, navigate to :guilabel:`fcm_make_um --> sources` and remove the branch ``vn11.7_training_compile_error``.  :guilabel:`Save` the suite, :guilabel:`Shutdown` or :guilabel:`Stop` the failed run and then :guilabel:`Run` it again.
 
 .. tip::
    This time we chose to shutdown the failed suite rather than do a reload.  In this scenario we need to redo the code extraction (``fcm_make_um``) step so doing a reload would be slightly more complex; you would need to :guilabel:`Reload` and then :guilabel:`Re-trigger` both the ``fcm_make_um`` and the ``fcm_make2_um`` tasks.  With experience you get to know when it's better to do a :guilabel:`Reload` and when to :guilabel:`Shutdown`  a suite.
@@ -104,7 +104,7 @@ Point your suite to the correct start dump.  Fixing this problem isn't quite as 
 
 Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.
 
-In your suite directory on PUMA (``~/roses/<suitename>``) use ``grep -R`` to search for the start dump name ``ab642a.da19880901_00_err`` in the suite files.  You should see 2 occurrences listed ::
+In your suite directory on PUMA2 (``~/roses/<suitename>``) use ``grep -R`` to search for the start dump name ``ab642a.da19880901_00_err`` in the suite files.  You should see 2 occurrences listed ::
 
   ros@puma2$ grep -r ab642a.da19880901_00_err *
   site/archer2.rc:{% set AINITIAL = AINITIAL_DIR + 'N96L85/ab642a.da19880901_00_err' %}
