@@ -7,7 +7,7 @@ Getting Set Up (Self-Study Instructions)
 .. warning:: 
    These instructions are for use on the UM Training Course held on 28th-30th November 2023. If you are using them for self-study please contact NCAS-CMS for instructions.
 
-.. _archer2:
+.. _archer:
    
 Set up your ARCHER2 connection
 ------------------------------
@@ -121,7 +121,9 @@ Logout of PUMA2 and back in again to pick up these changes.
 
 You will get a warning about not being able to find ``~/.ssh/ssh-setup``.  This can be ignored and will be resolved in the next step.
 
-You should also be prompted for your Met Office Science Repository Service password, then username. Note that it asks for your **password** first. Remember your MOSRS username is one word; usually firstnamelastname, all in lowercase. 
+You should also be prompted for your Met Office Science Repository Service password, then username. Note that it asks for your **password** first.
+
+Remember your MOSRS username is one word; usually firstnamelastname, all in lowercase. 
 
 If the password caching works, you should see: ::
 
@@ -147,7 +149,7 @@ In order to submit jobs to ARCHER2 from PUMA2, you will need to set up an ``ssh-
 
 Your ARCHER2 key is the one that you use to ssh into the ARCHER2 login nodes.  You need to copy both the public and private keys into your ``.ssh/`` directory on PUMA2.
 
-Open a new terminal from wherever you originally connected to ARCHER2 in :ref:`archer2`, and run the following command ::
+Open a new terminal from wherever you originally connected to ARCHER2 in :ref:`archer`, and run the following command ::
 
    scp ~/.ssh/id_rsa_archer2* <archer2-username>@login.archer2.ac.uk:/home/n02/n02-puma/<archer2-username>/.ssh
 
