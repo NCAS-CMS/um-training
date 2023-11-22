@@ -21,6 +21,7 @@ SSH key files
 ^^^^^^^^^^^^^
 
 Before you try and connect to ARCHER2, you need to make sure that you have the ssh-keys available on your computer.
+In these instructions, we've assumed the keys are called ``id_rsa_archer2`` and ``id_rsa_archer2.pub``. Replace with the name of your keys as appropriate.
 
 .. _terminal:
 
@@ -52,12 +53,12 @@ Connecting via MobaXTerm
 
 * From Chrome, go to page: https://mobaxterm.mobatek.net/download.html 
 * Under “Home Edition” select “Download now”
-* | On next page select **“MobaXterm Home Edition v23.3 (Portable edition)”**. 
+* | On next page select **“MobaXterm Home Edition v23.4 (Portable edition)”**. 
   | This should download the package.
 * Click the download icon in the bottom left hand corner. 
-* | Double-click on the **MobaXterm_Personal_23.3** application file, and select “Extract all”. 
+* | Double-click on the **MobaXterm_Personal_23.4** application file, and select “Extract all”. 
   | A new directory window will open up. 
-* Double-click **MobaXterm_Personal_23.3** to launch the application.
+* Double-click **MobaXterm_Personal_23.4** to launch the application.
 
 Next time, navigate to “Downloads” to open the application.
 
@@ -130,9 +131,11 @@ Copy our standard ``.profile`` and ``.bashrc`` files: ::
    puma2$ cp ~um1/um-training/puma2/.bash_profile .
    puma2$ cp ~um1/um-training/puma2/.bashrc . 
 
-Logout of PUMA2 and back in again to pick up these changes. You will get a warning about not being able to find ``~/.ssh/ssh-setup``.  This can be ignored and will be resolved in the next step.
+Logout of PUMA2 and back in again to pick up these changes. 
 
-You should then be prompted for your Met Office Science Repository Service password, then username. Note that it asks for your **password** first. Remember your MOSRS username is one word; usually firstnamelastname, all in lowercase. 
+You will get a warning about not being able to find ``~/.ssh/ssh-setup``.  This can be ignored and will be resolved in the next step.
+
+You should also be prompted for your Met Office Science Repository Service password, then username. Note that it asks for your **password** first. Remember your MOSRS username is one word; usually firstnamelastname, all in lowercase. 
 
 If the password caching works, you should see: ::
 
@@ -152,23 +155,21 @@ Finally, change the permission on your PUMA2 ``/home`` space: ::
 Set up your ssh-agent
 ---------------------
 
-In order to submit jobs to ARCHER2 from PUMA2, you will need to set up an ``ssh-agent`` and use it to cache the passphrase to your ARCHER2. 
+In order to submit jobs to ARCHER2 from PUMA2, you will need to set up an ``ssh-agent`` and use it to cache the passphrase to your ARCHER2 key. 
 
 **i. Copy your ARCHER2 ssh-key pair to PUMA2** 
 
 Your ARCHER2 key is the one that you use to ssh into the ARCHER2 login nodes.  You need to copy both the public and private keys into your ``.ssh/`` directory on PUMA2.
 
-Open a new terminal from wherever you originally connected to ARCHER2 in :ref:archer2:, and run the following command ::
+Open a new terminal from wherever you originally connected to ARCHER2 in :ref:`archer2`, and run the following command ::
 
    scp ~/.ssh/id_rsa_archer2* <archer2-username>@login.archer2.ac.uk:/home/n02/n02-puma/<archer2-username>/.ssh
 
 **ii. Start up your ssh-agent**
 
-Setting up an ``ssh-agent`` allows caching of your ARCHER2 key passphrase for a period of time. 
-
 First copy the ``ssh-setup`` script to your ``.ssh/`` directory. ::
 
-   puma2$ cp ~um/um-training/setup/ssh-setup ~/.ssh
+   puma2$ cp ~um1/um-training/setup/ssh-setup ~/.ssh
 
 Next log out of PUMA2 and back in again to start up the ``ssh-agent`` process. You should see the following message :: 
 
@@ -182,17 +183,17 @@ Add your ARCHER2 key to the ``ssh-agent``, by running ::
 
 Enter your passphrase when prompted. If the passphrase has been cached successfully you should see a message like this: ::
 
-   Identity add: /home/n02/n02/<archer2-username>/.ssh/id_rsa_archer2
+   Identity added: /home/n02/n02/<archer2-username>/.ssh/id_rsa_archer2
 
-The ``ssh-agent`` will continue to run even when you log out of PUMA2, however, it may stop from time to time, for example if PUMA2 is rebooted.  For instructions on what to do in this situation see :ref:`restarting-agent` in the Appendix.
+The ``ssh-agent`` will continue to run even when you log out of PUMA2. However, it may stop from time to time, for example if PUMA2 is rebooted.  For instructions on what to do in this situation see :ref:`restarting-agent` in the Appendix.
 
 **iv. Configure access to the ARCHER2 login nodes**
 
-Create a file ``.ssh/config`` (if it doesn't already exist), and add the following lines: ::
+Create a file ``~/.ssh/config`` (if it doesn't already exist), and add the following lines: ::
 
    # ARCHER2 login nodes
    Host ln* 
-   IdentityFile ~/.ssh/<archer-key>
+   IdentityFile ~/.ssh/id_rsa_archer2
 
 **iv. Verify the setup is correct**
 

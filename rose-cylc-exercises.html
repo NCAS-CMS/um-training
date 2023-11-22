@@ -53,10 +53,11 @@
 <li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">7. Further Exercises (2)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">8. Rose/Cylc Exercises</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#differencing-suites">8.1. Differencing suites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#exploring-the-suite-definition-files">8.2. Exploring the suite definition files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#starting-a-suite-in-held-mode">8.3. Starting a suite in “held” mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#discovering-running-suites-and-the-multi-suite-monitor-gui">8.4. Discovering running suites and the multi-suite monitor GUI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#adding-a-new-app-to-a-suite">8.5. Adding a new app to a suite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#graphing-a-suite">8.2. Graphing a suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exploring-the-suite-definition-files">8.3. Exploring the suite definition files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-a-suite-in-held-mode">8.4. Starting a suite in “held” mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#discovering-running-suites-and-the-multi-suite-monitor-gui">8.5. Discovering running suites and the multi-suite monitor GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-a-new-app-to-a-suite">8.6. Adding a new app to a suite</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#create-the-rose-application-directory">Create the Rose application directory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#create-the-rose-app-configuration-file">Create the Rose app configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add-a-new-task-to-the-suite-definition">Add a new task to the suite definition</a></li>
@@ -115,8 +116,20 @@ puma2$ diff -r u-cc654 &lt;your-suitename&gt;
 <li><p>Are the differences what you expected?</p></li>
 </ul>
 </section>
+<section id="graphing-a-suite">
+<h2><span class="section-number">8.2. </span>Graphing a suite<a class="headerlink" href="#graphing-a-suite" title="Link to this heading"></a></h2>
+<p>When developing suites, it can be useful to check what the run graph looks like after jinja evaluation, etc.</p>
+<p>The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ rosie checkout u-ce122
+puma2$ cd ~/roses/u-ce122
+puma2$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
+puma2$ cylc graph u-ce122               # view graph in browser
+</pre></div>
+</div>
+<p>A window containing the graph of the suite should appear. By default tasks in the same family are grouped together. Click the <span class="guilabel">Ungroup all families</span> button at the top of the window to expand the graph to view all tasks within this suite.</p>
+</section>
 <section id="exploring-the-suite-definition-files">
-<h2><span class="section-number">8.2. </span>Exploring the suite definition files<a class="headerlink" href="#exploring-the-suite-definition-files" title="Link to this heading"></a></h2>
+<h2><span class="section-number">8.3. </span>Exploring the suite definition files<a class="headerlink" href="#exploring-the-suite-definition-files" title="Link to this heading"></a></h2>
 <p>Change to the <code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suite-id&gt;</span></code> directory for your copy of <code class="docutils literal notranslate"><span class="pre">u-cc519</span></code>.</p>
 <p>Open the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file in your favourite editor.</p>
 <p>Look at the <code class="docutils literal notranslate"><span class="pre">[scheduling]</span></code> section.  This contains some Jinja2 variables (<code class="docutils literal notranslate"><span class="pre">BUILD</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">RECON</span></code>) which allow the user to select which tasks appear in the dependency graph. The dependency graph tells Cylc the order in which to run tasks.  The <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> and <code class="docutils literal notranslate"><span class="pre">recon</span></code> tasks are only included if the <code class="docutils literal notranslate"><span class="pre">BUILD</span></code> and <code class="docutils literal notranslate"><span class="pre">RECON</span></code> variables are set to true. These variables are located in the <code class="docutils literal notranslate"><span class="pre">rose-suite.conf</span></code> and can be changed using the rose edit GUI or by directly editing the <code class="docutils literal notranslate"><span class="pre">rose-suite.conf</span></code> file.  When you run a suite, a processed version of the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file, with all the Jinja2 code evaluated, is placed in your suite’s <code class="docutils literal notranslate"><span class="pre">cylc-run</span></code> directory.</p>
@@ -135,15 +148,15 @@ puma2$ diff -r u-cc654 &lt;your-suitename&gt;
 <p>As we saw earlier when changing the path to the start dump, some settings can’t be changed through the rose edit GUI.  Instead you have to edit the suite definition files directly.</p>
 <ul class="simple">
 <li><p>Can you find where the atmos processor decomposition is set for this suite?</p></li>
-<li><p>Change atmos processor decomposition to run on 2 nodes and set <code class="docutils literal notranslate"><span class="pre">ntasks</span></code> to 256.  Run the suite.</p></li>
-<li><p>What error message did you get?</p></li>
+<li><p>Change atmos processor decomposition to run on 2 nodes.  Run the suite.</p></li>
+<li><p>Did it work?  If not, what error message did you get?</p></li>
 </ul>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Look in the usual <code class="docutils literal notranslate"><span class="pre">job.out/job.err</span></code> or it may be in the <code class="docutils literal notranslate"><span class="pre">job-activity.log</span></code> file.</p>
 </div>
-<p>This error is caused by a mismatch in the number of nodes requested by the Slurm job script header and the number of processors requested by the <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> command which launches the executable. (For further information on Slurm and the sbatch command on ARCHER2 see: <a class="reference external" href="https://docs.archer2.ac.uk/user-guide/scheduler/">https://docs.archer2.ac.uk/user-guide/scheduler/</a>).</p>
-<p>In the <code class="docutils literal notranslate"><span class="pre">[[atmos]]</span> <span class="pre">[[[directives]]]</span></code> section change <code class="docutils literal notranslate"><span class="pre">--nodes=1</span></code> to <code class="docutils literal notranslate"><span class="pre">--nodes=2</span></code> to tell the Slurm scheduler that you require 2 nodes.</p>
+<p>You will get an error if the processor decomposition of the model does not match the number of tasks and nodes requested by Slurm.  For details on the Slurm batch system on ARCHER2 see: <a class="reference external" href="https://docs.archer2.ac.uk/user-guide/scheduler/">https://docs.archer2.ac.uk/user-guide/scheduler/</a>).</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">[[atmos]]</span> <span class="pre">[[[directives]]]</span></code> section, set <code class="docutils literal notranslate"><span class="pre">--nodes=2</span></code> and <code class="docutils literal notranslate"><span class="pre">--ntasks=256</span></code> to tell the Slurm scheduler that you require 2 nodes and a total of 256 MPI tasks.</p>
 <ul class="simple">
 <li><p>The suite should run this time. Did it run on 2 nodes as requested?</p></li>
 <li><p>How much walltime has been requested for the reconfiguration?</p></li>
@@ -151,12 +164,13 @@ puma2$ diff -r u-cc654 &lt;your-suitename&gt;
 <p>Now take a look at the <code class="docutils literal notranslate"><span class="pre">suite.rc</span></code> file for your other suite (the one copied from <code class="docutils literal notranslate"><span class="pre">u-cc654</span></code>). See how it differs.  This one is set up to run on multiple platforms.</p>
 <ul class="simple">
 <li><p>Can you see the more complex dependency graph?</p></li>
+<li><p>Why do you not need to adjust the Slurm directives to change the processor decomposition in this suite?</p></li>
 <li><p>Can you see where to change the reconfiguration walltime for this suite?</p></li>
 </ul>
-<p>This has just given you a very brief look at the suite definitions files.  More information can be found in the cylc documentation.</p>
+<p>This has just given you a very brief look at the suite definitions files.  More information can be found in the cylc documentation: <a class="reference external" href="https://cylc.github.io/cylc-doc/7.8.8/html/index.html">https://cylc.github.io/cylc-doc/7.8.8/html/index.html</a></p>
 </section>
 <section id="starting-a-suite-in-held-mode">
-<h2><span class="section-number">8.3. </span>Starting a suite in “held” mode<a class="headerlink" href="#starting-a-suite-in-held-mode" title="Link to this heading"></a></h2>
+<h2><span class="section-number">8.4. </span>Starting a suite in “held” mode<a class="headerlink" href="#starting-a-suite-in-held-mode" title="Link to this heading"></a></h2>
 <p>This allows you to trigger the running of tasks manually.</p>
 <p>To start a suite in held mode add <code class="docutils literal notranslate"><span class="pre">--</span> <span class="pre">--hold</span></code> to the end of the <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">suite-run</span></code> command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ rose suite-run -- --hold
@@ -166,7 +180,7 @@ puma2$ diff -r u-cc654 &lt;your-suitename&gt;
 <p>Try doing this as a way to run the reconfiguration only in one of your suites.</p>
 </section>
 <section id="discovering-running-suites-and-the-multi-suite-monitor-gui">
-<h2><span class="section-number">8.4. </span>Discovering running suites and the multi-suite monitor GUI<a class="headerlink" href="#discovering-running-suites-and-the-multi-suite-monitor-gui" title="Link to this heading"></a></h2>
+<h2><span class="section-number">8.5. </span>Discovering running suites and the multi-suite monitor GUI<a class="headerlink" href="#discovering-running-suites-and-the-multi-suite-monitor-gui" title="Link to this heading"></a></h2>
 <p>Suites that are currently running can be detected with command line or GUI tools:</p>
 <p>Submit 2 of your suites. It doesn’t matter what tasks they are running for this exercise; compilation, recon or model run.</p>
 <p>Now try running the command <code class="docutils literal notranslate"><span class="pre">cylc</span> <span class="pre">scan</span></code>. This lists your currently running suites.  For example:</p>
@@ -182,7 +196,7 @@ u-ag761 ros@localhost:7776
 <p>Double clicking on a suite in <code class="docutils literal notranslate"><span class="pre">gscan</span></code> GUI opens the Cylc GUI window, which you will be very familiar with by now. For each suite open the Cylc GUI window and stop the suite by going to <span class="guilabel">Control &gt; Stop Suite</span>, selecting  <span class="guilabel">Stop after killing active tasks</span> and clicking <span class="guilabel">Ok</span>.</p>
 </section>
 <section id="adding-a-new-app-to-a-suite">
-<h2><span class="section-number">8.5. </span>Adding a new app to a suite<a class="headerlink" href="#adding-a-new-app-to-a-suite" title="Link to this heading"></a></h2>
+<h2><span class="section-number">8.6. </span>Adding a new app to a suite<a class="headerlink" href="#adding-a-new-app-to-a-suite" title="Link to this heading"></a></h2>
 <p>A Rose application or “Rose app” is a Rose configuration for running an executable command, encapsulating details such as scripts, programs and settings.</p>
 <p>To add a new app to a suite, we first create a directory to hold the app files. The main details are specified in a configuration file <code class="docutils literal notranslate"><span class="pre">rose-app.conf</span></code>. We may also specify some metadata to tell the general user what inputs to the task mean (this goes under a <code class="docutils literal notranslate"><span class="pre">meta/</span></code> sub-directory or we may reference some standard metadata held elsewhere). Any scripts or executables needed by the new app can be added into an app <code class="docutils literal notranslate"><span class="pre">bin/</span></code> directory. General scripts that aren’t specific to the app should go in the <em>suite</em> <code class="docutils literal notranslate"><span class="pre">bin/</span></code> directory.</p>
 <p>Remember to <code class="docutils literal notranslate"><span class="pre">fcm</span> <span class="pre">add</span></code> any new files that you add to the suite so they will be added to the repository when you next commit.</p>
@@ -300,8 +314,8 @@ Hello, Jupiter!
 </section>
 <section id="references">
 <h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
-<p>A fuller discussion of Rose metadata can be found at <a class="reference external" href="https://metomi.github.io/rose/doc/html/tutorial/rose/metadata.html">https://metomi.github.io/rose/doc/html/tutorial/rose/metadata.html</a>.</p>
-<p>Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For further details, see the Rose documentation at <a class="reference external" href="https://metomi.github.io/rose/doc/html/tutorial/rose/applications.html">https://metomi.github.io/rose/doc/html/tutorial/rose/applications.html</a>.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see <a class="reference external" href="https://metomi.github.io/rose/doc/html/api/rose-built-in-applications.html">https://metomi.github.io/rose/doc/html/api/rose-built-in-applications.html</a>.</p>
+<p>A fuller discussion of Rose metadata can be found at <a class="reference external" href="https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/metadata.html">https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/metadata.html</a>.</p>
+<p>Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For further details, see the Rose documentation at <a class="reference external" href="https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/applications.html">https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/applications.html</a>.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see <a class="reference external" href="https://metomi.github.io/rose/2019.01.8/html/api/rose-built-in-applications.html">https://metomi.github.io/rose/2019.01.8/html/api/rose-built-in-applications.html</a>.</p>
 </section>
 </section>
 </section>
