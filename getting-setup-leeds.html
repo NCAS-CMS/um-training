@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Set Up (Self-Study Instructions) &mdash; NCAS Unified Model Introduction</title>
+  <title>Getting Set Up (Leeds Training Course) &mdash; NCAS Unified Model Introduction</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -71,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Getting Set Up (Self-Study Instructions)</li>
+      <li class="breadcrumb-item active">Getting Set Up (Leeds Training Course)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/getting-setup-leeds.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -81,8 +81,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="getting-set-up-self-study-instructions">
-<h1>Getting Set Up (Self-Study Instructions)<a class="headerlink" href="#getting-set-up-self-study-instructions" title="Link to this heading"></a></h1>
+  <section id="getting-set-up-leeds-training-course">
+<h1>Getting Set Up (Leeds Training Course)<a class="headerlink" href="#getting-set-up-leeds-training-course" title="Link to this heading"></a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>You <strong>MUST</strong> have PUMA2, ARCHER2 and MOSRS accounts setup before starting this section.</p>
@@ -209,7 +209,7 @@ puma2$ cp ~um1/um-training/puma2/.bashrc .
 <p>In order to submit jobs to ARCHER2 from PUMA2, you will need to set up an <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> and use it to cache the passphrase to your ARCHER2 key.</p>
 <p><strong>i. Copy your ARCHER2 ssh-key pair to PUMA2</strong></p>
 <p>Your ARCHER2 key is the one that you use to ssh into the ARCHER2 login nodes.  You need to copy both the public and private keys into your <code class="docutils literal notranslate"><span class="pre">.ssh/</span></code> directory on PUMA2.</p>
-<p>Open a new terminal from wherever you originally connected to ARCHER2 in <a class="reference internal" href="getting-setup-selfstudy.html#archer2"><span class="std std-ref">Set up your ARCHER2 connection</span></a>, and run the following command</p>
+<p>Open a new terminal from wherever you originally connected to ARCHER2 in <a class="reference internal" href="#archer2"><span class="std std-ref">Set up your ARCHER2 connection</span></a>, and run the following command</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer2</span><span class="o">*</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span><span class="nd">@login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">n02</span><span class="o">/</span><span class="n">n02</span><span class="o">-</span><span class="n">puma</span><span class="o">/&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/.</span><span class="n">ssh</span>
 </pre></div>
 </div>
