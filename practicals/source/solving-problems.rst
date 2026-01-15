@@ -1,14 +1,20 @@
 Solving Common UM Problems
 ==========================
    
+.. admonition:: Aims
+
+   In this section you will learn:
+     * How to troubleshoot common UM errors
+     * How to stop, reload and restart a workflow
+ 
 This section exposes you to more typical UM errors and hints at how to find and fix those errors.
 
 You may encounter other errors, often as a result of mistyping, for which solution hints are not provided.
 
-Set up N96 GA7.0 AMIP example suite
------------------------------------
+Set up N96 GA7.0 AMIP workflow
+------------------------------
 
-Find and make a copy of suite ``u-cc654``.
+Find and make a copy of suite ``u-dp084``.
 
 Firstly make the essential changes required to run the suite.  That is:
 
@@ -34,13 +40,14 @@ Errors resolved in the code extraction
 
 The suite should fail in the ``fcm_make_um`` task. This is the task that extracts all the required code from the repository including any branches.  The failure will be indicated in the Cylc GUI with a red square and the state ``failed``.  
 
-* What is the error? 
+.. admonition:: Question
 
-.. 
-   Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files through Rose Bush, as we have done previously, however you can also view them quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View -> job stderr`
+   * What is the error? 
 
-.. hint::
-   Examine the ``job.err`` and ``job.out`` to find the cause of the problem. You can view these files quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View -> job stderr`
+   .. hint::
+      Examine the ``job.err`` and ``job.out`` to find the cause of the problem either on the command line or via the cylc GUI or TUI.
+
+. You can view these files quickly and easily directly from the Cylc GUI.  **Right-click** on the failed ``fcm_make_um`` task and select :guilabel:`View -> job stderr`
 
 This indicates that the branch cannot be found due to an incorrect branch name. You will need to look at the UM code repository through Trac on MOSRS (https://code.metoffice.gov.uk/trac/um/browser) to determine the correct name.
 

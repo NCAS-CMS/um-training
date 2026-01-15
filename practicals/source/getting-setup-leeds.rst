@@ -1,11 +1,11 @@
-Getting Set Up (Self-Study Instructions)
+Getting Set Up (Leeds Training Course)
 ========================================
 
 .. warning::
    You **MUST** have PUMA2, ARCHER2 and MOSRS accounts setup before starting this section.
 
 .. warning:: 
-   These instructions are for use on the UM Training Course held on 28th-30th November 2023. If you are using them for self-study please contact NCAS-CMS for instructions.
+   These instructions are for use on the in-person UM Training Course held in Leeds. If you are using them for self-study please contact NCAS-CMS for instructions.
 
 .. _archer:
    

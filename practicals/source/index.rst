@@ -6,7 +6,7 @@
 NCAS Unified Model Introduction Course
 ======================================
 
-Practical exercises for UM training course in Leeds, 28th-30th November 2023. 
+Practical exercises for UM training course. 
 
 Can also be used for self-study.
 
@@ -17,10 +17,10 @@ NCAS Computational Modelling Services: http://cms.ncas.ac.uk/
    :maxdepth: 1
    :numbered: 2
 
-   getting-setup-leeds
+   todo-list
+   getting-setup-selfstudy
    working-with-suites
    running
-   fcm-tutorial
    solving-problems
    further-exercises-1
    further-exercises-2

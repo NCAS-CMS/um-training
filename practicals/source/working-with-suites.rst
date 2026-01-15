@@ -1,10 +1,18 @@
 Working with Suites
 ===================
 		
+.. admonition:: Aims
+
+   In this section you will learn:
+       * How to find, download and edit Rose suites
+
 Suite Discovery and Management: rosie go
 ----------------------------------------
 
-**Rosie go** is the suite manager GUI. It acts as a hub for all your suite work. From ``rosie go`` it is possible to search for suites, create, checkout, delete, edit, run suites and more.  We will take a look at the main features here.  
+.. Important::
+   The ``rosie go`` GUI is being phased out and will be replaced with command line tools in the next version of the Rose software.  ``rosie go`` will be available on PUMA2 until the end of November 2026.  
+
+**Rosie go** is the suite discovery GUI. From ``rosie go`` it is possible to search for suites, checkout, copy and delete suites.
 
 Launch ``rosie go`` by typing: ::
 
@@ -22,7 +30,7 @@ More advanced queries can be run by clicking the :guilabel:`+` button next to th
 
 * Select **idx** in the property box and **eq** in the operator box and then enter the value **u-ag137**. Click :guilabel:`Query`.
 
-This time you should only see one suite listed in the results pane.
+This time you should only see one id listed in the results pane.
 
 * Now run a query to list all suites **owned by rosalynhatcher containing ARCHER2 in their title**.
 
@@ -37,19 +45,20 @@ The :guilabel:`Search History` panel should now be displayed on the left-hand si
 Close the :guilabel:`Search History` Panel by clicking the close button (:guilabel:`X`) in the top-right of the panel.
 
 Viewing suite information
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 To obtain more information about a suite listed in the search results you can do one of two things:
 
-1. Hold your mouse over the suite to display a tooltip containing more details
+1. Hold your mouse over the suite id to display a tooltip containing more details
 2. Right click on the suite and select :guilabel:`Info` in the pop-up menu to display a dialog box containing further details
 
-* What project is suite ``u-ab878`` associated with?
+.. admonition:: Question
+   * What project is suite ``u-ab878`` associated with?
 
-Suite search results can be ordered by property in either ascending or descending order. To do so, click on the column title for the property you wish to order by so an arrow is displayed next to it indicating the order in which the property is being sorted.
+Search results can be ordered by property in either ascending or descending order. To do so, click on the column title for the property you wish to order by so an arrow is displayed next to it indicating the order in which the property is being sorted.
 
-Checking out an existing suite
+Checking out an existing suite 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Right-clicking on a suite displays a pop-up menu from which you can perform many functions on the suite; e.g. checkout, copy, delete, run, etc.  We will perform many of these actions in subsequent exercises but to begin with we will just checkout an existing suite to use in the :ref:`editing_suites` exercises. To view a suite it must be checked out first.
+Right-clicking on a suite displays a pop-up menu from which you can perform many functions on the suite; e.g. checkout, copy, delete, etc.  We will perform many of these actions in subsequent exercises but to begin with we will just checkout an existing suite to use in the :ref:`editing_suites` exercises. To view a suite it must be checked out first.
 
 * Right-click on suite ``u-ag137`` and select :guilabel:`Checkout Suite` from the pop-up menu. 
 
@@ -63,12 +72,14 @@ Other useful features
 ^^^^^^^^^^^^^^^^^^^^^
 To see what suites you have checked out click the :guilabel:`Show local suites` button to the left of the search box (represented by the *house* icon).  You should have at least 1 suite listed.
 
-* What do you think the *house* icon in the local column indicates?
+.. admonition:: Question
+
+   * What do you think the *house* icon in the local column indicates?
 
 .. _editing_suites:
 
-Editing Suites: rose edit
--------------------------
+Editing Suites/Workflows: rose edit
+-----------------------------------
 
 The ``rose config editor`` in combination with the metadata file, which describes UM inputs, is the GUI for editing UM suites.  Building and running the UM under Rose requires, at least, two separate apps: an ``fcm_make`` app to build the model executable and a ``um`` app to configure the runtime namelists and environment variables.  Coupled models may require additional ``fcm_make`` apps, one for each executable to be built.
 
@@ -76,7 +87,7 @@ Launch the config editor GUI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Right click on suite ``u-ag137`` and select :guilabel:`Edit Suite`.  The ``rose edit`` GUI will start up.
 
-On the left hand side is a navigation panel containing a tree listing the apps in the suite.  For this particular suite these are:
+On the left hand side is a navigation panel containing a tree listing the apps in the suite configuration.  For this particular suite these are:
 
 * *suite conf* - General suite configuration options
 * *fcm_make_pp* - Extract and build the post-processing scripts
@@ -90,7 +101,7 @@ On the left hand side is a navigation panel containing a tree listing the apps i
 
 Explore the GUI
 ^^^^^^^^^^^^^^^
-Click on the triangle to the left of :guilabel:`suite conf` to expand that section.  Click on :guilabel:`Build and run switches`.  A panel will appear on the right-hand side containing options for controlling what tasks will be run for this suite.  You can see that it will build the UM and reconfiguration executables, run the reconfiguration and then run the model.
+Click on the triangle to the left of :guilabel:`suite conf` to expand that section.  Click on :guilabel:`Build and run switches`.  A panel will appear on the right-hand side containing options for controlling what tasks will be run for this workflow.  You can see that it will build the UM and reconfiguration executables, run the reconfiguration and then run the model.
 
 .. note:: We generally use a **common notation** to help users navigate through the GUI and to help us help you with questions. Getting to "UM Science Settings" would be indicated like this: :guilabel:`um --> namelist --> UM Science Settings`.  This notation will be used throughout the rest of this tutorial.
 
@@ -104,14 +115,14 @@ Some larger science sections have been been divided into subsections; take a loo
 
 Trigger ignored settings are hidden by default and only appear to the user when the appropriate options are selected. Open the :guilabel:`Gravity Wave Drag` panel, if you change ``i_gwd_vn`` from ``5`` to ``4`` the options available change. Click the :guilabel:`save` button to apply these changes to your app. Let's take a look at what effect this has had to the ``rose-app.conf`` file, run ``fcm diff`` in the suite directory.
 
-  ::
+.. code-block:: bash
 
     puma2$ cd ~/roses/u-ag137
     puma2$ fcm diff -g
 
 You should see that several namelist items have had ``!!`` added to the start of the line. This tells Rose to ignore these items when processing the app file into Fortran namelists. Should you wish to see all variables on a panel select :guilabel:`View All Ignored Variables` and :guilabel:`View Latent Variables` from the :guilabel:`View` menu.
 
-Switch back to the Rose edit window and click the :guilabel:`Undo` button to revert the changes and then :guilabel:`Save` the suite again. To view all changes made to the suite in the current session go to :guilabel:`Edit > Undo/Redo Viewer`.
+Switch back to the Rose edit window and click the :guilabel:`Undo` button to revert the changes and then :guilabel:`Save` the suite again. To view all changes made to the suite configuration in the current session go to :guilabel:`Edit > Undo/Redo Viewer`.
 
 Error checking of UM inputs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -121,8 +132,10 @@ First let's check if the suite contains any options which trigger the fail-if an
 
 Now let's try and introduce both a warning and a failure. We're going to change the boundary layer option ``alpha_cd``. Either navigate to :guilabel:`Section 03 - Boundary Layer --> Implicit solver options` or type ``alpha_cd`` into the search bar. Click on the :guilabel:`+` sign to add an array element to ``alpha_cd`` and type ``1.5`` into the new box. Next navigate to :guilabel:`Reconfiguration and Ancillary Control --> Output dump grid sizes and levels` and increase the number of ozone levels to ``86``. Now run the fail-if, warn-if checker again.
 
-* What is the error?
-* What is the warning?
+.. admonition:: Question
 
-Use the :guilabel:`Undo` button to put the settings back to how we found them and run the checker again. It is strongly recommended that whenever namelists and environment variables are modified that the fail-if, warn-if checker is applied before running the suite.
+   * What is the error?
+   * What is the warning?
+
+Use the :guilabel:`Undo` button to put the settings back to how we found them and run the checker again. It is strongly recommended that whenever namelists and environment variables are modified that the fail-if, warn-if checker is applied before running the workflow.
 
