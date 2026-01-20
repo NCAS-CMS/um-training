@@ -1,6 +1,10 @@
 Getting Set Up (Leeds Training Course)
 ========================================
 
+.. todo::
+
+   Decided how to handle nstructions for both NCAS and user owned laptops
+
 .. warning::
    You **MUST** have PUMA2, ARCHER2 and MOSRS accounts setup before starting this section.
 

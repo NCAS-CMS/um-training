@@ -3,12 +3,19 @@ Further Exercises (2)
    
 The exercises in this section are all optional.  We suggest you pick and choose the exercises that you feel are most relevant to the work you are/will be doing.
 
-.. note:: Use your copy of suite ``u-cc654`` for these exercises unless otherwise specified.
+.. admonition:: Optional Exercises
+
+   * Postprocessing (archive and transfer of model data)
+   * Using IO Servers
+   * Writing NetCDF output from the UM
+   * Running the coupled model
+   
+.. note:: Use your copy of suite ``u-dp084`` for these exercises unless otherwise specified.
 
 Post-Processing (archive and transfer of model data)
 ----------------------------------------------------
 
-When your model runs it outputs data onto the ARCHER2 ``/work`` disk (``/projects`` on Monsoon2). If you are running a long integration and/or at high resolution data will mount up very quickly and you will need to move the data off of ARCHER2; for example to JASMIN.  The post-processing app (postproc) is used within cycling suites to automatically *archive*  model data and can be optionally configured to transfer the data from ARCHER2 to the JASMIN data facility.  The app archives and deletes model output files, not only for the UM, but also NEMO and CICE in coupled configurations.
+When your model runs it outputs data onto the ARCHER2 ``/work`` disk (``/projects`` on Monsoon3). If you are running a long integration and/or at high resolution data will mount up very quickly and you will need to move the data off of ARCHER2; for example to JASMIN.  The post-processing app (postproc) is used within cycling suites to automatically *archive*  model data and can be optionally configured to transfer the data from ARCHER2 to the JASMIN data facility.  The app archives and deletes model output files, not only for the UM, but also NEMO and CICE in coupled configurations.
 
 Let's try configuring your suite to archive to a staging location on ARCHER2:
 
@@ -50,7 +57,7 @@ Navigate to :guilabel:`suite conf --> Domain Decomposition --> Atmosphere` and c
 
 :guilabel:`Save` and then :guilabel:`Run` the suite.
 
-You will see lots of IO server log files in ``~/cylc-run/<suitename>/work/<cycle>/atmos_main`` which can be ignored for the most part.
+You will see lots of IO server log files in ``~/cylc-run/<workflow-name>/run1/work/<cycle>/atmos_main`` which can be ignored for the most part.
 
 Try repeating the :ref:`change_dump_freq` experiment with the IO servers switched on - you should see much faster performance.
 
@@ -85,7 +92,7 @@ The coupled model consists of the UM Atmosphere model coupled to the NEMO ocean 
 
 Checkout and run the suite
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-Checkout and open the suite ``u-cs147``.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called ``fcm_make_um`` and ``fcm_make_ocean`` respectively. Similarly there are separate apps for the atmos and ocean model settings, called ``um`` and ``nemo_cice``.
+Checkout and open the suite ``u-dw272``.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called ``fcm_make_um`` and ``fcm_make_ocean`` respectively. Similarly there are separate apps for the atmos and ocean model settings, called ``um`` and ``nemo_cice``.
 
 Make the usual changes required to run the suite (i.e. set username, account code, queue). If you are following the tutorial as part of an organised training event, select one of the special queues, otherwise, select to run in the ``short`` queue.
 
@@ -97,29 +104,39 @@ Exploring the suite
 ^^^^^^^^^^^^^^^^^^^
 Whilst the suite is compiling and running which will take around 40 minutes, take some time to look around the suite.
 
-* How many nodes is the atmosphere running on?
-* How many nodes is the ocean running on?
-* What is the cycling frequency?
+.. admonition:: Questions
+
+   * How many nodes is the atmosphere running on?
+   * How many nodes is the ocean running on?
+   * What is the cycling frequency?
 
 The version of NEMO used in this suite (and most suites you will come across) uses the XML IO Server (XIOS) to wite its diagnostic output. XIOS runs on dedicated nodes (one node in this case). Running ``squeue`` will show three status entries corresponding to the Atmosphere, Ocean, and XIOS components of the coupled suite. XIOS is running in ``multiple-file`` mode with 6 servers.
 
-* Can you see where the NEMO model settings appear? 
+.. admonition:: Question
+
+   * Can you see where the NEMO model settings appear? 
 
 Look under :guilabel:`Run settings (namrun)`. The variables ``nn_stock`` and ``nn_write`` control the frequency of output files.
 
-* How often are NEMO restart files written?
+.. admonition:: Question
 
-.. hint:: The NEMO timestep length is set as variable ``rn_rdt``
+   * How often are NEMO restart files written?
+
+   .. hint:: The NEMO timestep length is set as variable ``rn_rdt``
 
 Now browse the CICE settings.
 
-* Can you find what the CICE restart frequency is set to? 
+.. admonition:: Question
 
-NEMO, CICE and XIOS are developed separately from the UM, and you should have seen that they work in very different ways. See the following websites for documentation: 
+   * Can you find what the CICE restart frequency is set to? 
 
-* http://oceans11.lanl.gov/trac/CICE 
-* http://www.nemo-ocean.eu/
-* https://forge.ipsl.jussieu.fr/ioserver
+.. admonition:: Further Reading
+
+   NEMO, CICE and XIOS are developed separately from the UM, and you should have seen that they work in very different ways. See the following websites for documentation: 
+
+   * http://oceans11.lanl.gov/trac/CICE 
+   * http://www.nemo-ocean.eu/
+   * https://forge.ipsl.jussieu.fr/ioserver
 
 Output files
 ^^^^^^^^^^^^
@@ -127,30 +144,30 @@ Output files
 
 NEMO logging information is written to:
 
- ``~/cylc-run/<suitename>/work/<cycle>/coupled/ocean.output``
+ ``~/cylc-run/<workflow-name>/run1/work/<cycle>/coupled/ocean.output``
 
 CICE logging information is written to: 
 
- ``~/cylc-run/<suitename>/work/<cycle>/coupled/ice_diag.d``
+ ``~/cylc-run/<workflow-name>/run1/work/<cycle>/coupled/ice_diag.d``
 
-If the model fails some error messages may also be written to the file ``~/cylc-run/<suitename>/work/<cycle>/coupled/debug.root.01`` or ``debug.root.02``
+If the model fails some error messages may also be written to the file ``~/cylc-run/<workflow-name>/run1/work/<cycle>/coupled/debug.root.01`` or ``debug.root.02``
 
 When something goes wrong with the coupled model it can be tricky to work out what has gone wrong. NEMO errors may not appear at the end of the file but will be flagged with the string ``E R R O R``. 
 
 **Restart files** 
 
-Restart files go to the subdirectories ``NEMOhist`` and ``CICEhist`` in the standard data directory ``~/cylc-run/<suitename>/share/data/History_Data``.
+Restart files go to the subdirectories ``NEMOhist`` and ``CICEhist`` in the standard data directory ``~/cylc-run/<workflow-name>/run1/share/data/History_Data``.
 
 **Diagnostic files**
 
-Diagnostic files are left in the ``~/cylc-run/<suitename>/work/<cycle>/coupled/`` directory. 
+Diagnostic files are left in the ``~/cylc-run/<workflow-name>/run1/work/<cycle>/coupled/`` directory. 
 
-CICE files start with ``<suitename>i``. Once your suite has run you should see the following CICE file (and more): :: 
+CICE files start with ``<workflow-name>i``. Once your suite has run you should see the following CICE file (and more): :: 
 
   archer$ ls ce119i*
   ce119i.10d.1850-01-10.nc
 
-NEMO diagnostic files are named ``<suitename>o*grid_[TUVW]*``. To see what files are produced, run: :: 
+NEMO diagnostic files are named ``<workflow-name>o*grid_[TUVW]*``. To see what files are produced, run: :: 
 
   archer$ ls ce119o*grid*
 
@@ -160,61 +177,3 @@ In this case each XIOS IO server writes to a separate file. To concatenate these
 
 .. note:: The coupled atmos-ocean model setup is complex so we recommend you find a suite already setup for your needs.  If you find you do need to modify a coupled suite setup please contact NCAS-CMS for advice. 
 
-Running the Nesting Suite
--------------------------
-
-The Nesting Suite drives a series of nested limited area models (LAM) from a global model.  It allows the user to specify the domains and it then automatically creates the required ancillary files and lateral boundary condition files.
-
-Checkout and run the suite
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-Checkout and open the suite ``u-ce122``.  There are a number of tasks for creating ancillary files (``ancil_*`` and ``ants_*``).  The global model set up is in :guilabel:`glm_um` and the LAMs are in :guilabel:`um`.  The task ``um-createbc`` creates the lateral boundary condition files.
-
-Under :guilabel:`suite conf --> jinja2:suite.rc` are the main panels for controlling the Nesting Suite. Make the usual changes required to run the suite (i.e. set username, account code, queue).
-
-If following the tutorial as part of an organised training event, select one of the special queues, otherwise, select the ``short`` queue.
-
-:guilabel:`Run` the suite.
-
-This particular suite has a global model and one limited area model. It should complete in about 45 - 60 minutes.
-
-Exploring the Suite
-^^^^^^^^^^^^^^^^^^^
-The Driving Model set up panel allows the user to specify the resolution of the global model and the number of nested regions.
-
-The :guilabel:`Nested Region 1` set up panel specifies the latitude and longitude of the centre of the first nested region.  All the other limited area models have the same centre.
-
-A useful way to get this information is to use Google Maps.  Find the place you want as a centre and then press ``control-left mouse`` and a little window with the latitude and longitude appears.
-
- * Can you find out where the first LAM is located?
-
- .. hint:: Look at the orography file output during the ancillary creation.
-
-The :guilabel:`resolution 1` set up panel specifies the grid and the run length.
-
-The :guilabel:`Config 1` set up panel specifies the science configuration to be run.  Each LAM can have multiple science configurations.
-
-Initial Data
-^^^^^^^^^^^^
-The initial data for the global model is in ``share/cycle/<cycle time>/glm/ics``
-
-The initial data for the first LAM is in ``share/cycle/<cycle time>/Regn1/resn_1/RA1M/ics``
-
-The RA1M is the name you gave to the first science configuration.
-
-The LBCs for the first LAM are in ``share/cycle/<cycle time>/Regn1/resn_1/RA1M/lbcs``.
-
-The ancillary files
-^^^^^^^^^^^^^^^^^^^
-These are in ``share/data/ancils/Regn1/resn_1``
-
-The output files
-^^^^^^^^^^^^^^^^
-The global model output is in ``share/cycle/<cycle time>/glm/um``. This also contains contains the data for creating the LBC files (``umglaa_cb*``) for the first LAM.
-
-Diagnostic files can be found under ``work/<cycle time>`` in an application directory.  For example, the region1 forecast diagnostics is in ``work/<cycle time>/Regn1_resn_1_RA1M_um_fcst_000``. This will include the pe_output files.
-
-The output for the first LAM is in ``share/cycle/<cycle time>/Regn1/resn_1/RA1M/um``.
-
-Further Information
-^^^^^^^^^^^^^^^^^^^
-This has been a very brief overview of the functionality of the Nesting Suite. The Nesting Suite is developed and maintained by Stuart Webster at the Met Office.  He has a web page all about the Nesting Suite at https://code.metoffice.gov.uk/trac/rmed/wiki/suites/nesting. This includes a more detailed tutorial.

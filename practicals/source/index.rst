@@ -18,7 +18,7 @@ NCAS Computational Modelling Services: http://cms.ncas.ac.uk/
    :numbered: 2
 
    todo-list
-   getting-setup-selfstudy
+   getting-setup-leeds
    working-with-suites
    running
    solving-problems

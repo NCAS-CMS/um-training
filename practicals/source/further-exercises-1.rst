@@ -1,9 +1,14 @@
 Further Exercises (1)
 =====================
 
-Now that we have built the suite, there is no need to rebuild it each time you run it.  Switch off compilation of the UM and reconfiguration.
+.. admonition:: Aims
 
-.. hint:: See the :guilabel:`suite conf` section in the Rose edit GUI.
+   In this section you will learn how to:
+     * Change the model output logging behaviour
+     * Change the processor decomposition and output dump frequency
+     * Add a new STASH request
+     * Run the Reconfiguration
+     * Set up a longer running workflow
 
 Change the model output logging behaviour
 -----------------------------------------
@@ -14,12 +19,14 @@ Set ``ltimer`` to ``True``.  Timer diagnostics outputs timing information and ca
 
 :guilabel:`Save` and :guilabel:`Run` the suite.
 
-Check the output from processor 0 in the``fort6.pe000`` file.
+Check the output from processor 0 in the ``fort6.pe000`` file.
 
-* Which routine took the most time?
-* How many times was ``Atm_Step`` called?
-* How many time steps did the model run for?
-* Which PE was the slowest to run AP2 Boundary Layer? Which was the fastest?
+.. admonition:: Questions
+
+   * Which routine took the most time?
+   * How many times was ``Atm_Step`` called?
+   * How many time steps did the model run for?
+   * Which PE was the slowest to run AP2 Boundary Layer? Which was the fastest?
 
 Switch on "IO timing"
 
@@ -32,15 +39,19 @@ Change the processor decomposition
 
 Navigate to :guilabel:`suite conf --> Domain Decomposition --> Atmosphere`.
 
-* What is the current processor decomposition?
-* Why is this not a good way to run the model?
+.. admonition:: Questions
 
-.. hint::
-   The base ARCHER2 charging unit is a node irrespective of how many cores on the node are being used. ARCHER2 has 128 cores per node, and for the UM each MPI task and OpenMP thread is mapped to a separate core.  So in this case we are running 10x16 (x 2 OMP threads) for a total of 320 cores, but are charged for 3 nodes (384 cores).
+   * What is the current processor decomposition?
+   * Why is this not a good way to run the model?
+
+   .. hint::
+      The base ARCHER2 charging unit is a node irrespective of how many cores on the node are being used. ARCHER2 has 128 cores per node, and for the UM each MPI task and OpenMP thread is mapped to a separate core.  So in this case we are running 10x16 (x 2 OMP threads) for a total of 320 cores, but are charged for 3 nodes (384 cores).
 
 Try experimenting with different processor decompositions (E.g. 10x32, 16x32, etc)
 
-* How do the timings compare to when you ran on 3 nodes?
+.. admonition:: Question
+
+   * How do the timings compare to when you ran on 3 nodes?
 
 You can come up with a performance vs processor count curve in this way which might be valuable if you are planning an experiment - it's also worth adding in the CU cost calculation when doing this.  An example of this can be seen below:
 
@@ -59,7 +70,9 @@ Exploring STASH
 ^^^^^^^^^^^^^^^
 Navigate to :guilabel:`um --> namelist --> Model Input and Output --> STASH Requests and Profiles`. Look at the time profiles called ``TALLTS`` and ``T6H``.
 
-* What are they doing?
+.. admonition:: Question
+
+   * What are they doing?
 
 ``TALLTS`` says output on every timestep, ``T6H`` says output 6 hourly.
 
@@ -81,7 +94,9 @@ The model should fail with an error message similar to the following:
 
 This means that the number of output fields exceeds the limit set for a particular stream (the default is 4096 fields); in this case the stream attached to unit 14.  To find out what stream unit 14 is take a look in the ``fort6.pe000`` file and search for "Unit 14". You should see that the file opened on unit 14 is ``<suite-id>a.pc19880901``, so this is the ``pc`` stream.  Back in ``rose edit`` for this suite look at the STASH usage profile for ``upc``.
 
-* What is the file ID of the failing output stream?
+.. admonition:: Question
+
+   * What is the file ID of the failing output stream?
 
 Now navigate to the window for this stream under :guilabel:`Model Input and Output --> Model Output Streams`.  This defines the output stream.  You should see confirmation of the base output file name to be ``*.pc*``.  Changing the reinitialisation frequency by modifying ``reinit_step`` and/or ``reinit_unit`` is the best way to fix this header problem. This tells the model to create new output files at a specified frequency, so individual files don't get massively large.
 
@@ -103,7 +118,9 @@ Select a STASH item and click :guilabel:`Add` to add it to the list of STASH req
 
 Once you have added a new STASH request, you need to run a macro to generate an index for the namelist.  To do so click on the :guilabel:`Macros` button, then select :guilabel:`stash_indices.TidyStashTransform`. A box will pop up listing the changes the editor is going to make, click :guilabel:`Apply`.
 
-* Run the model.  Did it work?
+.. admonition:: Question
+
+   * Run the model.  Did it work?
 
 .. _change_dump_freq:
    
@@ -120,15 +137,21 @@ Reset the STASH output for stream UPC to 6 hourly and the file reinitialisation 
 
 Navigate to :guilabel:`um --> namelist --> Model Input and Output --> Dumping and Meaning`.
 
-* What is the current dump frequency?
+.. admonition:: Question
+
+   * What is the current dump frequency?
 
 Set the dump frequency to 6 hours.  :guilabel:`Run` the model.
 
-* How much time was spent in ``DUMPCTL``?
+.. admonition:: Question
+
+   * How much time was spent in ``DUMPCTL``?
 
 Set the dump frequency to 1 hour. :guilabel:`Run` the model.
 
-* What happened to the time spent in ``DUMPCTL``?
+.. admonition:: Question
+
+   * What happened to the time spent in ``DUMPCTL``?
 
 .. important::
    It is important to understand that writing out model dumps, particularly at higher resolutions, takes up a large amount of time and contributes to the cost.  You should think about how frequently you need to output model dumps when setting up your simulations.
@@ -144,12 +167,12 @@ Try to find out where to request extra diagnostic messages for the reconfigurati
 
 :guilabel:`Run` the reconfiguration only with extra diagnostic messages.
 
-Look at the ``job.out`` file.
+.. admonition:: Question
+      
+   * Look at the ``job.out`` file. Do you see a land-sea mask?
 
-* Do you see a land-sea mask?
-
-Setting up a suite to cycle
----------------------------
+Setting up a workflow to cycle
+------------------------------
 
 We mentioned in the presentations that the length of an integration will be limited by the time that a model is allowed to run on the HPC (see the ARCHER2 web pages for information about the time limits).  Clearly this is no good for much of our work which may need to run on the machine for several months.  Cylc and the UM allow for long integrations to be split up into multiple shorter jobs - this is called **cycling**.
 
@@ -166,7 +189,7 @@ Let's run the model for 1 day with 6 hour cycling:
 
 The model will submit the first cycle and once that has succeeded you will see the following 3 cycles submitted and run.
 
-.. note:: It is always wise, particularly when you plan to run a long integration, that you only run the first cycle initially so that you can check that the model is doing what you expect before committing to a longer simulation.  It also enables you to determine how long it takes your model to run and thus be able to calculate an appropriate cycling frequency for your simulation.
+.. tip:: It is always wise, particularly when you plan to run a long integration, that you only run the first cycle initially so that you can check that the model is doing what you expect before committing to a longer simulation.  It also enables you to determine how long it takes your model to run and thus be able to calculate an appropriate cycling frequency for your simulation.
 
 Restarting a suite
 ------------------
@@ -175,7 +198,7 @@ Let's now extend this run out to 2 days.  Change the ``Total run length`` to ``2
 
 Having already run the first day we just want the suite to pick up where it left off and run the remaining day.  To do this we *restart* the suite, by typing: ::
 
-  puma2$ rose suite-run --restart
+  puma2$ cylc play <workflow-name>
 
-The cylc GUI will pop up and you should see the run resuming from where it left off (i.e. from cycle point ``19880902T0000Z``).
+In either the cylc TUI or cylc GUI you should see the run resuming from where it left off (i.e. from cycle point ``19880902T0000Z``).
 
