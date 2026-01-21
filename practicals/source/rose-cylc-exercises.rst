@@ -6,23 +6,28 @@ Differencing suites
 
 Currently there is no Rose tool to difference two suites. Since a suite consists of text files it is simply a matter of making sure all the Rose configuration files are in the common format by running ``rose config-dump`` on each suite and then running ``diff``.
 
-We will difference your copy of the GA7.0 suite with the original one: ::
+We will difference your copy of the GA9.0 suite with the original one: ::
 
   puma2$ cd ~/roses
-  puma2$ rosie checkout u-cc654
-  puma2$ rose config-dump -C u-cc654
+  puma2$ rosie checkout u-dp084
+  puma2$ rose config-dump -C u-dp084
   puma2$ rose config-dump -C <your-suitename>
-  puma2$ diff -r u-cc654 <your-suitename>
+  puma2$ diff -r u-dp084 <your-suitename>
 
-* Are the differences what you expected?
+.. admonition:: Question
+
+   * Are the differences what you expected?
 
 
 Graphing a suite
 ----------------
 
+.. todo::
+   Find another suite for this task
+
 When developing suites, it can be useful to check what the run graph looks like after jinja evaluation, etc.  
 
-The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
+The GA9.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
 
   puma2$ rosie checkout u-ce122
   puma2$ cd ~/roses/u-ce122
@@ -34,106 +39,90 @@ A window containing the graph of the suite should appear. By default tasks in th
 Exploring the suite definition files
 ------------------------------------
 
-Change to the ``~/roses/<suite-id>`` directory for your copy of ``u-cc519``.
+Change to the ``~/roses/<suite-id>`` directory for your copy of ``u-dp063``.
 
-Open the ``suite.rc`` file in your favourite editor.  
+Open the ``flow.cylc`` file in your favourite editor.  
 
-Look at the ``[scheduling]`` section.  This contains some Jinja2 variables (``BUILD`` & ``RECON``) which allow the user to select which tasks appear in the dependency graph. The dependency graph tells Cylc the order in which to run tasks.  The ``fcm_make`` and ``recon`` tasks are only included if the ``BUILD`` and ``RECON`` variables are set to true. These variables are located in the ``rose-suite.conf`` and can be changed using the rose edit GUI or by directly editing the ``rose-suite.conf`` file.  When you run a suite, a processed version of the ``suite.rc`` file, with all the Jinja2 code evaluated, is placed in your suite's ``cylc-run`` directory.  
+Look at the ``[scheduling]`` section.  This contains some Jinja2 variables (``BUILD`` & ``RECON``) which allow the user to select which tasks appear in the dependency graph. The dependency graph tells Cylc the order in which to run tasks.  The ``fcm_make`` and ``recon`` tasks are only included if the ``BUILD`` and ``RECON`` variables are set to true. These variables are located in the ``rose-suite.conf`` and can be changed using the rose edit GUI or by directly editing the ``rose-suite.conf`` file.  When you run a suite, a processed version of the ``flow.cylc`` file, with all the Jinja2 code evaluated, is placed in your workflow's ``cylc-run`` directory.  
 
-* Take a look at the ``suite.rc.processed`` file for your suite.
+.. admonition:: Question
 
-.. hint:: Go to directory ``~/cylc-run/<suite-id>``.
+   * Take a look at the ``flow-processed.cylc`` file for your suite.
 
-* Change the values of ``BUILD`` and ``RECON`` and re-run your suite.  
-* Look at the new ``suite.rc.processed`` file.  Can you see how the graph has changed?
+   .. hint:: Go to directory ``~/cylc-run/<workflow-name>/runX/log/config``.
+
+Change the values of ``BUILD`` and ``RECON`` and re-run your suite.  
+
+.. admonition:: Question
+
+   * Look at the new ``flow-processed.cylc`` file.  Can you see how the graph has changed?
 
 Make sure that you leave the suite with ``BUILD=false`` before continuing.
 
 As we saw earlier when changing the path to the start dump, some settings can't be changed through the rose edit GUI.  Instead you have to edit the suite definition files directly. 
 
-* Can you find where the atmos processor decomposition is set for this suite?
-* Change atmos processor decomposition to run on 2 nodes.  Run the suite.
-* Did it work?  If not, what error message did you get?
+.. admonition:: Question
 
-.. hint:: Look in the usual ``job.out/job.err`` or it may be in the ``job-activity.log`` file.
+   * Can you find where the atmos processor decomposition is set for this suite?
+
+Change atmos processor decomposition to run on 2 nodes.  Run the suite.
+
+.. admonition:: Question
+
+   * Did it work?  If not, what error message did you get?
+
+     .. hint:: Look in the usual ``job.out/job.err`` or it may be in the ``job-activity.log`` file.
 
 You will get an error if the processor decomposition of the model does not match the number of tasks and nodes requested by Slurm.  For details on the Slurm batch system on ARCHER2 see: https://docs.archer2.ac.uk/user-guide/scheduler/).
 
 In the ``[[atmos]] [[[directives]]]`` section, set ``--nodes=2`` and ``--ntasks=256`` to tell the Slurm scheduler that you require 2 nodes and a total of 256 MPI tasks. 
 
-* The suite should run this time. Did it run on 2 nodes as requested?
-* How much walltime has been requested for the reconfiguration?
+.. admonition:: Questions
 
-Now take a look at the ``suite.rc`` file for your other suite (the one copied from ``u-cc654``). See how it differs.  This one is set up to run on multiple platforms.  
+   * The suite should run this time. Did it run on 2 nodes as requested?
+   * How much walltime has been requested for the reconfiguration?
 
-* Can you see the more complex dependency graph?
-* Why do you not need to adjust the Slurm directives to change the processor decomposition in this suite? 
-* Can you see where to change the reconfiguration walltime for this suite?
+Now take a look at the ``flow.cylc`` file for your other suite (the one copied from ``u-dp084``). See how it differs.  This one is set up to run on multiple platforms.  
 
-This has just given you a very brief look at the suite definitions files.  More information can be found in the cylc documentation: https://cylc.github.io/cylc-doc/7.8.8/html/index.html
+.. admonition:: Questions
+
+   * Can you see the more complex dependency graph?
+   * Why do you not need to adjust the Slurm directives to change the processor decomposition in this suite? 
+   * Can you see where to change the reconfiguration walltime for this suite?
+
+.. admonition:: Further Information
+
+   This has just given you a very brief look at the suite definition files.  More information can be found in the cylc documentation: `Writing Workflows <https://cylc.github.io/cylc-doc/stable/html/user-guide/writing-workflows/index.html>`_
 
 ..
-   Suite and task event handling
-   -----------------------------
 
-   Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting ``[[[events]]] mail events`` to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite ``u-cc654`` to send an email on task (submission) failure, retry and timeout. 
+Removing workflows
+------------------
 
-   Edit the ``suite.rc`` file to add the ``[[[events]]]`` section below: ::
+If we don't clear up worfklows when we are finished with them disk usage will mount up and you will eventually exceed your quota. As we have seen when running our workflows, files are written to multiple locations; PUMA2, ARCHER2 ``/home``, ``/work`` and potentially other locations.  The directory setup includes symlinks which means you can't simple do a ``rm -r ~/cylc-run/<workflow-name>`` on ARCHER2 for instance as this is just a symlink to ``/work``.  Fortunately, Cylc provides an easy way to clean up a workflow.
 
-       [runtime]
-           [[root]]
-               ...
-               [[[environment]]]
-               ...
-               [[[events]]]
-                   mail events = submission retry, retry, submission failed, failed, submission timeout, timeout
-                   submission timeout = P1D
+Try cleaning up one of your workflows.  We suggest the one you ran in Chapter 4; your copy of u-dp063: ::
 
-   Configure cylc so it knows what your email address is. Edit the file ``~/.cylc/global.rc`` (create it if it doesn't exist) to add the following: ::
+  puma2$ cylc clean <workflow-name>
 
-      [task events] 
-          mail to = <enter-your-email-address>
+You will see output similar to the following: ::
 
-   To test this out we need to force the suite to fail.  Change the account code to a non-existent one; e.g. 'n02-fail'
+  ros@puma2$ cylc clean u-dw123
+  Would clean the following workflows:
+    u-dw123/run2
+  Remove these workflows (y/n): y
+  INFO - Cleaning u-dw123/run2 on install target: archer2
+  INFO - [archer2]
+    INFO - Removing symlink and its target directory: /home/n02/n02/ros/cylc-run/u-dw123/run2 -> /mnt/lustre/a2fs-work2/work/n02/n02/ros/cylc-run/u-dw123/run2
+    INFO - Removing directory: /home/n02/n02/ros/cylc-run/u-dw123
+    INFO - Removing directory: /mnt/lustre/a2fs-work2/work/n02/n02/ros/cylc-run/u-dw123
+  INFO - Removing directory: /home/n02/n02/ros/cylc-run/u-dw123/run2
+  INFO - Removing directory: /home/n02/n02/ros/cylc-run/u-dw123/_cylc-install
+  INFO - Removing directory: /home/n02/n02/ros/cylc-run/u-dw123
 
-   * Did you get an email when the suite failed?
-   * Look in the suite error files to find the error message?
+.. admonition:: See Also
 
-   Change the account code back to its previous setting before continuing.
-
-   Further information about event handlers can be found in the Cylc documentation: https://cylc.github.io/doc/built-sphinx-single/index.html#eventhandling
-
-Starting a suite in "held" mode
--------------------------------
-
-This allows you to trigger the running of tasks manually.
-
-To start a suite in held mode add ``-- --hold`` to the end of the ``rose suite-run`` command: ::
-
-  puma2$ rose suite-run -- --hold
-
-The first ``--`` tells Rose that all subsequent options should be passed on to Cylc.  This is why the hold option should be added to the end of the command, after any Rose options.  Once the suite has started all tasks will be in a held state.  It is then possible to select which tasks are run by right clicking on a task in the Cylc GUI and manually triggering it or resetting its state.
-
-Try doing this as a way to run the reconfiguration only in one of your suites.
-
-Discovering running suites and the multi-suite monitor GUI
-----------------------------------------------------------
-
-Suites that are currently running can be detected with command line or GUI tools:
-
-Submit 2 of your suites. It doesn't matter what tasks they are running for this exercise; compilation, recon or model run.
-
-Now try running the command ``cylc scan``. This lists your currently running suites.  For example: ::
-
-  puma2$ cylc scan
-  u-af140 ros@localhost:7770
-  u-ag761 ros@localhost:7776
-
-There is also a multi-suite monitor GUI, which allows you to monitor the states of all suites you have running in one window.  Try running the command: ::
-
-  puma2$ cylc gscan &
-
-Double clicking on a suite in ``gscan`` GUI opens the Cylc GUI window, which you will be very familiar with by now. For each suite open the Cylc GUI window and stop the suite by going to :guilabel:`Control > Stop Suite`, selecting  :guilabel:`Stop after killing active tasks` and clicking :guilabel:`Ok`.
+   Cylc User Guide: `Removing Workflows <https://cylc.github.io/cylc-doc/stable/html/user-guide/removing-workflows.html>`_
 
 Adding a new app to a suite
 ---------------------------

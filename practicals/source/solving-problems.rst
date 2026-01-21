@@ -56,7 +56,15 @@ The error indicates that the branch cannot be found due to an incorrect branch n
 
 Fix the error, :guilabel:`Save` the suite.
 
-Now we will stop the suite and then re-run it.  In the Cylc GUI click on :guilabel:`Control > Stop Suite` and then select :guilabel:`Stop now` and then click on :guilabel:`OK`.  :guilabel:`Run` the suite again.
+Now stop the suite and then re-run it.
+
+On the PUMA2 command line type: ::
+  
+  puma2$ cylc stop <workflow-name>
+  puma2$ cylc vip <workflow-name>
+
+.. note::
+  You can also stop the suite from the Cylc TUI or GUI by selecting `<workflow-name>/run1` and selecting :guilabel:`Stop` from the pop up menu.
 
 The suite will fail in the ``fcm_make_um`` task again.
 
@@ -83,7 +91,11 @@ We then reload the suite definition by running the following Cylc command: ::
 
   puma2$ cylc vr <worflow-name>
 
-Enter **y** when asked if you wish to **Continue [y/n]**. Wait for this command to complete before continuing. Finally in the Cylc GUI *right-click* on the failed task and select :guilabel:`Trigger (run now)`.  The ``fcm_make_um`` task will then submit again.
+Enter **y** when asked if you wish to **Continue [y/n]**. Wait for this command to complete before continuing. 
+
+Finally in the Cylc TUI or GUI select the failed task and then select :guilabel:`Trigger`.   
+
+The ``fcm_make_um`` task will then submit again.
 
 .. admonition:: Question
 
@@ -102,10 +114,10 @@ Errors resolved in the compile and run
    * What is the error?
    * What line of the Fortran file does it occur on?
 
-In practice, you would need to fix the error in your branch on PUMA2 and then restart the suite.  In this case, navigate to :guilabel:`fcm_make_um --> sources` and remove the branch ``vn13.5_training_compile_error``.  :guilabel:`Save` the suite, :guilabel:`Shutdown` or :guilabel:`Stop` the failed run and then :guilabel:`Run` it again.
+In practice, you would need to fix the error in your branch on PUMA2 and then restart the suite.  In this case, navigate to :guilabel:`fcm_make_um --> sources` and remove the branch ``vn13.5_training_compile_error``.  :guilabel:`Save` the suite, :guilabel:`Stop` the failed run and then :guilabel:`Run` it again.
 
 .. tip::
-   This time we chose to shutdown the failed suite rather than do a reload.  In this scenario we need to redo the code extraction (``fcm_make_um``) step so doing a reload would be slightly more complex; you would need to :guilabel:`Reload` and then :guilabel:`Re-trigger` both the ``fcm_make_um`` and the ``fcm_make2_um`` tasks.  With experience you get to know when it's better to do a :guilabel:`Reload` and when to :guilabel:`Shutdown`  a suite.
+   This time we chose to shutdown the failed suite rather than do a reload.  In this scenario we need to redo the code extraction (``fcm_make_um``) step so doing a reload would be slightly more complex; you would need to :guilabel:`Reload` and then :guilabel:`Trigger` both the ``fcm_make_um`` and the ``fcm_make2_um`` tasks.  With experience you get to know when it's better to do a :guilabel:`Reload` and when to :guilabel:`Stop` a suite.
 
 Note again that the task submitted successfully.  
 
@@ -136,7 +148,7 @@ Edit the dump name in the appropriate ``.cylc`` file for the HPC we are running 
 .. Hint::
    This workflow is set up to run on multiple platforms, make sure you edit the file appropriate to ARCHER2.
 
-:guilabel:`Reload` the suite definition and then :guilabel:`Re-trigger` the ``install_ainitial`` task.  The task should succeed this time.
+:guilabel:`Reload` the suite definition and then :guilabel:`Trigger` the ``install_ainitial`` task.  The task should succeed this time.
 
 .. admonition:: Question
 
@@ -150,8 +162,6 @@ This time the model should have failed with an error.
 
    .. Hint::
       Try searching for ``ERROR`` - you will soon learn common phrases to help track down problems.
-
-.. note:: If you use the search ``job.err`` box at the bottom of the gcylc viewer, when you select :guilabel:`Find Next` you will see a message indicating the live feed will be disconnected. Click :guilabel:`Close`.
 
 .. admonition:: Question
 
