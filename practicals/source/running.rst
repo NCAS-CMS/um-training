@@ -100,27 +100,79 @@ This validates, installs and runs the workflow. The standard workflow will build
      * Play runs the workflow.
 
 Monitor the running workflow
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
-.. todo::
-   Decide on whether to use Cylc GUI or TUI here.
+To help you monitor and control running workflows Cylc offers 3 tools:
 
-.. admonition:: Further Reading
+  * A web based graphical user interface (Cylc GUI)
+  * A terminal-based user interface (Cylc TUI)
+  * A comprehensive command line interface (Cylc CLI)
 
-   To help you monitor and control running workflows Cylc offers 3 tools:
+.. admonition:: See also
 
-     * A graphical user interface (Cylc GUI)
-     * A terminal-based user interface (Cylc TUI)
-     * A comprehensive command line interface (Cylc CLI)
+   For full details see the `Cylc user interfaces documentation <https://cylc.github.io/cylc-doc/stable/html/tutorial/runtime/introduction.html#the-cylc-user-interfaces>`_
 
-   For full details see the `Cylc user interfaces documentation`_ 
+   These pages give information on how to navigate around both GUIs and indicates what all the task & job icons indicate.
 
-.. _Cylc user interfaces documentation: https://cylc.github.io/cylc-doc/stable/html/tutorial/runtime/introduction.html#the-cylc-user-interfaces 
+
+Using the Cylc User Interfaces
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We will take some time here to explore the Cylc User Interfaces
+
+**Using the Cylc web GUI**
+
+The Cylc GUI is a monitoring and control application that runs in a web browser. The Cylc GUI has different views you can use to examine your workflows, including a menu to allow you to switch between workflows.  You only need to have one instance of the Cylc GUI open.
+
+To use the Cylc GUI for workflows on ARCHER2 you need to do some setup first.  Please follow the "Setting up the Cylc GUI" instructions in Chapter 1.
+
+To start the Cylc UI, in your local desktop terminal window type ``puma-ui`` and you should see similar to the following:
+
+.. code-block:: console
+
+  $ puma-ui
+  #################################################################################
+  ------------------------------Welcome to PUMA2-----------------------------------
+  #################################################################################
+  [C 2026-01-22 08:25:30.367 ServerApp] 
+    
+  To access the server, open this file in a browser:
+    file:///home/n02/n02/ros/.cylc/uiserver/info_files/jpserver-1094362-open.html
+  Or copy and paste one of these URLs:
+    http://localhost:20522/cylc?token=700ab2be96800177d03df31b8140857cab02b9632af45a1d
+    http://127.0.0.1:20522/cylc?token=700ab2be96800177d03df31b8140857cab02b9632af45a1d
+  [W 2026-01-22 08:25:44.242 ServerApp] The websocket_ping_timeout (999999) cannot be longer than the websocket_ping_interval (290).
+    Setting websocket_ping_timeout=290
+
+Copy and paste one of the URLs listed into your web browser and you should then see your Cylc GUI load.
+
+.. image:: /images/cylc-gui.png
+   :scale: 50%
+   :align: center
+
+**Using the Cylc TUI**
+
+This is a command line version of the GUI.  It can be used to monitor and control any workflows running under your user account, trigger tasks, access log files and perform other common activities. 
+
+To start the Cylc TUI on PUMA2 type: ::
+
+  puma$ cylc tui <workflow_name>
+
+You interact with the TUI by selecting a task name, either by using the up & down arrows or the mouse and then pressing the <Enter> key to bring up a menu of actions.
+
+.. image:: /images/cylc-tui.png
+   :scale: 50%
+   :align: center
+
+Please take some time now to familiarise yourself with both the Cylc TUI & Cylc GUI.
 
 
 Looking at the queues on ARCHER2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-While you're waiting for the workflow to run, let's log into ARCHER2 and learn how to look at the queues.
+--------------------------------
+
+It's likely that whilst you have been looking at the GUIs your workflow will have finished.  If this is the case run it again before continuing with this section.
+
+Now, let's log into ARCHER2 and learn how to look at the queues.
 
 Run the following command: ::
 
@@ -138,10 +190,7 @@ Once your workflow has finished running the Cylc GUI/TUI will go blank and you s
 
 .. tip::
 
-  Cylc is set up so that it *polls* ARCHER2 to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on ARCHER2 and the Cylc GUI/TUI being updated. If you see that the task has finished running but Cylc hasn't updated then you can manually poll the task by right-clicking on it and selecting :guilabel:`Poll` from the pop-up menu.
-
-    * TUI
-    * GUI
+  Cylc is set up so that it *polls* ARCHER2 to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on ARCHER2 and the Cylc GUI/TUI being updated. If you see that the task has finished running but Cylc hasn't updated then you can manually poll the task by selecting it and then selecting :guilabel:`Poll` from the pop-up menu.
 
 Standard Workflow Output
 ------------------------
