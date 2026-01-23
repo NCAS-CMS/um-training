@@ -1,10 +1,6 @@
 Getting Set Up (Leeds Training Course)
 ========================================
 
-.. todo::
-
-   Decided how to handle nstructions for both NCAS and user owned laptops
-
 .. warning::
    You **MUST** have PUMA2, ARCHER2 and MOSRS accounts setup before starting this section.
 
@@ -12,9 +8,14 @@ Getting Set Up (Leeds Training Course)
    These instructions are for use on the in-person UM Training Course held in Leeds. If you are using them for self-study please contact NCAS-CMS for instructions.
 
 .. _archer:
+
+Set up your ARCHER2 connection - Using your own laptop
+------------------------------------------------------
+
+If you are using your own laptop, you should already have setup so that you can access ARCHER2 from a teminal window, please proceed to the section :ref:`Set up your ARCHER2 environment <archer2-env>`.
    
-Set up your ARCHER2 connection
-------------------------------
+Set up your ARCHER2 connection - Using an NCAS laptop
+-----------------------------------------------------
 
 To use the UM Introduction Tutorials you will first need to ensure you can connect from your local desktop to ARCHER2.
 
@@ -51,6 +52,8 @@ To simplify the login process, you can define a ``~/.ssh/config`` file entry con
 so that you can connect using just the command: ::
   
   ssh archer2
+
+.. _archer2-env:
 
 Set up your ARCHER2 environment 
 --------------------------------
@@ -194,5 +197,110 @@ To test this is all working correctly, run: ::
    puma2$ rose host-select archer2
 
 This should return one of the login nodes, e.g. ``ln01``. If it returns a message like ``[WARN] ln03: (ssh failed)`` then something has gone wrong with the ssh setup.
+
+Using the Cylc Web GUI
+----------------------
+
+Cylc provides a terminal based user interface and a web browser based one. The course can be completed using either. 
+If you wish to use the Cylc Web GUI some setup is required. Here we provide instructions for Linux, Mac & MobaXterm (Windows).  
+
+Linux/Mac
+^^^^^^^^^
+
+Edit the ``~/.ssh/config`` file on your laptop so that the ARCHER2 and PUMA2 sections contain: ::
+
+  # PUMA2 
+  Host puma2
+  User <username> 
+  IdentityFile ~/.ssh/<your-archer-ssh-key>
+  ProxyJump archer2 
+
+  # ARCHER2 
+  Host archer2 
+  Hostname login.archer2.ac.uk 
+  User <username>
+  IdentityFile ~/.ssh/<your-archer-ssh-key>
+  ForwardX11 No 
+  ControlMaster auto 
+  ControlPath /tmp/ssh-socket-%r@%h-%p 
+  ControlPersist yes
+
+You should now be able to type ``ssh puma2`` and land directly on PUMA2.
+
+Setup an alias on your laptop by adding one for the following to your ``~/.bashrc`` or equivlaent depending on whether you are using Linux or a Mac.
+
+**i. Linux** ::
+
+  alias puma-ui='PORT=$(shuf -n 1 -i 10000-65000); ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
+
+**ii. Mac** ::
+
+  alias puma-ui='PORT=$(jot -r 1 10000 65000); ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
+
+MobaXterm (Windows)
+^^^^^^^^^
+
+i. Launch MobaXterm
+
+ii. Open a terminal (click on the "+" tab)
+
+iii. If needed create a ``~/.ssh`` directory
+
+iv. Copy your ARCHER2 key into ``~/.ssh`` on MobaXterm the local disk is available at /mnt/c
+
+v. Edit (or create) the file ``~/.ssh/config`` with the following contents: ::
+
+.. code-block:: console
+
+  # PUMA2
+  Host puma2
+  User <username>
+  IdentityFile ~/.ssh/<your-archer-ssh-key>
+  ProxyJump archer2
+
+  # ARCHER2
+  Host archer2
+  Hostname login.archer2.ac.uk
+  User <username>
+  IdentityFile ~/.ssh/<your-archer-ssh-key>
+  ForwardX11 No
+  ControlMaster auto
+  ControlPath /tmp/ssh-socket-%r@%h-%p
+  ControlPersist yes
+
+Setup an alias by adding the following line to your ``~/.bashrc``: ::
+
+  alias puma-ui='PORT=$(shuf -n 1 -i 10000-65000); ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
+
+Start up the cylc web GUI
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In a new terminal window type: ::
+
+  $ puma-ui
+
+You see see a response similar to the following:
+
+.. code-block:: console
+
+  $ puma-ui
+  #################################################################################
+  ------------------------------Welcome to PUMA2-----------------------------------
+  #################################################################################
+  [C 2026-01-22 08:25:30.367 ServerApp]
+
+  To access the server, open this file in a browser:
+    file:///home/n02/n02/ros/.cylc/uiserver/info_files/jpserver-1094362-open.html
+  Or copy and paste one of these URLs:
+    http://localhost:20522/cylc?token=700ab2be96800177d03df31b8140857cab02b9632af45a1d
+    http://127.0.0.1:20522/cylc?token=700ab2be96800177d03df31b8140857cab02b9632af45a1d
+  [W 2026-01-22 08:25:44.242 ServerApp] The websocket_ping_timeout (999999) cannot be longer than the websocket_ping_interval (290).
+    Setting websocket_ping_timeout=290
+
+Copy and paste one of the http URLs listed into your web browser and you should then see your Cylc GUI load.  If you have never used Cylc8 before the Workflows panel will be empty.
+
+.. image:: /images/cylc-gui.png
+   :scale: 50%
+   :align: center
 
 You are now ready to try running a UM suite! 
