@@ -90,9 +90,9 @@ You should see several errors reported - it appears we have asked for diagnostic
 
 The model should fail with an error message similar to the following:
 
-  **STWORK: Number of fields exceeds reserved headers for unit  14**
+  **STWORK: Number of fields exceeds reserved headers for unit  15**
 
-This means that the number of output fields exceeds the limit set for a particular stream (the default is 4096 fields); in this case the stream attached to unit 14.  To find out what stream unit 14 is take a look in the ``fort6.pe000`` file and search for "Unit 14". You should see that the file opened on unit 14 is ``<suite-id>a.pc19880901``, so this is the ``pc`` stream.  Back in ``rose edit`` for this suite look at the STASH usage profile for ``upc``.
+This means that the number of output fields exceeds the limit set for a particular stream (the default is 4096 fields); in this case the stream attached to unit 15.  To find out what stream unit 15 is take a look in the ``fort6.pe000`` file and search for "Unit 15". You should see that the file opened on unit 15 is ``<suite-id>a.pc19880901``, so this is the ``pc`` stream.  Back in ``rose edit`` for this suite look at the STASH usage profile for ``upc``.
 
 .. admonition:: Question
 
@@ -127,13 +127,13 @@ Once you have added a new STASH request, you need to run a macro to generate an 
 Change the dump frequency
 -------------------------
 
-Set the model run length to 6 hours.
+Set the model run length to 1 day.
 
 .. hint:: Look in the :guilabel:`suite conf --> Run Initialisation and Cycling`.
 
 .. note:: Hours are represented in the ISO 8601 standard as ``PT<num-hours>H`` (e.g. ``PT1H`` represents 1 hour). Days are represented as ``P<num-days>D`` (e.g. ``P10D`` represents 10 days)
 
-Reset the STASH output for stream UPC to 6 hourly and the file reinitialisation frequency to daily.
+Reset the STASH output for stream UPC to 6 hourly and the file reinitialisation frequency to 3 hourly.
 
 Navigate to :guilabel:`um --> namelist --> Model Input and Output --> Dumping and Meaning`.
 
@@ -141,13 +141,13 @@ Navigate to :guilabel:`um --> namelist --> Model Input and Output --> Dumping an
 
    * What is the current dump frequency?
 
-Set the dump frequency to 6 hours.  :guilabel:`Run` the model.
+Set the dump frequency to 1 day.  :guilabel:`Run` the model.
 
 .. admonition:: Question
 
    * How much time was spent in ``DUMPCTL``?
 
-Set the dump frequency to 1 hour. :guilabel:`Run` the model.
+Set the dump frequency to 6 hour. :guilabel:`Run` the model.
 
 .. admonition:: Question
 
@@ -178,27 +178,27 @@ We mentioned in the presentations that the length of an integration will be limi
 
 Let's run the model for 1 day with 6 hour cycling:
 
-* Set the ``Total run length`` to 1 day.
-* Set the ``Cycling frequency`` to 6 hours.
+* Set the ``Total run length`` to 2 days.
+* Set the ``Cycling frequency`` to 1 day.
 * Set the ``Wallclock time`` to 10 minutes.
-* Ensure that the model dump frequency is 6 hourly, in this case.
+* Ensure that the model dump frequency is 1 day, in this case.
 
 :guilabel:`Save` and :guilabel:`Run` the suite.
 
 .. note:: The cycling frequency must be a multiple of the dump frequency.
 
-The model will submit the first cycle and once that has succeeded you will see the following 3 cycles submitted and run.
+The model will submit the first cycle and once that has succeeded you will see the following cycle submitted and run.
 
 .. tip:: It is always wise, particularly when you plan to run a long integration, that you only run the first cycle initially so that you can check that the model is doing what you expect before committing to a longer simulation.  It also enables you to determine how long it takes your model to run and thus be able to calculate an appropriate cycling frequency for your simulation.
 
 Restarting a suite
 ------------------
 
-Let's now extend this run out to 2 days.  Change the ``Total run length`` to ``2`` days and :guilabel:`Save` the suite.
+Let's now extend this run out to 3 days.  Change the ``Total run length`` to ``3`` days and :guilabel:`Save` the suite.
 
 Having already run the first day we just want the suite to pick up where it left off and run the remaining day.  To do this we *restart* the suite, by typing: ::
 
-  puma2$ cylc play <workflow-name>
+  puma2$ cylc vr <workflow-name>
 
 In either the cylc TUI or cylc GUI you should see the run resuming from where it left off (i.e. from cycle point ``19880902T0000Z``).
 

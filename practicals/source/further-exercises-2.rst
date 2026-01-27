@@ -31,27 +31,27 @@ You now need to specify where you want your archived data to be copied to:
 
 * In the :guilabel:`Archer Archiving` panel set ``archive_root_dir`` to be ``/work/n02/n02/<userid>/archive``.  The ``archive_name`` (suite id) will be automatically appended to this.  
 
-You will need to run the model for at least 1 day as archiving doesn't work for periods of less than 1 day.  Change the ``run length`` and ``cycling frequency`` to be 1 day.  This should complete in about 5 minutes so set the ``wallclock time`` to be 10 minutes. 
+You will need to run the model for at least 1 day as archiving doesn't work for periods of less than 1 day.  Set the ``run length`` and ``cycling frequency`` to be 1 day.  This should complete in about 5 minutes so set the ``wallclock time`` to be 10 minutes. 
 
 :guilabel:`Run` the suite.
 
 Once the run has completed go to the archive directory for this cycle (e.g. ``/nerc/n02/n02/<userid>/<suiteid>/19880901T0000Z``) and you should see several files have been copied over (e.g ``cc654a.pc19880901_00.pp``).
 
-Data files that have been archived and are no longer required by the model for restarting or for calculating means (seasonal, annual, etc) are deleted from the suite ``History_Data`` directory. Go to the ``History_Data`` directory for your suite and confirm that this has happened. This run is reinitialising the ``pc`` data stream every 6 hours and you should see that it has only removed data files for this stream up to 18:00hrs, the ``cc654a.pc19880901_18.pp`` file is still present.  This file contains data for the hours 18-24 and would be required by the model in order to restart. Equally seasonal mean files would not be fully archived until the end of the year, after the annual mean has been created.
+Data files that have been archived and are no longer required by the model for restarting or for calculating means (seasonal, annual, etc) are deleted from the suite ``History_Data`` directory. Go to the ``History_Data`` directory for your suite and confirm that this has happened. This run is reinitialising the ``pc`` data stream every 3 hours and you should see that it has only removed data files for this stream up to 21:00hrs, the ``cc654a.pc19880901_21.pp`` file is still present.  This file contains data for the hours 18-24 and would be required by the model in order to restart. Equally seasonal mean files would not be fully archived until the end of the year, after the annual mean has been created.
 
 .. note:: The post-processing app can also be configured to transfer the archived data over to JASMIN.  Details on how to do this are available on the CMS website: http://cms.ncas.ac.uk/wiki/Docs/PostProcessingApp
 
 Using IO Servers
 ----------------
 
-Older versions of the UM did not have IO servers, which meant that all reading and writing of fields files went through a single processor (pe0).  When the model is producing lots of data and is running on many processors, this method of IO is very inefficient and costly - when pe0 is writing data, all the other processors have to wait around doing nothing but still consuming AUs.  Later UM versions, including UM 10.5, have IO servers which are processors dedicated to performing IO and which work asynchronously with processors doing the computation.
+Older versions of the UM did not have IO servers, which meant that all reading and writing of fields files went through a single processor (pe0).  When the model is producing lots of data and is running on many processors, this method of IO is very inefficient and costly - when pe0 is writing data, all the other processors have to wait around doing nothing but still consuming compute resource (CUs).  Later UM versions, including UM 10.5, have IO servers which are processors dedicated to performing IO and which work asynchronously with processors doing the computation.
 
 Here's just a taste of how to get this working in your suite.
 
 Set the suite to run for 1 day with an appropriate cycling frequency, then check that ``OpenMP`` is switched on as this is needed for the IO servers to work.
 
 .. hint::
-   Search for ``openmp`` in the rose edit GUI
+   Search for ``OMP`` in the rose edit GUI
 
 Navigate to :guilabel:`suite conf --> Domain Decomposition --> Atmosphere` and check the number of ``OpenMP threads`` is set to ``2``. Set the number of ``IO Server Processes`` to ``8``.
 
@@ -124,18 +124,13 @@ Look under :guilabel:`Run settings (namrun)`. The variables ``nn_stock`` and ``n
 
    .. hint:: The NEMO timestep length is set as variable ``rn_rdt``
 
-Now browse the CICE settings.
-
-.. admonition:: Question
-
-   * Can you find what the CICE restart frequency is set to? 
-
 .. admonition:: Further Reading
 
-   NEMO, CICE and XIOS are developed separately from the UM, and you should have seen that they work in very different ways. See the following websites for documentation: 
+   NEMO, SI3, CICE (an alternative, widely used sea-ice model) and XIOS are developed separately from the UM, and you should have seen that they work in very different ways. See the following websites for documentation: 
 
    * http://oceans11.lanl.gov/trac/CICE 
    * http://www.nemo-ocean.eu/
+   * https://zenodo.org/records/7534900
    * https://forge.ipsl.jussieu.fr/ioserver
 
 Output files
@@ -146,34 +141,26 @@ NEMO logging information is written to:
 
  ``~/cylc-run/<workflow-name>/run1/work/<cycle>/coupled/ocean.output``
 
-CICE logging information is written to: 
-
- ``~/cylc-run/<workflow-name>/run1/work/<cycle>/coupled/ice_diag.d``
-
 If the model fails some error messages may also be written to the file ``~/cylc-run/<workflow-name>/run1/work/<cycle>/coupled/debug.root.01`` or ``debug.root.02``
 
 When something goes wrong with the coupled model it can be tricky to work out what has gone wrong. NEMO errors may not appear at the end of the file but will be flagged with the string ``E R R O R``. 
 
 **Restart files** 
 
-Restart files go to the subdirectories ``NEMOhist`` and ``CICEhist`` in the standard data directory ``~/cylc-run/<workflow-name>/run1/share/data/History_Data``.
+Restart files go to the subdirectory ``NEMOhist`` in the standard data directory ``~/cylc-run/<workflow-name>/run1/share/data/History_Data``.
 
 **Diagnostic files**
 
 Diagnostic files are left in the ``~/cylc-run/<workflow-name>/run1/work/<cycle>/coupled/`` directory. 
 
-CICE files start with ``<workflow-name>i``. Once your suite has run you should see the following CICE file (and more): :: 
+In this example,
 
-  archer$ ls ce119i*
-  ce119i.10d.1850-01-10.nc
+NEMO diagnostic files are named ``<workflow-name>o*grid_[TUVW]*``. 
+SI3 diagnostic files are named ``<workflow-name>io*icemod*``. To see what files are produced, run: ::
 
-NEMO diagnostic files are named ``<workflow-name>o*grid_[TUVW]*``. To see what files are produced, run: :: 
+  archer$ ls dw272o*grid*
+  archer$ ls dw272o*icemod*
 
-  archer$ ls ce119o*grid*
-
-In this case each XIOS IO server writes to a separate file. To concatenate these into a global file use the ``rebuild_nemo`` tool, e.g.: :: 
-
-  archer$ rebuild_nemo ce119o_1d_18500101_18500110_grid_T 6
 
 .. note:: The coupled atmos-ocean model setup is complex so we recommend you find a suite already setup for your needs.  If you find you do need to modify a coupled suite setup please contact NCAS-CMS for advice. 
 

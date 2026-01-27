@@ -28,7 +28,7 @@ Firstly make the essential changes required to run the workflow.  That is:
 Errors resolved in the code extraction
 --------------------------------------
 
-:guilabel:`Save` the suite and then :guilabel:`Run` it either from the GUI or the command line.
+:guilabel:`Save` the suite and then :guilabel:`Run` it. 
 
 The workflow should fail in the ``fcm_make_um`` task. This is the task that extracts all the required code from the repository including any branches.  The failure will be indicated in the Cylc TUI/GUI with a red square and the state ``failed``.  
 
@@ -54,7 +54,9 @@ The workflow should fail in the ``fcm_make_um`` task. This is the task that extr
 
 The error indicates that the branch cannot be found due to an incorrect branch name. You will need to look at the UM code repository through Trac on MOSRS (https://code.metoffice.gov.uk/trac/um/browser) to determine the correct name.
 
-Fix the error, :guilabel:`Save` the suite.
+To fix the error go to panel :guilabel:`fcm_make_um --> env --> Sources` and correct the branch name in ``um_sources``.
+
+:guilabel:`Save` the suite.
 
 Now stop the suite and then re-run it.
 
@@ -79,7 +81,7 @@ The suite will fail in the ``fcm_make_um`` task again.
 
    * Which file does the problem occur in?
 
-In practice, you would need to edit the code branch to fix the problem with the code conflict.  To proceed in this case, navigate to :guilabel:`fcm_make_um --> sources` and remove the branch called ``vn13.5_training_merge_error`` by clicking on it and then clicking the :guilabel:`-` sign.
+In practice, you would need to edit the code branch to fix the problem with the code conflict.  To proceed in this case, navigate to :guilabel:`fcm_make_um --> env --> sources` and remove the branch called ``vn13.5_training_merge_error`` by clicking on it and then clicking the :guilabel:`-` sign.
 
 :guilabel:`Save` the suite.
 
