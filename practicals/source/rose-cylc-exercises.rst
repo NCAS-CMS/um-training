@@ -124,6 +124,27 @@ You will see output similar to the following: ::
 
    Cylc User Guide: `Removing Workflows <https://cylc.github.io/cylc-doc/stable/html/user-guide/removing-workflows.html>`_
 
+Version Control of Suites
+-------------------------
+
+Just like the model code, your UM Rose suites are under version control in a subversion repository called ``rosie-u`` which is on MOSRS.  Once you have a working copy of your suite under ``~/roses`` you can use FCM commands to check the status of your edits; i.e. local edits, diff changes, commit changes etc.
+
+* Go to your suite working directory for one of the suites you've used on this course and type ``fcm status`` to see the changes you have made since you copied the suite.
+
+* Run ``fcm commit`` to commit your changes to the repository. This saves your changes to the repository.
+
+* Take a look in the MOSRS roses-u Trac (https://code.metoffice.gov.uk/trac/roses-u) and find the suite you created in the previous section.
+
+.. hint::
+   Go to :guilabel:`Browse Source`` then drill down to find your suite. e.g. ``u-dp084`` would be under ``d/p/0/8/4``
+
+  and see that your commit has now appeared in the repository.  What is the suite's last modified time now?
+
+* Use Trac to view the changes you have made to the suite.
+
+.. hint::
+   Click on the number in the revision column, and then on the :guilabel:`View changes` button to show a diff of your changes
+
 Adding a new app to a suite
 ---------------------------
 
@@ -141,7 +162,7 @@ In order to actually run the app, we need to add a new "task" to the suite which
 
 3. How the task will run (i.e. which computer and the resources it will need).
 
-In this example, we will add an app that prints ``Hello World``, which will execute after the reconfiguration and before the main model. We will add the app to your copy of ``u-cc654``.
+In this example, we will add an app that prints ``Hello World``, which will execute after the reconfiguration and before the main model. We will add the app to your copy of ``u-dp084``.
 
 Create the Rose application directory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -167,7 +188,7 @@ Add a new task to the suite definition
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In order to execute the app, we need to add a new task to the suite workflow. This task executes our new application on a machine that we specify. In this instance we are adding the new task between the reconfiguration and the model run, and the task will be run on ARCHER2 in the serial queue.
 
-To set this up, edit the ``suite.rc`` file. Under, ::
+To set this up, edit the ``flow.cylc`` file. Under, ::
 
   [scheduling]
      [[dependencies]]
@@ -182,7 +203,7 @@ and change it to ::
 
 This puts the task ``hello`` in the right place in the task list.
 
-The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable ``ROSE_TASK_APP`` in the task definition.  General task definitions go in the ``suite.rc`` file and the definitions specific to ARCHER2 in the ``site/archer2.rc`` file.  The queuing system is specific to the host being run on, and there is already a definition for the ARCHER serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of. To run the new application on ARCHER2 in the serial queue and give it two minutes to complete, add the following lines to the ``suite.rc`` after the definition for ``[[recon]]``: ::
+The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable ``ROSE_TASK_APP`` in the task definition.  General task definitions go in the ``suite.rc`` file and the definitions specific to ARCHER2 in the ``site/archer2.cylc`` file.  The queuing system is specific to the host being run on, and there is already a definition for the ARCHER2 serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of. To run the new application on ARCHER2 in the serial queue and give it two minutes to complete, add the following lines to the ``flow.cylc`` after the definition for ``[[recon]]``: ::
 
    [[hello]]
       inherit = HPC_SERIAL
@@ -194,6 +215,9 @@ The next step is to add a definition for the new task. To tell Rose to use one o
 Running the new app
 ^^^^^^^^^^^^^^^^^^^	    
 We are now ready to go.  :guilabel:`Run` the suite. Look at the task graph: ``recon`` and ``atmos_main`` are there, but a new hierarchy of tasks has appeared.
+
+.. todo::
+   Update image
 
 ..  image:: /images/u-cc654-new-app.png
 
@@ -248,7 +272,6 @@ For our example there are currently no restrictions on the variable ``PLANET``. 
 Rose provides some tools to quickly guess at the metadata where there is none.  Create a directory ``meta/`` under ``new_app/`` .  Then execute the command, ::
 
   rose metadata-gen
-
   
 This creates a file ``rose-meta.conf`` in the ``meta/`` directory.  It just says that there is an evironment variable called ``PLANET``, but it does not know much about it.  Edit this file and add the following lines after ``[env=PLANET]``: ::
 
@@ -258,8 +281,8 @@ This creates a file ``rose-meta.conf`` in the ``meta/`` directory.  It just says
   
 Now go back to the Rose GUI and select :guilabel:`Metadata > Refresh Metadata`. Once the metadata has reloaded, go to the :guilabel:`new_app --> env` panel.  The entry box for ``PLANET`` has changed into a drop down list.  Pluto is not allowed, presumably because the code cannot handle tiny planets.  Right click on the cog next to Planet and select :guilabel:`info` to see the description and allowed values.
 
-References
-^^^^^^^^^^
-A fuller discussion of Rose metadata can be found at https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/metadata.html.
+.. admonition:: Further Information
 
-Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For further details, see the Rose documentation at https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/applications.html.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see https://metomi.github.io/rose/2019.01.8/html/api/rose-built-in-applications.html.
+   A fuller discussion of Rose metadata can be found at https://metomi.github.io/rose/doc/html/tutorial/rose/metadata.html.
+
+   Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For further details, see the Rose documentation at https://metomi.github.io/rose/doc/html/tutorial/rose/applications.html.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see https://metomi.github.io/rose/doc/html/api/rose-built-in-applications.html. 
