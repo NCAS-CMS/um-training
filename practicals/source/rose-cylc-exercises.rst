@@ -22,19 +22,17 @@ We will difference your copy of the GA9.0 suite with the original one: ::
 Graphing a suite
 ----------------
 
-.. todo::
-   Find another suite for this task
-
 When developing suites, it can be useful to check what the run graph looks like after jinja evaluation, etc.  
 
-The GA9.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
+we shall graph the coupled suite. To do this without running the suite: ::
 
-  puma2$ rosie checkout u-ce122
-  puma2$ cd ~/roses/u-ce122
-  puma2$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
-  puma2$ cylc graph u-ce122               # view graph in browser
+  puma2$ rosie checkout u-dw272
+  puma2$ cd ~/roses/u-dw272
+  puma2$ cylc graph u-dw272 
 
-A window containing the graph of the suite should appear. By default tasks in the same family are grouped together. Click the :guilabel:`Ungroup all families` button at the top of the window to expand the graph to view all tasks within this suite.
+A window containing the graph of the suite should appear. 
+
+You an also view the graph of a running workflow in the Cylc GUI by selecting :guilabel:`ADD VIEW --> Graph`
 
 Exploring the suite definition files
 ------------------------------------
