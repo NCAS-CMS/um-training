@@ -141,7 +141,7 @@ Navigate to :guilabel:`um --> namelist --> Model Input and Output --> Dumping an
 
    * What is the current dump frequency?
 
-Set the dump frequency to 1 day.  :guilabel:`Run` the model.
+:guilabel:`Run` the model.
 
 .. admonition:: Question
 
@@ -176,7 +176,7 @@ Setting up a workflow to cycle
 
 We mentioned in the presentations that the length of an integration will be limited by the time that a model is allowed to run on the HPC (see the ARCHER2 web pages for information about the time limits).  Clearly this is no good for much of our work which may need to run on the machine for several months.  Cylc and the UM allow for long integrations to be split up into multiple shorter jobs - this is called **cycling**.
 
-Let's run the model for 1 day with 6 hour cycling:
+Let's run the model for 2 days with 1 day cycling:
 
 * Set the ``Total run length`` to 2 days.
 * Set the ``Cycling frequency`` to 1 day.
@@ -191,14 +191,14 @@ The model will submit the first cycle and once that has succeeded you will see t
 
 .. tip:: It is always wise, particularly when you plan to run a long integration, that you only run the first cycle initially so that you can check that the model is doing what you expect before committing to a longer simulation.  It also enables you to determine how long it takes your model to run and thus be able to calculate an appropriate cycling frequency for your simulation.
 
-Restarting a suite
-------------------
+Extending the run length of a workflow
+--------------------------------------
 
 Let's now extend this run out to 3 days.  Change the ``Total run length`` to ``3`` days and :guilabel:`Save` the suite.
 
-Having already run the first day we just want the suite to pick up where it left off and run the remaining day.  To do this we *restart* the suite, by typing: ::
+Having already run the first 2 days we just want the suite to pick up where it left off and run the remaining day.  To do this we *reload* the suite, by typing: ::
 
   puma2$ cylc vr <workflow-name>
 
-In either the cylc TUI or cylc GUI you should see the run resuming from where it left off (i.e. from cycle point ``19880902T0000Z``).
+In either the cylc TUI or cylc GUI you should see the run resuming from where it left off (i.e. from cycle point ``19880903T0000Z``).
 

@@ -23,13 +23,13 @@ Let's try configuring your suite to archive to a staging location on ARCHER2:
 
 The post-processing is configured under the :guilabel:`postproc` section:
 
-* Select the :guilabel:`Archer` archiving system in window :guilabel:`Post Processing - common settings`.
+* Select the :guilabel:`Archer2-Jasmin` archiving system in window :guilabel:`Post Processing - common settings`.
 
 A couple of new entries will have appeared in the index panel, :guilabel:`Archer Archiving` and :guilabel:`JASMIN Transfer`, identified with the blue dots.
 
 You now need to specify where you want your archived data to be copied to:
 
-* In the :guilabel:`Archer Archiving` panel set ``archive_root_dir`` to be ``/work/n02/n02/<userid>/archive``.  The ``archive_name`` (suite id) will be automatically appended to this.  
+* In the :guilabel:`ARCHER2-JASMIN` panel set ``archive_root_dir`` to be ``/work/n02/n02/<userid>/archive``.  The ``archive_name`` (suite id) will be automatically appended to this.  
 
 You will need to run the model for at least 1 day as archiving doesn't work for periods of less than 1 day.  Set the ``run length`` and ``cycling frequency`` to be 1 day.  This should complete in about 5 minutes so set the ``wallclock time`` to be 10 minutes. 
 
@@ -37,7 +37,7 @@ You will need to run the model for at least 1 day as archiving doesn't work for 
 
 Once the run has completed go to the archive directory for this cycle (e.g. ``/nerc/n02/n02/<userid>/<suiteid>/19880901T0000Z``) and you should see several files have been copied over (e.g ``dp084a.pc19880901_00.pp``).
 
-Data files that have been archived and are no longer required by the model for restarting or for calculating means (seasonal, annual, etc) are deleted from the suite ``History_Data`` directory. Go to the ``History_Data`` directory for your suite and confirm that this has happened. This run is reinitialising the ``pc`` data stream every 3 hours and you should see that it has only removed data files for this stream up to 21:00hrs, the ``dp084a.pc19880901_21.pp`` file is still present.  This file contains data for the hours 18-24 and would be required by the model in order to restart. Equally seasonal mean files would not be fully archived until the end of the year, after the annual mean has been created.
+Data files that have been archived and are no longer required by the model for restarting or for calculating means (seasonal, annual, etc) are deleted from the suite ``History_Data`` directory. Go to the ``History_Data`` directory for your suite and confirm that this has happened. This run is reinitialising the ``pc`` data stream every 3 hours and you should see that it has only removed data files for this stream up to 21:00hrs, the ``dp084a.pc19880901_21.pp`` file is still present.  This file contains data for the hours 21-24 and would be required by the model in order to restart. Equally seasonal mean files would not be fully archived until the end of the year, after the annual mean has been created.
 
 .. note:: The post-processing app can also be configured to transfer the archived data over to JASMIN.  Details on how to do this are available on the CMS website: http://cms.ncas.ac.uk/wiki/Docs/PostProcessingApp
 
@@ -64,7 +64,7 @@ Try repeating the :ref:`change_dump_freq` experiment with the IO servers switche
 Writing NetCDF output from the UM
 ---------------------------------
 
-Until UM vn10.9, only fields-file output was available from the UM - bespoke NetCDF output configurations did exist but not on the UM trunk. The suite used in most of these Section 7 exercises is vn11.7, hence supports both fields-file and NetCDF output data formats.
+Until UM vn10.9, only fields-file output was available from the UM - bespoke NetCDF output configurations did exist but not on the UM trunk. The suite used in most of these Section 7 exercises is vn13.5 hence supports both fields-file and NetCDF output data formats.
 
 Enable NetCDF
 ^^^^^^^^^^^^^

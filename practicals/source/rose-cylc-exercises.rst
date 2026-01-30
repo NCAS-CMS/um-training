@@ -136,9 +136,10 @@ Just like the model code, your UM Rose suites are under version control in a sub
 * Take a look in the MOSRS roses-u Trac (https://code.metoffice.gov.uk/trac/roses-u) and find the suite you created in the previous section.
 
 .. hint::
-   Go to :guilabel:`Browse Source`` then drill down to find your suite. e.g. ``u-dp084`` would be under ``d/p/0/8/4``
+   Go to :guilabel:`Browse Source`` then drill down to find your suite. e.g. ``u-dp084`` would be under ``d/p/0/8/4`` and see that your commit has now appeared in the repository.  
 
-  and see that your commit has now appeared in the repository.  What is the suite's last modified time now?
+.. admonition:: Question
+   What is the suite's last modified time now?
 
 * Use Trac to view the changes you have made to the suite.
 
@@ -154,7 +155,7 @@ To add a new app to a suite, we first create a directory to hold the app files. 
 
 Remember to ``fcm add`` any new files that you add to the suite so they will be added to the repository when you next commit.
 
-In order to actually run the app, we need to add a new "task" to the suite which involves editing the suite configuration file ``suite.rc``. We need to specify 3 things: 
+In order to actually run the app, we need to add a new "task" to the suite which involves editing the suite configuration file ``flow.cylc``. We need to specify 3 things: 
 
 1. How the new task relates to other tasks, specifically, which task will trigger it and which task will follow it; 
 
@@ -191,7 +192,7 @@ In order to execute the app, we need to add a new task to the suite workflow. Th
 To set this up, edit the ``flow.cylc`` file. Under, ::
 
   [scheduling]
-     [[dependencies]]
+     [[graph]]
 
 find the line ::
 
@@ -203,23 +204,23 @@ and change it to ::
 
 This puts the task ``hello`` in the right place in the task list.
 
-The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable ``ROSE_TASK_APP`` in the task definition.  General task definitions go in the ``suite.rc`` file and the definitions specific to ARCHER2 in the ``site/archer2.cylc`` file.  The queuing system is specific to the host being run on, and there is already a definition for the ARCHER2 serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of. To run the new application on ARCHER2 in the serial queue and give it two minutes to complete, add the following lines to the ``flow.cylc`` after the definition for ``[[recon]]``: ::
+Do the same for the line: ::
+
+  {% set BUILD_GRAPH = BUILD_GRAPH ~ ' => atmos_main' if TASK_RUN else BUILD_GRAPH %}
+
+The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable ``ROSE_TASK_APP`` in the task definition.  General task definitions go in the ``flow.cylc`` file and the definitions specific to ARCHER2 in the ``site/archer2.cylc`` file.  The queuing system is specific to the host being run on, and there is already a definition for the ARCHER2 serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of. To run the new application on ARCHER2 in the serial queue and give it two minutes to complete, add the following lines to the ``flow.cylc`` after the definition for ``[[recon]]``: ::
 
    [[hello]]
-      inherit = HPC_SERIAL
-      [[[environment]]]
-         ROSE_TASK_APP = new_app
-      [[[job]]]
-         execution time limit = PT2M
+       inherit = HPC_SERIAL
+       execution time limit = PT2M
+       [[[environment]]]
+           ROSE_TASK_APP = new_app
 
 Running the new app
 ^^^^^^^^^^^^^^^^^^^	    
-We are now ready to go.  :guilabel:`Run` the suite. Look at the task graph: ``recon`` and ``atmos_main`` are there, but a new hierarchy of tasks has appeared.
+We are now ready to go.  :guilabel:`Run` the suite. Look at the task graph, if you're using the Cylc GUI you can simply select :guilabel:`ADD VIEW --> Graph`.  You may need to change the graph window depth to see more of the workflow.  This can be done by changing `N=1` to ``N=3`` at the top of the Cylc GUI. In the graph you should see the new task ``hello`` in between ``recon`` and ``atmos_main``the new task ``hello`` in between.
 
-.. todo::
-   Update image
-
-..  image:: /images/u-cc654-new-app.png
+..  image:: /images/u-dp084-new-app.png
 
 Notice that ``atmos_main`` no longer runs after the reconfiguration, but our new task ``hello`` does and when that has completed, ``atmos_main`` starts. The output from the ``hello`` task can be found in the cylc output directory: ``log/job/19880901T0000Z/hello/NN/job.out``.
 
@@ -251,8 +252,7 @@ The app can be tested in isolation by changing into the ``new_app/`` directory a
 This should produce output similar to: ::
 
   ros@puma2$ rose app-run
-  [INFO] export PATH=/home/ros/roses/u-cc654/app/new_app/bin:/home/fcm/rose-2016.11.1/bin:/usr/local/python/bin:
-  ...
+  [INFO] export PATH=/home4/home/n02-puma/ros/roses/u-dp084/app/new_app/bin:/home/ros/bin:/usr/...
   [INFO] export PLANET=Jupiter
   [INFO] command: hello.sh ${PLANET}
   Hello, Jupiter!
