@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Set Up (Leeds Training Course) &mdash; NCAS Unified Model Introduction</title>
+  <title>2. Getting Set Up (Leeds Training Course) &mdash; NCAS Unified Model Introduction</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,13 +14,13 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9bcbadda"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. Working with Suites" href="working-with-suites.html" />
-    <link rel="prev" title="NCAS Unified Model Introduction Course" href="index.html" /> 
+    <link rel="next" title="3. Working with Suites" href="working-with-suites.html" />
+    <link rel="prev" title="1. To Do List" href="todo-list.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,11 +43,32 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Practicals</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="getting-setup-selfstudy.html">1. Getting Set Up (Self-Study Instructions)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">2. Working with Suites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running.html">3. Running a UM suite on ARCHER2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">4. FCM tutorial</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="todo-list.html">1. To Do List</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Getting Set Up (Leeds Training Course)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-archer2-connection-using-your-own-laptop">2.1. Set up your ARCHER2 connection - Using your own laptop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-archer2-connection-using-an-ncas-laptop">2.2. Set up your ARCHER2 connection - Using an NCAS laptop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ssh-key-files">SSH key files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-via-a-terminal-gnu-linux-macos">Connecting via a Terminal (GNU/Linux &amp; macOS)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-archer2-environment">2.3. Set up your ARCHER2 environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-puma2-connection">2.4. Set up your PUMA2 connection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-passwordless-access-to-puma2">Set up passwordless access to PUMA2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-puma2-environment">2.5. Set up your PUMA2 environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-ssh-agent">2.6. Set up your ssh-agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-cylc-web-gui">2.7. Using the Cylc Web GUI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#linux-mac">Linux/Mac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mobaxterm-windows">MobaXterm (Windows)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start-up-the-cylc-web-gui">Start up the cylc web GUI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">3. Working with Suites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">4. Running a UM workflow on ARCHER2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solving-problems.html">5. Solving Common UM Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">6. Further Exercises (1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">7. Further Exercises (2)</a></li>
@@ -71,7 +92,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Getting Set Up (Leeds Training Course)</li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>Getting Set Up (Leeds Training Course)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/getting-setup-leeds.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,17 +103,21 @@
            <div itemprop="articleBody">
              
   <section id="getting-set-up-leeds-training-course">
-<h1>Getting Set Up (Leeds Training Course)<a class="headerlink" href="#getting-set-up-leeds-training-course" title="Link to this heading"></a></h1>
+<h1><span class="section-number">2. </span>Getting Set Up (Leeds Training Course)<a class="headerlink" href="#getting-set-up-leeds-training-course" title="Link to this heading"></a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>You <strong>MUST</strong> have PUMA2, ARCHER2 and MOSRS accounts setup before starting this section.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>These instructions are for use on the UM Training Course held on 28th-30th November 2023. If you are using them for self-study please contact NCAS-CMS for instructions.</p>
+<p>These instructions are for use on the in-person UM Training Course held in Leeds. If you are using them for self-study please contact NCAS-CMS for instructions.</p>
 </div>
-<section id="set-up-your-archer2-connection">
-<span id="archer2"></span><h2>Set up your ARCHER2 connection<a class="headerlink" href="#set-up-your-archer2-connection" title="Link to this heading"></a></h2>
+<section id="set-up-your-archer2-connection-using-your-own-laptop">
+<span id="archer"></span><h2><span class="section-number">2.1. </span>Set up your ARCHER2 connection - Using your own laptop<a class="headerlink" href="#set-up-your-archer2-connection-using-your-own-laptop" title="Link to this heading"></a></h2>
+<p>If you are using your own laptop, you should already have setup so that you can access ARCHER2 from a teminal window, please proceed to the section <a class="reference internal" href="#archer2-env"><span class="std std-ref">Set up your ARCHER2 environment</span></a>.</p>
+</section>
+<section id="set-up-your-archer2-connection-using-an-ncas-laptop">
+<h2><span class="section-number">2.2. </span>Set up your ARCHER2 connection - Using an NCAS laptop<a class="headerlink" href="#set-up-your-archer2-connection-using-an-ncas-laptop" title="Link to this heading"></a></h2>
 <p>To use the UM Introduction Tutorials you will first need to ensure you can connect from your local desktop to ARCHER2.</p>
 <section id="ssh-key-files">
 <h3>SSH key files<a class="headerlink" href="#ssh-key-files" title="Link to this heading"></a></h3>
@@ -124,7 +149,7 @@ In these instructions, we’ve assumed the keys are called <code class="docutils
 </section>
 </section>
 <section id="set-up-your-archer2-environment">
-<h2>Set up your ARCHER2 environment<a class="headerlink" href="#set-up-your-archer2-environment" title="Link to this heading"></a></h2>
+<span id="archer2-env"></span><h2><span class="section-number">2.3. </span>Set up your ARCHER2 environment<a class="headerlink" href="#set-up-your-archer2-environment" title="Link to this heading"></a></h2>
 <p>Login to ARCHER2 from your local desktop, copy the following profile to your home directory.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ cp /work/y07/shared/umshared/um-training/rose-profile ~/.profile
 </pre></div>
@@ -136,7 +161,7 @@ In these instructions, we’ve assumed the keys are called <code class="docutils
 </div>
 </section>
 <section id="set-up-your-puma2-connection">
-<span id="puma2"></span><h2>Set up your PUMA2 connection<a class="headerlink" href="#set-up-your-puma2-connection" title="Link to this heading"></a></h2>
+<span id="puma2"></span><h2><span class="section-number">2.4. </span>Set up your PUMA2 connection<a class="headerlink" href="#set-up-your-puma2-connection" title="Link to this heading"></a></h2>
 <p>PUMA2 is accessed from the ARCHER2 login nodes, and you will use the same username and password.</p>
 <p>From an ARCHER2 terminal type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ ssh -Y puma2
@@ -179,7 +204,7 @@ In these instructions, we’ve assumed the keys are called <code class="docutils
 </section>
 </section>
 <section id="set-up-your-puma2-environment">
-<h2>Set up your PUMA2 environment<a class="headerlink" href="#set-up-your-puma2-environment" title="Link to this heading"></a></h2>
+<h2><span class="section-number">2.5. </span>Set up your PUMA2 environment<a class="headerlink" href="#set-up-your-puma2-environment" title="Link to this heading"></a></h2>
 <p>Copy our standard <code class="docutils literal notranslate"><span class="pre">.profile</span></code> and <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> files:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cd
 puma2$ cp ~um1/um-training/puma2/.bash_profile .
@@ -188,7 +213,8 @@ puma2$ cp ~um1/um-training/puma2/.bashrc .
 </div>
 <p>Logout of PUMA2 and back in again to pick up these changes.</p>
 <p>You will get a warning about not being able to find <code class="docutils literal notranslate"><span class="pre">~/.ssh/ssh-setup</span></code>.  This can be ignored and will be resolved in the next step.</p>
-<p>You should also be prompted for your Met Office Science Repository Service password, then username. Note that it asks for your <strong>password</strong> first. Remember your MOSRS username is one word; usually firstnamelastname, all in lowercase.</p>
+<p>You should also be prompted for your Met Office Science Repository Service password, then username. Note that it asks for your <strong>password</strong> first.</p>
+<p>Remember your MOSRS username is one word; usually firstnamelastname, all in lowercase.</p>
 <p>If the password caching works, you should see:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Subversion</span> <span class="n">password</span> <span class="n">cached</span>
 <span class="n">Rosie</span> <span class="n">password</span> <span class="n">cached</span>
@@ -205,11 +231,11 @@ puma2$ cp ~um1/um-training/puma2/.bashrc .
 </div>
 </section>
 <section id="set-up-your-ssh-agent">
-<span id="ssh-setup"></span><h2>Set up your ssh-agent<a class="headerlink" href="#set-up-your-ssh-agent" title="Link to this heading"></a></h2>
+<span id="ssh-setup"></span><h2><span class="section-number">2.6. </span>Set up your ssh-agent<a class="headerlink" href="#set-up-your-ssh-agent" title="Link to this heading"></a></h2>
 <p>In order to submit jobs to ARCHER2 from PUMA2, you will need to set up an <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> and use it to cache the passphrase to your ARCHER2 key.</p>
 <p><strong>i. Copy your ARCHER2 ssh-key pair to PUMA2</strong></p>
 <p>Your ARCHER2 key is the one that you use to ssh into the ARCHER2 login nodes.  You need to copy both the public and private keys into your <code class="docutils literal notranslate"><span class="pre">.ssh/</span></code> directory on PUMA2.</p>
-<p>Open a new terminal from wherever you originally connected to ARCHER2 in <a class="reference internal" href="#archer2"><span class="std std-ref">Set up your ARCHER2 connection</span></a>, and run the following command</p>
+<p>Open a new terminal from wherever you originally connected to ARCHER2 in <a class="reference internal" href="#archer"><span class="std std-ref">Set up your ARCHER2 connection - Using your own laptop</span></a>, and run the following command</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_archer2</span><span class="o">*</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span><span class="nd">@login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">n02</span><span class="o">/</span><span class="n">n02</span><span class="o">-</span><span class="n">puma</span><span class="o">/&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/.</span><span class="n">ssh</span>
 </pre></div>
 </div>
@@ -245,7 +271,100 @@ puma2$ cp ~um1/um-training/puma2/.bashrc .
 </pre></div>
 </div>
 <p>This should return one of the login nodes, e.g. <code class="docutils literal notranslate"><span class="pre">ln01</span></code>. If it returns a message like <code class="docutils literal notranslate"><span class="pre">[WARN]</span> <span class="pre">ln03:</span> <span class="pre">(ssh</span> <span class="pre">failed)</span></code> then something has gone wrong with the ssh setup.</p>
+</section>
+<section id="using-the-cylc-web-gui">
+<h2><span class="section-number">2.7. </span>Using the Cylc Web GUI<a class="headerlink" href="#using-the-cylc-web-gui" title="Link to this heading"></a></h2>
+<p>Cylc provides a terminal based user interface and a web browser based one. The course can be completed using either.
+If you wish to use the Cylc Web GUI some setup is required. Here we provide instructions for Linux, Mac &amp; MobaXterm (Windows).</p>
+<section id="linux-mac">
+<h3>Linux/Mac<a class="headerlink" href="#linux-mac" title="Link to this heading"></a></h3>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file on your laptop so that the ARCHER2 and PUMA2 sections contain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># PUMA2</span>
+<span class="n">Host</span> <span class="n">puma2</span>
+<span class="n">User</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span>
+<span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">archer</span><span class="o">-</span><span class="n">ssh</span><span class="o">-</span><span class="n">key</span><span class="o">&gt;</span>
+<span class="n">ProxyJump</span> <span class="n">archer2</span>
+
+<span class="c1"># ARCHER2</span>
+<span class="n">Host</span> <span class="n">archer2</span>
+<span class="n">Hostname</span> <span class="n">login</span><span class="o">.</span><span class="n">archer2</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
+<span class="n">User</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span>
+<span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">archer</span><span class="o">-</span><span class="n">ssh</span><span class="o">-</span><span class="n">key</span><span class="o">&gt;</span>
+<span class="n">ForwardX11</span> <span class="n">No</span>
+<span class="n">ControlMaster</span> <span class="n">auto</span>
+<span class="n">ControlPath</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ssh</span><span class="o">-</span><span class="n">socket</span><span class="o">-%</span><span class="n">r</span><span class="o">@%</span><span class="n">h</span><span class="o">-%</span><span class="n">p</span>
+<span class="n">ControlPersist</span> <span class="n">yes</span>
+</pre></div>
+</div>
+<p>You should now be able to type <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">puma2</span></code> and land directly on PUMA2.</p>
+<p>Setup an alias on your laptop by adding one for the following to your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> or equivlaent depending on whether you are using Linux or a Mac.</p>
+<p><strong>i. Linux</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alias</span> <span class="n">puma</span><span class="o">-</span><span class="n">ui</span><span class="o">=</span><span class="s1">&#39;PORT=$(shuf -n 1 -i 10000-65000); ssh -t -L $</span><span class="si">{PORT}</span><span class="s1">:localhost:$</span><span class="si">{PORT}</span><span class="s1"> puma2 &quot;bash -l -c </span><span class="se">\&quot;</span><span class="s1">export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=$</span><span class="si">{PORT}</span><span class="se">\&quot;</span><span class="s1">&quot;&#39;</span>
+</pre></div>
+</div>
+<p><strong>ii. Mac</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alias</span> <span class="n">puma</span><span class="o">-</span><span class="n">ui</span><span class="o">=</span><span class="s1">&#39;PORT=$(jot -r 1 10000 65000); ssh -t -L $</span><span class="si">{PORT}</span><span class="s1">:localhost:$</span><span class="si">{PORT}</span><span class="s1"> puma2 &quot;bash -l -c </span><span class="se">\&quot;</span><span class="s1">export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=$</span><span class="si">{PORT}</span><span class="se">\&quot;</span><span class="s1">&quot;&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="mobaxterm-windows">
+<h3>MobaXterm (Windows)<a class="headerlink" href="#mobaxterm-windows" title="Link to this heading"></a></h3>
+<ol class="lowerroman simple">
+<li><p>Launch MobaXterm</p></li>
+<li><p>Open a terminal (click on the “+” tab)</p></li>
+<li><p>If needed create a <code class="docutils literal notranslate"><span class="pre">~/.ssh</span></code> directory</p></li>
+<li><p>Copy your ARCHER2 key into <code class="docutils literal notranslate"><span class="pre">~/.ssh</span></code> on MobaXterm the local disk is available at /mnt/c</p></li>
+<li><p>Edit (or create) the file <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> with the following contents:</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>PUMA2
+<span class="go">Host puma2</span>
+<span class="go">User &lt;username&gt;</span>
+<span class="go">IdentityFile ~/.ssh/&lt;your-archer-ssh-key&gt;</span>
+<span class="go">ProxyJump archer2</span>
+
+<span class="gp"># </span>ARCHER2
+<span class="go">Host archer2</span>
+<span class="go">Hostname login.archer2.ac.uk</span>
+<span class="go">User &lt;username&gt;</span>
+<span class="go">IdentityFile ~/.ssh/&lt;your-archer-ssh-key&gt;</span>
+<span class="go">ForwardX11 No</span>
+<span class="go">ControlMaster auto</span>
+<span class="go">ControlPath /tmp/ssh-socket-%r@%h-%p</span>
+<span class="go">ControlPersist yes</span>
+</pre></div>
+</div>
+<p>Setup an alias by adding the following line to your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alias</span> <span class="n">puma</span><span class="o">-</span><span class="n">ui</span><span class="o">=</span><span class="s1">&#39;PORT=$(shuf -n 1 -i 10000-65000); ssh -t -L $</span><span class="si">{PORT}</span><span class="s1">:localhost:$</span><span class="si">{PORT}</span><span class="s1"> puma2 &quot;bash -l -c </span><span class="se">\&quot;</span><span class="s1">export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=$</span><span class="si">{PORT}</span><span class="se">\&quot;</span><span class="s1">&quot;&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="start-up-the-cylc-web-gui">
+<h3>Start up the cylc web GUI<a class="headerlink" href="#start-up-the-cylc-web-gui" title="Link to this heading"></a></h3>
+<p>In a new terminal window type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ puma-ui
+</pre></div>
+</div>
+<p>You see see a response similar to the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>puma-ui
+<span class="gp">#</span><span class="c1">################################################################################</span>
+<span class="go">------------------------------Welcome to PUMA2-----------------------------------</span>
+<span class="gp">#</span><span class="c1">################################################################################</span>
+<span class="go">[C 2026-01-22 08:25:30.367 ServerApp]</span>
+
+<span class="go">To access the server, open this file in a browser:</span>
+<span class="go">  file:///home/n02/n02/ros/.cylc/uiserver/info_files/jpserver-1094362-open.html</span>
+<span class="go">Or copy and paste one of these URLs:</span>
+<span class="go">  http://localhost:20522/cylc?token=700ab2be96800177d03df31b8140857cab02b9632af45a1d</span>
+<span class="go">  http://127.0.0.1:20522/cylc?token=700ab2be96800177d03df31b8140857cab02b9632af45a1d</span>
+<span class="go">[W 2026-01-22 08:25:44.242 ServerApp] The websocket_ping_timeout (999999) cannot be longer than the websocket_ping_interval (290).</span>
+<span class="go">  Setting websocket_ping_timeout=290</span>
+</pre></div>
+</div>
+<p>Copy and paste one of the http URLs listed into your web browser and you should then see your Cylc GUI load.  If you have never used Cylc8 before the Workflows panel will be empty.</p>
+<a class="reference internal image-reference" href="_images/cylc-gui.png"><img alt="_images/cylc-gui.png" class="align-center" src="_images/cylc-gui.png" style="width: 384.0px; height: 271.5px;" />
+</a>
 <p>You are now ready to try running a UM suite!</p>
+</section>
 </section>
 </section>
 
@@ -253,8 +372,8 @@ puma2$ cp ~um1/um-training/puma2/.bashrc .
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="NCAS Unified Model Introduction Course" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="working-with-suites.html" class="btn btn-neutral float-right" title="2. Working with Suites" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="todo-list.html" class="btn btn-neutral float-left" title="1. To Do List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="working-with-suites.html" class="btn btn-neutral float-right" title="3. Working with Suites" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

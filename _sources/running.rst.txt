@@ -1,6 +1,13 @@
-Running a UM suite on ARCHER2
-=============================
+Running a UM workflow on ARCHER2
+================================
    
+.. admonition:: Aims
+
+   In this section you will learn:
+       * How to run and monitor a standard UM workflow 
+       * Where to find the job output and error files
+       * Where to find the UM model output
+
 ARCHER2 architecture
 --------------------
 
@@ -12,36 +19,45 @@ In common with many HPC systems, ARCHER2 consists of different types of processo
 
 * **Serial / post-processing nodes:** This is where less intensive tasks such as compilation and archiving take place. 
 
-ARCHER2 has two file systems: 
+ARCHER2 has three file systems: 
 
 * **/home:** This is relatively small and is only backed up for disaster recovery. 
 
 * **/work:** This is much larger, but is not backed up. Note that the batch nodes can only see the work file system. It is optimised for parallel I/O and large files. 
+* **/a2fs-nvme:** This is high performance solid state storage configured as temporary SCRATCH storage where files not accessed in the last 28 days are automatically deleted. It is not backed up.
 
-Consult the ARCHER2 website for more information: http://www.archer2.ac.uk 
+.. admonition:: Further Reading
+
+   Consult the ARCHER2 website for more information: http://www.archer2.ac.uk 
 
 
-Running a Standard Suite
-------------------------
+Running a Standard Workflow
+---------------------------
 
-To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM13.0.  
+To demonstrate how to run the UM through Rose we will start by running a standard N48 workflow at UM13.8.  
 
-Copy the suite
+.. tip:: 
+
+   Cylc command reference sheet provides a summary of all major cylc commands which you will find useful to refer to throughout the remaining chapters:
+
+   `Cylc Cheat Sheet <https://cylc.github.io/cylc-doc/stable/html/user-guide/cheat-sheet.html>`_
+
+Copy the suite 
 ^^^^^^^^^^^^^^
-* In ``rosie go`` locate the suite with idx **u-cc519** owned by **rosalynhatcher**. 
+* In ``rosie go`` locate the suite with idx **u-dp063** owned by **grenvillelister**. 
 * Right click on the suite and select :guilabel:`Copy Suite`.  
 
 This copies an existing suite to a new suite id.  The new suite will be owned by you.  During the copy process a wizard will launch for you to edit the suite discovery information, if you wish.
 
 A new suite will be created in the MOSRS rosie-u suite repository and will be checked out into your ``~/roses`` directory. 
 
-Edit the suite
-^^^^^^^^^^^^^^
+Edit the suite configuration 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Open your new suite in the Rose config editor GUI.
 
-Before you can run the suite you need to change the *userid*, *queue*, *account code* and *reservation*:
+Before you can run the workflow you need to change the *userid*, *queue*, *account code* and *reservation*:
 
-* Click on :guilabel:`suite conf --> jinja2` in the left hand panel
+* Click on :guilabel:`suite conf --> template variables` in the left hand panel
 * Set ``HPC_USER`` (that's your ARCHER2 username)
 
 If following the tutorial as part of an organised training event:  
@@ -49,7 +65,7 @@ If following the tutorial as part of an organised training event:
 * Set ``HPC_ACCOUNT`` to **'n02-training'**
 * Set ``HPC_QUEUE`` to **'standard'**
 * Ensure ``RESERVATION`` is set to **True**
-* Set ``HPC_RESERVATION`` to be the reservation code for today. (e.g. **'n02-training_1055426'**)
+* Set ``HPC_RESERVATION`` to be the reservation code for today. (e.g. **'n02-training_1673632'**)
 
 If following the tutorial as self-study:
 
@@ -59,23 +75,110 @@ If following the tutorial as self-study:
 
 .. admonition:: Notes
 		
-   * Quotes around the variable values are essential otherwise the suite will not run.
-   * In normal practice you submit your suites to the parallel queue (either **short** or **standard**) on ARCHER2.
+   * Quotes around the variable values are essential otherwise the workflow will not run.
+   * In normal practice you submit your workflow to the parallel queue (either **short** or **standard**) on ARCHER2.
    * For organised training events, we use processor reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource.  Reservations are specified by adding an additional setting called the reservation code; e.g. **n02-training_226**.
 
 * Save the suite (:guilabel:`File > Save` or click the *down arrow* icon)
 
-Run the suite
-^^^^^^^^^^^^^
-The standard suite will build, reconfigure and run the UM.  
+* Close the `rose edit` window.
 
-* Click on the triangle symbol on the right end of the menu bar to run the suite. 
+Run the workflow
+^^^^^^^^^^^^^^^^
 
-Doing this will execute the ``rose suite-run`` command (more on this later) and start the Cylc GUI through which you can monitor the progress of your suite graphically. The Cylc GUI will update as the job progresses.
+Run the following commands to submit the workflow: ::
+
+ puma2$ cd ~/roses/u-dp063
+ puma2$ cylc vip 
+
+This validates, installs and runs the workflow. The standard workflow will build, reconfigure and run the UM.
+
+.. tip::
+
+   If no argument is supplied to ``cylc vip``, the current working directory is used as the source directory.  Alternatively, you can supply a workflow source name e.g. ``cylc vip u-dp063``
+
+.. admonition:: Further Information
+
+   ``cylc vip`` is short for **validate**, **install** and **play** (run) the workflow. 
+
+     * Validate checks the suite definition for errors.   
+     * Install creates the *run directory* structure along with some service files. 
+     * Play runs the workflow.
+
+Monitor the running workflow
+----------------------------
+
+To help you monitor and control running workflows Cylc offers 3 tools:
+
+  * A web based graphical user interface (Cylc GUI)
+  * A terminal-based user interface (Cylc TUI)
+  * A comprehensive command line interface (Cylc CLI)
+
+.. admonition:: See also
+
+   For full details see the `Cylc user interfaces documentation <https://cylc.github.io/cylc-doc/stable/html/tutorial/runtime/introduction.html#the-cylc-user-interfaces>`_
+
+   These pages give information on how to navigate around both GUIs and indicates what all the task & job icons indicate.
+
+
+Using the Cylc User Interfaces
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We will take some time here to explore the Cylc User Interfaces
+
+**Using the Cylc web GUI**
+
+The Cylc GUI is a monitoring and control application that runs in a web browser. The Cylc GUI has different views you can use to examine your workflows, including a menu to allow you to switch between workflows.  You only need to have one instance of the Cylc GUI open.
+
+To use the Cylc GUI for workflows on ARCHER2 you need to do some setup first.  Please follow the "Setting up the Cylc GUI" instructions in Chapter 1.
+
+To start the Cylc UI, in your local desktop terminal window type ``puma-ui`` and you should see similar to the following:
+
+.. code-block:: console
+
+  $ puma-ui
+  #################################################################################
+  ------------------------------Welcome to PUMA2-----------------------------------
+  #################################################################################
+  [C 2026-01-22 08:25:30.367 ServerApp] 
+    
+  To access the server, open this file in a browser:
+    file:///home/n02/n02/ros/.cylc/uiserver/info_files/jpserver-1094362-open.html
+  Or copy and paste one of these URLs:
+    http://localhost:20522/cylc?token=700ab2be96800177d03df31b8140857cab02b9632af45a1d
+    http://127.0.0.1:20522/cylc?token=700ab2be96800177d03df31b8140857cab02b9632af45a1d
+  [W 2026-01-22 08:25:44.242 ServerApp] The websocket_ping_timeout (999999) cannot be longer than the websocket_ping_interval (290).
+    Setting websocket_ping_timeout=290
+
+Copy and paste one of the URLs listed into your web browser and you should then see your Cylc GUI load.
+
+.. image:: /images/cylc-gui.png
+   :scale: 50%
+   :align: center
+
+**Using the Cylc TUI**
+
+This is a command line version of the GUI.  It can be used to monitor and control any workflows running under your user account, trigger tasks, access log files and perform other common activities. 
+
+To start the Cylc TUI on PUMA2 type: ::
+
+  puma$ cylc tui <workflow_name>
+
+You interact with the TUI by selecting a task name, either by using the up & down arrows or the mouse and then pressing the <Enter> key to bring up a menu of actions.
+
+.. image:: /images/cylc-tui.png
+   :scale: 50%
+   :align: center
+
+Please take some time now to familiarise yourself with both the Cylc TUI & Cylc GUI.
+
 
 Looking at the queues on ARCHER2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-While you're waiting for the suite to run, let's log into ARCHER2 and learn how to look at the queues.
+--------------------------------
+
+It's likely that whilst you have been looking at the GUIs your workflow will have finished.  If this is the case run it again before continuing with this section.
+
+Now, let's log into ARCHER2 and learn how to look at the queues.
 
 Run the following command: ::
 
@@ -89,55 +192,67 @@ This will show the status of jobs you are running.  You will see output similar 
 
 At this stage you will probably only have a job running or waiting to run in the serial queue. Running ``squeue`` will show all jobs currently on ARCHER2, most of which will be in the parallel queues. 
 
-Once your suite has finished running the Cylc GUI will go blank and you should get a message in the bottom left hand corner saying ``Stopped with succeeded``.
+Once your workflow has finished running the Cylc GUI/TUI will go blank and you should get a message in the bottom left hand corner saying ``Stopped with succeeded``.
 
 .. tip::
-  Cylc is set up so that it *polls* ARCHER2 to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on ARCHER2 and the Cylc GUI being updated. If you see that the task has finished running but Cylc hasn't updated then you can manually poll the task by right-clicking on it and selecting :guilabel:`Poll` from the pop-up menu.
 
-Standard Suite Output
----------------------
+  Cylc is set up so that it *polls* ARCHER2 to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on ARCHER2 and the Cylc GUI/TUI being updated. If you see that the task has finished running but Cylc hasn't updated then you can manually poll the task by selecting it and then selecting :guilabel:`Poll` from the pop-up menu.
 
-The output from a standard suite goes to a variety of places, depending on the type of the file.  On ARCHER2 you will find all the output from your run under the directory ``~/cylc-run/<suitename>``, where ``<suitename>`` is the name of the suite. This is actually a symbolic link to the equivalent location in your ``/work`` directory (E.g. ``/work/n02/n02/<username>/cylc-run/<suitename>``. 
+Standard Workflow Output
+------------------------
+
+The output from a standard workflow goes to a variety of places, depending on the type of the file.  On ARCHER2 you will find all the output from your run under the directory ``~/cylc-run/<workflow-name>``, where ``<workflow-name>`` is the name of the workflow (e.g. u-dp063). This is actually a symbolic link to the equivalent location in your ``/work`` directory (E.g. ``/work/n02/n02/<username>/cylc-run/<workflow-name>``. 
 
 Task output
 ^^^^^^^^^^^
 
-.. note:: Rose Bush is a web-based tool for viewing the standard output and errors from suites. Unfortunately this does not work on the current puma server, so we need to browse the log files directly.
+On PUMA2, navigate to the cylc-run directory for the workflow:
 
-.. note:: To run Rose Bush on Monsoon run: ``firefox http://localhost/rose-bush``	  
+.. code-block:: console
 
-On PUMA2, navigate to the cylc-run directory: ::
-
-  cd ~/cylc-run/<suitename>
+  cd ~/cylc-run/<workflow-name>
   ls 
 
-You should see directories for each of the suites that you have run. Go to the suite you have just run and into the log directory: ::
+By default, cylc will create a new numbered run directory each time you run the workflow:
 
-  cd <suitename>/log/job/1
+.. code-block:: console
+
+  puma2$ cd ~/cylc-run/u-dp063
+  puma2$ ls
+  _cylc-install/  run1/  run2/  run3/  runN@
+
+The most recent ``runX`` directory is symlinked to ``runN``.
+
+Go to the workflow you have just run and into the log directory:
+
+.. code-block:: console
+
+  cd runN/log/job/1
   ls 
 
-You will see directories for each of the tasks in the suite. For this suite there are 4 tasks: ``fcm_make`` (code extraction), ``fcm_make2`` (compilation), ``recon`` & ``atmos``. Try looking in one of the task directories: ::
+You will see directories for each of the tasks in the workflow. For this workflow there are 5 tasks: ``remote_setup`` (ARCHER2 directory setup), ``fcm_make`` (code extraction), ``fcm_make2`` (compilation), ``recon`` & ``atmos``. Try looking in one of the task directories:
+
+.. code-block:: console
 
   cd recon/NN
   ls
 
 Here ``NN`` is a symbolic link created by Rose pointing to the output of the most recently run. You will see several files in this directory. The ``job.out`` and ``job.err`` files are the first places you should look for information when tasks fail.
 
-..
-  Rose bush
-  ^^^^^^^^^
- 
-  The standard output and errors from the suite can be easily viewed using Rose Bush.
+.. tip::
+   You can use the command line to view scheduler or job logs without having to find them yourself on the filesystem:
 
-  For suites submitted from PUMA2; in a browser navigate to: http://puma.nerc.ac.uk/rose-bush
+   .. code-block:: bash
   
-  Enter your PUMA2 userid and click :guilabel:`Suites List`.  You should then see a list of all the suites you have run.  Click on :guilabel:`tasks jobs list` for the suite you have just run. You can examine the output of each task using the links, as well as see whether the suite contains failed tasks, or is currently running.  For this suite you should see output files for 4 tasks: ``fcm_make`` (code extraction), ``fcm_make2`` (compilation), ``recon`` & ``atmos``. The ``job.out`` and ``job.err`` files are the first places you should look for information when tasks fail.
+      cylc cat-log <workflow-name>
+      cylc cat-log <workflow-name//<cycle-point/<task-name>
+   
 
 Compilation output
 ^^^^^^^^^^^^^^^^^^
 The output from the compilation is stored on the host upon which the compilation was performed.  The output from ``fcm_make`` is inside the directory containing the build, which is inside the ``share`` subdirectory.
 
-``~/cylc-run/<suitename>/share/fcm_make/fcm-make2.log``
+``~/cylc-run/<workflow-name>/run<X>/share/fcm_make/fcm-make2.log``
 
 If you come across the word "failed", chances are your model didn't build correctly and this file is where you'd search for reasons why.
 
@@ -145,7 +260,7 @@ UM standard output
 ^^^^^^^^^^^^^^^^^^
 The output from the UM scripts and the output from PE0 of the model are written to the ``job.out`` and ``job.err`` files for that task. Take a look at the ``job.out`` for the ``atmos`` task, by opening the following file:
 
-``~/cylc-run/<suitename>/log/job/1/atmos/NN/job.out``
+``~/cylc-run/<workflow-name>/run<X>/log/job/1/atmos/NN/job.out``
 
 * Did the linear solver for the Helmholtz problem converge in the final timestep?
   
@@ -153,7 +268,7 @@ The output from the UM scripts and the output from PE0 of the model are written 
 		 
   The ``sacct`` command displays accounting data for all jobs that are run on ARCHER2.  ``sacct`` can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This information is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.
 
-  Let's take a look at the resources used by your copy of ``u-cc519`` run.
+  Let's take a look at the resources used by your copy of ``u-dp063`` run.
 
   * Locate the SLURM Job Id for your run.  This is a 6 digit number and can be found in the ``job.status`` file in the cylc task log directory.  Look for the line ``CYLC_BATCH_SYS_JOB_ID=`` and take note of the number after the ``=`` sign.
 
@@ -186,31 +301,35 @@ The output from the UM scripts and the output from PE0 of the model are written 
 
 Binary output - work and share
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-By default the UM will write all output to the directory it was launched from, which will be the task's ``work`` directory.  However, all output paths can be configured in the GUI and in practice most UM tasks will send output to one or both of the suite's ``work`` or ``share`` directories.
+By default the UM will write all output to the directory it was launched from, which will be the task's ``work`` directory.  However, all output paths can be configured in the GUI and in practice most UM tasks will send output to one or both of the workflow's ``work`` or ``share`` directories.
 
-``~/cylc-run/<suitename>/work/1/atmos``
+``~/cylc-run/<workflow-name>/run<X>/work/1/atmos``
 
 or
 
-``~/cylc-run/<suitename>/share/data``
+``~/cylc-run/<workflow-name>/run<X>/share/data``
 
-For this suite output is sent to the ``work`` directory. 
+For this workflow output is sent to the ``work`` directory. 
 
 Change directory to the work space.
 
-* What files and directories are present?
+.. admonition:: Question
+
+   * What files and directories are present?
 
 Model diagnostic output files will appear here, along with a directory called ``pe_output``. This contains one file for each processor, for both model and reconfiguration, which contain logging information on how the model behaved.
 
-Open one of these files ``<suite-id>.fort6.peXX`` in your favourite editor. 
+Open one of these files ``<workflow-name>.fort6.peXX`` in your favourite editor. 
 
-The amount of output created by the suite and written to this file can be controlled in the suite configuration (:guilabel:`um --> env --> Runtime Controls --> Atmosphere only`). For development work, and to gain familiarity with the system, make sure "Extra diagnostic messages" are output. Switch it on in this suite if it isn't already.
+The amount of output created by the workflow and written to this file can be controlled in the suite configuration (:guilabel:`um --> env --> Runtime Controls --> Atmosphere only`). For development work, and to gain familiarity with the system, make sure "Extra diagnostic messages" are output. Switch it on in this suite if it isn't already.
 
 It is well worth taking a little time to look through this file and to recognise some of the key phrases output by the model. You will soon learn what to search for to tell you if the model ran successfully or not. Unfortunately, important information can be dotted about in the file, so just examining the first or last few lines may not be sufficient to find out why the model hasn't behaved as you expected. Try to find answers to the following:
 
-* How many prognostic fields were read from the start file?
-* How many boundary layer levels did you run with?
-* What was the range of gridpoints handled by this processor?
+.. admonition:: Questions
+
+   * How many prognostic fields were read from the start file?
+   * How many boundary layer levels did you run with?
+   * What was the range of gridpoints handled by this processor?
 
 Check the file sizes of the different file types. The output directory will contain start dumps, diagnostic output files and possibly a core dump file if the model failed and these usually have very different sizes.
 

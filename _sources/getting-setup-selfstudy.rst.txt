@@ -4,9 +4,6 @@ Getting Set Up (Self-Study Instructions)
 .. warning::
    You **MUST** have PUMA2, ARCHER2 and MOSRS accounts setup before starting this section.
 
-.. warning:: 
-   If you have moved your account over to PUMA2 from the old PUMA server (pumanew), then you should follow these instructions: https://cms.ncas.ac.uk/puma2/
-
 .. _archer2:
    
 Set up your ARCHER2 connection

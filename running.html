@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3. Running a UM suite on ARCHER2 &mdash; NCAS Unified Model Introduction</title>
+  <title>4. Running a UM workflow on ARCHER2 &mdash; NCAS Unified Model Introduction</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,13 +14,13 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9bcbadda"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. FCM tutorial" href="fcm-tutorial.html" />
-    <link rel="prev" title="2. Working with Suites" href="working-with-suites.html" /> 
+    <link rel="next" title="5. Solving Common UM Problems" href="solving-problems.html" />
+    <link rel="prev" title="3. Working with Suites" href="working-with-suites.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,18 +44,23 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Practicals</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="getting-setup-selfstudy.html">1. Getting Set Up (Self-Study Instructions)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">2. Working with Suites</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Running a UM suite on ARCHER2</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#archer2-architecture">3.1. ARCHER2 architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-a-standard-suite">3.2. Running a Standard Suite</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="todo-list.html">1. To Do List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-setup-leeds.html">2. Getting Set Up (Leeds Training Course)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">3. Working with Suites</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Running a UM workflow on ARCHER2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#archer2-architecture">4.1. ARCHER2 architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-standard-workflow">4.2. Running a Standard Workflow</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#copy-the-suite">Copy the suite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#edit-the-suite">Edit the suite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#run-the-suite">Run the suite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#looking-at-the-queues-on-archer2">Looking at the queues on ARCHER2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edit-the-suite-configuration">Edit the suite configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-workflow">Run the workflow</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#standard-suite-output">3.3. Standard Suite Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#monitor-the-running-workflow">4.3. Monitor the running workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-cylc-user-interfaces">Using the Cylc User Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#looking-at-the-queues-on-archer2">4.4. Looking at the queues on ARCHER2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#standard-workflow-output">4.5. Standard Workflow Output</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#task-output">Task output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compilation-output">Compilation output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#um-standard-output">UM standard output</a></li>
@@ -64,7 +69,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">4. FCM tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solving-problems.html">5. Solving Common UM Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">6. Further Exercises (1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">7. Further Exercises (2)</a></li>
@@ -88,7 +92,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">3. </span>Running a UM suite on ARCHER2</li>
+      <li class="breadcrumb-item active"><span class="section-number">4. </span>Running a UM workflow on ARCHER2</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/running.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -98,43 +102,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="running-a-um-suite-on-archer2">
-<h1><span class="section-number">3. </span>Running a UM suite on ARCHER2<a class="headerlink" href="#running-a-um-suite-on-archer2" title="Link to this heading"></a></h1>
+  <section id="running-a-um-workflow-on-archer2">
+<h1><span class="section-number">4. </span>Running a UM workflow on ARCHER2<a class="headerlink" href="#running-a-um-workflow-on-archer2" title="Link to this heading"></a></h1>
+<div class="admonition-aims admonition">
+<p class="admonition-title">Aims</p>
+<dl class="simple">
+<dt>In this section you will learn:</dt><dd><ul class="simple">
+<li><p>How to run and monitor a standard UM workflow</p></li>
+<li><p>Where to find the job output and error files</p></li>
+<li><p>Where to find the UM model output</p></li>
+</ul>
+</dd>
+</dl>
+</div>
 <section id="archer2-architecture">
-<h2><span class="section-number">3.1. </span>ARCHER2 architecture<a class="headerlink" href="#archer2-architecture" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.1. </span>ARCHER2 architecture<a class="headerlink" href="#archer2-architecture" title="Link to this heading"></a></h2>
 <p>In common with many HPC systems, ARCHER2 consists of different types of processor nodes:</p>
 <ul class="simple">
 <li><p><strong>Login nodes:</strong> This is where you land when you ssh into ARCHER2. Typically these processors are used for file management tasks.</p></li>
 <li><p><strong>Compute / batch nodes:</strong> These make up most of the ARCHER2 system, and this is where the model runs.</p></li>
 <li><p><strong>Serial / post-processing nodes:</strong> This is where less intensive tasks such as compilation and archiving take place.</p></li>
 </ul>
-<p>ARCHER2 has two file systems:</p>
+<p>ARCHER2 has three file systems:</p>
 <ul class="simple">
 <li><p><strong>/home:</strong> This is relatively small and is only backed up for disaster recovery.</p></li>
 <li><p><strong>/work:</strong> This is much larger, but is not backed up. Note that the batch nodes can only see the work file system. It is optimised for parallel I/O and large files.</p></li>
+<li><p><strong>/a2fs-nvme:</strong> This is high performance solid state storage configured as temporary SCRATCH storage where files not accessed in the last 28 days are automatically deleted. It is not backed up.</p></li>
 </ul>
+<div class="admonition-further-reading admonition">
+<p class="admonition-title">Further Reading</p>
 <p>Consult the ARCHER2 website for more information: <a class="reference external" href="http://www.archer2.ac.uk">http://www.archer2.ac.uk</a></p>
+</div>
 </section>
-<section id="running-a-standard-suite">
-<h2><span class="section-number">3.2. </span>Running a Standard Suite<a class="headerlink" href="#running-a-standard-suite" title="Link to this heading"></a></h2>
-<p>To demonstrate how to run the UM through Rose we will start by running a standard N48 suite at UM13.0.</p>
+<section id="running-a-standard-workflow">
+<h2><span class="section-number">4.2. </span>Running a Standard Workflow<a class="headerlink" href="#running-a-standard-workflow" title="Link to this heading"></a></h2>
+<p>To demonstrate how to run the UM through Rose we will start by running a standard N48 workflow at UM13.8.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Cylc command reference sheet provides a summary of all major cylc commands which you will find useful to refer to throughout the remaining chapters:</p>
+<p><a class="reference external" href="https://cylc.github.io/cylc-doc/stable/html/user-guide/cheat-sheet.html">Cylc Cheat Sheet</a></p>
+</div>
 <section id="copy-the-suite">
 <h3>Copy the suite<a class="headerlink" href="#copy-the-suite" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>In <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> locate the suite with idx <strong>u-cc519</strong> owned by <strong>rosalynhatcher</strong>.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">rosie</span> <span class="pre">go</span></code> locate the suite with idx <strong>u-dp063</strong> owned by <strong>grenvillelister</strong>.</p></li>
 <li><p>Right click on the suite and select <span class="guilabel">Copy Suite</span>.</p></li>
 </ul>
 <p>This copies an existing suite to a new suite id.  The new suite will be owned by you.  During the copy process a wizard will launch for you to edit the suite discovery information, if you wish.</p>
 <p>A new suite will be created in the MOSRS rosie-u suite repository and will be checked out into your <code class="docutils literal notranslate"><span class="pre">~/roses</span></code> directory.</p>
 </section>
-<section id="edit-the-suite">
-<h3>Edit the suite<a class="headerlink" href="#edit-the-suite" title="Link to this heading"></a></h3>
+<section id="edit-the-suite-configuration">
+<h3>Edit the suite configuration<a class="headerlink" href="#edit-the-suite-configuration" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Open your new suite in the Rose config editor GUI.</p></li>
 </ul>
-<p>Before you can run the suite you need to change the <em>userid</em>, <em>queue</em>, <em>account code</em> and <em>reservation</em>:</p>
+<p>Before you can run the workflow you need to change the <em>userid</em>, <em>queue</em>, <em>account code</em> and <em>reservation</em>:</p>
 <ul class="simple">
-<li><p>Click on <span class="guilabel">suite conf –&gt; jinja2</span> in the left hand panel</p></li>
+<li><p>Click on <span class="guilabel">suite conf –&gt; template variables</span> in the left hand panel</p></li>
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_USER</span></code> (that’s your ARCHER2 username)</p></li>
 </ul>
 <p>If following the tutorial as part of an organised training event:</p>
@@ -142,7 +166,7 @@
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_ACCOUNT</span></code> to <strong>‘n02-training’</strong></p></li>
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_QUEUE</span></code> to <strong>‘standard’</strong></p></li>
 <li><p>Ensure <code class="docutils literal notranslate"><span class="pre">RESERVATION</span></code> is set to <strong>True</strong></p></li>
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_RESERVATION</span></code> to be the reservation code for today. (e.g. <strong>‘n02-training_1055426’</strong>)</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">HPC_RESERVATION</span></code> to be the reservation code for today. (e.g. <strong>‘n02-training_1673632’</strong>)</p></li>
 </ul>
 <p>If following the tutorial as self-study:</p>
 <ul class="simple">
@@ -153,26 +177,97 @@
 <div class="admonition-notes admonition">
 <p class="admonition-title">Notes</p>
 <ul class="simple">
-<li><p>Quotes around the variable values are essential otherwise the suite will not run.</p></li>
-<li><p>In normal practice you submit your suites to the parallel queue (either <strong>short</strong> or <strong>standard</strong>) on ARCHER2.</p></li>
+<li><p>Quotes around the variable values are essential otherwise the workflow will not run.</p></li>
+<li><p>In normal practice you submit your workflow to the parallel queue (either <strong>short</strong> or <strong>standard</strong>) on ARCHER2.</p></li>
 <li><p>For organised training events, we use processor reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource.  Reservations are specified by adding an additional setting called the reservation code; e.g. <strong>n02-training_226</strong>.</p></li>
 </ul>
 </div>
 <ul class="simple">
 <li><p>Save the suite (<span class="guilabel">File &gt; Save</span> or click the <em>down arrow</em> icon)</p></li>
+<li><p>Close the <cite>rose edit</cite> window.</p></li>
 </ul>
 </section>
-<section id="run-the-suite">
-<h3>Run the suite<a class="headerlink" href="#run-the-suite" title="Link to this heading"></a></h3>
-<p>The standard suite will build, reconfigure and run the UM.</p>
-<ul class="simple">
-<li><p>Click on the triangle symbol on the right end of the menu bar to run the suite.</p></li>
+<section id="run-the-workflow">
+<h3>Run the workflow<a class="headerlink" href="#run-the-workflow" title="Link to this heading"></a></h3>
+<p>Run the following commands to submit the workflow:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cd ~/roses/u-dp063
+puma2$ cylc vip
+</pre></div>
+</div>
+<p>This validates, installs and runs the workflow. The standard workflow will build, reconfigure and run the UM.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If no argument is supplied to <code class="docutils literal notranslate"><span class="pre">cylc</span> <span class="pre">vip</span></code>, the current working directory is used as the source directory.  Alternatively, you can supply a workflow source name e.g. <code class="docutils literal notranslate"><span class="pre">cylc</span> <span class="pre">vip</span> <span class="pre">u-dp063</span></code></p>
+</div>
+<div class="admonition-further-information admonition">
+<p class="admonition-title">Further Information</p>
+<p><code class="docutils literal notranslate"><span class="pre">cylc</span> <span class="pre">vip</span></code> is short for <strong>validate</strong>, <strong>install</strong> and <strong>play</strong> (run) the workflow.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Validate checks the suite definition for errors.</p></li>
+<li><p>Install creates the <em>run directory</em> structure along with some service files.</p></li>
+<li><p>Play runs the workflow.</p></li>
 </ul>
-<p>Doing this will execute the <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">suite-run</span></code> command (more on this later) and start the Cylc GUI through which you can monitor the progress of your suite graphically. The Cylc GUI will update as the job progresses.</p>
+</div></blockquote>
+</div>
+</section>
+</section>
+<section id="monitor-the-running-workflow">
+<h2><span class="section-number">4.3. </span>Monitor the running workflow<a class="headerlink" href="#monitor-the-running-workflow" title="Link to this heading"></a></h2>
+<p>To help you monitor and control running workflows Cylc offers 3 tools:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>A web based graphical user interface (Cylc GUI)</p></li>
+<li><p>A terminal-based user interface (Cylc TUI)</p></li>
+<li><p>A comprehensive command line interface (Cylc CLI)</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition-see-also admonition">
+<p class="admonition-title">See also</p>
+<p>For full details see the <a class="reference external" href="https://cylc.github.io/cylc-doc/stable/html/tutorial/runtime/introduction.html#the-cylc-user-interfaces">Cylc user interfaces documentation</a></p>
+<p>These pages give information on how to navigate around both GUIs and indicates what all the task &amp; job icons indicate.</p>
+</div>
+<section id="using-the-cylc-user-interfaces">
+<h3>Using the Cylc User Interfaces<a class="headerlink" href="#using-the-cylc-user-interfaces" title="Link to this heading"></a></h3>
+<p>We will take some time here to explore the Cylc User Interfaces</p>
+<p><strong>Using the Cylc web GUI</strong></p>
+<p>The Cylc GUI is a monitoring and control application that runs in a web browser. The Cylc GUI has different views you can use to examine your workflows, including a menu to allow you to switch between workflows.  You only need to have one instance of the Cylc GUI open.</p>
+<p>To use the Cylc GUI for workflows on ARCHER2 you need to do some setup first.  Please follow the “Setting up the Cylc GUI” instructions in Chapter 1.</p>
+<p>To start the Cylc UI, in your local desktop terminal window type <code class="docutils literal notranslate"><span class="pre">puma-ui</span></code> and you should see similar to the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>puma-ui
+<span class="gp">#</span><span class="c1">################################################################################</span>
+<span class="go">------------------------------Welcome to PUMA2-----------------------------------</span>
+<span class="gp">#</span><span class="c1">################################################################################</span>
+<span class="go">[C 2026-01-22 08:25:30.367 ServerApp]</span>
+
+<span class="go">To access the server, open this file in a browser:</span>
+<span class="go">  file:///home/n02/n02/ros/.cylc/uiserver/info_files/jpserver-1094362-open.html</span>
+<span class="go">Or copy and paste one of these URLs:</span>
+<span class="go">  http://localhost:20522/cylc?token=700ab2be96800177d03df31b8140857cab02b9632af45a1d</span>
+<span class="go">  http://127.0.0.1:20522/cylc?token=700ab2be96800177d03df31b8140857cab02b9632af45a1d</span>
+<span class="go">[W 2026-01-22 08:25:44.242 ServerApp] The websocket_ping_timeout (999999) cannot be longer than the websocket_ping_interval (290).</span>
+<span class="go">  Setting websocket_ping_timeout=290</span>
+</pre></div>
+</div>
+<p>Copy and paste one of the URLs listed into your web browser and you should then see your Cylc GUI load.</p>
+<a class="reference internal image-reference" href="_images/cylc-gui.png"><img alt="_images/cylc-gui.png" class="align-center" src="_images/cylc-gui.png" style="width: 384.0px; height: 271.5px;" />
+</a>
+<p><strong>Using the Cylc TUI</strong></p>
+<p>This is a command line version of the GUI.  It can be used to monitor and control any workflows running under your user account, trigger tasks, access log files and perform other common activities.</p>
+<p>To start the Cylc TUI on PUMA2 type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma$ cylc tui &lt;workflow_name&gt;
+</pre></div>
+</div>
+<p>You interact with the TUI by selecting a task name, either by using the up &amp; down arrows or the mouse and then pressing the &lt;Enter&gt; key to bring up a menu of actions.</p>
+<a class="reference internal image-reference" href="_images/cylc-tui.png"><img alt="_images/cylc-tui.png" class="align-center" src="_images/cylc-tui.png" style="width: 262.5px; height: 175.0px;" />
+</a>
+<p>Please take some time now to familiarise yourself with both the Cylc TUI &amp; Cylc GUI.</p>
+</section>
 </section>
 <section id="looking-at-the-queues-on-archer2">
-<h3>Looking at the queues on ARCHER2<a class="headerlink" href="#looking-at-the-queues-on-archer2" title="Link to this heading"></a></h3>
-<p>While you’re waiting for the suite to run, let’s log into ARCHER2 and learn how to look at the queues.</p>
+<h2><span class="section-number">4.4. </span>Looking at the queues on ARCHER2<a class="headerlink" href="#looking-at-the-queues-on-archer2" title="Link to this heading"></a></h2>
+<p>It’s likely that whilst you have been looking at the GUIs your workflow will have finished.  If this is the case run it again before continuing with this section.</p>
+<p>Now, let’s log into ARCHER2 and learn how to look at the queues.</p>
 <p>Run the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">squeue</span> <span class="o">-</span><span class="n">u</span> <span class="o">&lt;</span><span class="n">archer2</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
 </pre></div>
@@ -184,60 +279,66 @@
 </pre></div>
 </div>
 <p>At this stage you will probably only have a job running or waiting to run in the serial queue. Running <code class="docutils literal notranslate"><span class="pre">squeue</span></code> will show all jobs currently on ARCHER2, most of which will be in the parallel queues.</p>
-<p>Once your suite has finished running the Cylc GUI will go blank and you should get a message in the bottom left hand corner saying <code class="docutils literal notranslate"><span class="pre">Stopped</span> <span class="pre">with</span> <span class="pre">succeeded</span></code>.</p>
+<p>Once your workflow has finished running the Cylc GUI/TUI will go blank and you should get a message in the bottom left hand corner saying <code class="docutils literal notranslate"><span class="pre">Stopped</span> <span class="pre">with</span> <span class="pre">succeeded</span></code>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Cylc is set up so that it <em>polls</em> ARCHER2 to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on ARCHER2 and the Cylc GUI being updated. If you see that the task has finished running but Cylc hasn’t updated then you can manually poll the task by right-clicking on it and selecting <span class="guilabel">Poll</span> from the pop-up menu.</p>
+<p>Cylc is set up so that it <em>polls</em> ARCHER2 to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on ARCHER2 and the Cylc GUI/TUI being updated. If you see that the task has finished running but Cylc hasn’t updated then you can manually poll the task by selecting it and then selecting <span class="guilabel">Poll</span> from the pop-up menu.</p>
 </div>
 </section>
-</section>
-<section id="standard-suite-output">
-<h2><span class="section-number">3.3. </span>Standard Suite Output<a class="headerlink" href="#standard-suite-output" title="Link to this heading"></a></h2>
-<p>The output from a standard suite goes to a variety of places, depending on the type of the file.  On ARCHER2 you will find all the output from your run under the directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;suitename&gt;</span></code> is the name of the suite. This is actually a symbolic link to the equivalent location in your <code class="docutils literal notranslate"><span class="pre">/work</span></code> directory (E.g. <code class="docutils literal notranslate"><span class="pre">/work/n02/n02/&lt;username&gt;/cylc-run/&lt;suitename&gt;</span></code>.</p>
+<section id="standard-workflow-output">
+<h2><span class="section-number">4.5. </span>Standard Workflow Output<a class="headerlink" href="#standard-workflow-output" title="Link to this heading"></a></h2>
+<p>The output from a standard workflow goes to a variety of places, depending on the type of the file.  On ARCHER2 you will find all the output from your run under the directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;workflow-name&gt;</span></code> is the name of the workflow (e.g. u-dp063). This is actually a symbolic link to the equivalent location in your <code class="docutils literal notranslate"><span class="pre">/work</span></code> directory (E.g. <code class="docutils literal notranslate"><span class="pre">/work/n02/n02/&lt;username&gt;/cylc-run/&lt;workflow-name&gt;</span></code>.</p>
 <section id="task-output">
 <h3>Task output<a class="headerlink" href="#task-output" title="Link to this heading"></a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Rose Bush is a web-based tool for viewing the standard output and errors from suites. Unfortunately this does not work on the current puma server, so we need to browse the log files directly.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To run Rose Bush on Monsoon run: <code class="docutils literal notranslate"><span class="pre">firefox</span> <span class="pre">http://localhost/rose-bush</span></code></p>
-</div>
-<p>On PUMA2, navigate to the cylc-run directory:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">cylc</span><span class="o">-</span><span class="n">run</span><span class="o">/&lt;</span><span class="n">suitename</span><span class="o">&gt;</span>
-<span class="n">ls</span>
+<p>On PUMA2, navigate to the cylc-run directory for the workflow:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ~/cylc-run/&lt;workflow-name&gt;</span>
+<span class="go">ls</span>
 </pre></div>
 </div>
-<p>You should see directories for each of the suites that you have run. Go to the suite you have just run and into the log directory:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">suitename</span><span class="o">&gt;/</span><span class="n">log</span><span class="o">/</span><span class="n">job</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">ls</span>
+<p>By default, cylc will create a new numbered run directory each time you run the workflow:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">puma2$ cd ~/cylc-run/u-dp063</span>
+<span class="go">puma2$ ls</span>
+<span class="go">_cylc-install/  run1/  run2/  run3/  runN@</span>
 </pre></div>
 </div>
-<p>You will see directories for each of the tasks in the suite. For this suite there are 4 tasks: <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> (code extraction), <code class="docutils literal notranslate"><span class="pre">fcm_make2</span></code> (compilation), <code class="docutils literal notranslate"><span class="pre">recon</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">atmos</span></code>. Try looking in one of the task directories:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">recon</span><span class="o">/</span><span class="n">NN</span>
-<span class="n">ls</span>
+<p>The most recent <code class="docutils literal notranslate"><span class="pre">runX</span></code> directory is symlinked to <code class="docutils literal notranslate"><span class="pre">runN</span></code>.</p>
+<p>Go to the workflow you have just run and into the log directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd runN/log/job/1</span>
+<span class="go">ls</span>
+</pre></div>
+</div>
+<p>You will see directories for each of the tasks in the workflow. For this workflow there are 5 tasks: <code class="docutils literal notranslate"><span class="pre">remote_setup</span></code> (ARCHER2 directory setup), <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> (code extraction), <code class="docutils literal notranslate"><span class="pre">fcm_make2</span></code> (compilation), <code class="docutils literal notranslate"><span class="pre">recon</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">atmos</span></code>. Try looking in one of the task directories:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd recon/NN</span>
+<span class="go">ls</span>
 </pre></div>
 </div>
 <p>Here <code class="docutils literal notranslate"><span class="pre">NN</span></code> is a symbolic link created by Rose pointing to the output of the most recently run. You will see several files in this directory. The <code class="docutils literal notranslate"><span class="pre">job.out</span></code> and <code class="docutils literal notranslate"><span class="pre">job.err</span></code> files are the first places you should look for information when tasks fail.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can use the command line to view scheduler or job logs without having to find them yourself on the filesystem:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cylc<span class="w"> </span>cat-log<span class="w"> </span>&lt;workflow-name&gt;
+cylc<span class="w"> </span>cat-log<span class="w"> </span>&lt;workflow-name//&lt;cycle-point/&lt;task-name&gt;
+</pre></div>
+</div>
+</div>
 </section>
 <section id="compilation-output">
 <h3>Compilation output<a class="headerlink" href="#compilation-output" title="Link to this heading"></a></h3>
 <p>The output from the compilation is stored on the host upon which the compilation was performed.  The output from <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> is inside the directory containing the build, which is inside the <code class="docutils literal notranslate"><span class="pre">share</span></code> subdirectory.</p>
-<p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/share/fcm_make/fcm-make2.log</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;/run&lt;X&gt;/share/fcm_make/fcm-make2.log</span></code></p>
 <p>If you come across the word “failed”, chances are your model didn’t build correctly and this file is where you’d search for reasons why.</p>
 </section>
 <section id="um-standard-output">
 <h3>UM standard output<a class="headerlink" href="#um-standard-output" title="Link to this heading"></a></h3>
 <p>The output from the UM scripts and the output from PE0 of the model are written to the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> and <code class="docutils literal notranslate"><span class="pre">job.err</span></code> files for that task. Take a look at the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> for the <code class="docutils literal notranslate"><span class="pre">atmos</span></code> task, by opening the following file:</p>
-<p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/log/job/1/atmos/NN/job.out</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;/run&lt;X&gt;/log/job/1/atmos/NN/job.out</span></code></p>
 <ul class="simple">
 <li><p>Did the linear solver for the Helmholtz problem converge in the final timestep?</p></li>
 </ul>
 <div class="admonition-job-accounting admonition">
 <p class="admonition-title">Job Accounting</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">sacct</span></code> command displays accounting data for all jobs that are run on ARCHER2.  <code class="docutils literal notranslate"><span class="pre">sacct</span></code> can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This information is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.</p>
-<p>Let’s take a look at the resources used by your copy of <code class="docutils literal notranslate"><span class="pre">u-cc519</span></code> run.</p>
+<p>Let’s take a look at the resources used by your copy of <code class="docutils literal notranslate"><span class="pre">u-dp063</span></code> run.</p>
 <ul class="simple">
 <li><p>Locate the SLURM Job Id for your run.  This is a 6 digit number and can be found in the <code class="docutils literal notranslate"><span class="pre">job.status</span></code> file in the cylc task log directory.  Look for the line <code class="docutils literal notranslate"><span class="pre">CYLC_BATCH_SYS_JOB_ID=</span></code> and take note of the number after the <code class="docutils literal notranslate"><span class="pre">=</span></code> sign.</p></li>
 </ul>
@@ -270,24 +371,30 @@
 </section>
 <section id="binary-output-work-and-share">
 <h3>Binary output - work and share<a class="headerlink" href="#binary-output-work-and-share" title="Link to this heading"></a></h3>
-<p>By default the UM will write all output to the directory it was launched from, which will be the task’s <code class="docutils literal notranslate"><span class="pre">work</span></code> directory.  However, all output paths can be configured in the GUI and in practice most UM tasks will send output to one or both of the suite’s <code class="docutils literal notranslate"><span class="pre">work</span></code> or <code class="docutils literal notranslate"><span class="pre">share</span></code> directories.</p>
-<p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/1/atmos</span></code></p>
+<p>By default the UM will write all output to the directory it was launched from, which will be the task’s <code class="docutils literal notranslate"><span class="pre">work</span></code> directory.  However, all output paths can be configured in the GUI and in practice most UM tasks will send output to one or both of the workflow’s <code class="docutils literal notranslate"><span class="pre">work</span></code> or <code class="docutils literal notranslate"><span class="pre">share</span></code> directories.</p>
+<p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;/run&lt;X&gt;/work/1/atmos</span></code></p>
 <p>or</p>
-<p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/share/data</span></code></p>
-<p>For this suite output is sent to the <code class="docutils literal notranslate"><span class="pre">work</span></code> directory.</p>
+<p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;/run&lt;X&gt;/share/data</span></code></p>
+<p>For this workflow output is sent to the <code class="docutils literal notranslate"><span class="pre">work</span></code> directory.</p>
 <p>Change directory to the work space.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
 <li><p>What files and directories are present?</p></li>
 </ul>
+</div>
 <p>Model diagnostic output files will appear here, along with a directory called <code class="docutils literal notranslate"><span class="pre">pe_output</span></code>. This contains one file for each processor, for both model and reconfiguration, which contain logging information on how the model behaved.</p>
-<p>Open one of these files <code class="docutils literal notranslate"><span class="pre">&lt;suite-id&gt;.fort6.peXX</span></code> in your favourite editor.</p>
-<p>The amount of output created by the suite and written to this file can be controlled in the suite configuration (<span class="guilabel">um –&gt; env –&gt; Runtime Controls –&gt; Atmosphere only</span>). For development work, and to gain familiarity with the system, make sure “Extra diagnostic messages” are output. Switch it on in this suite if it isn’t already.</p>
+<p>Open one of these files <code class="docutils literal notranslate"><span class="pre">&lt;workflow-name&gt;.fort6.peXX</span></code> in your favourite editor.</p>
+<p>The amount of output created by the workflow and written to this file can be controlled in the suite configuration (<span class="guilabel">um –&gt; env –&gt; Runtime Controls –&gt; Atmosphere only</span>). For development work, and to gain familiarity with the system, make sure “Extra diagnostic messages” are output. Switch it on in this suite if it isn’t already.</p>
 <p>It is well worth taking a little time to look through this file and to recognise some of the key phrases output by the model. You will soon learn what to search for to tell you if the model ran successfully or not. Unfortunately, important information can be dotted about in the file, so just examining the first or last few lines may not be sufficient to find out why the model hasn’t behaved as you expected. Try to find answers to the following:</p>
+<div class="admonition-questions admonition">
+<p class="admonition-title">Questions</p>
 <ul class="simple">
 <li><p>How many prognostic fields were read from the start file?</p></li>
 <li><p>How many boundary layer levels did you run with?</p></li>
 <li><p>What was the range of gridpoints handled by this processor?</p></li>
 </ul>
+</div>
 <p>Check the file sizes of the different file types. The output directory will contain start dumps, diagnostic output files and possibly a core dump file if the model failed and these usually have very different sizes.</p>
 </section>
 </section>
@@ -297,8 +404,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="working-with-suites.html" class="btn btn-neutral float-left" title="2. Working with Suites" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="fcm-tutorial.html" class="btn btn-neutral float-right" title="4. FCM tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="working-with-suites.html" class="btn btn-neutral float-left" title="3. Working with Suites" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="solving-problems.html" class="btn btn-neutral float-right" title="5. Solving Common UM Problems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

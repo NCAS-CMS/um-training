@@ -8,7 +8,7 @@ xconv
 
 View data
 ^^^^^^^^^
-On ARCHER2 go to the output directory of the global job that you ran previously (the one copied from ``u-cc654``). Run ``xconv`` on the file ending with, for example, ``da19880901_04``. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.
+On ARCHER2 go to the output directory of the global job that you ran previously (the one copied from ``u-dp084``). Run ``xconv`` on the file ending with, for example, ``da19880901_04``. This file is an atmosphere start file - this type of file is used to restart the model from the time specified in the file header data.
 
 In the directory above is a file whose name ends in ``.astart``; run a second instance of ``xconv`` on this file. This is the file used by the model to start its run - created by the reconfiguration program in this case.
 
@@ -51,9 +51,9 @@ This provides another way of seeing header information, but also gives some info
 Run ``mule-pumf`` on the start file - here's a couple of examples on one of Ros' files: :: 
 
  archer2$ mule-pumf --print-columns 2 --headers-only \\
-                        cc654.astart > ~/mule-pumf-header.out
+                        dp084.astart > ~/mule-pumf-header.out
 
- archer2$ mule-pumf --print-columns 2 cc654.astart > ~/mule-pumf.out
+ archer2$ mule-pumf --print-columns 2 dp084.astart > ~/mule-pumf.out
 
 * Can you see what the difference is in the output of these 2 commands?
 
@@ -84,15 +84,15 @@ Set the stack size limit to unlimited, and add the path to ``um-convpp`` to your
   archer2$ ulimit -s unlimited
   archer2$ export PATH=$UMDIR/vn11.2/cce/utilities:$PATH
 
-Run ``um-convpp`` on a fieldsfile (E.g `cc654a.pc19880901_00`) ::
+Run ``um-convpp`` on a fieldsfile (E.g `dp084a.pc19880901_00`) ::
 
-  archer2$ cd /home/n02/n02/ros/cylc-run/u-cc654/share/data/History_Data
-  archer2$ um-convpp cc654a.pc19880901_00 cc654a.pc19880901_00.pp
+  archer2$ cd /home/n02/n02/ros/cylc-run/u-dp084/share/data/History_Data
+  archer2$ um-convpp dp084a.pc19880901_00 dp084a.pc19880901_00.pp
 
-  archer2$ ls -l cc654a.pc19880901*
-  -rw-r--r-- 1 ros n02 26447872 Nov  2 10:36 cc654a.pc19880901_00
-  -rw-r--r-- 1 ros n02 20372768 Nov  2 10:47 cc654a.pc19880901_00.pp
-  -rw-r--r-- 1 ros n02 26476544 Nov  2 10:36 cc654a.pc19880901_06
+  archer2$ ls -l dp084a.pc19880901*
+  -rw-r--r-- 1 ros n02 26447872 Nov  2 10:36 dp084a.pc19880901_00
+  -rw-r--r-- 1 ros n02 20372768 Nov  2 10:47 dp084a.pc19880901_00.pp
+  -rw-r--r-- 1 ros n02 26476544 Nov  2 10:36 dp084a.pc19880901_06
 
 
 Note the reduction in file size. Now use ``xconv`` to examine the contents of the PP file.
@@ -109,7 +109,7 @@ CF-compliant data in NetCDF format. You first need to set the
 environment to run ``cfa``: ::
 
  archer2$ export PATH=/home/n02/n02/dch/cf-analysis/bin:$PATH
- archer2$ cfa -i -o cc654a.pc19880901_00.nc cc654a.pc19880901_00.pp
+ archer2$ cfa -i -o dp084a.pc19880901_00.nc dp084a.pc19880901_00.pp
  
 Try viewing the NetCDF file with xconv.
 
@@ -118,7 +118,7 @@ files, to provide a text representation of the CF fields contained in
 the input files. Try it on a PP file and its NetCDF equivalent,
 e.g. ::
 
-  archer2$ cfa -vm cc654a.pc19880901_00.pp | less
+  archer2$ cfa -vm dp084a.pc19880901_00.pp | less
   Field: long_name:HEAVYSIDE FN ON P LEV/UV GRID (ncvar%UM_m01s30i301_vn1100)
   ---------------------------------------------------------------------------
   Data           : long_name:HEAVYSIDE FN ON P LEV/UV GRID(time(5), air_pressure(17), latitude(145), longitude(192)) 

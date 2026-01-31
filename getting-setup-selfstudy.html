@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. Getting Set Up (Self-Study Instructions) &mdash; NCAS Unified Model Introduction</title>
+  <title>2. Getting Set Up (Self-Study Instructions) &mdash; NCAS Unified Model Introduction</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,11 +14,13 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9bcbadda"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Working with Workflows" href="working-with-suites.html" />
+    <link rel="prev" title="1. To Do List" href="todo-list.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,17 +44,33 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Practicals</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Getting Set Up (Self-Study Instructions)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">2. Working with Suites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running.html">3. Running a UM suite on ARCHER2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">4. FCM tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solving-problems.html">5. Solving Common UM Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">6. Further Exercises (1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">7. Further Exercises (2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">8. Rose/Cylc Exercises</a></li>
-<li class="toctree-l1"><a class="reference internal" href="post-processing.html">9. Post processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="useful-information.html">10. Appendix A: Useful information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ssh-tasks.html">11. Appendix B: SSH FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo-list.html">1. To Do List</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Getting Set Up (Self-Study Instructions)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-archer2-connection">2.1. Set up your ARCHER2 connection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ssh-key-files">SSH key files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-via-a-terminal-gnu-linux-macos">Connecting via a Terminal (GNU/Linux &amp; macOS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-via-mobaxterm">Connecting via MobaXTerm</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-archer2-environment">2.2. Set up your ARCHER2 environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-puma2-connection">2.3. Set up your PUMA2 connection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-passwordless-access-to-puma2">Set up passwordless access to PUMA2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-puma2-environment">2.4. Set up your PUMA2 environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-ssh-agent">2.5. Set up your ssh-agent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">3. Working with Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">4. Running a UM workflow on ARCHER2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">5. FCM tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solving-problems.html">6. Solving Common UM Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">7. Further Exercises (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further-exercises-2.html">8. Further Exercises (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rose-cylc-exercises.html">9. Rose/Cylc Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post-processing.html">10. Post processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="useful-information.html">11. Appendix A: Useful information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh-tasks.html">12. Appendix B: SSH FAQs</a></li>
 </ul>
 
         </div>
@@ -69,7 +87,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">1. </span>Getting Set Up (Self-Study Instructions)</li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>Getting Set Up (Self-Study Instructions)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/getting-setup-selfstudy.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -80,17 +98,13 @@
            <div itemprop="articleBody">
              
   <section id="getting-set-up-self-study-instructions">
-<h1><span class="section-number">1. </span>Getting Set Up (Self-Study Instructions)<a class="headerlink" href="#getting-set-up-self-study-instructions" title="Link to this heading"></a></h1>
+<h1><span class="section-number">2. </span>Getting Set Up (Self-Study Instructions)<a class="headerlink" href="#getting-set-up-self-study-instructions" title="Link to this heading"></a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>You <strong>MUST</strong> have PUMA2, ARCHER2 and MOSRS accounts setup before starting this section.</p>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>If you have moved your account over to PUMA2 from the old PUMA server (pumanew), then you should follow these instructions: <a class="reference external" href="https://cms.ncas.ac.uk/puma2/">https://cms.ncas.ac.uk/puma2/</a></p>
-</div>
 <section id="set-up-your-archer2-connection">
-<span id="archer2"></span><h2><span class="section-number">1.1. </span>Set up your ARCHER2 connection<a class="headerlink" href="#set-up-your-archer2-connection" title="Link to this heading"></a></h2>
+<span id="archer2"></span><h2><span class="section-number">2.1. </span>Set up your ARCHER2 connection<a class="headerlink" href="#set-up-your-archer2-connection" title="Link to this heading"></a></h2>
 <p>To use the UM Introduction Tutorials you will first need to ensure you can connect from your local desktop to ARCHER2.  There a multiple ways in which you can do this depending on your desktop platform:</p>
 <ul class="simple">
 <li><p>via <a class="reference internal" href="#terminal">Terminal</a> on GNU/Linux &amp; macOS</p></li>
@@ -144,7 +158,7 @@ In these instructions, we’ve assumed the keys are called <code class="docutils
 </section>
 </section>
 <section id="set-up-your-archer2-environment">
-<h2><span class="section-number">1.2. </span>Set up your ARCHER2 environment<a class="headerlink" href="#set-up-your-archer2-environment" title="Link to this heading"></a></h2>
+<h2><span class="section-number">2.2. </span>Set up your ARCHER2 environment<a class="headerlink" href="#set-up-your-archer2-environment" title="Link to this heading"></a></h2>
 <p>Login to ARCHER2 from your local desktop, copy the following profile to your home directory.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ cp /work/y07/shared/umshared/um-training/rose-profile ~/.profile
 </pre></div>
@@ -156,7 +170,7 @@ In these instructions, we’ve assumed the keys are called <code class="docutils
 </div>
 </section>
 <section id="set-up-your-puma2-connection">
-<span id="puma2"></span><h2><span class="section-number">1.3. </span>Set up your PUMA2 connection<a class="headerlink" href="#set-up-your-puma2-connection" title="Link to this heading"></a></h2>
+<span id="puma2"></span><h2><span class="section-number">2.3. </span>Set up your PUMA2 connection<a class="headerlink" href="#set-up-your-puma2-connection" title="Link to this heading"></a></h2>
 <p>PUMA2 is accessed from the ARCHER2 login nodes, and you will use the same username and password.</p>
 <p>From an ARCHER2 terminal type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ ssh -Y puma2
@@ -199,7 +213,7 @@ In these instructions, we’ve assumed the keys are called <code class="docutils
 </section>
 </section>
 <section id="set-up-your-puma2-environment">
-<h2><span class="section-number">1.4. </span>Set up your PUMA2 environment<a class="headerlink" href="#set-up-your-puma2-environment" title="Link to this heading"></a></h2>
+<h2><span class="section-number">2.4. </span>Set up your PUMA2 environment<a class="headerlink" href="#set-up-your-puma2-environment" title="Link to this heading"></a></h2>
 <p>Copy our standard <code class="docutils literal notranslate"><span class="pre">.profile</span></code> and <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> files:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cd
 puma2$ cp ~um1/um-training/puma2/.bash_profile .
@@ -225,7 +239,7 @@ puma2$ cp ~um1/um-training/puma2/.bashrc .
 </div>
 </section>
 <section id="set-up-your-ssh-agent">
-<span id="ssh-setup"></span><h2><span class="section-number">1.5. </span>Set up your ssh-agent<a class="headerlink" href="#set-up-your-ssh-agent" title="Link to this heading"></a></h2>
+<span id="ssh-setup"></span><h2><span class="section-number">2.5. </span>Set up your ssh-agent<a class="headerlink" href="#set-up-your-ssh-agent" title="Link to this heading"></a></h2>
 <p>In order to submit jobs to ARCHER2 from PUMA2, you will need to set up an <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> and use it to cache the passphrase to your ARCHER2 key.</p>
 <p><strong>i. Copy your ARCHER2 ssh-key pair to PUMA2</strong></p>
 <p>Your ARCHER2 key is the one that you use to ssh into the ARCHER2 login nodes.  You need to copy both the public and private keys into your <code class="docutils literal notranslate"><span class="pre">.ssh/</span></code> directory on PUMA2.</p>
@@ -272,7 +286,10 @@ puma2$ cp ~um1/um-training/puma2/.bashrc .
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="todo-list.html" class="btn btn-neutral float-left" title="1. To Do List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="working-with-suites.html" class="btn btn-neutral float-right" title="3. Working with Workflows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

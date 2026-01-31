@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>5. Solving Common UM Problems &mdash; NCAS Unified Model Introduction</title>
@@ -14,13 +14,13 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9bcbadda"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="6. Further Exercises (1)" href="further-exercises-1.html" />
-    <link rel="prev" title="4. FCM tutorial" href="fcm-tutorial.html" /> 
+    <link rel="prev" title="4. Running a UM workflow on ARCHER2" href="running.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,12 +44,12 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Practicals</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="getting-setup-selfstudy.html">1. Getting Set Up (Self-Study Instructions)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">2. Working with Suites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running.html">3. Running a UM suite on ARCHER2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">4. FCM tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo-list.html">1. To Do List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-setup-leeds.html">2. Getting Set Up (Leeds Training Course)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">3. Working with Suites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">4. Running a UM workflow on ARCHER2</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">5. Solving Common UM Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#set-up-n96-ga7-0-amip-example-suite">5.1. Set up N96 GA7.0 AMIP example suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-n96-ga7-0-amip-workflow">5.1. Set up N96 GA7.0 AMIP workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#errors-resolved-in-the-code-extraction">5.2. Errors resolved in the code extraction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#errors-resolved-in-the-compile-and-run">5.3. Errors resolved in the compile and run</a></li>
 </ul>
@@ -88,12 +88,22 @@
              
   <section id="solving-common-um-problems">
 <h1><span class="section-number">5. </span>Solving Common UM Problems<a class="headerlink" href="#solving-common-um-problems" title="Link to this heading"></a></h1>
+<div class="admonition-aims admonition">
+<p class="admonition-title">Aims</p>
+<dl class="simple">
+<dt>In this section you will learn:</dt><dd><ul class="simple">
+<li><p>How to troubleshoot common UM errors</p></li>
+<li><p>How to stop, reload and restart a workflow</p></li>
+</ul>
+</dd>
+</dl>
+</div>
 <p>This section exposes you to more typical UM errors and hints at how to find and fix those errors.</p>
 <p>You may encounter other errors, often as a result of mistyping, for which solution hints are not provided.</p>
-<section id="set-up-n96-ga7-0-amip-example-suite">
-<h2><span class="section-number">5.1. </span>Set up N96 GA7.0 AMIP example suite<a class="headerlink" href="#set-up-n96-ga7-0-amip-example-suite" title="Link to this heading"></a></h2>
-<p>Find and make a copy of suite <code class="docutils literal notranslate"><span class="pre">u-cc654</span></code>.</p>
-<p>Firstly make the essential changes required to run the suite.  That is:</p>
+<section id="set-up-n96-ga7-0-amip-workflow">
+<h2><span class="section-number">5.1. </span>Set up N96 GA7.0 AMIP workflow<a class="headerlink" href="#set-up-n96-ga7-0-amip-workflow" title="Link to this heading"></a></h2>
+<p>Find and make a copy of suite <code class="docutils literal notranslate"><span class="pre">u-dp084</span></code>.</p>
+<p>Firstly make the essential changes required to run the workflow.  That is:</p>
 <ul class="simple">
 <li><p>The account code (‘n02-training’ if you’re on an organised training event)</p></li>
 <li><p>Your ARCHER2 user name</p></li>
@@ -103,31 +113,53 @@
 <p class="admonition-title">Hint</p>
 <p>Look in the <span class="guilabel">suite conf</span> section.  For organised training events you will see that this suite is setup to use reservations listed as Tuesday, Wednesday, Thursday; select the appropriate day.  For self-study switch off “Use a reservation on ARCHER2” and select the <code class="docutils literal notranslate"><span class="pre">short</span></code> queue.</p>
 </div>
-<ul class="simple">
-<li><p>Did you manage to find where to set your ARCHER2 username?</p></li>
-</ul>
-<p>This suite is set up slightly differently to the one used in the previous sections; suites do vary on how they are set up but you will soon learn where to look for things.  This suite is set up so that specifying your username on the remote HPC is optional.</p>
-<ul class="simple">
-<li><p>Click <span class="guilabel">View –&gt; View Latent Variables</span>. You should see <code class="docutils literal notranslate"><span class="pre">Username</span> <span class="pre">on</span> <span class="pre">ARCHER2</span></code> appear in the panel greyed out.</p></li>
-<li><p>Click the <span class="guilabel">+</span> sign next to it and select <span class="guilabel">Add to configuration</span></p></li>
-<li><p>Enter your ARCHER2 username</p></li>
-</ul>
 </section>
 <section id="errors-resolved-in-the-code-extraction">
 <h2><span class="section-number">5.2. </span>Errors resolved in the code extraction<a class="headerlink" href="#errors-resolved-in-the-code-extraction" title="Link to this heading"></a></h2>
-<p><span class="guilabel">Save</span> the suite and then <span class="guilabel">Run</span> it either from the GUI or the command line.</p>
-<p>The suite should fail in the <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task. This is the task that extracts all the required code from the repository including any branches.  The failure will be indicated in the Cylc GUI with a red square and the state <code class="docutils literal notranslate"><span class="pre">failed</span></code>.</p>
+<p><span class="guilabel">Save</span> the suite and then <span class="guilabel">Run</span> it.</p>
+<p>The workflow should fail in the <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task. This is the task that extracts all the required code from the repository including any branches.  The failure will be indicated in the Cylc TUI/GUI with a red square and the state <code class="docutils literal notranslate"><span class="pre">failed</span></code>.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
 <li><p>What is the error?</p></li>
 </ul>
+<p>Examine the <code class="docutils literal notranslate"><span class="pre">job.err</span></code> and <code class="docutils literal notranslate"><span class="pre">job.out</span></code> to find the cause of the problem either on the command line or via the cylc GUI or TUI.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Examine the <code class="docutils literal notranslate"><span class="pre">job.err</span></code> and <code class="docutils literal notranslate"><span class="pre">job.out</span></code> to find the cause of the problem. You can view these files quickly and easily directly from the Cylc GUI.  <strong>Right-click</strong> on the failed <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task and select <span class="guilabel">View -&gt; job stderr</span></p>
+<dl class="simple">
+<dt><strong>In the Cylc TUI:</strong></dt><dd><ul class="simple">
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task</p></li>
+<li><p>Press the <strong>&lt;Enter&gt;</strong> key and select <em>Log</em></p></li>
+<li><p>Press the <strong>&lt;Enter&gt;</strong> key to bring up the <em>“Select File”</em> menu</p></li>
+<li><p>Select the file you wish to view</p></li>
+<li><p>Press the <strong>&lt;Enter&gt;</strong> again.</p></li>
+</ul>
+</dd>
+<dt><strong>In the Cylc GUI:</strong></dt><dd><ul class="simple">
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task</p></li>
+<li><p>Select <em>Log</em> to view the job logs</p></li>
+<li><p>From the <em>“Select File”</em> dropdown select the file you wish to view.</p></li>
+</ul>
+</dd>
+</dl>
 </div>
-<p>This indicates that the branch cannot be found due to an incorrect branch name. You will need to look at the UM code repository through Trac on MOSRS (<a class="reference external" href="https://code.metoffice.gov.uk/trac/um/browser">https://code.metoffice.gov.uk/trac/um/browser</a>) to determine the correct name.</p>
-<p>Fix the error, <span class="guilabel">Save</span> the suite.</p>
-<p>Now we will stop the suite and then re-run it.  In the Cylc GUI click on <span class="guilabel">Control &gt; Stop Suite</span> and then select <span class="guilabel">Stop now</span> and then click on <span class="guilabel">OK</span>.  <span class="guilabel">Run</span> the suite again.</p>
+</div>
+<p>The error indicates that the branch cannot be found due to an incorrect branch name. You will need to look at the UM code repository through Trac on MOSRS (<a class="reference external" href="https://code.metoffice.gov.uk/trac/um/browser">https://code.metoffice.gov.uk/trac/um/browser</a>) to determine the correct name.</p>
+<p>To fix the error go to panel <span class="guilabel">fcm_make_um –&gt; env –&gt; Sources</span> and correct the branch name in <code class="docutils literal notranslate"><span class="pre">um_sources</span></code>.</p>
+<p><span class="guilabel">Save</span> the suite.</p>
+<p>Now stop the suite and then re-run it.</p>
+<p>On the PUMA2 command line type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cylc stop &lt;workflow-name&gt;
+puma2$ cylc vip &lt;workflow-name&gt;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can also stop the suite from the Cylc TUI or GUI by selecting <cite>&lt;workflow-name&gt;/run1</cite> and selecting <span class="guilabel">Stop</span> from the pop up menu.</p>
+</div>
 <p>The suite will fail in the <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task again.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
 <li><p>What is the error?</p></li>
 </ul>
@@ -135,27 +167,38 @@
 <p class="admonition-title">Hint</p>
 <p>Again look in the <code class="docutils literal notranslate"><span class="pre">job.err</span></code> file.  This kind of error results when changes made in two or more branches affect the same bit of code and which the FCM system cannot understand how to resolve.</p>
 </div>
+</div>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
 <li><p>Which file does the problem occur in?</p></li>
 </ul>
-<p>In practice, you will need to fix the problem with the code conflict as you did in the FCM tutorial section.  To proceed in this case, navigate to <span class="guilabel">fcm_make_um –&gt; sources</span> and remove the branch called <code class="docutils literal notranslate"><span class="pre">vn11.7_training_merge_error</span></code> by clicking on it and then clicking the <span class="guilabel">-</span> sign.</p>
+</div>
+<p>In practice, you would need to edit the code branch to fix the problem with the code conflict.  To proceed in this case, navigate to <span class="guilabel">fcm_make_um –&gt; env –&gt; sources</span> and remove the branch called <code class="docutils literal notranslate"><span class="pre">vn13.5_training_merge_error</span></code> by clicking on it and then clicking the <span class="guilabel">-</span> sign.</p>
 <p><span class="guilabel">Save</span> the suite.</p>
 <p>Last time we stopped the suite and then re-ran it, however, it is possible to reload the suite definition and then re-trigger the failed task without first stopping the running suite. To do this change to the suite directory:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cd ~/roses/&lt;suitename&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cd ~/roses/&lt;workflow-name&gt;
 </pre></div>
 </div>
-<p>We then reload the suite definition by running the following Rose command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ rose suite-run --reload
+<p>We then reload the suite definition by running the following Cylc command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>puma2$ cylc vr &lt;worflow-name&gt;
 </pre></div>
 </div>
-<p>Wait for this command to complete before continuing. Finally in the Cylc GUI <em>right-click</em> on the failed task and select <span class="guilabel">Trigger (run now)</span>.  The <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task will then submit again.</p>
+<p>Enter <strong>y</strong> when asked if you wish to <strong>Continue [y/n]</strong>. Wait for this command to complete before continuing.</p>
+<p>Finally in the Cylc TUI or GUI select the failed task and then select <span class="guilabel">Trigger</span>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> task will then submit again.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
 <li><p>Is there an error in <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> this time?</p></li>
 </ul>
+</div>
 <p>If you look in the <code class="docutils literal notranslate"><span class="pre">job.err</span></code> file now it should be empty and the <code class="docutils literal notranslate"><span class="pre">job.out</span></code> file indicates SUCCESS.</p>
 </section>
 <section id="errors-resolved-in-the-compile-and-run">
 <h2><span class="section-number">5.3. </span>Errors resolved in the compile and run<a class="headerlink" href="#errors-resolved-in-the-compile-and-run" title="Link to this heading"></a></h2>
+<div class="admonition-questions admonition">
+<p class="admonition-title">Questions</p>
 <ul class="simple">
 <li><p>Has the <code class="docutils literal notranslate"><span class="pre">fcm_make2_um</span></code> (compilation) task completed successfully?</p></li>
 <li><p>You should have a failure.  Open the <code class="docutils literal notranslate"><span class="pre">job.err</span></code> file - what does it indicate?</p></li>
@@ -163,15 +206,18 @@
 <li><p>What is the error?</p></li>
 <li><p>What line of the Fortran file does it occur on?</p></li>
 </ul>
-<p>In practice, you would need to fix the error in your branch on PUMA2 and then restart the suite.  In this case, navigate to <span class="guilabel">fcm_make_um –&gt; sources</span> and remove the branch <code class="docutils literal notranslate"><span class="pre">vn11.7_training_compile_error</span></code>.  <span class="guilabel">Save</span> the suite, <span class="guilabel">Shutdown</span> or <span class="guilabel">Stop</span> the failed run and then <span class="guilabel">Run</span> it again.</p>
+</div>
+<p>In practice, you would need to fix the error in your branch on PUMA2 and then restart the suite.  In this case, navigate to <span class="guilabel">fcm_make_um –&gt; sources</span> and remove the branch <code class="docutils literal notranslate"><span class="pre">vn13.5_training_compile_error</span></code>.  <span class="guilabel">Save</span> the suite, <span class="guilabel">Stop</span> the failed run and then <span class="guilabel">Run</span> it again.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>This time we chose to shutdown the failed suite rather than do a reload.  In this scenario we need to redo the code extraction (<code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code>) step so doing a reload would be slightly more complex; you would need to <span class="guilabel">Reload</span> and then <span class="guilabel">Re-trigger</span> both the <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> and the <code class="docutils literal notranslate"><span class="pre">fcm_make2_um</span></code> tasks.  With experience you get to know when it’s better to do a <span class="guilabel">Reload</span> and when to <span class="guilabel">Shutdown</span>  a suite.</p>
+<p>This time we chose to shutdown the failed suite rather than do a reload.  In this scenario we need to redo the code extraction (<code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code>) step so doing a reload would be slightly more complex; you would need to <span class="guilabel">Reload</span> and then <span class="guilabel">Trigger</span> both the <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> and the <code class="docutils literal notranslate"><span class="pre">fcm_make2_um</span></code> tasks.  With experience you get to know when it’s better to do a <span class="guilabel">Reload</span> and when to <span class="guilabel">Stop</span> a suite.</p>
 </div>
 <p>Note again that the task submitted successfully.</p>
+<div class="admonition-questions admonition">
+<p class="admonition-title">Questions</p>
 <ul class="simple">
 <li><p>Did the <code class="docutils literal notranslate"><span class="pre">fcm_make2_um</span></code> task succeed this time?</p></li>
-<li><p>What about the <code class="docutils literal notranslate"><span class="pre">install_cold</span></code> task?</p></li>
+<li><p>What about the <code class="docutils literal notranslate"><span class="pre">install_ainitial</span></code> task?</p></li>
 <li><p>What is the error?</p></li>
 <li><p>Does the start dump exist?</p></li>
 <li><p>What is the name of the correct start dump?</p></li>
@@ -180,24 +226,30 @@
 <p class="admonition-title">Hint</p>
 <p>Look in the directory where it thinks the start file should be - is there a candidate in there?</p>
 </div>
-<p>Point your suite to the correct start dump.  Fixing this problem isn’t quite as easy as it sounds.  A search in the Rose edit GUI for the dump file name <code class="docutils literal notranslate"><span class="pre">ab642a.da19880901_00_err</span></code> will not locate anything.  For this suite it is not possible to fix this issue through the GUI, for some other suites you can edit the initial dump location in the panel <span class="guilabel">um –&gt; namelist –&gt; Reconfiguration and Ancillary Control –&gt; General technical options</span>.</p>
-<p>Suites can be and are set up differently and there will be times when you need to edit the cylc suite definition files directly.</p>
-<p>In your suite directory on PUMA2 (<code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suitename&gt;</span></code>) use <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-R</span></code> to search for the start dump name <code class="docutils literal notranslate"><span class="pre">ab642a.da19880901_00_err</span></code> in the suite files.  You should see 2 occurrences listed</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma2$ grep -r ab642a.da19880901_00_err *
-site/archer2.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901_00_err&#39; %}
-site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901_00_err&#39; %}
+</div>
+<p>Point your suite to the correct start dump.  Fixing this problem isn’t quite as easy as it sounds.  A search in the Rose edit GUI for the dump file name <code class="docutils literal notranslate"><span class="pre">co764a.da19880901_00_err</span></code> will not locate anything.  For this suite it is not possible to fix this issue through the GUI, for some other suites you can edit the initial dump location in the panel <span class="guilabel">um –&gt; namelist –&gt; Reconfiguration and Ancillary Control –&gt; General technical options</span>.</p>
+<p>Suites can be and are set up differently and there will be times when you need to edit the suite definition files directly.</p>
+<p>In your suite directory on PUMA2 (<code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suite-name&gt;</span></code>) use <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-R</span></code> to search for the start dump name <code class="docutils literal notranslate"><span class="pre">co764a.da19880901_00_err</span></code> in the suite files.  You should see 2 occurrences listed</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ros@puma2$ grep -r co764a.da19880901_00_error *
+site/meto_cray.cylc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/co764a.da19880901_00_error&#39; %}
+site/archer2.cylc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/co764a.da19880901_00_error&#39; %}
 </pre></div>
 </div>
-<p>Edit the dump name in the appropriate <code class="docutils literal notranslate"><span class="pre">.rc</span></code> file for the HPC we are running on, to point to the correct initial dump file.</p>
+<p>Edit the dump name in the appropriate <code class="docutils literal notranslate"><span class="pre">.cylc</span></code> file for the HPC we are running on, to point to the correct initial dump file.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>This suite is set up to run on multiple platforms, make sure you edit the file appropriate to ARCHER2. You may notice that <code class="docutils literal notranslate"><span class="pre">AINITIAL</span></code> is set 3 times; a different file is required depending on the resolution the model is being run at.  This suite is running at N96 resolution.</p>
+<p>This workflow is set up to run on multiple platforms, make sure you edit the file appropriate to ARCHER2.</p>
 </div>
-<p><span class="guilabel">Reload</span> the suite definition and then <span class="guilabel">Re-trigger</span> the <code class="docutils literal notranslate"><span class="pre">install_cold</span></code> task.  The task should succeed this time.</p>
+<p><span class="guilabel">Reload</span> the suite definition and then <span class="guilabel">Trigger</span> the <code class="docutils literal notranslate"><span class="pre">install_ainitial</span></code> task.  The task should succeed this time.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
 <li><p>Has the model run successfully?</p></li>
 </ul>
+</div>
 <p>This time the model should have failed with an error.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
 <li><p>What is the error message?</p></li>
 </ul>
@@ -205,27 +257,34 @@ site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901
 <p class="admonition-title">Hint</p>
 <p>Try searching for <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> - you will soon learn common phrases to help track down problems.</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you use the search <code class="docutils literal notranslate"><span class="pre">job.err</span></code> box at the bottom of the gcylc viewer, when you select <span class="guilabel">Find Next</span> you will see a message indicating the live feed will be disconnected. Click <span class="guilabel">Close</span>.</p>
 </div>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
 <li><p>Which PE Ranks signalled the Abort?</p></li>
 </ul>
-<p>In general it can be useful to note which processors failed and then look at the detailed output for those processors. In this scenario, however, all the processors aborted.  We’ll now take a look at the individual PE output file. Change to the <code class="docutils literal notranslate"><span class="pre">pe_output</span></code> directory for the atmos_main task. This is under <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suite-id&gt;/work/&lt;cycle&gt;/atmos_main/pe_output</span></code>.</p>
-<p>Open the file called <code class="docutils literal notranslate"><span class="pre">&lt;suite-id&gt;.fort6.pe0</span></code>.  Sometimes extra information about the error can be found in the individual PE output files.</p>
+</div>
+<p>In general it can be useful to note which processors failed and then look at the detailed output for those processors. In this scenario, however, all the processors aborted.  We’ll now take a look at the individual PE output file. Change to the <code class="docutils literal notranslate"><span class="pre">pe_output</span></code> directory for the atmos_main task. This is under <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;/runX/work/&lt;cycle&gt;/atmos_main/pe_output</span></code>.</p>
+<p>Open the file called <code class="docutils literal notranslate"><span class="pre">&lt;workflow-name&gt;.fort6.pe0</span></code>.  Sometimes extra information about the error can be found in the individual PE output files.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
 <li><p>At what timestep did the error occur?</p></li>
 </ul>
+</div>
 <p>The error message indicates that the model has suffered a convergence failure in the routine <code class="docutils literal notranslate"><span class="pre">EG_BICGSTAB_MIXED_PREC</span></code>. This basically means that the model was not able to find a solution to the requested accuracy with the amount of effort specified. In this case the failure results from the value chosen for <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations</span></code>.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within <code class="docutils literal notranslate"><span class="pre">rose</span> <span class="pre">edit</span></code> may point you in the right direction.  Go to <span class="guilabel">um –&gt; namelist –&gt; UM Science Settings –&gt; Sections 10 11 12 - Dynamics settings –&gt;  Solver</span> and set it to the suggested value. <span class="guilabel">Save</span>, <span class="guilabel">Reload</span> and <span class="guilabel">Re-trigger</span>.</p>
-<p>The model should fail with the same error.  So what’s gone wrong here?  We’ve changed the value of the number of iterations to a recommended value so why didn’t it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER2 navigate to the work directory for the <code class="docutils literal notranslate"><span class="pre">atmos_main</span></code> task (ie. <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suite-id&gt;/work/&lt;cycle&gt;/atmos_main</span></code>).  In here you will see several files with uppercase names (e.g. <code class="docutils literal notranslate"><span class="pre">ATMOSCNTL</span></code>, <code class="docutils literal notranslate"><span class="pre">SHARED</span></code>), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use <cite>grep</cite>) in these files for the max number of solver iterations variable <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations</span></code>.</p>
+<p>The model should fail with the same error.  So what’s gone wrong here?  We’ve changed the value of the number of iterations to a recommended value so why didn’t it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER2 navigate to the work directory for the <code class="docutils literal notranslate"><span class="pre">atmos_main</span></code> task (ie. <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;/runX/work/&lt;cycle&gt;/atmos_main</span></code>).  In here you will see several files with uppercase names (e.g. <code class="docutils literal notranslate"><span class="pre">ATMOSCNTL</span></code>, <code class="docutils literal notranslate"><span class="pre">SHARED</span></code>), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use <cite>grep</cite>) in these files for the max number of solver iterations variable <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations</span></code>.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Search for the string <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations=</span></code>.</p>
 </div>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
-<li><p>What value does it have?  Is this what you changed it to in the Rose edit GUI?</p></li>
+<li><p>What value does it have?</p></li>
+<li><p>Is this what you changed it to in the Rose edit GUI?</p></li>
 </ul>
+</div>
 <p>So why was the change not picked up?  Go back to view the setting in the Rose GUI.  By the side of the variable <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations</span></code> there is a little icon of a hand on paper, this indicates that there is an <em>“optional configuration override”</em> for this variable.</p>
 <p>Optional configuration overrides add to or overwrite the default configuration. They are useful to make it easier to switch between different configurations of the model.  For example switching between different resolutions.</p>
 <p>Click on the icon and the list of overrides appears.  You will see that the variable is set to 1 in the <em>training</em> override file and it is this value that is being used in the model.  Unfortunately optional configuration override files cannot be changed through the GUI so we will need to edit the Rose file directly. Override files for the <code class="docutils literal notranslate"><span class="pre">um</span></code> app live in the directory <code class="docutils literal notranslate"><span class="pre">~/roses/&lt;suite-id&gt;/app/um/opt</span></code>.  Open the file <code class="docutils literal notranslate"><span class="pre">rose-app-training.conf</span></code> and edit the value for <code class="docutils literal notranslate"><span class="pre">gcr_max_iterations</span></code>. <span class="guilabel">Save</span>, <span class="guilabel">Reload</span> and <span class="guilabel">Re-trigger</span> the suite.</p>
@@ -237,7 +296,7 @@ site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + &#39;N96L85/ab642a.da19880901
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="fcm-tutorial.html" class="btn btn-neutral float-left" title="4. FCM tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="running.html" class="btn btn-neutral float-left" title="4. Running a UM workflow on ARCHER2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="further-exercises-1.html" class="btn btn-neutral float-right" title="6. Further Exercises (1)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

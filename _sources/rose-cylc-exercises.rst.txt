@@ -6,15 +6,17 @@ Differencing suites
 
 Currently there is no Rose tool to difference two suites. Since a suite consists of text files it is simply a matter of making sure all the Rose configuration files are in the common format by running ``rose config-dump`` on each suite and then running ``diff``.
 
-We will difference your copy of the GA7.0 suite with the original one: ::
+We will difference your copy of the GA9.0 suite with the original one: ::
 
   puma2$ cd ~/roses
-  puma2$ rosie checkout u-cc654
-  puma2$ rose config-dump -C u-cc654
+  puma2$ rosie checkout u-dp084
+  puma2$ rose config-dump -C u-dp084
   puma2$ rose config-dump -C <your-suitename>
-  puma2$ diff -r u-cc654 <your-suitename>
+  puma2$ diff -r u-dp084 <your-suitename>
 
-* Are the differences what you expected?
+.. admonition:: Question
+
+   * Are the differences what you expected?
 
 
 Graphing a suite
@@ -22,118 +24,125 @@ Graphing a suite
 
 When developing suites, it can be useful to check what the run graph looks like after jinja evaluation, etc.  
 
-The GA7.0 suite that we have been working with is very simple so we shall graph a nesting suite which is more complex. To do this without running the suite: ::
+we shall graph the coupled suite. To do this without running the suite: ::
 
-  puma2$ rosie checkout u-ce122
-  puma2$ cd ~/roses/u-ce122
-  puma2$ rose suite-run -l --name=u-ce122 # install suite in local cylc db only
-  puma2$ cylc graph u-ce122               # view graph in browser
+  puma2$ rosie checkout u-dw272
+  puma2$ cd ~/roses/u-dw272
+  puma2$ cylc graph u-dw272 
 
-A window containing the graph of the suite should appear. By default tasks in the same family are grouped together. Click the :guilabel:`Ungroup all families` button at the top of the window to expand the graph to view all tasks within this suite.
+A window containing the graph of the suite should appear. 
+
+You an also view the graph of a running workflow in the Cylc GUI by selecting :guilabel:`ADD VIEW --> Graph`
 
 Exploring the suite definition files
 ------------------------------------
 
-Change to the ``~/roses/<suite-id>`` directory for your copy of ``u-cc519``.
+Change to the ``~/roses/<suite-id>`` directory for your copy of ``u-dp063``.
 
-Open the ``suite.rc`` file in your favourite editor.  
+Open the ``flow.cylc`` file in your favourite editor.  
 
-Look at the ``[scheduling]`` section.  This contains some Jinja2 variables (``BUILD`` & ``RECON``) which allow the user to select which tasks appear in the dependency graph. The dependency graph tells Cylc the order in which to run tasks.  The ``fcm_make`` and ``recon`` tasks are only included if the ``BUILD`` and ``RECON`` variables are set to true. These variables are located in the ``rose-suite.conf`` and can be changed using the rose edit GUI or by directly editing the ``rose-suite.conf`` file.  When you run a suite, a processed version of the ``suite.rc`` file, with all the Jinja2 code evaluated, is placed in your suite's ``cylc-run`` directory.  
+Look at the ``[scheduling]`` section.  This contains some Jinja2 variables (``BUILD`` & ``RECON``) which allow the user to select which tasks appear in the dependency graph. The dependency graph tells Cylc the order in which to run tasks.  The ``fcm_make`` and ``recon`` tasks are only included if the ``BUILD`` and ``RECON`` variables are set to true. These variables are located in the ``rose-suite.conf`` and can be changed using the rose edit GUI or by directly editing the ``rose-suite.conf`` file.  When you run a suite, a processed version of the ``flow.cylc`` file, with all the Jinja2 code evaluated, is placed in your workflow's ``cylc-run`` directory.  
 
-* Take a look at the ``suite.rc.processed`` file for your suite.
+.. admonition:: Question
 
-.. hint:: Go to directory ``~/cylc-run/<suite-id>``.
+   * Take a look at the ``flow-processed.cylc`` file for your suite.
 
-* Change the values of ``BUILD`` and ``RECON`` and re-run your suite.  
-* Look at the new ``suite.rc.processed`` file.  Can you see how the graph has changed?
+   .. hint:: Go to directory ``~/cylc-run/<workflow-name>/runX/log/config``.
 
-Make sure that you leave the suite with ``BUILD=false`` before continuing.
+Change the values of ``BUILD`` and ``RECON`` and re-run your suite.  
+
+.. admonition:: Question
+
+   * Look at the new ``flow-processed.cylc`` file.  Can you see how the graph has changed?
+
+Make sure that you leave the suite with ``BUILD=true`` before continuing.
 
 As we saw earlier when changing the path to the start dump, some settings can't be changed through the rose edit GUI.  Instead you have to edit the suite definition files directly. 
 
-* Can you find where the atmos processor decomposition is set for this suite?
-* Change atmos processor decomposition to run on 2 nodes.  Run the suite.
-* Did it work?  If not, what error message did you get?
+.. admonition:: Question
 
-.. hint:: Look in the usual ``job.out/job.err`` or it may be in the ``job-activity.log`` file.
+   * Can you find where the atmos processor decomposition is set for this suite?
+
+Change atmos processor decomposition to run on 2 nodes.  Run the suite.
+
+.. admonition:: Question
+
+   * Did it work?  If not, what error message did you get?
+
+     .. hint:: Look in the usual ``job.out/job.err`` or it may be in the ``job-activity.log`` file.
 
 You will get an error if the processor decomposition of the model does not match the number of tasks and nodes requested by Slurm.  For details on the Slurm batch system on ARCHER2 see: https://docs.archer2.ac.uk/user-guide/scheduler/).
 
 In the ``[[atmos]] [[[directives]]]`` section, set ``--nodes=2`` and ``--ntasks=256`` to tell the Slurm scheduler that you require 2 nodes and a total of 256 MPI tasks. 
 
-* The suite should run this time. Did it run on 2 nodes as requested?
-* How much walltime has been requested for the reconfiguration?
+.. admonition:: Questions
 
-Now take a look at the ``suite.rc`` file for your other suite (the one copied from ``u-cc654``). See how it differs.  This one is set up to run on multiple platforms.  
+   * The suite should run this time. Did it run on 2 nodes as requested?
+   * How much walltime has been requested for the reconfiguration?
 
-* Can you see the more complex dependency graph?
-* Why do you not need to adjust the Slurm directives to change the processor decomposition in this suite? 
-* Can you see where to change the reconfiguration walltime for this suite?
+Now take a look at the ``flow.cylc`` file for your other suite (the one copied from ``u-dp084``). See how it differs.  This one is set up to run on multiple platforms.  
 
-This has just given you a very brief look at the suite definitions files.  More information can be found in the cylc documentation: https://cylc.github.io/cylc-doc/7.8.8/html/index.html
+.. admonition:: Questions
+
+   * Can you see the more complex dependency graph?
+   * Why do you not need to adjust the Slurm directives to change the processor decomposition in this suite? 
+   * Can you see where to change the reconfiguration walltime for this suite?
+
+.. admonition:: Further Information
+
+   This has just given you a very brief look at the suite definition files.  More information can be found in the cylc documentation: `Writing Workflows <https://cylc.github.io/cylc-doc/stable/html/user-guide/writing-workflows/index.html>`_
 
 ..
-   Suite and task event handling
-   -----------------------------
 
-   Suites can be configured to send emails to alert you to any task or suite failures (or indeed when the suite finishes successfully). To send an email, you use the built-in setting ``[[[events]]] mail events`` to specify a list of events for which notifications should be sent.  Here we will configure your copy of suite ``u-cc654`` to send an email on task (submission) failure, retry and timeout. 
+Removing workflows
+------------------
 
-   Edit the ``suite.rc`` file to add the ``[[[events]]]`` section below: ::
+If we don't clear up worfklows when we are finished with them disk usage will mount up and you will eventually exceed your quota. As we have seen when running our workflows, files are written to multiple locations; PUMA2, ARCHER2 ``/home``, ``/work`` and potentially other locations.  The directory setup includes symlinks which means you can't simple do a ``rm -r ~/cylc-run/<workflow-name>`` on ARCHER2 for instance as this is just a symlink to ``/work``.  Fortunately, Cylc provides an easy way to clean up a workflow.
 
-       [runtime]
-           [[root]]
-               ...
-               [[[environment]]]
-               ...
-               [[[events]]]
-                   mail events = submission retry, retry, submission failed, failed, submission timeout, timeout
-                   submission timeout = P1D
+Try cleaning up one of your workflows.  We suggest the one you ran in Chapter 4; your copy of u-dp063: ::
 
-   Configure cylc so it knows what your email address is. Edit the file ``~/.cylc/global.rc`` (create it if it doesn't exist) to add the following: ::
+  puma2$ cylc clean <workflow-name>
 
-      [task events] 
-          mail to = <enter-your-email-address>
+You will see output similar to the following: ::
 
-   To test this out we need to force the suite to fail.  Change the account code to a non-existent one; e.g. 'n02-fail'
+  ros@puma2$ cylc clean u-dw123
+  Would clean the following workflows:
+    u-dw123/run2
+  Remove these workflows (y/n): y
+  INFO - Cleaning u-dw123/run2 on install target: archer2
+  INFO - [archer2]
+    INFO - Removing symlink and its target directory: /home/n02/n02/ros/cylc-run/u-dw123/run2 -> /mnt/lustre/a2fs-work2/work/n02/n02/ros/cylc-run/u-dw123/run2
+    INFO - Removing directory: /home/n02/n02/ros/cylc-run/u-dw123
+    INFO - Removing directory: /mnt/lustre/a2fs-work2/work/n02/n02/ros/cylc-run/u-dw123
+  INFO - Removing directory: /home/n02/n02/ros/cylc-run/u-dw123/run2
+  INFO - Removing directory: /home/n02/n02/ros/cylc-run/u-dw123/_cylc-install
+  INFO - Removing directory: /home/n02/n02/ros/cylc-run/u-dw123
 
-   * Did you get an email when the suite failed?
-   * Look in the suite error files to find the error message?
+.. admonition:: See Also
 
-   Change the account code back to its previous setting before continuing.
+   Cylc User Guide: `Removing Workflows <https://cylc.github.io/cylc-doc/stable/html/user-guide/removing-workflows.html>`_
 
-   Further information about event handlers can be found in the Cylc documentation: https://cylc.github.io/doc/built-sphinx-single/index.html#eventhandling
+Version Control of Suites
+-------------------------
 
-Starting a suite in "held" mode
--------------------------------
+Just like the model code, your UM Rose suites are under version control in a subversion repository called ``rosie-u`` which is on MOSRS.  Once you have a working copy of your suite under ``~/roses`` you can use FCM commands to check the status of your edits; i.e. local edits, diff changes, commit changes etc.
 
-This allows you to trigger the running of tasks manually.
+* Go to your suite working directory for one of the suites you've used on this course and type ``fcm status`` to see the changes you have made since you copied the suite.
 
-To start a suite in held mode add ``-- --hold`` to the end of the ``rose suite-run`` command: ::
+* Run ``fcm commit`` to commit your changes to the repository. This saves your changes to the repository.
 
-  puma2$ rose suite-run -- --hold
+* Take a look in the MOSRS roses-u Trac (https://code.metoffice.gov.uk/trac/roses-u) and find the suite you created in the previous section.
 
-The first ``--`` tells Rose that all subsequent options should be passed on to Cylc.  This is why the hold option should be added to the end of the command, after any Rose options.  Once the suite has started all tasks will be in a held state.  It is then possible to select which tasks are run by right clicking on a task in the Cylc GUI and manually triggering it or resetting its state.
+.. hint::
+   Go to :guilabel:`Browse Source`` then drill down to find your suite. e.g. ``u-dp084`` would be under ``d/p/0/8/4`` and see that your commit has now appeared in the repository.  
 
-Try doing this as a way to run the reconfiguration only in one of your suites.
+.. admonition:: Question
+   What is the suite's last modified time now?
 
-Discovering running suites and the multi-suite monitor GUI
-----------------------------------------------------------
+* Use Trac to view the changes you have made to the suite.
 
-Suites that are currently running can be detected with command line or GUI tools:
-
-Submit 2 of your suites. It doesn't matter what tasks they are running for this exercise; compilation, recon or model run.
-
-Now try running the command ``cylc scan``. This lists your currently running suites.  For example: ::
-
-  puma2$ cylc scan
-  u-af140 ros@localhost:7770
-  u-ag761 ros@localhost:7776
-
-There is also a multi-suite monitor GUI, which allows you to monitor the states of all suites you have running in one window.  Try running the command: ::
-
-  puma2$ cylc gscan &
-
-Double clicking on a suite in ``gscan`` GUI opens the Cylc GUI window, which you will be very familiar with by now. For each suite open the Cylc GUI window and stop the suite by going to :guilabel:`Control > Stop Suite`, selecting  :guilabel:`Stop after killing active tasks` and clicking :guilabel:`Ok`.
+.. hint::
+   Click on the number in the revision column, and then on the :guilabel:`View changes` button to show a diff of your changes
 
 Adding a new app to a suite
 ---------------------------
@@ -144,7 +153,7 @@ To add a new app to a suite, we first create a directory to hold the app files. 
 
 Remember to ``fcm add`` any new files that you add to the suite so they will be added to the repository when you next commit.
 
-In order to actually run the app, we need to add a new "task" to the suite which involves editing the suite configuration file ``suite.rc``. We need to specify 3 things: 
+In order to actually run the app, we need to add a new "task" to the suite which involves editing the suite configuration file ``flow.cylc``. We need to specify 3 things: 
 
 1. How the new task relates to other tasks, specifically, which task will trigger it and which task will follow it; 
 
@@ -152,7 +161,7 @@ In order to actually run the app, we need to add a new "task" to the suite which
 
 3. How the task will run (i.e. which computer and the resources it will need).
 
-In this example, we will add an app that prints ``Hello World``, which will execute after the reconfiguration and before the main model. We will add the app to your copy of ``u-cc654``.
+In this example, we will add an app that prints ``Hello World``, which will execute after the reconfiguration and before the main model. We will add the app to your copy of ``u-dp084``.
 
 Create the Rose application directory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -178,10 +187,10 @@ Add a new task to the suite definition
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In order to execute the app, we need to add a new task to the suite workflow. This task executes our new application on a machine that we specify. In this instance we are adding the new task between the reconfiguration and the model run, and the task will be run on ARCHER2 in the serial queue.
 
-To set this up, edit the ``suite.rc`` file. Under, ::
+To set this up, edit the ``flow.cylc`` file. Under, ::
 
   [scheduling]
-     [[dependencies]]
+     [[graph]]
 
 find the line ::
 
@@ -193,20 +202,23 @@ and change it to ::
 
 This puts the task ``hello`` in the right place in the task list.
 
-The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable ``ROSE_TASK_APP`` in the task definition.  General task definitions go in the ``suite.rc`` file and the definitions specific to ARCHER2 in the ``site/archer2.rc`` file.  The queuing system is specific to the host being run on, and there is already a definition for the ARCHER serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of. To run the new application on ARCHER2 in the serial queue and give it two minutes to complete, add the following lines to the ``suite.rc`` after the definition for ``[[recon]]``: ::
+Do the same for the line: ::
+
+  {% set BUILD_GRAPH = BUILD_GRAPH ~ ' => atmos_main' if TASK_RUN else BUILD_GRAPH %}
+
+The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable ``ROSE_TASK_APP`` in the task definition.  General task definitions go in the ``flow.cylc`` file and the definitions specific to ARCHER2 in the ``site/archer2.cylc`` file.  The queuing system is specific to the host being run on, and there is already a definition for the ARCHER2 serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of. To run the new application on ARCHER2 in the serial queue and give it two minutes to complete, add the following lines to the ``flow.cylc`` after the definition for ``[[recon]]``: ::
 
    [[hello]]
-      inherit = HPC_SERIAL
-      [[[environment]]]
-         ROSE_TASK_APP = new_app
-      [[[job]]]
-         execution time limit = PT2M
+       inherit = HPC_SERIAL
+       execution time limit = PT2M
+       [[[environment]]]
+           ROSE_TASK_APP = new_app
 
 Running the new app
 ^^^^^^^^^^^^^^^^^^^	    
-We are now ready to go.  :guilabel:`Run` the suite. Look at the task graph: ``recon`` and ``atmos_main`` are there, but a new hierarchy of tasks has appeared.
+We are now ready to go.  :guilabel:`Run` the suite. Look at the task graph, if you're using the Cylc GUI you can simply select :guilabel:`ADD VIEW --> Graph`.  You may need to change the graph window depth to see more of the workflow.  This can be done by changing `N=1` to ``N=3`` at the top of the Cylc GUI. In the graph you should see the new task ``hello`` in between ``recon`` and ``atmos_main``the new task ``hello`` in between.
 
-..  image:: /images/u-cc654-new-app.png
+..  image:: /images/u-dp084-new-app.png
 
 Notice that ``atmos_main`` no longer runs after the reconfiguration, but our new task ``hello`` does and when that has completed, ``atmos_main`` starts. The output from the ``hello`` task can be found in the cylc output directory: ``log/job/19880901T0000Z/hello/NN/job.out``.
 
@@ -238,8 +250,7 @@ The app can be tested in isolation by changing into the ``new_app/`` directory a
 This should produce output similar to: ::
 
   ros@puma2$ rose app-run
-  [INFO] export PATH=/home/ros/roses/u-cc654/app/new_app/bin:/home/fcm/rose-2016.11.1/bin:/usr/local/python/bin:
-  ...
+  [INFO] export PATH=/home4/home/n02-puma/ros/roses/u-dp084/app/new_app/bin:/home/ros/bin:/usr/...
   [INFO] export PLANET=Jupiter
   [INFO] command: hello.sh ${PLANET}
   Hello, Jupiter!
@@ -259,7 +270,6 @@ For our example there are currently no restrictions on the variable ``PLANET``. 
 Rose provides some tools to quickly guess at the metadata where there is none.  Create a directory ``meta/`` under ``new_app/`` .  Then execute the command, ::
 
   rose metadata-gen
-
   
 This creates a file ``rose-meta.conf`` in the ``meta/`` directory.  It just says that there is an evironment variable called ``PLANET``, but it does not know much about it.  Edit this file and add the following lines after ``[env=PLANET]``: ::
 
@@ -269,8 +279,8 @@ This creates a file ``rose-meta.conf`` in the ``meta/`` directory.  It just says
   
 Now go back to the Rose GUI and select :guilabel:`Metadata > Refresh Metadata`. Once the metadata has reloaded, go to the :guilabel:`new_app --> env` panel.  The entry box for ``PLANET`` has changed into a drop down list.  Pluto is not allowed, presumably because the code cannot handle tiny planets.  Right click on the cog next to Planet and select :guilabel:`info` to see the description and allowed values.
 
-References
-^^^^^^^^^^
-A fuller discussion of Rose metadata can be found at https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/metadata.html.
+.. admonition:: Further Information
 
-Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For further details, see the Rose documentation at https://metomi.github.io/rose/2019.01.8/html/tutorial/rose/applications.html.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see https://metomi.github.io/rose/2019.01.8/html/api/rose-built-in-applications.html.
+   A fuller discussion of Rose metadata can be found at https://metomi.github.io/rose/doc/html/tutorial/rose/metadata.html.
+
+   Designing a new application may seem a daunting process, but there are numerous existing examples in suites that you can try to understand.  For further details, see the Rose documentation at https://metomi.github.io/rose/doc/html/tutorial/rose/applications.html.  There are a collection of built-in applications that you can use for building, testing, archiving and housekeeping - see https://metomi.github.io/rose/doc/html/api/rose-built-in-applications.html. 

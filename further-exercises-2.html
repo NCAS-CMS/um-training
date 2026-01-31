@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>7. Further Exercises (2) &mdash; NCAS Unified Model Introduction</title>
@@ -14,7 +14,7 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9bcbadda"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -44,10 +44,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Practicals</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="getting-setup-selfstudy.html">1. Getting Set Up (Self-Study Instructions)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">2. Working with Suites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running.html">3. Running a UM suite on ARCHER2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fcm-tutorial.html">4. FCM tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo-list.html">1. To Do List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-setup-leeds.html">2. Getting Set Up (Leeds Training Course)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-suites.html">3. Working with Suites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">4. Running a UM workflow on ARCHER2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solving-problems.html">5. Solving Common UM Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="further-exercises-1.html">6. Further Exercises (1)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">7. Further Exercises (2)</a><ul>
@@ -63,15 +63,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#checkout-and-run-the-suite">Checkout and run the suite</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exploring-the-suite">Exploring the suite</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#output-files">Output files</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#running-the-nesting-suite">7.5. Running the Nesting Suite</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Checkout and run the suite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Exploring the Suite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#initial-data">Initial Data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-ancillary-files">The ancillary files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-output-files">The output files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#further-information">Further Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rebuild-nemo">Rebuild NEMO</a></li>
 </ul>
 </li>
 </ul>
@@ -109,30 +101,39 @@
   <section id="further-exercises-2">
 <h1><span class="section-number">7. </span>Further Exercises (2)<a class="headerlink" href="#further-exercises-2" title="Link to this heading"></a></h1>
 <p>The exercises in this section are all optional.  We suggest you pick and choose the exercises that you feel are most relevant to the work you are/will be doing.</p>
+<div class="admonition-optional-exercises admonition">
+<p class="admonition-title">Optional Exercises</p>
+<ul class="simple">
+<li><p>Postprocessing (archive and transfer of model data)</p></li>
+<li><p>Using IO Servers</p></li>
+<li><p>Writing NetCDF output from the UM</p></li>
+<li><p>Running the coupled model</p></li>
+</ul>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Use your copy of suite <code class="docutils literal notranslate"><span class="pre">u-cc654</span></code> for these exercises unless otherwise specified.</p>
+<p>Use your copy of suite <code class="docutils literal notranslate"><span class="pre">u-dp084</span></code> for these exercises unless otherwise specified.</p>
 </div>
 <section id="post-processing-archive-and-transfer-of-model-data">
 <h2><span class="section-number">7.1. </span>Post-Processing (archive and transfer of model data)<a class="headerlink" href="#post-processing-archive-and-transfer-of-model-data" title="Link to this heading"></a></h2>
-<p>When your model runs it outputs data onto the ARCHER2 <code class="docutils literal notranslate"><span class="pre">/work</span></code> disk (<code class="docutils literal notranslate"><span class="pre">/projects</span></code> on Monsoon2). If you are running a long integration and/or at high resolution data will mount up very quickly and you will need to move the data off of ARCHER2; for example to JASMIN.  The post-processing app (postproc) is used within cycling suites to automatically <em>archive</em>  model data and can be optionally configured to transfer the data from ARCHER2 to the JASMIN data facility.  The app archives and deletes model output files, not only for the UM, but also NEMO and CICE in coupled configurations.</p>
+<p>When your model runs it outputs data onto the ARCHER2 <code class="docutils literal notranslate"><span class="pre">/work</span></code> disk (<code class="docutils literal notranslate"><span class="pre">/projects</span></code> on Monsoon3). If you are running a long integration and/or at high resolution data will mount up very quickly and you will need to move the data off of ARCHER2; for example to JASMIN.  The post-processing app (postproc) is used within cycling suites to automatically <em>archive</em>  model data and can be optionally configured to transfer the data from ARCHER2 to the JASMIN data facility.  The app archives and deletes model output files, not only for the UM, but also NEMO and CICE in coupled configurations.</p>
 <p>Let’s try configuring your suite to archive to a staging location on ARCHER2:</p>
 <ul class="simple">
 <li><p>Switch on post-processsing in window <span class="guilabel">suite conf –&gt; Tasks</span></p></li>
 </ul>
 <p>The post-processing is configured under the <span class="guilabel">postproc</span> section:</p>
 <ul class="simple">
-<li><p>Select the <span class="guilabel">Archer</span> archiving system in window <span class="guilabel">Post Processing - common settings</span>.</p></li>
+<li><p>Select the <span class="guilabel">Archer2-Jasmin</span> archiving system in window <span class="guilabel">Post Processing - common settings</span>.</p></li>
 </ul>
 <p>A couple of new entries will have appeared in the index panel, <span class="guilabel">Archer Archiving</span> and <span class="guilabel">JASMIN Transfer</span>, identified with the blue dots.</p>
 <p>You now need to specify where you want your archived data to be copied to:</p>
 <ul class="simple">
-<li><p>In the <span class="guilabel">Archer Archiving</span> panel set <code class="docutils literal notranslate"><span class="pre">archive_root_dir</span></code> to be <code class="docutils literal notranslate"><span class="pre">/work/n02/n02/&lt;userid&gt;/archive</span></code>.  The <code class="docutils literal notranslate"><span class="pre">archive_name</span></code> (suite id) will be automatically appended to this.</p></li>
+<li><p>In the <span class="guilabel">ARCHER2-JASMIN</span> panel set <code class="docutils literal notranslate"><span class="pre">archive_root_dir</span></code> to be <code class="docutils literal notranslate"><span class="pre">/work/n02/n02/&lt;userid&gt;/archive</span></code>.  The <code class="docutils literal notranslate"><span class="pre">archive_name</span></code> (suite id) will be automatically appended to this.</p></li>
 </ul>
-<p>You will need to run the model for at least 1 day as archiving doesn’t work for periods of less than 1 day.  Change the <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">length</span></code> and <code class="docutils literal notranslate"><span class="pre">cycling</span> <span class="pre">frequency</span></code> to be 1 day.  This should complete in about 5 minutes so set the <code class="docutils literal notranslate"><span class="pre">wallclock</span> <span class="pre">time</span></code> to be 10 minutes.</p>
+<p>You will need to run the model for at least 1 day as archiving doesn’t work for periods of less than 1 day.  Set the <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">length</span></code> and <code class="docutils literal notranslate"><span class="pre">cycling</span> <span class="pre">frequency</span></code> to be 1 day.  This should complete in about 5 minutes so set the <code class="docutils literal notranslate"><span class="pre">wallclock</span> <span class="pre">time</span></code> to be 10 minutes.</p>
 <p><span class="guilabel">Run</span> the suite.</p>
-<p>Once the run has completed go to the archive directory for this cycle (e.g. <code class="docutils literal notranslate"><span class="pre">/nerc/n02/n02/&lt;userid&gt;/&lt;suiteid&gt;/19880901T0000Z</span></code>) and you should see several files have been copied over (e.g <code class="docutils literal notranslate"><span class="pre">cc654a.pc19880901_00.pp</span></code>).</p>
-<p>Data files that have been archived and are no longer required by the model for restarting or for calculating means (seasonal, annual, etc) are deleted from the suite <code class="docutils literal notranslate"><span class="pre">History_Data</span></code> directory. Go to the <code class="docutils literal notranslate"><span class="pre">History_Data</span></code> directory for your suite and confirm that this has happened. This run is reinitialising the <code class="docutils literal notranslate"><span class="pre">pc</span></code> data stream every 6 hours and you should see that it has only removed data files for this stream up to 18:00hrs, the <code class="docutils literal notranslate"><span class="pre">cc654a.pc19880901_18.pp</span></code> file is still present.  This file contains data for the hours 18-24 and would be required by the model in order to restart. Equally seasonal mean files would not be fully archived until the end of the year, after the annual mean has been created.</p>
+<p>Once the run has completed go to the archive directory for this cycle (e.g. <code class="docutils literal notranslate"><span class="pre">/nerc/n02/n02/&lt;userid&gt;/&lt;suiteid&gt;/19880901T0000Z</span></code>) and you should see several files have been copied over (e.g <code class="docutils literal notranslate"><span class="pre">dp084a.pc19880901_00.pp</span></code>).</p>
+<p>Data files that have been archived and are no longer required by the model for restarting or for calculating means (seasonal, annual, etc) are deleted from the suite <code class="docutils literal notranslate"><span class="pre">History_Data</span></code> directory. Go to the <code class="docutils literal notranslate"><span class="pre">History_Data</span></code> directory for your suite and confirm that this has happened. This run is reinitialising the <code class="docutils literal notranslate"><span class="pre">pc</span></code> data stream every 3 hours and you should see that it has only removed data files for this stream up to 21:00hrs, the <code class="docutils literal notranslate"><span class="pre">dp084a.pc19880901_21.pp</span></code> file is still present.  This file contains data for the hours 21-24 and would be required by the model in order to restart. Equally seasonal mean files would not be fully archived until the end of the year, after the annual mean has been created.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The post-processing app can also be configured to transfer the archived data over to JASMIN.  Details on how to do this are available on the CMS website: <a class="reference external" href="http://cms.ncas.ac.uk/wiki/Docs/PostProcessingApp">http://cms.ncas.ac.uk/wiki/Docs/PostProcessingApp</a></p>
@@ -140,21 +141,21 @@
 </section>
 <section id="using-io-servers">
 <h2><span class="section-number">7.2. </span>Using IO Servers<a class="headerlink" href="#using-io-servers" title="Link to this heading"></a></h2>
-<p>Older versions of the UM did not have IO servers, which meant that all reading and writing of fields files went through a single processor (pe0).  When the model is producing lots of data and is running on many processors, this method of IO is very inefficient and costly - when pe0 is writing data, all the other processors have to wait around doing nothing but still consuming AUs.  Later UM versions, including UM 10.5, have IO servers which are processors dedicated to performing IO and which work asynchronously with processors doing the computation.</p>
+<p>Older versions of the UM did not have IO servers, which meant that all reading and writing of fields files went through a single processor (pe0).  When the model is producing lots of data and is running on many processors, this method of IO is very inefficient and costly - when pe0 is writing data, all the other processors have to wait around doing nothing but still consuming compute resource (CUs).  Later UM versions, including UM 10.5, have IO servers which are processors dedicated to performing IO and which work asynchronously with processors doing the computation.</p>
 <p>Here’s just a taste of how to get this working in your suite.</p>
 <p>Set the suite to run for 1 day with an appropriate cycling frequency, then check that <code class="docutils literal notranslate"><span class="pre">OpenMP</span></code> is switched on as this is needed for the IO servers to work.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Search for <code class="docutils literal notranslate"><span class="pre">openmp</span></code> in the rose edit GUI</p>
+<p>Search for <code class="docutils literal notranslate"><span class="pre">OMP</span></code> in the rose edit GUI</p>
 </div>
 <p>Navigate to <span class="guilabel">suite conf –&gt; Domain Decomposition –&gt; Atmosphere</span> and check the number of <code class="docutils literal notranslate"><span class="pre">OpenMP</span> <span class="pre">threads</span></code> is set to <code class="docutils literal notranslate"><span class="pre">2</span></code>. Set the number of <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Server</span> <span class="pre">Processes</span></code> to <code class="docutils literal notranslate"><span class="pre">8</span></code>.</p>
 <p><span class="guilabel">Save</span> and then <span class="guilabel">Run</span> the suite.</p>
-<p>You will see lots of IO server log files in <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/&lt;cycle&gt;/atmos_main</span></code> which can be ignored for the most part.</p>
+<p>You will see lots of IO server log files in <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;/run1/work/&lt;cycle&gt;/atmos_main</span></code> which can be ignored for the most part.</p>
 <p>Try repeating the <a class="reference internal" href="further-exercises-1.html#change-dump-freq"><span class="std std-ref">Change the dump frequency</span></a> experiment with the IO servers switched on - you should see much faster performance.</p>
 </section>
 <section id="writing-netcdf-output-from-the-um">
 <h2><span class="section-number">7.3. </span>Writing NetCDF output from the UM<a class="headerlink" href="#writing-netcdf-output-from-the-um" title="Link to this heading"></a></h2>
-<p>Until UM vn10.9, only fields-file output was available from the UM - bespoke NetCDF output configurations did exist but not on the UM trunk. The suite used in most of these Section 7 exercises is vn11.7, hence supports both fields-file and NetCDF output data formats.</p>
+<p>Until UM vn10.9, only fields-file output was available from the UM - bespoke NetCDF output configurations did exist but not on the UM trunk. The suite used in most of these Section 7 exercises is vn13.5 hence supports both fields-file and NetCDF output data formats.</p>
 <section id="enable-netcdf">
 <h3>Enable NetCDF<a class="headerlink" href="#enable-netcdf" title="Link to this heading"></a></h3>
 <p>Make sure that <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Server</span> <span class="pre">Processes</span></code> variable is set to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
@@ -176,7 +177,7 @@
 <p>The coupled model consists of the UM Atmosphere model coupled to the NEMO ocean and CICE sea ice models.  The coupled configuration used for this exercise is the UKESM Historical configuration with an N96 resolution for the atmosphere and a 1 degree ocean - you will see this written N96 ORCA1.</p>
 <section id="checkout-and-run-the-suite">
 <h3>Checkout and run the suite<a class="headerlink" href="#checkout-and-run-the-suite" title="Link to this heading"></a></h3>
-<p>Checkout and open the suite <code class="docutils literal notranslate"><span class="pre">u-cs147</span></code>.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> and <code class="docutils literal notranslate"><span class="pre">fcm_make_ocean</span></code> respectively. Similarly there are separate apps for the atmos and ocean model settings, called <code class="docutils literal notranslate"><span class="pre">um</span></code> and <code class="docutils literal notranslate"><span class="pre">nemo_cice</span></code>.</p>
+<p>Checkout and open the suite <code class="docutils literal notranslate"><span class="pre">u-dw272</span></code>.  The first difference you should see is in the naming of the apps; there is a separate build app for the um and ocean, called <code class="docutils literal notranslate"><span class="pre">fcm_make_um</span></code> and <code class="docutils literal notranslate"><span class="pre">fcm_make_ocean</span></code> respectively. Similarly there are separate apps for the atmos and ocean model settings, called <code class="docutils literal notranslate"><span class="pre">um</span></code> and <code class="docutils literal notranslate"><span class="pre">nemo_cice</span></code>.</p>
 <p>Make the usual changes required to run the suite (i.e. set username, account code, queue). If you are following the tutorial as part of an organised training event, select one of the special queues, otherwise, select to run in the <code class="docutils literal notranslate"><span class="pre">short</span></code> queue.</p>
 <p>Check that the suite is set to build the UM, Ocean, and Drivers as well as run the reconfiguration and model.</p>
 <p><span class="guilabel">Run</span> the suite.</p>
@@ -184,16 +185,24 @@
 <section id="exploring-the-suite">
 <h3>Exploring the suite<a class="headerlink" href="#exploring-the-suite" title="Link to this heading"></a></h3>
 <p>Whilst the suite is compiling and running which will take around 40 minutes, take some time to look around the suite.</p>
+<div class="admonition-questions admonition">
+<p class="admonition-title">Questions</p>
 <ul class="simple">
 <li><p>How many nodes is the atmosphere running on?</p></li>
 <li><p>How many nodes is the ocean running on?</p></li>
 <li><p>What is the cycling frequency?</p></li>
 </ul>
+</div>
 <p>The version of NEMO used in this suite (and most suites you will come across) uses the XML IO Server (XIOS) to wite its diagnostic output. XIOS runs on dedicated nodes (one node in this case). Running <code class="docutils literal notranslate"><span class="pre">squeue</span></code> will show three status entries corresponding to the Atmosphere, Ocean, and XIOS components of the coupled suite. XIOS is running in <code class="docutils literal notranslate"><span class="pre">multiple-file</span></code> mode with 6 servers.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
 <li><p>Can you see where the NEMO model settings appear?</p></li>
 </ul>
+</div>
 <p>Look under <span class="guilabel">Run settings (namrun)</span>. The variables <code class="docutils literal notranslate"><span class="pre">nn_stock</span></code> and <code class="docutils literal notranslate"><span class="pre">nn_write</span></code> control the frequency of output files.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
 <ul class="simple">
 <li><p>How often are NEMO restart files written?</p></li>
 </ul>
@@ -201,45 +210,36 @@
 <p class="admonition-title">Hint</p>
 <p>The NEMO timestep length is set as variable <code class="docutils literal notranslate"><span class="pre">rn_rdt</span></code></p>
 </div>
-<p>Now browse the CICE settings.</p>
-<ul class="simple">
-<li><p>Can you find what the CICE restart frequency is set to?</p></li>
-</ul>
-<p>NEMO, CICE and XIOS are developed separately from the UM, and you should have seen that they work in very different ways. See the following websites for documentation:</p>
+</div>
+<div class="admonition-further-reading admonition">
+<p class="admonition-title">Further Reading</p>
+<p>NEMO, SI3, CICE (an alternative, widely used sea-ice model) and XIOS are developed separately from the UM, and you should have seen that they work in very different ways. See the following websites for documentation:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="http://oceans11.lanl.gov/trac/CICE">http://oceans11.lanl.gov/trac/CICE</a></p></li>
 <li><p><a class="reference external" href="http://www.nemo-ocean.eu/">http://www.nemo-ocean.eu/</a></p></li>
+<li><p><a class="reference external" href="https://zenodo.org/records/7534900">https://zenodo.org/records/7534900</a></p></li>
 <li><p><a class="reference external" href="https://forge.ipsl.jussieu.fr/ioserver">https://forge.ipsl.jussieu.fr/ioserver</a></p></li>
 </ul>
+</div>
 </section>
 <section id="output-files">
 <h3>Output files<a class="headerlink" href="#output-files" title="Link to this heading"></a></h3>
 <p><strong>Log files</strong></p>
 <p>NEMO logging information is written to:</p>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/&lt;cycle&gt;/coupled/ocean.output</span></code></p>
+<div><p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;/run1/work/&lt;cycle&gt;/coupled/ocean.output</span></code></p>
 </div></blockquote>
-<p>CICE logging information is written to:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/&lt;cycle&gt;/coupled/ice_diag.d</span></code></p>
-</div></blockquote>
-<p>If the model fails some error messages may also be written to the file <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/&lt;cycle&gt;/coupled/debug.root.01</span></code> or <code class="docutils literal notranslate"><span class="pre">debug.root.02</span></code></p>
+<p>If the model fails some error messages may also be written to the file <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;/run1/work/&lt;cycle&gt;/coupled/debug.root.01</span></code> or <code class="docutils literal notranslate"><span class="pre">debug.root.02</span></code></p>
 <p>When something goes wrong with the coupled model it can be tricky to work out what has gone wrong. NEMO errors may not appear at the end of the file but will be flagged with the string <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">R</span> <span class="pre">R</span> <span class="pre">O</span> <span class="pre">R</span></code>.</p>
 <p><strong>Restart files</strong></p>
-<p>Restart files go to the subdirectories <code class="docutils literal notranslate"><span class="pre">NEMOhist</span></code> and <code class="docutils literal notranslate"><span class="pre">CICEhist</span></code> in the standard data directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/share/data/History_Data</span></code>.</p>
+<p>Restart files go to the subdirectory <code class="docutils literal notranslate"><span class="pre">NEMOhist</span></code> in the standard data directory <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;/run1/share/data/History_Data</span></code>.</p>
 <p><strong>Diagnostic files</strong></p>
-<p>Diagnostic files are left in the <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;suitename&gt;/work/&lt;cycle&gt;/coupled/</span></code> directory.</p>
-<p>CICE files start with <code class="docutils literal notranslate"><span class="pre">&lt;suitename&gt;i</span></code>. Once your suite has run you should see the following CICE file (and more):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ ls ce119i*
-ce119i.10d.1850-01-10.nc
-</pre></div>
-</div>
-<p>NEMO diagnostic files are named <code class="docutils literal notranslate"><span class="pre">&lt;suitename&gt;o*grid_[TUVW]*</span></code>. To see what files are produced, run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ ls ce119o*grid*
-</pre></div>
-</div>
-<p>In this case each XIOS IO server writes to a separate file. To concatenate these into a global file use the <code class="docutils literal notranslate"><span class="pre">rebuild_nemo</span></code> tool, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer$ rebuild_nemo ce119o_1d_18500101_18500110_grid_T 6
+<p>Diagnostic files are left in the <code class="docutils literal notranslate"><span class="pre">~/cylc-run/&lt;workflow-name&gt;/run1/work/&lt;cycle&gt;/coupled/</span></code> directory.</p>
+<p>In this example,</p>
+<p>NEMO diagnostic files are named <code class="docutils literal notranslate"><span class="pre">nemo_&lt;workflow-name&gt;o*grid_[TUVW]*</span></code>.
+SI3 diagnostic files are named <code class="docutils literal notranslate"><span class="pre">si3_&lt;workflow-name&gt;io*icemod*</span></code>. To see what files are produced, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ ls nemo_dw272o*grid*
+archer2$ ls si3_dw272o*icemod*
 </pre></div>
 </div>
 <div class="admonition note">
@@ -247,55 +247,18 @@ ce119i.10d.1850-01-10.nc
 <p>The coupled atmos-ocean model setup is complex so we recommend you find a suite already setup for your needs.  If you find you do need to modify a coupled suite setup please contact NCAS-CMS for advice.</p>
 </div>
 </section>
-</section>
-<section id="running-the-nesting-suite">
-<h2><span class="section-number">7.5. </span>Running the Nesting Suite<a class="headerlink" href="#running-the-nesting-suite" title="Link to this heading"></a></h2>
-<p>The Nesting Suite drives a series of nested limited area models (LAM) from a global model.  It allows the user to specify the domains and it then automatically creates the required ancillary files and lateral boundary condition files.</p>
-<section id="id1">
-<h3>Checkout and run the suite<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
-<p>Checkout and open the suite <code class="docutils literal notranslate"><span class="pre">u-ce122</span></code>.  There are a number of tasks for creating ancillary files (<code class="docutils literal notranslate"><span class="pre">ancil_*</span></code> and <code class="docutils literal notranslate"><span class="pre">ants_*</span></code>).  The global model set up is in <span class="guilabel">glm_um</span> and the LAMs are in <span class="guilabel">um</span>.  The task <code class="docutils literal notranslate"><span class="pre">um-createbc</span></code> creates the lateral boundary condition files.</p>
-<p>Under <span class="guilabel">suite conf –&gt; jinja2:suite.rc</span> are the main panels for controlling the Nesting Suite. Make the usual changes required to run the suite (i.e. set username, account code, queue).</p>
-<p>If following the tutorial as part of an organised training event, select one of the special queues, otherwise, select the <code class="docutils literal notranslate"><span class="pre">short</span></code> queue.</p>
-<p><span class="guilabel">Run</span> the suite.</p>
-<p>This particular suite has a global model and one limited area model. It should complete in about 45 - 60 minutes.</p>
-</section>
-<section id="id2">
-<h3>Exploring the Suite<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
-<p>The Driving Model set up panel allows the user to specify the resolution of the global model and the number of nested regions.</p>
-<p>The <span class="guilabel">Nested Region 1</span> set up panel specifies the latitude and longitude of the centre of the first nested region.  All the other limited area models have the same centre.</p>
-<p>A useful way to get this information is to use Google Maps.  Find the place you want as a centre and then press <code class="docutils literal notranslate"><span class="pre">control-left</span> <span class="pre">mouse</span></code> and a little window with the latitude and longitude appears.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Can you find out where the first LAM is located?</p></li>
-</ul>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>Look at the orography file output during the ancillary creation.</p>
+<section id="rebuild-nemo">
+<h3>Rebuild NEMO<a class="headerlink" href="#rebuild-nemo" title="Link to this heading"></a></h3>
+<p>The ocean and ice model components start with single start files (see for example, <span class="guilabel">si3-&gt;Restart files</span>), but notice in <code class="docutils literal notranslate"><span class="pre">share/data/History_Data/NEMOhist</span></code>, the model has written multiple start files. Type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ ls  dw272o_19781001_restart_ice*
+</pre></div>
 </div>
-</div></blockquote>
-<p>The <span class="guilabel">resolution 1</span> set up panel specifies the grid and the run length.</p>
-<p>The <span class="guilabel">Config 1</span> set up panel specifies the science configuration to be run.  Each LAM can have multiple science configurations.</p>
-</section>
-<section id="initial-data">
-<h3>Initial Data<a class="headerlink" href="#initial-data" title="Link to this heading"></a></h3>
-<p>The initial data for the global model is in <code class="docutils literal notranslate"><span class="pre">share/cycle/&lt;cycle</span> <span class="pre">time&gt;/glm/ics</span></code></p>
-<p>The initial data for the first LAM is in <code class="docutils literal notranslate"><span class="pre">share/cycle/&lt;cycle</span> <span class="pre">time&gt;/Regn1/resn_1/RA1M/ics</span></code></p>
-<p>The RA1M is the name you gave to the first science configuration.</p>
-<p>The LBCs for the first LAM are in <code class="docutils literal notranslate"><span class="pre">share/cycle/&lt;cycle</span> <span class="pre">time&gt;/Regn1/resn_1/RA1M/lbcs</span></code>.</p>
-</section>
-<section id="the-ancillary-files">
-<h3>The ancillary files<a class="headerlink" href="#the-ancillary-files" title="Link to this heading"></a></h3>
-<p>These are in <code class="docutils literal notranslate"><span class="pre">share/data/ancils/Regn1/resn_1</span></code></p>
-</section>
-<section id="the-output-files">
-<h3>The output files<a class="headerlink" href="#the-output-files" title="Link to this heading"></a></h3>
-<p>The global model output is in <code class="docutils literal notranslate"><span class="pre">share/cycle/&lt;cycle</span> <span class="pre">time&gt;/glm/um</span></code>. This also contains contains the data for creating the LBC files (<code class="docutils literal notranslate"><span class="pre">umglaa_cb*</span></code>) for the first LAM.</p>
-<p>Diagnostic files can be found under <code class="docutils literal notranslate"><span class="pre">work/&lt;cycle</span> <span class="pre">time&gt;</span></code> in an application directory.  For example, the region1 forecast diagnostics is in <code class="docutils literal notranslate"><span class="pre">work/&lt;cycle</span> <span class="pre">time&gt;/Regn1_resn_1_RA1M_um_fcst_000</span></code>. This will include the pe_output files.</p>
-<p>The output for the first LAM is in <code class="docutils literal notranslate"><span class="pre">share/cycle/&lt;cycle</span> <span class="pre">time&gt;/Regn1/resn_1/RA1M/um</span></code>.</p>
-</section>
-<section id="further-information">
-<h3>Further Information<a class="headerlink" href="#further-information" title="Link to this heading"></a></h3>
-<p>This has been a very brief overview of the functionality of the Nesting Suite. The Nesting Suite is developed and maintained by Stuart Webster at the Met Office.  He has a web page all about the Nesting Suite at <a class="reference external" href="https://code.metoffice.gov.uk/trac/rmed/wiki/suites/nesting">https://code.metoffice.gov.uk/trac/rmed/wiki/suites/nesting</a>. This includes a more detailed tutorial.</p>
+<p>Each processor writes its own start file. This means you can not run on a different ocean/si3 processor decomposition with these files. NEMO provides a utility to combine the individual processor files into a single start file, convenient for moving around and enabling use with differing ocean/ice processor decompositions.</p>
+<p>Try running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>archer2$ rebuild_nemo dw272o_19781001_restart_ice 108
+</pre></div>
+</div>
+<p>Have a look at the file it created and compare with one of the multiple processor files (using ncdump for example.)</p>
 </section>
 </section>
 </section>
