@@ -55,7 +55,7 @@ Change the values of ``BUILD`` and ``RECON`` and re-run your suite.
 
    * Look at the new ``flow-processed.cylc`` file.  Can you see how the graph has changed?
 
-Make sure that you leave the suite with ``BUILD=false`` before continuing.
+Make sure that you leave the suite with ``BUILD=true`` before continuing.
 
 As we saw earlier when changing the path to the start dump, some settings can't be changed through the rose edit GUI.  Instead you have to edit the suite definition files directly. 
 

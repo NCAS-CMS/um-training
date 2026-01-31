@@ -36,6 +36,12 @@ Running a Standard Workflow
 
 To demonstrate how to run the UM through Rose we will start by running a standard N48 workflow at UM13.8.  
 
+.. tip:: 
+
+   Cylc command reference sheet provides a summary of all major cylc commands which you will find useful to refer to throughout the remaining chapters:
+
+   `Cylc Cheat Sheet <https://cylc.github.io/cylc-doc/stable/html/user-guide/cheat-sheet.html>`_
+
 Copy the suite 
 ^^^^^^^^^^^^^^
 * In ``rosie go`` locate the suite with idx **u-dp063** owned by **grenvillelister**. 

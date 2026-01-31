@@ -45,3 +45,25 @@ Cylc Cheat Sheet
 
 Summary sheet covering most of the major Cylc commands for interacting with a workflow: https://cylc.github.io/cylc-doc/stable/html/user-guide/cheat-sheet.html
 
+For convenience the basic cylc commands needed for this training are:
+
+``cylc vip <workflow-name>``   
+  Validates the workflow configuration, installs the workflow (ie. copy its files into the ``~/cylc-run`` directory) and start a workflow running.
+
+``cylc play <workflow-name>``
+  Start or Restart a workflow
+
+``cylc stop [--now] <workflow-name>`` 
+  Stop a workflow
+
+``cylc vr <workflow-name>`` 
+  Validate, reinstall and reload the workflow.  Used after making changes to a suite configuration
+
+``cylc graph <workflow-name>``
+  Generate a graphical representation of the workflow's graph
+
+``cylc tui <workflow-name>`` 
+  Open the in-terminal utility for monitoring and controlling a specific workflow
+
+
+
