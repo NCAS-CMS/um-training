@@ -17,7 +17,6 @@ NCAS Computational Modelling Services: http://cms.ncas.ac.uk/
    :maxdepth: 1
    :numbered: 2
 
-   todo-list
    getting-setup-leeds
    working-with-suites
    running
