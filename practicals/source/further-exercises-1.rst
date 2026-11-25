@@ -36,7 +36,7 @@ Navigate to :guilabel:`suite conf --> Domain Decomposition --> Atmosphere`.
 * Why is this not a good way to run the model?
 
 .. hint::
-   The base CIRRUS charging unit is a node irrespective of how many cores on the node are being used. CIRRUS has 288 cores per node, and for the UM each MPI task and OpenMP thread is mapped to a separate core.  So in this case we are running 10x16 (x 2 OMP threads) for a total of 320 cores, but are charged for 3 nodes (384 cores).
+   The base ARCHER2 charging unit is a node irrespective of how many cores on the node are being used. ARCHER2 has 128 cores per node, and for the UM each MPI task and OpenMP thread is mapped to a separate core.  So in this case we are running 10x16 (x 2 OMP threads) for a total of 320 cores, but are charged for 3 nodes (384 cores).
 
 Try experimenting with different processor decompositions (E.g. 10x32, 16x32, etc)
 
@@ -151,7 +151,7 @@ Look at the ``job.out`` file.
 Setting up a suite to cycle
 ---------------------------
 
-We mentioned in the presentations that the length of an integration will be limited by the time that a model is allowed to run on the HPC (see the CIRRUS web pages for information about the time limits).  Clearly this is no good for much of our work which may need to run on the machine for several months.  Cylc and the UM allow for long integrations to be split up into multiple shorter jobs - this is called **cycling**.
+We mentioned in the presentations that the length of an integration will be limited by the time that a model is allowed to run on the HPC (see the ARCHER2 web pages for information about the time limits).  Clearly this is no good for much of our work which may need to run on the machine for several months.  Cylc and the UM allow for long integrations to be split up into multiple shorter jobs - this is called **cycling**.
 
 Let's run the model for 1 day with 6 hour cycling:
 
