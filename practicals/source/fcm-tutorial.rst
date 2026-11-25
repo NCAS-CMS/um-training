@@ -297,12 +297,12 @@ If you have followed the tutorial scenario so far you should find that your suit
   [FAIL] um/src/control/top_level/um_shell.F90: merge results in conflict
   [FAIL]     merge output: /home/ros/cylc-run/u-cc519-test/share/fcm_make/
   .fcm-make/extract/merge/um/src/control/top_level/um_shell.F90.diff
-  [FAIL]     source from location  0: svn://puma2.archer2.ac.uk/um.xm_svn/main/trunk/src/
+  [FAIL]     source from location  0: svn://puma2.cirrus.ac.uk/um.xm_svn/main/trunk/src/
   control/top_level/um_shell.F90@111272
-  [FAIL]     source from location  1: svn://puma2.archer2.ac.uk/um.xm_svn/main/branches/
+  [FAIL]     source from location  1: svn://puma2.cirrus.ac.uk/um.xm_svn/main/branches/
   dev/rosalynhatcher/vn13.0_training_um_shell1/src/control/top_level/
   um_shell.F90@113821
-  [FAIL] !!! source from location  2: svn://puma2.archer2.ac.uk/um.xm_svn/main/branches/
+  [FAIL] !!! source from location  2: svn://puma2.cirrus.ac.uk/um.xm_svn/main/branches/
   dev/rosalynhatcher/vn13.0_tutorial/src/control/top_level/
   um_shell.F90@113821
 

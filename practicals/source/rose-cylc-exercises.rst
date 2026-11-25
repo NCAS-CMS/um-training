@@ -57,7 +57,7 @@ As we saw earlier when changing the path to the start dump, some settings can't 
 
 .. hint:: Look in the usual ``job.out/job.err`` or it may be in the ``job-activity.log`` file.
 
-You will get an error if the processor decomposition of the model does not match the number of tasks and nodes requested by Slurm.  For details on the Slurm batch system on ARCHER2 see: https://docs.archer2.ac.uk/user-guide/scheduler/).
+You will get an error if the processor decomposition of the model does not match the number of tasks and nodes requested by Slurm.  For details on the Slurm batch system on CIRRUS see: https://docs.cirrus.ac.uk/user-guide/batch/).
 
 In the ``[[atmos]] [[[directives]]]`` section, set ``--nodes=2`` and ``--ntasks=256`` to tell the Slurm scheduler that you require 2 nodes and a total of 256 MPI tasks. 
 
@@ -176,7 +176,7 @@ Everything is greyed out.  Click on :guilabel:`command` to see the command page 
 
 Add a new task to the suite definition
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-In order to execute the app, we need to add a new task to the suite workflow. This task executes our new application on a machine that we specify. In this instance we are adding the new task between the reconfiguration and the model run, and the task will be run on ARCHER2 in the serial queue.
+In order to execute the app, we need to add a new task to the suite workflow. This task executes our new application on a machine that we specify. In this instance we are adding the new task between the reconfiguration and the model run, and the task will be run on CIRRUS in the serial queue.
 
 To set this up, edit the ``suite.rc`` file. Under, ::
 
@@ -193,7 +193,7 @@ and change it to ::
 
 This puts the task ``hello`` in the right place in the task list.
 
-The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable ``ROSE_TASK_APP`` in the task definition.  General task definitions go in the ``suite.rc`` file and the definitions specific to ARCHER2 in the ``site/archer2.rc`` file.  The queuing system is specific to the host being run on, and there is already a definition for the ARCHER serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of. To run the new application on ARCHER2 in the serial queue and give it two minutes to complete, add the following lines to the ``suite.rc`` after the definition for ``[[recon]]``: ::
+The next step is to add a definition for the new task. To tell Rose to use one of the apps contained in the suite, we set the environment variable ``ROSE_TASK_APP`` in the task definition.  General task definitions go in the ``suite.rc`` file and the definitions specific to CIRRUS in the ``site/cirrus.rc`` file.  The queuing system is specific to the host being run on, and there is already a definition for the ARCHER serial queue environment  ``[[HPC_SERIAL]]`` that we can make use of. To run the new application on CIRRUS in the serial queue and give it two minutes to complete, add the following lines to the ``suite.rc`` after the definition for ``[[recon]]``: ::
 
    [[hello]]
       inherit = HPC_SERIAL

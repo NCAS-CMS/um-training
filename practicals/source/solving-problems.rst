@@ -13,19 +13,19 @@ Find and make a copy of suite ``u-cc654``.
 Firstly make the essential changes required to run the suite.  That is:
 
 * The account code ('n02-training' if you're on an organised training event)
-* Your ARCHER2 user name
+* Your CIRRUS user name
 * The queue to run in.
 
 .. Hint::
-   Look in the :guilabel:`suite conf` section.  For organised training events you will see that this suite is setup to use reservations listed as Tuesday, Wednesday, Thursday; select the appropriate day.  For self-study switch off "Use a reservation on ARCHER2" and select the ``short`` queue.
+   Look in the :guilabel:`suite conf` section.  For organised training events you will see that this suite is setup to use reservations listed as Tuesday, Wednesday, Thursday; select the appropriate day.  For self-study switch off "Use a reservation on CIRRUS" and select the ``short`` queue.
 
-* Did you manage to find where to set your ARCHER2 username?  
+* Did you manage to find where to set your CIRRUS username?
 
 This suite is set up slightly differently to the one used in the previous sections; suites do vary on how they are set up but you will soon learn where to look for things.  This suite is set up so that specifying your username on the remote HPC is optional. 
 
-* Click :guilabel:`View --> View Latent Variables`. You should see ``Username on ARCHER2`` appear in the panel greyed out.
+* Click :guilabel:`View --> View Latent Variables`. You should see ``Username on CIRRUS`` appear in the panel greyed out.
 * Click the :guilabel:`+` sign next to it and select :guilabel:`Add to configuration`
-* Enter your ARCHER2 username
+* Enter your CIRRUS username
 
 Errors resolved in the code extraction
 --------------------------------------
@@ -107,13 +107,13 @@ Suites can be and are set up differently and there will be times when you need t
 In your suite directory on PUMA2 (``~/roses/<suitename>``) use ``grep -R`` to search for the start dump name ``ab642a.da19880901_00_err`` in the suite files.  You should see 2 occurrences listed ::
 
   ros@puma2$ grep -r ab642a.da19880901_00_err *
-  site/archer2.rc:{% set AINITIAL = AINITIAL_DIR + 'N96L85/ab642a.da19880901_00_err' %}
+  site/cirrus.rc:{% set AINITIAL = AINITIAL_DIR + 'N96L85/ab642a.da19880901_00_err' %}
   site/meto_cray.rc:{% set AINITIAL = AINITIAL_DIR + 'N96L85/ab642a.da19880901_00_err' %}
 
 Edit the dump name in the appropriate ``.rc`` file for the HPC we are running on, to point to the correct initial dump file.
 
 .. Hint::
-   This suite is set up to run on multiple platforms, make sure you edit the file appropriate to ARCHER2. You may notice that ``AINITIAL`` is set 3 times; a different file is required depending on the resolution the model is being run at.  This suite is running at N96 resolution.
+   This suite is set up to run on multiple platforms, make sure you edit the file appropriate to CIRRUS. You may notice that ``AINITIAL`` is set 3 times; a different file is required depending on the resolution the model is being run at.  This suite is running at N96 resolution.
 
 :guilabel:`Reload` the suite definition and then :guilabel:`Re-trigger` the ``install_cold`` task.  The task should succeed this time.
 
@@ -138,7 +138,7 @@ Open the file called ``<suite-id>.fort6.pe0``.  Sometimes extra information abou
    
 The error message indicates that the model has suffered a convergence failure in the routine ``EG_BICGSTAB_MIXED_PREC``. This basically means that the model was not able to find a solution to the requested accuracy with the amount of effort specified. In this case the failure results from the value chosen for ``gcr_max_iterations``.  You could try to find what setting similar models use (with the MOSRS repository you have access to all model setups) or looking at the help within ``rose edit`` may point you in the right direction.  Go to :guilabel:`um --> namelist --> UM Science Settings --> Sections 10 11 12 - Dynamics settings -->  Solver` and set it to the suggested value. :guilabel:`Save`, :guilabel:`Reload` and :guilabel:`Re-trigger`.
 
-The model should fail with the same error.  So what's gone wrong here?  We've changed the value of the number of iterations to a recommended value so why didn't it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On ARCHER2 navigate to the work directory for the ``atmos_main`` task (ie. ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main``).  In here you will see several files with uppercase names (e.g. ``ATMOSCNTL``, ``SHARED``), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use `grep`) in these files for the max number of solver iterations variable ``gcr_max_iterations``.
+The model should fail with the same error.  So what's gone wrong here?  We've changed the value of the number of iterations to a recommended value so why didn't it work?  The first thing to check is that the new value has indeed been passed to the model.  We do this by checking the variable in the namelists which are written by the Rose system. On CIRRUS navigate to the work directory for the ``atmos_main`` task (ie. ``~/cylc-run/<suite-id>/work/<cycle>/atmos_main``).  In here you will see several files with uppercase names (e.g. ``ATMOSCNTL``, ``SHARED``), these contain the Fortran namelists which are read into the model.  Have a look inside one of them to see the structure.  Now search (use `grep`) in these files for the max number of solver iterations variable ``gcr_max_iterations``.
 
 .. Hint::
    Search for the string ``gcr_max_iterations=``.

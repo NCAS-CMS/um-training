@@ -8,9 +8,9 @@ The exercises in this section are all optional.  We suggest you pick and choose 
 Post-Processing (archive and transfer of model data)
 ----------------------------------------------------
 
-When your model runs it outputs data onto the ARCHER2 ``/work`` disk (``/projects`` on Monsoon2). If you are running a long integration and/or at high resolution data will mount up very quickly and you will need to move the data off of ARCHER2; for example to JASMIN.  The post-processing app (postproc) is used within cycling suites to automatically *archive*  model data and can be optionally configured to transfer the data from ARCHER2 to the JASMIN data facility.  The app archives and deletes model output files, not only for the UM, but also NEMO and CICE in coupled configurations.
+When your model runs it outputs data onto the CIRRUS ``/work`` disk (``/projects`` on Monsoon2). If you are running a long integration and/or at high resolution data will mount up very quickly and you will need to move the data off of CIRRUS; for example to JASMIN.  The post-processing app (postproc) is used within cycling suites to automatically *archive*  model data and can be optionally configured to transfer the data from CIRRUS to the JASMIN data facility.  The app archives and deletes model output files, not only for the UM, but also NEMO and CICE in coupled configurations.
 
-Let's try configuring your suite to archive to a staging location on ARCHER2:
+Let's try configuring your suite to archive to a staging location on CIRRUS:
 
 * Switch on post-processsing in window :guilabel:`suite conf --> Tasks`
 
