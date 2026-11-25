@@ -2,17 +2,17 @@ Getting Set Up (Self-Study Instructions)
 ========================================
 
 .. warning::
-   You **MUST** have PUMA2, CIRRUS and MOSRS accounts setup before starting this section.
+   You **MUST** have PUMA2, ARCHER2 and MOSRS accounts setup before starting this section.
 
 .. warning:: 
    If you have moved your account over to PUMA2 from the old PUMA server (pumanew), then you should follow these instructions: https://cms.ncas.ac.uk/puma2/
 
-.. _cirrus:
+.. _archer2:
    
-Set up your CIRRUS connection
+Set up your ARCHER2 connection
 ------------------------------
 
-To use the UM Introduction Tutorials you will first need to ensure you can connect from your local desktop to CIRRUS.  There a multiple ways in which you can do this depending on your desktop platform:
+To use the UM Introduction Tutorials you will first need to ensure you can connect from your local desktop to ARCHER2.  There a multiple ways in which you can do this depending on your desktop platform:
 
 * via `Terminal <terminal_>`_ on GNU/Linux & macOS
 * via `MobaXTerm <mobaxterm_>`_ on Windows
@@ -20,8 +20,8 @@ To use the UM Introduction Tutorials you will first need to ensure you can conne
 SSH key files
 ^^^^^^^^^^^^^
 
-Before you try and connect to CIRRUS, you need to make sure that you have the ssh-keys available on your computer.
-In these instructions, we've assumed the keys are called ``id_rsa_cirrus`` and ``id_rsa_cirrus.pub``. Replace with the name of your keys as appropriate.
+Before you try and connect to ARCHER2, you need to make sure that you have the ssh-keys available on your computer.
+In these instructions, we've assumed the keys are called ``id_rsa_archer2`` and ``id_rsa_archer2.pub``. Replace with the name of your keys as appropriate.
 
 .. _terminal:
 
@@ -29,22 +29,22 @@ Connecting via a Terminal (GNU/Linux & macOS)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 It is possible to connect via a terminal with an X11 connection (`XQuartz <https://www.xquartz.org/>`_ is also required when using macOS)
 
-Login to CIRRUS: ::
+Login to ARCHER2: ::
 
-  ssh -Y -i ~/.ssh/id_rsa_cirrus <cirrus-username>@login.cirrus.ac.uk
+  ssh -Y -i ~/.ssh/id_rsa_archer2 <archer2-username>@login.archer2.ac.uk
 
 To simplify the login process, you can define a ``~/.ssh/config`` file entry containing the necessary information. For example: ::
 
-  Host cirrus
-  Hostname login.cirrus.ac.uk
-  User <cirrus_username>
-  IdentityFile ~/.ssh/id_rsa_cirrus
+  Host archer2
+  Hostname login.archer2.ac.uk
+  User <archer2_username>
+  IdentityFile ~/.ssh/id_rsa_archer2
   ForwardX11 yes
   ForwardX11Trusted yes
 
 so that you can connect using just the command: ::
   
-  ssh cirrus
+  ssh archer2
 
 .. _mobaxterm:
 
@@ -62,12 +62,12 @@ Connecting via MobaXTerm
 
 Next time, navigate to “Downloads” to open the application.
 
-Set up your CIRRUS environment
+Set up your ARCHER2 environment 
 --------------------------------
 
-Login to CIRRUS from your local desktop, copy the following profile to your home directory. ::
+Login to ARCHER2 from your local desktop, copy the following profile to your home directory. :: 
 
-  cirrus$ cp /work/y07/shared/umshared/um-training/rose-profile ~/.profile
+  archer2$ cp /work/y07/shared/umshared/um-training/rose-profile ~/.profile
 
 Change the permissions on your ``/home`` and ``/work`` directories to enable the NCAS-CMS team to help with any queries: ::
 
@@ -79,34 +79,34 @@ Change the permissions on your ``/home`` and ``/work`` directories to enable the
 Set up your PUMA2 connection 
 ----------------------------
 
-PUMA2 is accessed from the CIRRUS login nodes, and you will use the same username and password.
+PUMA2 is accessed from the ARCHER2 login nodes, and you will use the same username and password.
 
-From an CIRRUS terminal type: ::
+From an ARCHER2 terminal type: ::
 
-    cirrus$ ssh -Y puma2
+    archer2$ ssh -Y puma2
 
-and type your CIRRUS password when prompted.
+and type your ARCHER2 password when prompted. 
 
-You should now be logged into PUMA2. To go back to the CIRRUS login nodes, type ``exit``.
+You should now be logged into PUMA2. To go back to the ARCHER2 login nodes, type ``exit``. 
 
 Set up passwordless access to PUMA2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can set up a passphrase-less ssh-key to allow you to connect to PUMA2 without typing a password or passphrase. 
 
-.. note:: We would never normally advise using an ssh-key without a passphrase, but in this case it is safe to do so since we are already authenticated within the CIRRUS system.
+.. note:: We would never normally advise using an ssh-key without a passphrase, but in this case it is safe to do so since we are already authenticated within the ARCHER2 system.
 
-From the CIRRUS login nodes, type: ::
+From the ARCHER2 login nodes, type: :: 
 
-   cirrus$ ssh-keygen -t rsa -f ~/.ssh/id_rsa_puma2
+   archer2$ ssh-keygen -t rsa -f ~/.ssh/id_rsa_puma2
 
 At the prompt, press enter for an empty passphrase.
 
 Copy the key over to PUMA2: ::
 
-   cirrus$ ssh-copy-id -i ~/.ssh/id_rsa_puma2 puma2
+   archer2$ ssh-copy-id -i ~/.ssh/id_rsa_puma2 puma2
 
-Type in your CIRRUS password when prompted.
+Type in your ARCHER2 password when prompted.
 
 Next, create a file called ``~/.ssh/config`` (if it doesn’t already exist), and add the following lines: ::
 
@@ -116,11 +116,11 @@ Next, create a file called ``~/.ssh/config`` (if it doesn’t already exist), an
 
 Test it works by typing: :: 
 
-   cirrus$ ssh puma2
+   archer2$ ssh puma2
 
 You should not be prompted for your password. Note that this should have set up X11 forwarding, so you no longer need the ``-Y`` option.
 
-.. warning:: You should never use a passphrase-less key to access the CIRRUS login nodes, as this is a serious security risk.
+.. warning:: You should never use a passphrase-less key to access the ARCHER2 login nodes, as this is a serious security risk. 
 
 Set up your PUMA2 environment
 -----------------------------
@@ -155,15 +155,15 @@ Finally, change the permission on your PUMA2 ``/home`` space: ::
 Set up your ssh-agent
 ---------------------
 
-In order to submit jobs to CIRRUS from PUMA2, you will need to set up an ``ssh-agent`` and use it to cache the passphrase to your CIRRUS key.
+In order to submit jobs to ARCHER2 from PUMA2, you will need to set up an ``ssh-agent`` and use it to cache the passphrase to your ARCHER2 key. 
 
-**i. Copy your CIRRUS ssh-key pair to PUMA2**
+**i. Copy your ARCHER2 ssh-key pair to PUMA2** 
 
-Your CIRRUS key is the one that you use to ssh into the CIRRUS login nodes.  You need to copy both the public and private keys into your ``.ssh/`` directory on PUMA2.
+Your ARCHER2 key is the one that you use to ssh into the ARCHER2 login nodes.  You need to copy both the public and private keys into your ``.ssh/`` directory on PUMA2.
 
-Open a new terminal from wherever you originally connected to CIRRUS in :ref:`cirrus`, and run the following command ::
+Open a new terminal from wherever you originally connected to ARCHER2 in :ref:`archer2`, and run the following command ::
 
-   scp ~/.ssh/id_rsa_cirrus* <cirrus-username>@login.cirrus.ac.uk:/home/n02/n02-puma/<cirrus-username>/.ssh
+   scp ~/.ssh/id_rsa_archer2* <archer2-username>@login.archer2.ac.uk:/home/n02/n02-puma/<archer2-username>/.ssh
 
 **ii. Start up your ssh-agent**
 
@@ -175,31 +175,31 @@ Next log out of PUMA2 and back in again to start up the ``ssh-agent`` process. Y
 
    Initialising new SSH agent...
 
-**iii. Add your CIRRUS key**
+**iii. Add your ARCHER2 key**
 
-Add your CIRRUS key to the ``ssh-agent``, by running ::
+Add your ARCHER2 key to the ``ssh-agent``, by running ::
 
-   puma2$ ssh-add ~/.ssh/id_rsa_cirrus
+   puma2$ ssh-add ~/.ssh/id_rsa_archer2
 
 Enter your passphrase when prompted. If the passphrase has been cached successfully you should see a message like this: ::
 
-   Identity added: /home/n02/n02/<cirrus-username>/.ssh/id_rsa_cirrus
+   Identity added: /home/n02/n02/<archer2-username>/.ssh/id_rsa_archer2
 
 The ``ssh-agent`` will continue to run even when you log out of PUMA2. However, it may stop from time to time, for example if PUMA2 is rebooted.  For instructions on what to do in this situation see :ref:`restarting-agent` in the Appendix.
 
-**iv. Configure access to the CIRRUS login nodes**
+**iv. Configure access to the ARCHER2 login nodes**
 
 Create a file ``~/.ssh/config`` (if it doesn't already exist), and add the following lines: ::
 
-   # CIRRUS login nodes
+   # ARCHER2 login nodes
    Host ln* 
-   IdentityFile ~/.ssh/id_rsa_cirrus
+   IdentityFile ~/.ssh/id_rsa_archer2
 
 **iv. Verify the setup is correct**
 
 To test this is all working correctly, run: ::
 
-   puma2$ rose host-select cirrus
+   puma2$ rose host-select archer2
 
 This should return one of the login nodes, e.g. ``ln01``. If it returns a message like ``[WARN] ln03: (ssh failed)`` then something has gone wrong with the ssh setup.
 
