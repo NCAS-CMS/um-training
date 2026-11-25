@@ -1,24 +1,24 @@
-Running a UM suite on ARCHER2
+Running a UM suite on CIRRUS
 =============================
    
-ARCHER2 architecture
+CIRRUS architecture
 --------------------
 
-In common with many HPC systems, ARCHER2 consists of different types of processor nodes: 
+In common with many HPC systems, CIRRUS consists of different types of processor nodes:
 
-* **Login nodes:** This is where you land when you ssh into ARCHER2. Typically these processors are used for file management tasks.
+* **Login nodes:** This is where you land when you ssh into CIRRUS. Typically these processors are used for file management tasks.
 
-* **Compute / batch nodes:** These make up most of the ARCHER2 system, and this is where the model runs. 
+* **Compute / batch nodes:** These make up most of the CIRRUS system, and this is where the model runs.
 
 * **Serial / post-processing nodes:** This is where less intensive tasks such as compilation and archiving take place. 
 
-ARCHER2 has two file systems: 
+CIRRUS has two file systems:
 
 * **/home:** This is relatively small and is only backed up for disaster recovery. 
 
 * **/work:** This is much larger, but is not backed up. Note that the batch nodes can only see the work file system. It is optimised for parallel I/O and large files. 
 
-Consult the ARCHER2 website for more information: http://www.archer2.ac.uk 
+Consult the CIRRUS website for more information: http://www.cirrus.ac.uk
 
 
 Running a Standard Suite
@@ -42,7 +42,7 @@ Edit the suite
 Before you can run the suite you need to change the *userid*, *queue*, *account code* and *reservation*:
 
 * Click on :guilabel:`suite conf --> jinja2` in the left hand panel
-* Set ``HPC_USER`` (that's your ARCHER2 username)
+* Set ``HPC_USER`` (that's your CIRRUS username)
 
 If following the tutorial as part of an organised training event:  
 
@@ -60,8 +60,8 @@ If following the tutorial as self-study:
 .. admonition:: Notes
 		
    * Quotes around the variable values are essential otherwise the suite will not run.
-   * In normal practice you submit your suites to the parallel queue (either **short** or **standard**) on ARCHER2.
-   * For organised training events, we use processor reservations, whereby we have exclusive access to a prearranged amount of ARCHER2 resource.  Reservations are specified by adding an additional setting called the reservation code; e.g. **n02-training_226**.
+   * In normal practice you submit your suites to the parallel queue (either **short** or **standard**) on CIRRUS.
+   * For organised training events, we use processor reservations, whereby we have exclusive access to a prearranged amount of CIRRUS resource.  Reservations are specified by adding an additional setting called the reservation code; e.g. **n02-training_226**.
 
 * Save the suite (:guilabel:`File > Save` or click the *down arrow* icon)
 
@@ -73,31 +73,31 @@ The standard suite will build, reconfigure and run the UM.
 
 Doing this will execute the ``rose suite-run`` command (more on this later) and start the Cylc GUI through which you can monitor the progress of your suite graphically. The Cylc GUI will update as the job progresses.
 
-Looking at the queues on ARCHER2
+Looking at the queues on CIRRUS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-While you're waiting for the suite to run, let's log into ARCHER2 and learn how to look at the queues.
+While you're waiting for the suite to run, let's log into CIRRUS and learn how to look at the queues.
 
 Run the following command: ::
 
-  squeue -u <archer2-user-name>
+  squeue -u <cirrus-user-name>
 
 This will show the status of jobs you are running.  You will see output similar to the following: ::
 
-  ARCHER2> squeue -u ros
+  CIRRUS> squeue -u ros
         JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON) 
        148599  standard u-cc519.      ros  R       0:11      1 nid001001
 
-At this stage you will probably only have a job running or waiting to run in the serial queue. Running ``squeue`` will show all jobs currently on ARCHER2, most of which will be in the parallel queues. 
+At this stage you will probably only have a job running or waiting to run in the serial queue. Running ``squeue`` will show all jobs currently on CIRRUS, most of which will be in the parallel queues.
 
 Once your suite has finished running the Cylc GUI will go blank and you should get a message in the bottom left hand corner saying ``Stopped with succeeded``.
 
 .. tip::
-  Cylc is set up so that it *polls* ARCHER2 to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on ARCHER2 and the Cylc GUI being updated. If you see that the task has finished running but Cylc hasn't updated then you can manually poll the task by right-clicking on it and selecting :guilabel:`Poll` from the pop-up menu.
+  Cylc is set up so that it *polls* CIRRUS to check the status of the task, every 5 minutes.  This means that there could be a maximum of 5 minutes delay between the task finishing on CIRRUS and the Cylc GUI being updated. If you see that the task has finished running but Cylc hasn't updated then you can manually poll the task by right-clicking on it and selecting :guilabel:`Poll` from the pop-up menu.
 
 Standard Suite Output
 ---------------------
 
-The output from a standard suite goes to a variety of places, depending on the type of the file.  On ARCHER2 you will find all the output from your run under the directory ``~/cylc-run/<suitename>``, where ``<suitename>`` is the name of the suite. This is actually a symbolic link to the equivalent location in your ``/work`` directory (E.g. ``/work/n02/n02/<username>/cylc-run/<suitename>``. 
+The output from a standard suite goes to a variety of places, depending on the type of the file.  On CIRRUS you will find all the output from your run under the directory ``~/cylc-run/<suitename>``, where ``<suitename>`` is the name of the suite. This is actually a symbolic link to the equivalent location in your ``/work`` directory (E.g. ``/work/n02/n02/<username>/cylc-run/<suitename>``.
 
 Task output
 ^^^^^^^^^^^
@@ -151,7 +151,7 @@ The output from the UM scripts and the output from PE0 of the model are written 
   
 .. admonition::  Job Accounting
 		 
-  The ``sacct`` command displays accounting data for all jobs that are run on ARCHER2.  ``sacct`` can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This information is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.
+  The ``sacct`` command displays accounting data for all jobs that are run on CIRRUS.  ``sacct`` can be used to find out about the resources used by a job. For example; Nodes used, Length of time the job ran for, etc.  This information is useful for working out how much resource your runs are using.  You should have some idea of the resource requirements for your runs and how that relates to the annual CU budget for your project.  Information on resource requirements is also needed when applying for time on the HPC.
 
   Let's take a look at the resources used by your copy of ``u-cc519`` run.
 
@@ -164,7 +164,7 @@ The output from the UM scripts and the output from PE0 of the model are written 
 
   Where ``<slurm-job-id>`` is the number you just noted above.  You should get output similar to the following: ::
 
-    ARCHER2-ex> sacct --job=204175 --format="JobID,JobName,Elapsed,Timelimit,NNodes"
+    CIRRUS-ex> sacct --job=204175 --format="JobID,JobName,Elapsed,Timelimit,NNodes"
            JobID    JobName    Elapsed  Timelimit   NNodes 
     ------------ ---------- ---------- ---------- --------
     204175       u-cc519.a+   00:00:23   00:20:00        1
@@ -180,7 +180,7 @@ The output from the UM scripts and the output from PE0 of the model are written 
 
   * How many CUs (Accounting Units) did the job cost?
 
-  .. hint:: 1 node hour currently = 1 CU. See the ARCHER2 website for information about the CU.
+  .. hint:: 1 node hour currently = 1 CU. See the CIRRUS website for information about the CU.
 
   There are many other fields that can be output for a job.  For more information see the Man page (``man sacct``).  You can see a list of all the fields that can be specified in the ``--format`` option by running ``sacct --helpformat``. 
 
